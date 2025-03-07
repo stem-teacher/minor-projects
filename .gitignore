@@ -1,0 +1,44 @@
+# Build directories
+node_modules/
+dist/
+build/
+target/
+*.o
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+.env
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime*
+*~
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+Cargo.lock
+
+# Output files
+*.out
+*.pdf
+*.png
+*.jpg
+*.jpeg
+/output/
+
+# Temporary files
+/tmp/
+/temp/
+*.tmp
