@@ -1,0 +1,4 @@
+ ai_key_location.txt
+*.out
+*.aux 
+*.log

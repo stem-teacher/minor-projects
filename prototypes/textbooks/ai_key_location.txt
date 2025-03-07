@@ -1,0 +1,2 @@
+OPEN_AI_API_KEY= ~/devel/openai/oi-key.txt 
+GEMINI_API_KEY=~/devel/google/gemini-key-vn-1.txt 

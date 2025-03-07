@@ -1,0 +1,54 @@
+\contentsline {chapter}{Introduction to Scientific Inquiry}{7}{chapter*.3}%
+\contentsline {section}{The Nature of Science}{8}{section*.4}%
+\contentsline {subsection}{Characteristics of Science}{8}{subsection*.5}%
+\contentsline {section}{Scientific Method and Process}{9}{section*.6}%
+\contentsline {subsection}{Steps in Scientific Investigation}{10}{subsection*.7}%
+\contentsline {subsection}{Forming a Scientific Hypothesis}{10}{subsection*.8}%
+\contentsline {section}{Laboratory Safety}{11}{section*.9}%
+\contentsline {subsection}{General Safety Rules}{12}{subsection*.10}%
+\contentsline {subsection}{Understanding Safety Symbols}{12}{subsection*.11}%
+\contentsline {section}{Scientific Skills}{13}{section*.12}%
+\contentsline {subsection}{Observation Skills}{13}{subsection*.13}%
+\contentsline {subsection}{Measurement Skills}{14}{subsection*.14}%
+\contentsline {subsection}{Data Collection and Recording}{14}{subsection*.15}%
+\contentsline {section}{Understanding Variables and Controls}{16}{section*.16}%
+\contentsline {subsection}{Types of Variables}{16}{subsection*.17}%
+\contentsline {subsection}{Controls in Experiments}{16}{subsection*.18}%
+\contentsline {section}{Analyzing and Interpreting Data}{17}{section*.19}%
+\contentsline {subsection}{Data Analysis Techniques}{17}{subsection*.20}%
+\contentsline {subsection}{Creating and Interpreting Graphs}{18}{subsection*.21}%
+\contentsline {section}{Drawing Conclusions and Communicating Results}{19}{section*.22}%
+\contentsline {subsection}{Drawing Evidence-Based Conclusions}{20}{subsection*.23}%
+\contentsline {subsection}{Communicating Scientific Information}{20}{subsection*.24}%
+\contentsline {section}{Ethics in Science}{21}{section*.25}%
+\contentsline {subsection}{Principles of Scientific Ethics}{22}{subsection*.26}%
+\contentsline {subsection}{Ethical Considerations in Scientific Research}{22}{subsection*.27}%
+\contentsline {section}{Chapter Review and Practice}{23}{section*.28}%
+\contentsline {section}{Glossary of Key Terms}{25}{section*.29}%
+\contentsline {section}{Beyond the Basics: Exploring Further}{26}{section*.30}%
+\contentsline {chapter}{Properties of Matter (Particle Theory)}{27}{chapter*.31}%
+\contentsline {section}{What is Matter?}{27}{section*.32}%
+\contentsline {subsection}{States of Matter}{28}{subsection*.33}%
+\contentsline {section}{Particle Theory of Matter}{28}{section*.34}%
+\contentsline {subsection}{Key Principles of Particle Theory}{29}{subsection*.35}%
+\contentsline {subsection}{How Particle Theory Explains Properties of Matter}{29}{subsection*.36}%
+\contentsline {section}{Particles in Solids, Liquids, and Gases}{31}{section*.37}%
+\contentsline {subsection}{Particles in Solids}{31}{subsection*.38}%
+\contentsline {subsection}{Particles in Liquids}{31}{subsection*.39}%
+\contentsline {subsection}{Particles in Gases}{32}{subsection*.40}%
+\contentsline {section}{Changes of State}{34}{section*.41}%
+\contentsline {subsection}{Types of State Changes}{34}{subsection*.42}%
+\contentsline {subsection}{Explaining Changes of State Using Particle Theory}{34}{subsection*.43}%
+\contentsline {section}{Gas Pressure and Temperature}{36}{section*.44}%
+\contentsline {subsection}{Gas Pressure}{36}{subsection*.45}%
+\contentsline {subsection}{The Effect of Temperature on Gases}{36}{subsection*.46}%
+\contentsline {section}{Evolution of Particle Theory}{38}{section*.47}%
+\contentsline {subsection}{Historical Development of Particle Theory}{38}{subsection*.48}%
+\contentsline {subsection}{The Dynamic Nature of Scientific Models}{39}{subsection*.49}%
+\contentsline {section}{Applications of Particle Theory}{41}{section*.50}%
+\contentsline {subsection}{Everyday Applications}{41}{subsection*.51}%
+\contentsline {subsection}{Technological Applications}{41}{subsection*.52}%
+\contentsline {section}{Chapter Review and Practice}{44}{section*.53}%
+\contentsline {section}{Glossary of Key Terms}{45}{section*.54}%
+\contentsline {section}{Beyond the Basics: Exploring Further}{46}{section*.55}%
+\contentsfinish 

@@ -1,0 +1,128 @@
+% Stage 5 Science Textbook (Years 9-10, NSW Curriculum)
+% Using Tufte-LaTeX document class for elegant layout with margin notes
+
+\documentclass[justified,notoc]{tufte-book}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{amsmath,amssymb}
+\usepackage[version=4]{mhchem} % For chemistry notation
+\usepackage{booktabs} % For nice tables
+\usepackage{microtype} % Better typography
+\usepackage{tikz} % For diagrams
+\usepackage{xcolor} % For colored text
+\usepackage{soul} % For highlighting
+\usepackage{tcolorbox} % For colored boxes
+\usepackage{enumitem} % For better lists
+\usepackage{wrapfig} % For wrapping text around figures
+\usepackage{hyperref} % For links
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+% Custom colors
+\definecolor{primary}{RGB}{0, 73, 144} % Deep blue
+\definecolor{secondary}{RGB}{242, 142, 43} % Orange
+\definecolor{highlight}{RGB}{255, 222, 89} % Yellow highlight
+\definecolor{success}{RGB}{46, 139, 87} % Green
+\definecolor{info}{RGB}{70, 130, 180} % Steel blue
+\definecolor{note}{RGB}{220, 220, 220} % Light gray
+
+% Custom commands for pedagogical elements
+\newcommand{\keyword}[1]{\textbf{#1}\marginnote{\textbf{#1}: }}
+
+\newcommand{\challengeicon}{*}
+\newcommand{\challenge}[1]{\marginnote{\textbf{\challengeicon\ Challenge:} #1}}
+
+\newcommand{\mathlink}[1]{\marginnote{\textbf{Math Link:} #1}}
+
+\newcommand{\historylink}[1]{\marginnote{\textbf{History:} #1}}
+
+\newenvironment{investigation}[1]{%
+    \begin{tcolorbox}[colback=info!10,colframe=info,title=\textbf{Investigation: #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{keyconcept}[1]{%
+    \begin{tcolorbox}[colback=primary!5,colframe=primary,title=\textbf{Key Concept: #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{tieredquestions}[1]{%
+    \begin{tcolorbox}[colback=note!30,colframe=note!50,title=\textbf{Practice Questions - #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{stopandthink}{%
+    \begin{tcolorbox}[colback=highlight!30,colframe=highlight!50,title=\textbf{Stop and Think}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{pisascenario}[1]{%
+    \begin{tcolorbox}[colback=secondary!10,colframe=secondary,title=\textbf{Real-World Scenario: #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{example}{%
+    \par\smallskip\noindent\textit{Example:} 
+}{%
+    \par\smallskip
+}
+
+\newenvironment{extension}{%
+    \begin{tcolorbox}[colback=success!10,colframe=success,title=\textbf{Extension Activity}]
+}{%
+    \end{tcolorbox}
+}
+
+\title{Advancing in Science: Pathways for Stage 5\\
+New South Wales Science Curriculum}
+\author{Designed for Gifted, Neurodiverse, and Highly Capable Year 9-10 Students}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+% Introduction
+\input{chapters/introduction}
+
+% Chapter 1: Scientific Investigations and Research Skills
+\input{chapters/chapter1}
+
+% Chapter 2: Atoms, Elements and Compounds
+\input{chapters/chapter2}
+
+% Chapter 3: Reactions and Chemical Equations
+%\input{chapters/chapter3}
+
+% Chapter 4: Electricity and Energy
+%\input{chapters/chapter4}
+
+% Chapter 5: Light and Sound Waves
+%\input{chapters/chapter5}
+
+% Chapter 6: Ecosystems and Human Impact
+%\input{chapters/chapter6}
+
+% Chapter 7: Genetics and Evolution
+%\input{chapters/chapter7}
+
+% Chapter 8: Disease and Immunity
+%\input{chapters/chapter8}
+
+% Chapter 9: Earth Systems and Resources
+%\input{chapters/chapter9}
+
+% Chapter 10: Space Science and the Universe
+%\input{chapters/chapter10}
+
+\end{document}
