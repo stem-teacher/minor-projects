@@ -116,9 +116,10 @@ When using the Tufte-LaTeX class for textbooks, follow these guidelines to preve
 1. ✅ Apply same modular structure to Stage 5 textbook (COMPLETED)
 2. ✅ Apply the same process, but instead using the OpenAI api to enable a comparison. Files should output to a "stage {4 |5}-OAI" instead. (COMPLETED)
 3. ✅ Apply the same process, but instead using the Google Gemini API. Files should output to a "stage {4 |5}-gemini" instead. (COMPLETED)
-4. Compare text book versions produced by the different AI's and depending on which is best, this will become responsive for primary generation of content, with the other AI's reviewers
-5. Create the remaining chapter files for Stage 4 (Chapters 3-10)
-6. Create the remaining chapter files for Stage 5 (Chapters 3-10)
-7. Review content & incorporate feed back into text book.
-8. Add actual image content to replace empty placeholders
-9. Uncomment image references once real images are available
+4. ✅ Standardize the build processes across all versions (OpenAI and Gemini) with consistent scripts. (COMPLETED)
+5. Compare text book versions produced by the different AI's and depending on which is best, this will become responsive for primary generation of content, with the other AI's reviewers
+6. Create the remaining chapter files for Stage 4 (Chapters 3-10)
+7. Create the remaining chapter files for Stage 5 (Chapters 3-10)
+8. Review content & incorporate feed back into text book.
+9. Add actual image content to replace empty placeholders
+10. Uncomment image references once real images are available

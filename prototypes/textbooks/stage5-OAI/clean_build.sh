@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# This script performs a clean build of the Stage 4 textbook
+# This script performs a clean build of the Stage 5 textbook
 # It deletes existing content, regenerates all chapters, and compiles the LaTeX document
 
-# Change to the stage4-OAI directory
-cd /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/textbooks/stage4-OAI
+# Change to the stage5-OAI directory
+cd /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/textbooks/stage5-OAI
 
 # Log file for tracking progress
 LOG_FILE="clean_build.log"
@@ -51,16 +51,16 @@ sleep 30
 # Define chapters in order
 CHAPTER_NUMBERS=(1 2 3 4 5 6 7 8 9 10)
 CHAPTER_TITLES=(
-  "Introduction to Scientific Inquiry"
-  "Properties of Matter (Particle Theory)"
-  "Mixtures and Separation Techniques" 
-  "Physical and Chemical Change"
-  "Forces and Motion"
-  "Energy Forms and Transfers"
-  "Diversity of Life (Classification and Survival)"
-  "Cells and Body Systems"
-  "Earth's Resources and Geological Change"
-  "Earth in Space"
+  "Scientific Investigations and Research Skills"
+  "Atoms, Elements and Compounds"
+  "Ecosystems and Environmental Science"
+  "Human Biology and Disease"
+  "Genetics and Evolution"
+  "Atomic Structure and the Periodic Table"
+  "Chemical Reactions and Equations"
+  "Applied Chemistry and Environmental Chemistry"
+  "Motion and Mechanics"
+  "Energy Conservation and Electricity"
 )
 
 # Generate each chapter
@@ -98,18 +98,18 @@ echo "===============================================" | tee -a $LOG_FILE
 
 cd ..
 source /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/textbooks/textbook_env/bin/activate
-python generate_openai_textbooks.py --compile --stage 4 2>&1 | tee -a stage4-OAI/$LOG_FILE
+python generate_openai_textbooks.py --compile --stage 5 2>&1 | tee -a stage5-OAI/$LOG_FILE
 
 echo "===============================================" | tee -a $LOG_FILE
 echo "Clean build process completed at $(date)" | tee -a $LOG_FILE
-echo "Check stage4-OAI/stage4-OAI-textbook.pdf for the output" | tee -a $LOG_FILE
+echo "Check stage5-OAI/stage5-OAI-textbook.pdf for the output" | tee -a $LOG_FILE
 echo "===============================================" | tee -a $LOG_FILE
 
-# Go back to stage4-OAI directory
-cd stage4-OAI
+# Go back to stage5-OAI directory
+cd stage5-OAI
 
 echo ""
 echo "Clean build process completed!"
 echo "The backup of previous chapters is stored in: $backup_dir"
 echo "Check $LOG_FILE for detailed output"
-echo "The compiled PDF should be available at: stage4-OAI-textbook.pdf"
+echo "The compiled PDF should be available at: stage5-OAI-textbook.pdf"

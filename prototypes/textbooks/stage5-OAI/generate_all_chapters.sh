@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Change to the stage4-OAI directory
-cd /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/textbooks/stage4-OAI
+# Change to the stage5-OAI directory
+cd /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/textbooks/stage5-OAI
 
 # Log file for tracking progress
 LOG_FILE="generation_progress.log"
@@ -30,16 +30,16 @@ fi
 # Step 2: Define and generate all chapters
 CHAPTER_NUMBERS=(1 2 3 4 5 6 7 8 9 10)
 CHAPTER_TITLES=(
-  "Introduction to Scientific Inquiry"
-  "Properties of Matter (Particle Theory)"
-  "Mixtures and Separation Techniques" 
-  "Physical and Chemical Change"
-  "Forces and Motion"
-  "Energy Forms and Transfers"
-  "Diversity of Life (Classification and Survival)"
-  "Cells and Body Systems"
-  "Earth's Resources and Geological Change"
-  "Earth in Space"
+  "Scientific Investigations and Research Skills"
+  "Atoms, Elements and Compounds"
+  "Ecosystems and Environmental Science"
+  "Human Biology and Disease"
+  "Genetics and Evolution"
+  "Atomic Structure and the Periodic Table"
+  "Chemical Reactions and Equations"
+  "Applied Chemistry and Environmental Chemistry"
+  "Motion and Mechanics"
+  "Energy Conservation and Electricity"
 )
 
 # Generate each chapter
@@ -80,4 +80,4 @@ echo "Check chapters/ directory for the generated LaTeX files" | tee -a $LOG_FIL
 # echo "Compiling LaTeX document ($(date))" | tee -a $LOG_FILE
 # echo "===============================================" | tee -a $LOG_FILE
 # cd ..
-# python generate_openai_textbooks.py --compile --stage 4 2>&1 | tee -a stage4-OAI/$LOG_FILE
+# python generate_openai_textbooks.py --compile --stage 5 2>&1 | tee -a stage5-OAI/$LOG_FILE

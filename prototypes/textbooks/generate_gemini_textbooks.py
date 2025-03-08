@@ -38,7 +38,7 @@ def setup_gemini_client(api_key):
     return genai
 
 # Generate text using Gemini API
-def generate_text(client, prompt, model_name, max_tokens=3000):
+def generate_text(client, prompt, model_name, max_tokens=10000):
     try:
         model = client.GenerativeModel(model_name)
         response = model.generate_content(
@@ -114,20 +114,42 @@ def copy_images(stage, output_dir):
 
 # Generate introduction content
 def generate_introduction(client, stage, model):
-    prompt = f"""Create an introduction chapter for a Stage {stage} science textbook designed for gifted and neurodiverse students following the NSW curriculum. 
+    prompt = f"""Create an introduction chapter for a Stage {stage} science textbook following the NSW curriculum. The content should be high-quality, accessible, and engaging for all students.
 
 This introduction should:
 1. Welcome students to the study of science at Stage {stage} level
 2. Explain how the textbook is organized and how to use its features (main text, margin notes, investigations, etc.)
 3. Provide an overview of what students will learn across the chapters
 4. Include a section on how to use this book effectively (study tips, navigation)
+5. Use British English spelling consistently throughout (e.g., 'colour' not 'color', 'centre' not 'center')
 
 The introduction should be engaging, accessible, and considerate of diverse learning styles. It should also set high expectations while being supportive.
 
 Format the content in LaTeX using the Tufte-book class with appropriate section headings, margin notes, and formatting.
 The file should begin with a chapter heading (\\chapter{{Introduction}}) and should not include the document class or preamble.
 
-Maximum length: 1000-1500 words, formatted in LaTeX.
+Use the Tufte-book class with proper handling of floats:
+
+IMPORTANT TUFTE FLOAT HANDLING GUIDELINES:
+1. Use [0pt] offset for margin figures to prevent vertical drift:
+   \\begin{{marginfigure}}[0pt]
+     \\includegraphics[width=\\linewidth]{{filename}}
+     \\caption{{Caption text.}}
+   \\end{{marginfigure}}
+
+2. Limit margin figures to maximum 3-4 per page
+
+3. Add explicit \\FloatBarrier commands at the end of each major section with floats
+
+4. For critical figures that must appear at specific locations, use:
+   \\begin{{figure}}[H]
+     ...
+   \\end{{figure}}
+
+5. Use \\marginpar{{}} sparingly (max 5-6 per page) to avoid float build-up
+
+IMPORTANT: The introduction should be comprehensive and substantial, with a minimum of 2500 words (approximately 5-7 pages of content).
+Word count range: 2500-11000 words, formatted in LaTeX.
 """
     return generate_text(client, prompt, model)
 
@@ -159,7 +181,7 @@ def generate_chapter(client, stage, chapter_num, chapter_title, model):
             else:
                 chapter_description = chapter_info[:next_chapter_idx+1]
     
-    prompt = f"""Create Chapter {chapter_num}: {chapter_title} for a Stage {stage} science textbook designed for gifted and neurodiverse students following the NSW curriculum.
+    prompt = f"""Create Chapter {chapter_num}: {chapter_title} for a Stage {stage} science textbook following the NSW curriculum. The content should be high-quality, accessible, and engaging for all students.
 
 Chapter details from the curriculum plan:
 {chapter_description}
@@ -173,6 +195,7 @@ The chapter should include:
 6. Investigation activities that develop scientific skills
 7. Tiered questions (basic, intermediate, advanced) at the end of each main section
 8. Visual elements described in LaTeX (figures will be added later)
+9. Use British English spelling
 
 Format the content in LaTeX using the Tufte-book class with appropriate section headings, margin notes, and custom environments.
 The file should begin with a chapter heading (\\chapter{{{chapter_title}}}) and should not include the document class or preamble.
@@ -192,7 +215,8 @@ And these custom commands:
 
 Use the mhchem package (\\ce{{}}) for any chemical formulas or equations.
 
-Maximum length: 2500-3000 words, formatted in LaTeX.
+IMPORTANT: Each chapter must be comprehensive and substantial, with a minimum of 2500 words (approximately 5-7 pages of content).
+Word count range: 2500-12000 words, formatted in LaTeX.
 """
     return generate_text(client, prompt, model)
 
@@ -202,7 +226,7 @@ def write_content(content, file_path):
         f.write(content)
 
 # Generate a full textbook
-def generate_textbook(stage, chapters=2):
+def generate_textbook(stage, chapters=10):
     # Prepare paths
     output_dir = f"stage{stage}-gemini"
     os.makedirs(output_dir, exist_ok=True)
@@ -211,7 +235,7 @@ def generate_textbook(stage, chapters=2):
     # Read configuration
     api_key = get_gemini_key()
     model_config = read_model_config("ai_model.conf")
-    model = model_config.get("GEMINI_MODEL", "gemini-2.0-flash-thinking-exp-01-21")
+    model = model_config.get("GEMINI_MODEL", "gemini-1.5-pro")
     
     # Set up API client
     client = setup_gemini_client(api_key)
@@ -231,21 +255,36 @@ def generate_textbook(stage, chapters=2):
     if stage == "4":
         chapter_titles = [
             "Introduction to Scientific Inquiry",
-            "Properties of Matter (Particle Theory)"
+            "Properties of Matter (Particle Theory)",
+            "Mixtures and Separation Techniques",
+            "Physical and Chemical Change",
+            "Forces and Motion",
+            "Energy Forms and Transfers",
+            "Diversity of Life (Classification and Survival)",
+            "Cells and Body Systems",
+            "Earth's Resources and Geological Change",
+            "Earth in Space"
         ]
     else:  # stage 5
         chapter_titles = [
             "Scientific Investigations and Research Skills",
-            "Atoms, Elements and Compounds"
+            "Atoms, Elements and Compounds",
+            "Ecosystems and Environmental Science",
+            "Human Biology and Disease",
+            "Genetics and Evolution",
+            "Atomic Structure and the Periodic Table",
+            "Chemical Reactions and Equations",
+            "Applied Chemistry and Environmental Chemistry",
+            "Motion and Mechanics",
+            "Energy Conservation and Electricity"
         ]
     
-    for i in range(1, chapters + 1):
-        if i <= len(chapter_titles):
-            chapter_title = chapter_titles[i-1]
-            print(f"Generating Chapter {i}: {chapter_title}...")
-            chapter_content = generate_chapter(client, stage, i, chapter_title, model)
-            write_content(chapter_content, f"{output_dir}/chapters/chapter{i}.tex")
-            time.sleep(5)  # Adding a delay to avoid rate limits
+    for i in range(1, min(chapters + 1, len(chapter_titles) + 1)):
+        chapter_title = chapter_titles[i-1]
+        print(f"Generating Chapter {i}: {chapter_title}...")
+        chapter_content = generate_chapter(client, stage, i, chapter_title, model)
+        write_content(chapter_content, f"{output_dir}/chapters/chapter{i}.tex")
+        time.sleep(10)  # Increased delay to avoid rate limits
     
     print(f"Stage {stage} textbook content generation complete!")
 
@@ -267,14 +306,16 @@ def main():
                         help='Which stage textbook to generate (4, 5, or both)')
     parser.add_argument('--generate', action='store_true', help='Generate textbook content using Gemini API')
     parser.add_argument('--compile', action='store_true', help='Compile LaTeX documents')
+    parser.add_argument('--chapters', type=int, default=10, 
+                        help='Number of chapters to generate (default: 10)')
     args = parser.parse_args()
     
     if args.generate:
         if args.stage in ['4', 'both']:
-            generate_textbook('4')
+            generate_textbook('4', chapters=args.chapters)
             
         if args.stage in ['5', 'both']:
-            generate_textbook('5')
+            generate_textbook('5', chapters=args.chapters)
     
     if args.compile:
         if args.stage in ['4', 'both']:
