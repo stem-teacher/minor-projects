@@ -1,0 +1,152 @@
+\contentsline {chapter}{Introduction}{5}{chapter*.2}%
+\contentsline {section}{Welcome to Stage 4 Science}{5}{section*.3}%
+\contentsline {section}{How This Textbook is Organised}{5}{section*.4}%
+\contentsline {subsection}{Features of the Textbook}{6}{subsection*.5}%
+\contentsline {section}{Overview of Your Learning Journey}{6}{section*.6}%
+\contentsline {subsection}{Working Scientifically}{6}{subsection*.7}%
+\contentsline {subsection}{Matter and Its Properties}{7}{subsection*.8}%
+\contentsline {subsection}{Energy and Forces}{7}{subsection*.9}%
+\contentsline {subsection}{Living Things and Ecosystems}{7}{subsection*.10}%
+\contentsline {subsection}{Earth and Space}{8}{subsection*.11}%
+\contentsline {section}{Using This Book Effectively}{8}{section*.12}%
+\contentsline {subsection}{Set Regular Study Habits}{8}{subsection*.13}%
+\contentsline {subsection}{Engage Actively with the Text}{8}{subsection*.14}%
+\contentsline {subsection}{Use Visual Aids}{8}{subsection*.15}%
+\contentsline {subsection}{Participate Fully in Investigations}{8}{subsection*.16}%
+\contentsline {subsection}{Collaborate and Communicate}{8}{subsection*.17}%
+\contentsline {subsection}{Reflect on Your Learning}{9}{subsection*.18}%
+\contentsline {subsection}{Seek Help When Needed}{9}{subsection*.19}%
+\contentsline {section}{Embracing Diversity and Inclusion}{9}{section*.20}%
+\contentsline {section}{Setting High Expectations}{9}{section*.21}%
+\contentsline {chapter}{Introduction to Scientific Inquiry}{11}{chapter*.22}%
+\contentsline {section}{Laboratory Safety: Protecting Yourself and Others}{11}{section*.23}%
+\contentsline {subsection}{General Laboratory Rules}{11}{subsection*.24}%
+\contentsline {subsection}{Using Chemicals Safely}{12}{subsection*.25}%
+\contentsline {subsection}{Safety Equipment}{12}{subsection*.26}%
+\contentsline {section}{The Scientific Method}{13}{section*.27}%
+\contentsline {subsection}{Steps of the Scientific Method}{13}{subsection*.28}%
+\contentsline {subsection}{Formulating Hypotheses}{13}{subsection*.29}%
+\contentsline {section}{Designing and Conducting Investigations}{14}{section*.30}%
+\contentsline {subsection}{Variables in Experiments}{14}{subsection*.31}%
+\contentsline {section}{Observing, Measuring, and Recording Data}{14}{section*.32}%
+\contentsline {subsection}{Types of Observations}{15}{subsection*.33}%
+\contentsline {subsection}{Recording Data}{15}{subsection*.34}%
+\contentsline {chapter}{Properties of Matter (Particle Theory)}{17}{chapter*.35}%
+\contentsline {section}{Introduction to Matter}{17}{section*.36}%
+\contentsline {section}{Historical Models of Matter}{17}{section*.37}%
+\contentsline {section}{The Particle Theory of Matter}{18}{section*.38}%
+\contentsline {section}{States of Matter}{18}{section*.39}%
+\contentsline {subsection}{Solids}{18}{subsection*.40}%
+\contentsline {subsection}{Liquids}{19}{subsection*.41}%
+\contentsline {subsection}{Gases}{19}{subsection*.42}%
+\contentsline {section}{Expansion and Contraction}{19}{section*.43}%
+\contentsline {section}{Compression}{20}{section*.44}%
+\contentsline {section}{Changing Ideas About Matter}{20}{section*.45}%
+\contentsline {section}{End of Section Questions}{21}{section*.46}%
+\contentsline {section}{Chapter Summary}{21}{section*.47}%
+\contentsline {chapter}{Mixtures and Separation Techniques}{23}{chapter*.48}%
+\contentsline {section}{Introduction}{23}{section*.49}%
+\contentsline {section}{Mixtures and Pure Substances}{23}{section*.50}%
+\contentsline {subsection}{Types of Mixtures}{23}{subsection*.51}%
+\contentsline {subsection}{Solutions}{24}{subsection*.52}%
+\contentsline {section}{Separation Techniques}{24}{section*.53}%
+\contentsline {subsection}{Filtration}{24}{subsection*.54}%
+\contentsline {subsection}{Evaporation}{25}{subsection*.55}%
+\contentsline {subsection}{Distillation}{25}{subsection*.56}%
+\contentsline {subsection}{Chromatography}{26}{subsection*.57}%
+\contentsline {section}{Real-world Applications}{27}{section*.58}%
+\contentsline {subsection}{Water Purification}{27}{subsection*.59}%
+\contentsline {subsection}{Mining and Industry}{27}{subsection*.60}%
+\contentsline {section}{Summary and Review}{27}{section*.61}%
+\contentsline {chapter}{Physical and Chemical Change}{29}{chapter*.62}%
+\contentsline {section}{Introduction}{29}{section*.63}%
+\contentsline {section}{Physical Changes}{29}{section*.64}%
+\contentsline {subsection}{Changes of State}{29}{subsection*.65}%
+\contentsline {subsection}{Other Physical Changes}{29}{subsection*.66}%
+\contentsline {section}{Chemical Changes}{31}{section*.67}%
+\contentsline {subsection}{Evidence of Chemical Changes}{31}{subsection*.68}%
+\contentsline {subsection}{Examples of Chemical Changes}{31}{subsection*.69}%
+\contentsline {section}{Conservation of Mass}{33}{section*.70}%
+\contentsline {section}{Summary}{33}{section*.71}%
+\contentsline {chapter}{Forces and Motion}{35}{chapter*.72}%
+\contentsline {section}{What are Forces?}{35}{section*.73}%
+\contentsline {subsection}{Contact Forces}{35}{subsection*.74}%
+\contentsline {paragraph}{Friction}{35}{paragraph*.75}%
+\contentsline {paragraph}{Air resistance}{36}{paragraph*.76}%
+\contentsline {subsection}{Non-contact Forces}{36}{subsection*.77}%
+\contentsline {paragraph}{Gravity}{36}{paragraph*.78}%
+\contentsline {paragraph}{Magnetism}{36}{paragraph*.79}%
+\contentsline {section}{Balanced and Unbalanced Forces}{37}{section*.80}%
+\contentsline {subsection}{Balanced Forces}{37}{subsection*.81}%
+\contentsline {subsection}{Unbalanced Forces and Motion}{38}{subsection*.82}%
+\contentsline {section}{Newton’s First Law of Motion}{38}{section*.83}%
+\contentsline {section}{Forces in Everyday Life}{39}{section*.84}%
+\contentsline {subsection}{Forces in Sport}{39}{subsection*.85}%
+\contentsline {subsection}{Forces in Transport}{39}{subsection*.86}%
+\contentsline {subsection}{Falling Objects}{39}{subsection*.87}%
+\contentsline {chapter}{Energy Forms and Transfers}{41}{chapter*.88}%
+\contentsline {section}{What is Energy?}{41}{section*.89}%
+\contentsline {section}{Forms of Energy}{41}{section*.90}%
+\contentsline {subsection}{Kinetic Energy}{42}{subsection*.91}%
+\contentsline {subsection}{Potential Energy}{42}{subsection*.92}%
+\contentsline {subsection}{Thermal Energy}{42}{subsection*.93}%
+\contentsline {subsection}{Electrical Energy}{42}{subsection*.94}%
+\contentsline {subsection}{Light and Sound Energy}{43}{subsection*.95}%
+\contentsline {section}{Energy Transfers and Transformations}{43}{section*.96}%
+\contentsline {section}{Technological Developments and Energy}{44}{section*.97}%
+\contentsline {subsection}{Renewable Energy}{44}{subsection*.98}%
+\contentsline {subsection}{Energy Efficiency}{44}{subsection*.99}%
+\contentsline {section}{Solving Problems with Energy Knowledge}{45}{section*.100}%
+\contentsline {chapter}{Diversity of Life (Classification and Survival)}{47}{chapter*.101}%
+\contentsline {section}{Characteristics of Living Things}{47}{section*.102}%
+\contentsline {section}{Why Classify Organisms?}{48}{section*.103}%
+\contentsline {section}{Systems of Classification}{48}{section*.104}%
+\contentsline {subsection}{Domains and Kingdoms}{48}{subsection*.105}%
+\contentsline {subsection}{Species and Naming Organisms}{49}{subsection*.106}%
+\contentsline {section}{Biodiversity and Variation}{50}{section*.107}%
+\contentsline {subsection}{Variation Within and Between Species}{50}{subsection*.108}%
+\contentsline {section}{Adaptations and Survival}{51}{section*.109}%
+\contentsline {chapter}{Cells and Body Systems}{53}{chapter*.110}%
+\contentsline {section}{Introduction}{53}{section*.111}%
+\contentsline {section}{Cell Theory}{53}{section*.112}%
+\contentsline {section}{Investigating Cells}{54}{section*.113}%
+\contentsline {section}{Structure of Cells}{54}{section*.114}%
+\contentsline {subsection}{Animal Cells}{54}{subsection*.115}%
+\contentsline {subsection}{Plant Cells}{55}{subsection*.116}%
+\contentsline {section}{Cells to Body Systems}{55}{section*.117}%
+\contentsline {subsection}{Tissues and Organs}{56}{subsection*.118}%
+\contentsline {subsection}{Body Systems}{56}{subsection*.119}%
+\contentsline {section}{The Digestive System}{56}{section*.120}%
+\contentsline {subsection}{Structure and Function}{56}{subsection*.121}%
+\contentsline {section}{The Circulatory System}{56}{section*.122}%
+\contentsline {subsection}{The Heart and Blood Vessels}{57}{subsection*.123}%
+\contentsline {section}{The Reproductive System}{57}{section*.124}%
+\contentsline {subsection}{Male and Female Systems}{57}{subsection*.125}%
+\contentsline {section}{Coordination of Body Systems}{57}{section*.126}%
+\contentsline {section}{Chapter Summary}{58}{section*.127}%
+\contentsline {chapter}{Earth's Resources and Geological Change}{59}{chapter*.128}%
+\contentsline {section}{Earth's Natural Resources}{59}{section*.129}%
+\contentsline {subsection}{Renewable and Non-Renewable Resources}{59}{subsection*.130}%
+\contentsline {subsection}{Water as a Vital Resource}{60}{subsection*.131}%
+\contentsline {subsection}{Minerals and Rocks}{60}{subsection*.132}%
+\contentsline {section}{Geological Processes and Earth's Resources}{61}{section*.133}%
+\contentsline {subsection}{Weathering and Erosion}{61}{subsection*.134}%
+\contentsline {subsection}{Volcanic Activity and Igneous Rocks}{62}{subsection*.135}%
+\contentsline {subsection}{Metamorphic Rocks and the Rock Cycle}{62}{subsection*.136}%
+\contentsline {section}{Human Impact and Resource Management}{63}{section*.137}%
+\contentsline {chapter}{Earth in Space}{65}{chapter*.138}%
+\contentsline {section}{Our Place in the Solar System}{65}{section*.139}%
+\contentsline {subsection}{The Solar System: An Overview}{65}{subsection*.140}%
+\contentsline {section}{Historical Models: Geocentric to Heliocentric}{66}{section*.141}%
+\contentsline {subsection}{The Geocentric Model}{66}{subsection*.142}%
+\contentsline {subsection}{The Heliocentric Revolution}{66}{subsection*.143}%
+\contentsline {section}{Day and Night}{66}{section*.144}%
+\contentsline {subsection}{Explaining Day and Night}{67}{subsection*.145}%
+\contentsline {section}{Seasons on Earth}{67}{section*.146}%
+\contentsline {subsection}{Axis Tilt and Seasons}{67}{subsection*.147}%
+\contentsline {section}{The Moon and Its Phases}{67}{section*.148}%
+\contentsline {subsection}{Understanding Moon Phases}{68}{subsection*.149}%
+\contentsline {section}{Eclipses}{68}{section*.150}%
+\contentsline {subsection}{Solar and Lunar Eclipses}{68}{subsection*.151}%
+\contentsline {section}{Review and Extend}{68}{section*.152}%
+\contentsfinish 

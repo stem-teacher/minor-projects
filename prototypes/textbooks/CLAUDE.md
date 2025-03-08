@@ -50,10 +50,72 @@ Previously generated textbooks are located in the output directory.
 - Document compiles correctly to PDF with proper formatting
 - Image references temporarily commented out due to empty image files
 
+## LaTeX Float Management for Tufte-Style Textbooks
+
+When using the Tufte-LaTeX class for textbooks, follow these guidelines to prevent "Float(s) lost" errors and ensure proper placement of figures and margin notes:
+
+1. **Enhanced Float Settings in Preamble**:
+   ```latex
+   % Float adjustment to reduce figure/table drift
+   \setcounter{topnumber}{9}          % Maximum floats at top of page
+   \setcounter{bottomnumber}{9}       % Maximum floats at bottom
+   \setcounter{totalnumber}{16}       % Maximum total floats on a page
+   \renewcommand{\topfraction}{0.9}   % Maximum page fraction for top floats
+   \renewcommand{\bottomfraction}{0.9}% Maximum page fraction for bottom floats
+   \renewcommand{\textfraction}{0.05} % Minimum text fraction on page
+   \renewcommand{\floatpagefraction}{0.5} % Minimum float page fill
+
+   % Increase float storage capacity
+   \usepackage{morefloats}
+   \extrafloats{100}
+
+   % Add float package for [H] placement option
+   \usepackage{float}
+   \usepackage{placeins} % For \FloatBarrier
+   ```
+
+2. **Strategic Placement of Float Barriers**:
+   - Add `\FloatBarrier` at the end of each section with floats
+   - Process all floats at end of each chapter:
+     ```latex
+     \makeatletter
+     \AtBeginDocument{
+       \let\old@chapter\@chapter
+       \def\@chapter[#1]#2{\FloatBarrier\old@chapter[{#1}]{#2}}
+     }
+     \makeatother
+     ```
+   - Add explicit barriers in the document:
+     ```latex
+     \input{chapters/chapter1}
+     \FloatBarrier
+     ```
+
+3. **Margin Figure Best Practices**:
+   - Use `[0pt]` offset to prevent vertical drift:
+     ```latex
+     \begin{marginfigure}[0pt]
+       \includegraphics[width=\linewidth]{image.png}
+       \caption{Caption text.}
+     \end{marginfigure}
+     ```
+   - Limit number of margin figures per page (3-4 max)
+   - Add `\FloatBarrier` after sections with multiple margin figures
+
+4. **Troubleshooting Approaches**:
+   - For critical figures, use `[H]` placement option: `\begin{figure}[H]`
+   - Create tcolorbox environments instead of floats for some content
+   - Consider compiling chapters individually for complex documents
+   - Check for recursive calls in margin note commands
+
+5. **Working Examples**:
+   - See `chapter3-tufte.tex` for a tested implementation
+   - Use `simple-full-textbook.tex` as a fallback approach
+
 ## Next Steps
 1. ✅ Apply same modular structure to Stage 5 textbook (COMPLETED)
-2. Apply the same process, but instead using the OpenAI api to enable a comparison. Files should output to a "stage {4 |5}-OAI" instead.
-3. Apply the same process, but instead using the Google Gemini API. Files should output to a "stage {4 |5}-gemini" instead.
+2. ✅ Apply the same process, but instead using the OpenAI api to enable a comparison. Files should output to a "stage {4 |5}-OAI" instead. (COMPLETED)
+3. ✅ Apply the same process, but instead using the Google Gemini API. Files should output to a "stage {4 |5}-gemini" instead. (COMPLETED)
 4. Compare text book versions produced by the different AI's and depending on which is best, this will become responsive for primary generation of content, with the other AI's reviewers
 5. Create the remaining chapter files for Stage 4 (Chapters 3-10)
 6. Create the remaining chapter files for Stage 5 (Chapters 3-10)

@@ -2,3 +2,6 @@
 *.out
 *.aux 
 *.log
+prototypes/mcp/servers/
+../mcp/servers/
+../mcp/

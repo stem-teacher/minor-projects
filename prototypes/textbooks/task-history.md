@@ -39,3 +39,40 @@
   1. Add the remaining chapters (3-10) as separate files
   2. Replace the empty image files with actual content
   3. Uncomment the image references once the images are available
+
+⏺ March 7, 2025: Created OpenAI versions of the textbooks (Task 2)
+
+  1. Set up staging directories:
+    - stage4-OAI: Contains Stage 4 textbook with OpenAI-generated content
+    - stage5-OAI: Contains Stage 5 textbook with OpenAI-generated content
+  2. Created module structure with:
+    - stage{4|5}-OAI-textbook.tex: Main LaTeX files for each stage
+    - chapters/introduction.tex: Introduction chapters
+    - chapters/chapter1.tex: First chapter for each stage
+    - chapters/chapter2.tex: Second chapter for each stage
+  3. Created Python script (generate_openai_textbooks.py) for generating content using OpenAI API
+  4. Set up placeholder chapter files with section headings
+  5. Successfully compiled PDFs for both stages
+
+  Note: The actual content generation using the OpenAI API is scheduled to be completed separately, as the API calls can be time-consuming.
+
+⏺ March 7, 2025: Created Google Gemini versions of the textbooks (Task 3)
+
+  1. Set up staging directories:
+    - stage4-gemini: Contains Stage 4 textbook with Gemini-generated content
+    - stage5-gemini: Contains Stage 5 textbook with Gemini-generated content
+  2. Created module structure with:
+    - stage{4|5}-gemini-textbook.tex: Main LaTeX files for each stage
+    - chapters/introduction.tex: Introduction chapters
+    - chapters/chapter1.tex: First chapter for each stage
+    - chapters/chapter2.tex: Second chapter for each stage
+  3. Created Python script (generate_gemini_textbooks.py) for generating content using Google Gemini API
+  4. Set up placeholder chapter files
+  5. Copied images from original directories
+  6. Installed Google Generative AI Python package
+
+  The script can be run with the following commands:
+  - To generate content: `python generate_gemini_textbooks.py --generate --stage both`
+  - To compile PDFs: `python generate_gemini_textbooks.py --compile --stage both`
+  
+  Note: The actual content generation using the Gemini API is scheduled to be completed separately, as the API calls can be time-consuming.
