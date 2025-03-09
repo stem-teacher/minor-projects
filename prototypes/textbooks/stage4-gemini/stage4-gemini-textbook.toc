@@ -1,0 +1,17 @@
+\contentsline {chapter}{Welcome to the World of Science!}{5}{chapter*.2}%
+\contentsline {chapter}{Introduction}{15}{chapter*.3}%
+\contentsline {chapter}{Introduction to Scientific Inquiry}{21}{chapter*.4}%
+\contentsline {section}{What is Science?}{21}{section*.5}%
+\contentsline {section}{Why Scientific Inquiry Matters}{21}{section*.6}%
+\contentsline {section}{Laboratory Safety: Your First Priority}{22}{section*.7}%
+\contentsline {subsection}{Why is Lab Safety Important?}{22}{subsection*.8}%
+\contentsline {subsection}{Essential Laboratory Safety Rules}{23}{subsection*.9}%
+\contentsline {section}{The Scientific Method: A Pathway to Discovery}{26}{section*.10}%
+\contentsline {subsection}{Steps in the Scientific Method}{27}{subsection*.11}%
+\contentsline {subsection}{The Scientific Method is a Cycle}{30}{subsection*.12}%
+\contentsline {section}{Working Scientifically Skills: Tools for Inquiry}{31}{section*.13}%
+\contentsline {subsection}{Questioning and Predicting}{32}{subsection*.14}%
+\contentsline {subsection}{Planning and Conducting Investigations}{32}{subsection*.15}%
+\contentsline {subsection}{Processing and Analysing Data and Information}{33}{subsection*.16}%
+\contentsline {subsection}{Evaluating and Improving Investigations}{33}{subsection*.17}%
+\contentsfinish 

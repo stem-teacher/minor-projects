@@ -1,4 +1,4 @@
-% Stage 4 Science Textbook (Years 7-8, NSW Curriculum)
+% Stage 4 Science Textbook (Gemini Version)
 % Using Tufte-LaTeX document class for elegant layout with margin notes
 
 \documentclass[justified,notoc]{tufte-book}
@@ -20,6 +20,29 @@
 \usepackage{wrapfig} % For wrapping text around figures
 \usepackage{hyperref} % For links
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+% Add float package for [H] placement option
+\usepackage{float}
+\usepackage{placeins} % For \FloatBarrier
+\usepackage{morefloats}
+\extrafloats{100}
+
+% Float adjustment to reduce figure/table drift
+\setcounter{topnumber}{9}          % Maximum floats at top of page
+\setcounter{bottomnumber}{9}       % Maximum floats at bottom
+\setcounter{totalnumber}{16}       % Maximum total floats on a page
+\renewcommand{\topfraction}{0.9}   % Maximum page fraction for top floats
+\renewcommand{\bottomfraction}{0.9}% Maximum page fraction for bottom floats
+\renewcommand{\textfraction}{0.05} % Minimum text fraction on page
+\renewcommand{\floatpagefraction}{0.5} % Minimum float page fill
+
+% Process all floats at end of each chapter
+\makeatletter
+\AtBeginDocument{
+  \let\old@chapter\@chapter
+  \def\@chapter[#1]#2{\FloatBarrier\old@chapter[{#1}]{#2}}
+}
+\makeatother
 
 % Custom colors
 \definecolor{primary}{RGB}{0, 73, 144} % Deep blue
@@ -58,20 +81,20 @@
 }
 
 \newenvironment{stopandthink}{%
-    \begin{tcolorbox}[colback=highlight!30,colframe=highlight!50,title=\textbf{Stop and Think}]
+    \begin{tcolorbox}[colback={highlight!30},colframe={highlight!50},title=\textbf{Stop and Think}]
 }{%
     \end{tcolorbox}
 }
 
 \newenvironment{example}{%
-    \par\smallskip\noindent\textit{Example:} 
+    \par\smallskip\noindent\textit{Example:}
 }{%
     \par\smallskip
 }
 
-\title{Unlocking Science: Explorations for Stage 4 (Gemini Version)\\
-New South Wales Science Curriculum}
-\author{Designed for Gifted, Neurodiverse, and Highly Capable Year 7-8 Students}
+\title{Emergent Minds: Stage 4 Science (Gemini Version)}
+\author{The Curious Scientist}
+\publisher{Emergent Mind Press}
 \date{\today}
 
 \begin{document}
@@ -82,35 +105,47 @@ New South Wales Science Curriculum}
 
 % Introduction
 \input{chapters/introduction}
+\FloatBarrier
 
-% Chapter 1: Introduction to Scientific Inquiry
+% Uncomment each chapter one by one to test
+% chapter1
 \input{chapters/chapter1}
+\FloatBarrier
 
-% Chapter 2: Properties of Matter (Particle Theory)
+% chapter2
 \input{chapters/chapter2}
+\FloatBarrier
 
-% Chapter 3: Mixtures and Separation Techniques
-%\input{chapters/chapter3}
-
-% Chapter 4: Physical and Chemical Change
-%\input{chapters/chapter4}
-
-% Chapter 5: Forces and Motion
-%\input{chapters/chapter5}
-
-% Chapter 6: Energy Forms and Transfers
-%\input{chapters/chapter6}
-
-% Chapter 7: Diversity of Life (Classification and Survival)
-%\input{chapters/chapter7}
-
-% Chapter 8: Cells and Body Systems
-%\input{chapters/chapter8}
-
-% Chapter 9: Earth's Resources and Geological Change
-%\input{chapters/chapter9}
-
-% Chapter 10: Earth in Space
-%\input{chapters/chapter10}
+% % chapter3
+% \input{chapters/chapter3}
+% \FloatBarrier
+% 
+% % chapter4
+% \input{chapters/chapter4}
+% \FloatBarrier
+% 
+% % chapter5
+% \input{chapters/chapter5}
+% \FloatBarrier
+% 
+% % chapter6
+% \input{chapters/chapter6}
+% \FloatBarrier
+% 
+% % chapter7
+% \input{chapters/chapter7}
+% \FloatBarrier
+% 
+% % chapter8
+% \input{chapters/chapter8}
+% \FloatBarrier
+% 
+% % chapter9
+% \input{chapters/chapter9}
+% \FloatBarrier
+% 
+% % chapter10
+% \input{chapters/chapter10}
+% \FloatBarrier
 
 \end{document}

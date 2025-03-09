@@ -12,43 +12,16 @@ The goal of this project is to produce two high-quality science textbooks for th
 Files in the tests directory are prototype tests and should be ignored.
 Previously generated textbooks are located in the output directory.
 
-## Stage 4 Textbook
-- Location: `/stage-4` subdirectory
-- Current structure: Modular design with separate chapter files
-- Main files:
-  - `main-textbook.tex` - Main LaTeX file that imports all chapters
-  - `/chapters/` directory containing:
-    - `introduction.tex` - Book introduction
-    - `chapter1.tex` - Introduction to Scientific Inquiry
-    - `chapter2.tex` - Properties of Matter (Particle Theory)
-    - (Chapters 3-10 planned but not yet implemented)
-  - `/images/` directory for figures (currently contains placeholder files)
+## AI-Generated Textbook Versions
+- Standard version: `/stage-4` and `/stage-5` subdirectories
+- OpenAI version: `/stage4-OAI` and `/stage5-OAI` subdirectories
+- Gemini version: `/stage4-gemini` and `/stage5-gemini` subdirectories
 
-## Current State (Stage 4)
-- Successfully restructured from single file to modular chapter structure
-- First two chapters fully implemented with proper LaTeX formatting
-- Main file contains commented-out references to future chapters (3-10)
-- Document compiles correctly to PDF with proper formatting
-- Image references temporarily commented out due to empty image files
-
-## Stage 5 Textbook
-- Location: `/stage-5` subdirectory
-- Successfully restructured into modular format (March 2025)
-- Main files:
-  - `main-textbook.tex` - Main LaTeX file that imports all chapters
-  - `/chapters/` directory containing:
-    - `introduction.tex` - Book introduction
-    - `chapter1.tex` - Scientific Investigations and Research Skills
-    - `chapter2.tex` - Atoms, Elements and Compounds
-    - (Chapters 3-10 planned but not yet implemented)
-  - `/images/` directory for figures (currently contains placeholder files from Stage 4)
-
-## Current State (Stage 5)
-- Successfully restructured from single file to modular chapter structure
-- First two chapters fully implemented with proper LaTeX formatting
-- Main file contains commented-out references to future chapters (3-10)
-- Document compiles correctly to PDF with proper formatting
-- Image references temporarily commented out due to empty image files
+## Helper Scripts
+- `fix_gemini_chapters.py` - Fixes common LaTeX issues in Gemini-generated chapters
+- `validate_latex.py` - Checks LaTeX files for syntax errors
+- `build_gemini_textbook.sh` - Interactive script to build textbooks incrementally
+- `gemini_chapter_template.md` - Improved prompt template for Gemini LaTeX generation
 
 ## LaTeX Float Management for Tufte-Style Textbooks
 
@@ -108,18 +81,52 @@ When using the Tufte-LaTeX class for textbooks, follow these guidelines to preve
    - Consider compiling chapters individually for complex documents
    - Check for recursive calls in margin note commands
 
-5. **Working Examples**:
-   - See `chapter3-tufte.tex` for a tested implementation
-   - Use `simple-full-textbook.tex` as a fallback approach
+## Gemini LaTeX Issue Resolution
+
+When working with Gemini-generated LaTeX, these common issues and fixes should be applied:
+
+1. **Incorrect Environment Syntax**:
+   - The `stopandthink` environment should not have a title parameter
+   - Fix with: `\begin{stopandthink}{Title}` → `\begin{stopandthink}`
+
+2. **Missing FloatBarriers**:
+   - Add `\FloatBarrier` at the end of major sections and after chapters
+   - Use incremental build approach - add chapters one by one
+
+3. **Too Many Margin Figures**:
+   - Limit to 3-4 margin figures per page
+   - Use `[0pt]` offset consistently
+
+4. **Deep Nesting Issues**:
+   - Use `enumitem` package options for deeply nested lists
+   - Replace: `\begin{itemize}\item` → `\begin{itemize}[label=$\bullet$]\item`
+
+5. **Build Process**:
+   1. Edit `main-textbook.tex` to include only introduction
+   2. Compile and verify it works
+   3. Uncomment chapter1 and compile again
+   4. Continue adding chapters one by one
+   5. If compilation fails, run the validation script
+
+## Improving Gemini LaTeX Output
+
+When generating LaTeX with Gemini:
+
+1. Use the improved template in `gemini_chapter_template.md`
+2. Provide explicit examples of correctly formatted environments
+3. Emphasize that `stopandthink` takes no title parameter
+4. Request explicit `\FloatBarrier` commands after sections
+5. Limit number of margin figures per page
 
 ## Next Steps
 1. ✅ Apply same modular structure to Stage 5 textbook (COMPLETED)
 2. ✅ Apply the same process, but instead using the OpenAI api to enable a comparison. Files should output to a "stage {4 |5}-OAI" instead. (COMPLETED)
 3. ✅ Apply the same process, but instead using the Google Gemini API. Files should output to a "stage {4 |5}-gemini" instead. (COMPLETED)
 4. ✅ Standardize the build processes across all versions (OpenAI and Gemini) with consistent scripts. (COMPLETED)
-5. Compare text book versions produced by the different AI's and depending on which is best, this will become responsive for primary generation of content, with the other AI's reviewers
-6. Create the remaining chapter files for Stage 4 (Chapters 3-10)
-7. Create the remaining chapter files for Stage 5 (Chapters 3-10)
-8. Review content & incorporate feed back into text book.
-9. Add actual image content to replace empty placeholders
-10. Uncomment image references once real images are available
+5. ✅ Fix LaTeX compilation issues in Gemini-generated chapters (COMPLETED)
+6. Compare text book versions produced by the different AI's and determine which is best for primary generation
+7. Create the remaining chapter files for Stage 4 (Chapters 3-10)
+8. Create the remaining chapter files for Stage 5 (Chapters 3-10)
+9. Review content & incorporate feedback into text book
+10. Add actual image content to replace empty placeholders
+11. Uncomment image references once real images are available
