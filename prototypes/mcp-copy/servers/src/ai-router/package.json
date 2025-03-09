@@ -1,0 +1,24 @@
+{
+  "name": "ai-router-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for routing AI queries to multiple providers (OpenAI, Gemini, Ollama)",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsx index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.0.1",
+    "dotenv": "^16.0.3",
+    "@google/generative-ai": "^0.2.1",
+    "openai": "^4.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,6 @@
+curl -X POST http://localhost:11434/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+          "model": "qwq:latest",
+          "prompt": "Tell me a fact about space."
+        }'
