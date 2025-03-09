@@ -1,44 +1,41 @@
-# Build directories
-node_modules/
-dist/
-build/
-target/
-*.o
-*.a
-*.so
-*.dll
-*.dylib
-*.exe
+# Ignore everything by default
+*
 
-# System files
-.DS_Store
-Thumbs.db
-*.log
-*.cache
-.env
+# Don't ignore these directories (add ! to negate the ignore)
+!prototypes/
+!prototypes/mcp/
+!prototypes/mcp/servers/
+!prototypes/mcp/servers/src/
+!prototypes/mcp/servers/src/ai-router/
 
-# Editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.sublime*
-*~
+# Don't ignore specific files in the ai-router directory
+!prototypes/mcp/servers/src/ai-router/Dockerfile
+!prototypes/mcp/servers/src/ai-router/README.md
+!prototypes/mcp/servers/src/ai-router/chmod_scripts.sh
+!prototypes/mcp/servers/src/ai-router/claude-autostart.sh
+!prototypes/mcp/servers/src/ai-router/index.ts
+!prototypes/mcp/servers/src/ai-router/install.sh
+!prototypes/mcp/servers/src/ai-router/manual-run.sh
+!prototypes/mcp/servers/src/ai-router/package.json
+!prototypes/mcp/servers/src/ai-router/server.js
+!prototypes/mcp/servers/src/ai-router/start-server.sh
+!prototypes/mcp/servers/src/ai-router/tsconfig.json
+!prototypes/mcp/servers/src/CLAUDE.md
 
-# Dependency lock files
-yarn.lock
-package-lock.json
-Cargo.lock
+# Explicitly ignore node_modules everywhere
+**/node_modules/
 
-# Output files
-*.out
-*.pdf
-*.png
-*.jpg
-*.jpeg
-/output/
+# Specifically ignore libraries you don't want to include
+prototypes/mcp/servers/src/other-library-1/
+prototypes/mcp/servers/src/other-library-2/
 
-# Temporary files
-/tmp/
-/temp/
-*.tmp
+# Don't ignore these file types (anywhere in the explicitly included directories)
+!**/*.ts
+!**/*.js
+!**/*.json
+!**/*.md
+!**/*.sh
+
+# Ignore sensitive files
+**/.env
+**/claude_desktop_config.json
