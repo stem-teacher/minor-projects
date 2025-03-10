@@ -1,6 +1,9 @@
 
 prototypes/mcp/
 
+prototypes/textbooks/textbook_env/
+prototypes/textbooks/arm64_env/
+
 # Explicitly ignore node_modules everywhere
 **/node_modules/
 
