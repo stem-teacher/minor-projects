@@ -1,0 +1,208 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{serif}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{multicol}
+
+\title[LaTeX Workshop]{\LaTeX\ Workshop for an Academic Setting}
+\author{Matthew Ahrens}
+\institute{CSLOL - Tufts University}
+\date{Monday, September 19th, 2016}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+\begin{frame}{Outline}
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{\LaTeX\ and Overleaf}
+\begin{itemize}
+  \item LaTeX is a Typesetting Programming Language
+  \item Overleaf is a Web Application to manage \LaTeX\ documents in the cloud
+  \begin{itemize}
+    \item collaborate easier
+    \item save headaches (about saving)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Typesetting }
+\begin{itemize}
+  \item What is \texttt{Typesetting}?
+  \item What are some of the struggles of typesetting for academic work?
+  \item What are some of the unique concerns of typesetting for homework?
+\end{itemize}
+
+\vskip 1cm
+
+\begin{block}{Examples}
+  \begin{itemize}
+    \item Style, font, and sizing
+    \item Space usage
+    \item Given constraints and learning a template
+  \end{itemize}
+\end{block}
+
+\end{frame}
+
+\section{Guided Activities}
+
+\subsection{General \LaTeX\ structure}
+\begin{frame}{General \LaTeX\ structure}
+\begin{itemize}
+  \item Commands and Parameters
+  \item Blocks, Environments (Begin and End)
+  \item Document and Class
+  \item Comments
+\end{itemize}
+
+\begin{block}{Examples}
+  TODO: Make the following in a new blank document or identify the following in a new project from an overleaf template.\\
+  \begin{itemize}
+    \item Add a document class
+    \item begin and end document
+    \item setup sections
+  \end{itemize}
+\end{block}
+\end{frame}
+
+\subsection{Fonts}
+\begin{frame}{Fonts}
+\begin{itemize}
+\item Fonts
+\item Size
+\item Word Spacing and Kerning
+\item Italics, Bold, and other Inline Changes
+\end{itemize}
+\end{frame}
+
+\subsection{Paragraphs and Spacing}
+\begin{frame}{Paragraphs and Spacing}
+\begin{itemize}
+\item New Paragraphs and Indentation
+\item Borders and other Spacing Elements
+\end{itemize}
+\end{frame}
+
+\subsection{Homework Page layout}
+\begin{frame}{Homework Page layout}
+\begin{itemize}
+  \item Title, Subtitle, Name, and Date
+  \item Sections and Subsections
+  \item Page Layout
+\end{itemize}
+\end{frame}
+
+\subsection{Itemized lists and Parameters}
+\begin{frame}{Itemized lists and Parameters}
+\begin{itemize}
+\item Making a list
+\item Making a nested list
+\item Bullets and other Stylings
+\end{itemize}
+\end{frame}
+
+\subsection{Tables and Figures}
+
+\begin{frame}{Tables and Figures}
+
+\begin{itemize}
+\item Use \texttt{tabular} for basic tables --- see Table~\ref{tab:widgets}, for example.
+\item You can upload a figure (JPEG, PNG or PDF) using the files menu. 
+\item To include it in your document, use the \texttt{includegraphics} command (see the comment below in the source code).
+\end{itemize}
+
+% Commands to include a figure:
+%\begin{figure}
+%\includegraphics[width=\textwidth]{your-figure's-file-name}
+%\caption{\label{fig:your-figure}Caption goes here.}
+%\end{figure}
+
+\begin{table}
+\centering
+\begin{tabular}{l|r}
+Item & Quantity \\\hline
+Widgets & 42 \\
+Gadgets & 13
+\end{tabular}
+\caption{\label{tab:widgets}An example table.}
+\end{table}
+
+\end{frame}
+
+\subsection{Mathematics and Math Mode}
+\begin{frame}{Mathematics and Math Mode}
+\begin{itemize}
+\item Entering math mode with \$
+\item Common Math formatting
+\item  \$\ and \$\$\ and using an environment
+\item Formatting and Styling inside Math Mode
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Readable Mathematics}
+
+Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
+$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
+      = \frac{1}{n}\sum_{i}^{n} X_i$$
+denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+
+\end{frame}
+
+\subsection{Academic Paper Layout}
+\begin{frame}{Academic Paper Layout}
+\begin{itemize}
+\item Common Templates
+\item Automatically Generate ToC
+\item two column style
+\item bibliography
+\end{itemize}
+\end{frame}
+
+\subsection{Environments and Different Modes}
+
+\subsection{Macros and Helpers}
+\begin{frame}{Macros and Helpers}
+\begin{itemize}
+\item The \texttt{\textbackslash newcommand} Command
+\item Making a new environment
+\item Conditionals and Loops
+\end{itemize}
+\end{frame}
+
+\subsection{Useful Packages}
+\begin{frame}{Useful Packages}
+\begin{itemize}
+\item Algorithms Package
+\item Rule template
+\item Beamer
+\item \LaTeX\ Cheat Sheet
+\end{itemize}
+\end{frame}
+
+\end{document}
+

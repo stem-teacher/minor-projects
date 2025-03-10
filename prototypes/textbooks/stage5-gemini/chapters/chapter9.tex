@@ -1,0 +1,412 @@
+```latex
+\chapter{Motion and Mechanics}
+
+\section{Introduction: The World in Motion}
+
+\begin{marginfigure}
+  \includegraphics[width=\marginparwidth]{placeholder-motion.jpg}
+  \captionof{figure}{Motion is everywhere, from the smallest particles to the largest galaxies.}
+  \label{fig:motion-intro}
+\end{marginfigure}
+
+Have you ever stopped to think about movement?  Everything around us, from a gentle breeze rustling leaves to a speeding car on a highway, is in motion.  Even things that seem still are actually moving – our planet is spinning and orbiting the Sun, and even the atoms within solid objects are constantly vibrating. The study of \keyword{motion} and its causes is called \keyword{mechanics}, a fundamental branch of physics that helps us understand the world around us.
+
+Mechanics can be broadly divided into two main areas: \keyword{kinematics} and \keyword{dynamics}. Kinematics is all about describing motion – how things move, how fast, and in what direction – without worrying about *why* they move. Dynamics, on the other hand, delves into the causes of motion, exploring the forces that make objects speed up, slow down, or change direction.  This chapter will introduce you to both kinematics and dynamics, laying the groundwork for a deeper understanding of the physical world.
+
+\begin{marginnote}
+\historylink{Ancient Greek philosophers} like Aristotle and Archimedes made early attempts to understand motion, but it was \historylink{Galileo Galilei} and \historylink{Isaac Newton} in the 17th century who truly revolutionised our understanding with their laws of motion.
+\end{marginnote}
+
+We will start by learning how to describe motion precisely, using concepts like displacement, velocity, and acceleration. Then, we will explore the concept of force and Newton's laws of motion, which are the bedrock of classical mechanics.  Finally, we will touch upon energy, work, momentum, and impulse, all essential tools for analysing and understanding motion in various contexts. Get ready to embark on a journey into the fascinating world of motion and mechanics!
+
+\section{Describing Motion: Kinematics}
+
+To understand motion, we first need to be able to describe it accurately.  This involves defining several key quantities that help us quantify how an object is moving.
+
+\subsection{Displacement, Distance, and Position}
+
+Imagine you are walking from your home to the local park.  You might walk along a winding path, taking detours to avoid puddles or say hello to neighbours. The total length of the path you walked is the \keyword{distance} you travelled.  However, the \keyword{displacement} is different. Displacement is the straight-line distance between your starting point (your home) and your ending point (the park), along with the direction from start to finish.
+
+\begin{keyconcept}{Displacement}
+\keyword{Displacement} is the change in position of an object. It is a \keyword{vector} quantity, meaning it has both magnitude (size) and direction.  It is measured in metres (m).
+\end{keyconcept}
+
+\begin{marginnote}
+\textbf{Scalar vs. Vector Quantities:}
+\begin{itemize}
+    \item \textbf{Scalar quantities} have only magnitude (e.g., distance, speed, time, mass).
+    \item \textbf{Vector quantities} have both magnitude and direction (e.g., displacement, velocity, acceleration, force).
+\end{itemize}
+\end{marginnote}
+
+\keyword{Distance}, on the other hand, is the total path length travelled. It is a \keyword{scalar} quantity, having only magnitude.  For example, you might walk 500 metres along a winding path to the park, but your displacement might only be 300 metres to the east if the park is directly east of your home.
+
+\keyword{Position} describes where an object is located in space relative to a reference point, often called the origin.  We can use a coordinate system (like a number line in one dimension, or x-y axes in two dimensions) to specify position. Change in position over time leads to motion.
+
+\begin{stopandthink}
+A runner completes one lap of a 400-metre circular track. What is the distance they ran? What is their displacement at the end of the lap compared to their starting point?
+\end{stopandthink}
+
+\subsection{Speed and Velocity}
+
+\keyword{Speed} tells us how fast an object is moving. It is defined as the distance travelled per unit of time.  The standard unit for speed is metres per second (m/s). We can calculate average speed using the formula:
+
+\[ \text{Average speed} = \frac{\text{Total distance}}{\text{Total time}} \]
+
+\begin{keyconcept}{Speed}
+\keyword{Speed} is the rate at which an object covers distance. It is a scalar quantity, measured in metres per second (m/s).
+\end{keyconcept}
+
+\keyword{Velocity}, like displacement, is a vector quantity. It tells us not only how fast an object is moving but also in what direction.  \keyword{Velocity} is defined as the rate of change of displacement.  Average velocity is calculated as:
+
+\[ \text{Average velocity} = \frac{\text{Total displacement}}{\text{Total time}} \]
+
+\begin{keyconcept}{Velocity}
+\keyword{Velocity} is the rate of change of displacement. It is a vector quantity, measured in metres per second (m/s) and specifies direction.
+\end{keyconcept}
+
+Instantaneous speed and instantaneous velocity refer to the speed and velocity at a specific moment in time.  Imagine looking at the speedometer of a car – it shows the instantaneous speed. If the car is also moving in a particular direction, then that speedometer reading combined with the direction gives the instantaneous velocity.
+
+\begin{marginnote}
+The terms "speed" and "velocity" are often used interchangeably in everyday language, but in physics, it's crucial to distinguish between them, especially when direction is important.
+\end{marginnote}
+
+\begin{example}
+A car travels 200 metres east in 10 seconds, then 100 metres west in 5 seconds. Calculate:
+\begin{enumerate}
+    \item The average speed for the entire journey.
+    \item The average velocity for the entire journey.
+\end{enumerate}
+\textbf{Solution:}
+\begin{enumerate}
+    \item Total distance = 200 m + 100 m = 300 m. Total time = 10 s + 5 s = 15 s.
+    Average speed = $\frac{300 \text{ m}}{15 \text{ s}} = 20 \text{ m/s}$.
+    \item Total displacement = 200 m (east) - 100 m (west) = 100 m (east). Total time = 15 s.
+    Average velocity = $\frac{100 \text{ m (east)}}{15 \text{ s}} \approx 6.67 \text{ m/s (east)}$.
+\end{enumerate}
+\end{example}
+
+\begin{stopandthink}
+Can an object have a constant speed but a changing velocity? Explain with an example.
+\end{stopandthink}
+
+\subsection{Acceleration}
+
+If an object's velocity is changing, we say it is \keyword{accelerating}. \keyword{Acceleration} is defined as the rate of change of velocity.  Like velocity and displacement, acceleration is also a vector quantity.  Average acceleration is calculated as:
+
+\[ \text{Average acceleration} = \frac{\text{Change in velocity}}{\text{Time taken}} = \frac{\text{Final velocity} - \text{Initial velocity}}{\text{Time taken}} \]
+
+The standard unit for acceleration is metres per second squared (m/s$^2$).  A positive acceleration means the velocity is increasing in the positive direction, while a negative acceleration (sometimes called \keyword{deceleration} or retardation) means the velocity is decreasing or increasing in the negative direction.
+
+\begin{keyconcept}{Acceleration}
+\keyword{Acceleration} is the rate of change of velocity. It is a vector quantity, measured in metres per second squared (m/s$^2$).
+\end{keyconcept}
+
+\begin{marginnote}
+\challenge{Non-uniform Acceleration:}  While we often deal with constant acceleration in introductory mechanics, real-world acceleration can be non-uniform (changing over time).  This leads to more complex motion analysis, often involving calculus.
+\end{marginnote}
+
+\begin{example}
+A cyclist starts from rest and accelerates uniformly to a velocity of 10 m/s east in 5 seconds. Calculate the cyclist's average acceleration.
+
+\textbf{Solution:}
+Initial velocity = 0 m/s. Final velocity = 10 m/s (east). Time taken = 5 s.
+Average acceleration = $\frac{10 \text{ m/s (east)} - 0 \text{ m/s}}{5 \text{ s}} = 2 \text{ m/s}^2 \text{ (east)}$.
+\end{example}
+
+\begin{stopandthink}
+If a car is moving at a constant velocity, what is its acceleration? Explain.
+\end{stopandthink}
+
+\subsection{Equations of Motion (for Uniform Acceleration)}
+
+When an object moves with constant or uniform acceleration in a straight line, we can use a set of equations to relate displacement ($s$), initial velocity ($u$), final velocity ($v$), acceleration ($a$), and time ($t$). These are often called the \keyword{equations of motion} or SUVAT equations.
+
+\begin{enumerate}
+    \item $v = u + at$  (relates final velocity, initial velocity, acceleration, and time)
+    \item $s = ut + \frac{1}{2}at^2$  (relates displacement, initial velocity, acceleration, and time)
+    \item $v^2 = u^2 + 2as$  (relates final velocity, initial velocity, acceleration, and displacement)
+    \item $s = \frac{(u+v)}{2}t$ (relates displacement, average velocity, and time)
+\end{enumerate}
+
+\begin{marginnote}
+\mathlink{Derivation of Equations:} These equations can be derived using calculus or from the definitions of velocity and acceleration and assuming uniform acceleration.
+\end{marginnote}
+
+These equations are powerful tools for solving problems involving motion in a straight line with constant acceleration.  It's important to remember that these equations are vector equations, meaning direction must be considered.  In one-dimensional motion, we often use positive and negative signs to represent directions.
+
+\begin{example}
+A train starts from rest and accelerates uniformly at 0.5 m/s$^2$ for 20 seconds. Calculate:
+\begin{enumerate}
+    \item The final velocity of the train.
+    \item The distance travelled by the train in this time.
+\end{enumerate}
+\textbf{Solution:}
+Given: $u = 0 \text{ m/s}$, $a = 0.5 \text{ m/s}^2$, $t = 20 \text{ s}$.
+
+\begin{enumerate}
+    \item Using $v = u + at$:
+    $v = 0 + (0.5 \text{ m/s}^2)(20 \text{ s}) = 10 \text{ m/s}$.
+    \item Using $s = ut + \frac{1}{2}at^2$:
+    $s = (0 \text{ m/s})(20 \text{ s}) + \frac{1}{2}(0.5 \text{ m/s}^2)(20 \text{ s})^2 = 0 + \frac{1}{2}(0.5)(400) \text{ m} = 100 \text{ m}$.
+\end{enumerate}
+\end{example}
+
+\begin{investigation}{Investigating Motion with a Ramp and Trolley}
+\textbf{Aim:} To investigate the motion of a trolley rolling down a ramp and determine its acceleration.
+
+\textbf{Materials:}
+\begin{itemize}
+    \item Ramp (e.g., a plank of wood)
+    \item Trolley
+    \item Stopwatch
+    \item Metre ruler
+    \item Books or blocks to elevate the ramp
+\end{itemize}
+
+\textbf{Procedure:}
+\begin{enumerate}
+    \item Set up the ramp at a shallow angle using books or blocks. Measure and record the height of the ramp.
+    \item Mark several positions along the ramp at equal distances (e.g., every 20 cm).
+    \item Release the trolley from rest at the top of the ramp.
+    \item Use the stopwatch to measure the time it takes for the trolley to reach each marked position. Repeat each measurement several times and calculate the average time.
+    \item Record your measurements in a table, including distance travelled and average time taken.
+    \item Plot a graph of distance travelled (on the y-axis) against time squared (on the x-axis).
+    \item Determine the gradient of the graph. The gradient should be approximately equal to $\frac{1}{2}a$, where $a$ is the acceleration of the trolley. Calculate the acceleration from the gradient.
+\end{enumerate}
+
+\textbf{Analysis and Discussion:}
+\begin{itemize}
+    \item Describe the shape of your graph. What does it tell you about the relationship between distance and time for the trolley's motion?
+    \item Calculate the acceleration of the trolley from your graph.
+    \item Discuss any sources of error in your experiment and how they could be minimised.
+    \item How would changing the angle of the ramp affect the acceleration of the trolley?  Suggest further investigations.
+\end{itemize}
+\end{investigation}
+
+\begin{tieredquestions}{Describing Motion}
+
+\begin{enumerate}[label=\textbf{Basic Questions}]
+    \item Define the terms: distance, displacement, speed, velocity, and acceleration.
+    \item What is the difference between scalar and vector quantities? Give examples of each.
+    \item A car travels 100 km in 2 hours. Calculate its average speed in km/h and m/s.
+    \item A ball is dropped from rest and falls for 3 seconds. Assuming acceleration due to gravity is approximately 10 m/s$^2$, calculate its final velocity. (Use $v=u+at$)
+\end{enumerate}
+
+\begin{enumerate}[resume, label=\textbf{Intermediate Questions}]
+    \item Explain the difference between average speed and instantaneous speed.
+    \item A cyclist travels 12 km east and then 5 km north. Calculate the total distance travelled and the magnitude of the displacement.
+    \item A train accelerates uniformly from 10 m/s to 30 m/s in 20 seconds. Calculate its acceleration and the distance travelled during this time. (Use $a = \frac{v-u}{t}$ and $s = ut + \frac{1}{2}at^2$)
+    \item Sketch a velocity-time graph for an object moving with constant positive acceleration. Describe the motion represented by the graph.
+\end{enumerate}
+
+\begin{enumerate}[resume, label=\textbf{Advanced Questions}]
+    \item A racing car starts from rest and accelerates uniformly to a speed of 100 m/s over a distance of 400 m. Calculate its acceleration and the time taken to cover this distance. (Use $v^2 = u^2 + 2as$)
+    \item Explain how to determine instantaneous velocity from a displacement-time graph.
+    \item A ball is thrown vertically upwards with an initial velocity of 20 m/s. Assuming acceleration due to gravity is 9.8 m/s$^2$ downwards, calculate:
+    \begin{enumerate}
+        \item The maximum height reached by the ball.
+        \item The time taken to reach the maximum height.
+        \item The total time of flight (time to return to the starting point).
+    \end{enumerate}
+    \item Discuss the limitations of using the equations of motion in real-world scenarios. When are they not applicable?
+\end{enumerate}
+
+\end{tieredquestions}
+
+\section{Forces: The Causes of Motion}
+
+We've learned how to describe motion, but what *causes* motion?  The answer is \keyword{force}.  A force is essentially a push or a pull that can cause an object to start moving, stop moving, change direction, or change shape. Forces are vector quantities; they have both magnitude and direction.  The unit of force is the \keyword{Newton} (N).
+
+\begin{keyconcept}{Force}
+\keyword{Force} is a push or a pull that can cause a change in an object's motion. It is a vector quantity, measured in Newtons (N).
+\end{keyconcept}
+
+\subsection{Types of Forces}
+
+There are many types of forces in nature.  Some common types we encounter in mechanics include:
+
+\begin{itemize}
+    \item \textbf{Gravitational Force (Weight):} The force of attraction between objects with mass. On Earth, this is the force that pulls objects downwards towards the centre of the Earth. We call this force \keyword{weight}.
+    \item \textbf{Frictional Force (Friction):} A force that opposes motion when two surfaces are in contact and move or try to move past each other. Friction can be helpful (e.g., allowing us to walk) or hindering (e.g., slowing down moving machines).
+    \item \textbf{Tension Force (Tension):} The force transmitted through a string, rope, cable, or wire when it is pulled tight by forces acting from opposite ends.
+    \item \textbf{Normal Force (Normal Reaction):} The force exerted by a surface perpendicular to the surface of contact when an object rests on it. It prevents objects from passing through surfaces.
+    \item \textbf{Applied Force:} A force that is directly applied to an object by a person or another object (e.g., pushing a box).
+    \item \textbf{Air Resistance (Drag):} A frictional force exerted by air on objects moving through it.  It increases with speed.
+\end{itemize}
+
+\begin{marginnote}
+At a fundamental level, all forces can be classified into four \textbf{fundamental forces}: gravitational, electromagnetic, weak nuclear, and strong nuclear forces.  The forces we commonly deal with in mechanics are often macroscopic manifestations of these fundamental forces.
+\end{marginnote}
+
+\begin{stopandthink}
+Think of examples of each type of force in everyday situations.
+\end{stopandthink}
+
+\subsection{Newton's Laws of Motion}
+
+Sir Isaac Newton formulated three fundamental laws of motion that describe the relationship between force and motion. These laws are the foundation of classical mechanics.
+
+\subsubsection{Newton's First Law: The Law of Inertia}
+
+\begin{keyconcept}{Newton's First Law (Law of Inertia)}
+An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force (net force).
+\end{keyconcept}
+
+This law introduces the concept of \keyword{inertia}. Inertia is the tendency of an object to resist changes in its state of motion.  An object with a larger mass has greater inertia – it is harder to start it moving or to stop it once it's moving.
+
+If the net force (the vector sum of all forces acting on an object) is zero, the object will either remain at rest or continue to move at a constant velocity.  This does not mean there are no forces acting, but rather that the forces are balanced.
+
+\begin{marginnote}
+\historylink{Galileo's Concept of Inertia:}  Galileo Galilei first proposed the idea of inertia, challenging Aristotle's view that a force is needed to keep an object moving. Newton built upon Galileo's work to formulate his first law.
+\end{marginnote}
+
+\begin{stopandthink}
+Explain how Newton's First Law applies to:
+\begin{enumerate}
+    \item A spacecraft moving in space far from any stars or planets.
+    \item Wearing a seatbelt in a car.
+\end{enumerate}
+\end{stopandthink}
+
+\subsubsection{Newton's Second Law: Force, Mass, and Acceleration}
+
+\begin{keyconcept}{Newton's Second Law}
+The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. The acceleration is in the same direction as the net force.
+\end{keyconcept}
+
+Mathematically, Newton's Second Law is expressed as:
+
+\[ \mathbf{F}_\text{net} = m\mathbf{a} \]
+
+where:
+\begin{itemize}
+    \item $\mathbf{F}_\text{net}$ is the net force acting on the object (vector sum of all forces).
+    \item $m$ is the mass of the object (a scalar quantity, measure of inertia).
+    \item $\mathbf{a}$ is the acceleration of the object (a vector quantity).
+\end{itemize}
+
+This equation is fundamental to dynamics. It tells us that if we know the net force acting on an object and its mass, we can calculate its acceleration.  Conversely, if we know the mass and acceleration, we can determine the net force.
+
+\begin{marginnote}
+\mathlink{Vector Nature:}  Remember that $\mathbf{F}_\text{net}$ and $\mathbf{a}$ are vectors.  In problems involving forces in two or three dimensions, we need to resolve forces into components and apply Newton's Second Law along each direction independently.
+\end{marginnote}
+
+\begin{example}
+A 2 kg block is pushed across a frictionless horizontal surface with a force of 10 N. Calculate the acceleration of the block.
+
+\textbf{Solution:}
+Given: $m = 2 \text{ kg}$, $F_\text{net} = 10 \text{ N}$.
+Using $F_\text{net} = ma$:
+$10 \text{ N} = (2 \text{ kg})a$
+$a = \frac{10 \text{ N}}{2 \text{ kg}} = 5 \text{ m/s}^2$.
+The acceleration of the block is 5 m/s$^2$ in the direction of the applied force.
+\end{example}
+
+\begin{stopandthink}
+If you double the net force acting on an object, what happens to its acceleration? If you double the mass of the object (while keeping the net force the same), what happens to its acceleration?
+\end{stopandthink}
+
+\subsubsection{Newton's Third Law: Action and Reaction}
+
+\begin{keyconcept}{Newton's Third Law (Law of Action and Reaction)}
+For every action, there is an equal and opposite reaction.  Whenever one object exerts a force on a second object, the second object exerts an equal and opposite force on the first.
+\end{keyconcept}
+
+Forces always come in pairs, called action-reaction pairs.  These forces are:
+\begin{itemize}
+    \item Equal in magnitude.
+    \item Opposite in direction.
+    \item Act on \textbf{different} objects.
+    \item Are of the same type (e.g., both gravitational, both contact forces, etc.).
+\end{itemize}
+
+It's crucial to remember that action and reaction forces act on different objects. They do not cancel each other out when considering the motion of a single object.
+
+\begin{marginnote}
+Confusion Alert!  Action and reaction forces, though equal and opposite, do not cancel each other out because they act on different objects.  For cancellation of forces, they must act on the \textbf{same} object and be equal and opposite.
+\end{marginnote}
+
+\begin{example}
+Consider a book resting on a table.
+\begin{itemize}
+    \item \textbf{Action:} The book exerts a downward gravitational force (weight) on the table.
+    \item \textbf{Reaction:} The table exerts an upward normal force on the book.
+\end{itemize}
+These two forces are an action-reaction pair according to Newton's Third Law. They are equal in magnitude and opposite in direction.  The weight acts on the table, and the normal force acts on the book.
+
+Now consider the forces acting on the book itself to determine its motion (or lack thereof).  The forces acting on the book are its weight (downwards) and the normal force from the table (upwards).  In this case, these two forces are equal and opposite \textbf{and act on the same object (the book)}. Therefore, they cancel each other out, resulting in a net force of zero on the book, and the book remains at rest (Newton's First Law).
+\end{example}
+
+\begin{stopandthink}
+Identify the action-reaction pairs in the following scenarios:
+\begin{enumerate}
+    \item A person walking on the ground.
+    \item A rocket launching upwards.
+    \item A swimmer pushing against the water.
+\end{enumerate}
+\end{stopandthink}
+
+\begin{investigation}{Investigating Friction}
+\textbf{Aim:} To investigate how the force of friction varies with the weight of an object.
+
+\textbf{Materials:}
+\begin{itemize}
+    \item Wooden block
+    \item Wooden plank (or table surface)
+    \item Spring balance or force sensor
+    \item Weights (e.g., slotted masses)
+    \item String
+\end{itemize}
+
+\textbf{Procedure:}
+\begin{enumerate}
+    \item Place the wooden plank horizontally on a table.
+    \item Attach a string to the wooden block and connect the other end to a spring balance or force sensor.
+    \item Place the wooden block on the plank.
+    \item Gradually increase the pull on the spring balance until the wooden block just starts to move. Record the reading on the spring balance – this is the static friction force.
+    \item Add weights to the wooden block to increase its weight.  Repeat step 4 for different weights.
+    \item Record your measurements in a table, including the weight of the block (including added weights) and the static friction force.
+    \item Plot a graph of static friction force (on the y-axis) against the weight of the block (on the x-axis).
+\end{enumerate}
+
+\textbf{Analysis and Discussion:}
+\begin{itemize}
+    \item Describe the shape of your graph. What does it tell you about the relationship between static friction and weight?
+    \item Is there a proportional relationship? If so, determine the constant of proportionality. This constant is related to the coefficient of static friction.
+    \item Discuss any factors that might affect the force of friction in this experiment, such as the surfaces in contact and the presence of any lubricants.
+    \item How might the force of kinetic friction (friction when the object is moving) differ from static friction? Suggest how you could investigate kinetic friction.
+\end{itemize}
+\end{investigation}
+
+\begin{tieredquestions}{Forces and Newton's Laws}
+
+\begin{enumerate}[label=\textbf{Basic Questions}]
+    \item Define the term 'force' and state its unit.
+    \item State Newton's First Law of Motion in your own words.
+    \item State Newton's Second Law of Motion and write down the equation that represents it.
+    \item State Newton's Third Law of Motion.
+    \item Identify the action-reaction pair when you jump upwards from the ground.
+\end{enumerate}
+
+\begin{enumerate}[resume, label=\textbf{Intermediate Questions}]
+    \item Explain the concept of inertia and how it relates to mass.
+    \item A net force of 20 N acts on a 5 kg object. Calculate the acceleration of the object.
+    \item A car of mass 1000 kg is moving at a constant velocity. What is the net force acting on the car? Explain your answer using Newton's Laws.
+    \item Describe the difference between static friction and kinetic friction.
+    \item Explain why action and reaction forces do not cancel each other out, even though they are equal and opposite.
+\end{enumerate}
+
+\begin{enumerate}[resume, label=\textbf{Advanced Questions}]
+    \item A 10 kg box is placed on a horizontal surface. The coefficient of static friction between the box and the surface is 0.4. Calculate the minimum horizontal force required to start moving the box. (Assume acceleration due to gravity is 9.8 m/s$^2$)
+    \item A rocket engine exerts a thrust force of 10000 N upwards. The mass of the rocket is 500 kg. Calculate the initial upward acceleration of the rocket. (Remember to consider the weight of the rocket).
+    \item Explain how Newton's Third Law is essential for propulsion (e.g., rockets, aeroplanes, swimming).
+    \item Discuss the limitations of Newton's Laws of Motion. Are they always applicable? If not, when do they break down and what theories are needed beyond them?
+\end{enumerate}
+
+\end{tieredquestions}
+
+\section{Energy and Work}
+
+\textit{(To be continued...)}
+```

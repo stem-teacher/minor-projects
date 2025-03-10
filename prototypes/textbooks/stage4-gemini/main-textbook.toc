@@ -1,0 +1,28 @@
+\contentsline {chapter}{Introduction}{5}{chapter*.2}%
+\contentsline {subsection}{Features of the Textbook}{6}{subsection*.3}%
+\contentsline {subsection}{Working Scientifically}{6}{subsection*.4}%
+\contentsline {subsection}{Matter and Its Properties}{7}{subsection*.5}%
+\contentsline {subsection}{Energy and Forces}{7}{subsection*.6}%
+\contentsline {subsection}{Living Things and Ecosystems}{7}{subsection*.7}%
+\contentsline {subsection}{Earth and Space}{8}{subsection*.8}%
+\contentsline {subsection}{Set Regular Study Habits}{8}{subsection*.9}%
+\contentsline {subsection}{Engage Actively with the Text}{8}{subsection*.10}%
+\contentsline {subsection}{Use Visual Aids}{8}{subsection*.11}%
+\contentsline {subsection}{Participate Fully in Investigations}{8}{subsection*.12}%
+\contentsline {subsection}{Collaborate and Communicate}{8}{subsection*.13}%
+\contentsline {subsection}{Reflect on Your Learning}{9}{subsection*.14}%
+\contentsline {subsection}{Seek Help When Needed}{9}{subsection*.15}%
+\contentsline {chapter}{Introduction to Scientific Inquiry}{11}{chapter*.16}%
+\contentsline {subsection}{General Laboratory Rules}{11}{subsection*.17}%
+\contentsline {subsection}{Using Chemicals Safely}{12}{subsection*.18}%
+\contentsline {subsection}{Safety Equipment}{12}{subsection*.19}%
+\contentsline {subsection}{Steps of the Scientific Method}{13}{subsection*.20}%
+\contentsline {subsection}{Formulating Hypotheses}{13}{subsection*.21}%
+\contentsline {subsection}{Variables in Experiments}{14}{subsection*.22}%
+\contentsline {subsection}{Types of Observations}{14}{subsection*.23}%
+\contentsline {subsection}{Recording Data}{15}{subsection*.24}%
+\contentsline {chapter}{Properties of Matter (Particle Theory)}{17}{chapter*.25}%
+\contentsline {subsection}{Solids}{18}{subsection*.26}%
+\contentsline {subsection}{Liquids}{18}{subsection*.27}%
+\contentsline {subsection}{Gases}{19}{subsection*.28}%
+\contentsfinish 

@@ -1,40 +1,9 @@
-# Ignore everything by default
-*
 
-# Don't ignore these directories (add ! to negate the ignore)
-!prototypes/
-!prototypes/mcp/
-!prototypes/mcp/servers/
-!prototypes/mcp/servers/src/
-!prototypes/mcp/servers/src/ai-router/
-
-# Don't ignore specific files in the ai-router directory
-!prototypes/mcp/servers/src/ai-router/Dockerfile
-!prototypes/mcp/servers/src/ai-router/README.md
-!prototypes/mcp/servers/src/ai-router/chmod_scripts.sh
-!prototypes/mcp/servers/src/ai-router/claude-autostart.sh
-!prototypes/mcp/servers/src/ai-router/index.ts
-!prototypes/mcp/servers/src/ai-router/install.sh
-!prototypes/mcp/servers/src/ai-router/manual-run.sh
-!prototypes/mcp/servers/src/ai-router/package.json
-!prototypes/mcp/servers/src/ai-router/server.js
-!prototypes/mcp/servers/src/ai-router/start-server.sh
-!prototypes/mcp/servers/src/ai-router/tsconfig.json
-!prototypes/mcp/servers/src/CLAUDE.md
+prototypes/mcp/
 
 # Explicitly ignore node_modules everywhere
 **/node_modules/
 
-# Specifically ignore libraries you don't want to include
-prototypes/mcp/servers/src/other-library-1/
-prototypes/mcp/servers/src/other-library-2/
-
-# Don't ignore these file types (anywhere in the explicitly included directories)
-!**/*.ts
-!**/*.js
-!**/*.json
-!**/*.md
-!**/*.sh
 
 # Ignore sensitive files
 **/.env

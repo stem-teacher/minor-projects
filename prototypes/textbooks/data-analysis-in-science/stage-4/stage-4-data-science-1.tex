@@ -1,0 +1,1107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tufte‐Style LaTeX Book with Data Science Program Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{tufte-book}
+
+\hypersetup{colorlinks}% for colored hyperlinks
+
+% Book metadata
+\title{Data Science \linebreak Unlocking Real World Insights \\[1ex]
+\large  NESA Stage 4 Data Science Program}
+\author{Philip Haynes}
+\publisher{NSW Science Scholars}
+\date{\monthyear}
+
+% Additional packages if needed
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}  % for list control
+
+\begin{document}
+
+% Front matter: cover page, table of contents, etc.
+\frontmatter
+
+% Title page (cover page)
+\maketitle
+
+% Table of Contents (and lists if desired)
+\tableofcontents
+
+\listoffigures
+\listoftables
+
+% Main matter begins here
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction to the NESA Stage 4 Data Science Program}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Program Title}
+\textbf{Data Science: Unlocking Insights in the Real World}
+
+\section*{Target Audience}
+Year 8 Students (Ages 13--14) -- Selective School Edition
+
+\section*{Program Overview}
+Welcome to the Year 8 Data Science program, an exciting and innovative course designed to equip students with essential skills for the 21st century. In today's data‐rich world, the ability to understand, analyse, and interpret data is no longer a niche skill but a fundamental competency. This program provides a foundational understanding of data science principles and practices, empowering students to become data‐literate citizens and future innovators.
+
+\section*{Alignment with NSW NESA Stage 4 Science Syllabus and the Australian Curriculum: Science (Version 8.4)}
+This program is meticulously designed to align with the NSW Stage 4 Science Syllabus—specifically addressing the ``Data Science 1'' focus area (SC4-DA1) and the broader Working Scientifically skills (SC4-WS). It also integrates strongly with the Australian Curriculum: Science (Version 8.4), particularly the Science Inquiry Skills strand.
+
+\subsection*{Key Curriculum Links}
+\begin{itemize}[leftmargin=*, label={--}]
+    \item \textbf{NSW Stage 4 Science Syllabus -- Data Science 1:}
+    \begin{itemize}[leftmargin=*, label={\textbullet}]
+        \item SC4-DA1-01: Explains how data is used by scientists to model and predict scientific phenomena.
+        \item SC4-WS-06: Uses data to identify trends, patterns and relationships, and draw conclusions.
+        \item SC4-WS-07: Identifies problem-solving strategies and proposes solutions.
+    \end{itemize}
+    \item \textbf{Australian Curriculum: Science (Version 8.4) -- Science Inquiry Skills (Year 7--8):}
+    \begin{itemize}[leftmargin=*, label={\textbullet}]
+        \item ACSIS124: Formulating questions or hypotheses that can be investigated scientifically.
+        \item ACSIS125: Planning, selecting and using appropriate investigation types to collect reliable data.
+        \item ACSIS126: Processing, analysing and evaluating data; identifying patterns and summarising data.
+        \item ACSIS127: Communicating ideas, findings and evidence-based conclusions.
+        \item ACSIS131: Evaluating investigation methods and conclusions.
+    \end{itemize}
+\end{itemize}
+
+\section*{Pedagogical Logic: Real-World Analysis with Modern Tooling}
+This program is built upon an inquiry-based, hands-on approach that emphasizes:
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Active inquiry and investigation.
+    \item Practical, hands-on activities using modern tools (Observable notebooks, Python coding, AI Tutor integration).
+    \item Real-world relevance and the development of 21st-century skills (digital literacy, computational thinking, critical reasoning, and effective communication).
+\end{itemize}
+% (Additional content, examples, and further explanation can be inserted here.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{10 Week Learning Sequence}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Overall Theme}
+Data Science: Unlocking Insights in the Real World
+
+\section*{Week-by-Week Overview}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item \textbf{Week 1:} Data Science Foundations \& Digital Immersion.
+    \item \textbf{Week 2:} Data Collection Mastery \& Digital Responsibility.
+    \item \textbf{Week 3:} Data Visualization \& Interactive Storytelling.
+    \item \textbf{Week 4:} Descriptive Statistics \& Data Interpretation.
+    \item \textbf{Week 5:} Scientific Question Formulation \& Experimental Design --- Advanced.
+    \item \textbf{Week 6:} Advanced Data Wrangling \& Real-World Datasets.
+    \item \textbf{Week 7:} AI-Powered Data Analysis \& Predictive Modelling (Introduction).
+    \item \textbf{Week 8:} Group Project --- Real-World Data Science Challenge.
+    \item \textbf{Week 9:} Project Refinement \& Advanced Review.
+    \item \textbf{Week 10:} End-of-Semester Exam \& Future Pathways.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Thirty One-Hour Data Science Lesson Plans}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 1: Data Science Foundations \& Digital Immersion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 1.1: Introduction to Data Science: What, Why, and Where?}
+\textbf{Title:} Data Science: Unveiling the Power of Data in the 21st Century
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define data science and explain its interdisciplinary nature.
+    \item Identify key applications of data science in diverse fields.
+    \item Understand the significance of data science in modern society.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+This introductory lesson provides an overview of data science, its definition, and its role in various scientific breakthroughs. Real--world case studies (such as precision medicine, climate modelling, astronomy, and materials science) are used to illustrate its importance.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Display a series of news headlines related to data science breakthroughs and ask students what common theme they see.
+    \item \textbf{Main Activity (25 mins):} Explain the definition of data science and use a diagram to illustrate its connections with statistics, computer science, domain expertise, communication, and ethics.
+    \item \textbf{Case Study Exploration (25 mins):} Present case studies; have small groups discuss the scientific problem, the type of data used, and the role of data science.
+    \item \textbf{Reflection (10 mins):} Facilitate a class discussion about the potential future applications of data science.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+A formative quiz (multiple choice) and observation of group discussions.
+
+\medskip
+\textbf{Student Materials:}  
+Workbook with diagrams and reflection questions; slide deck and handouts.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 1.2: Digital Toolkit: Getting Started with Observable \& AI Tutor}
+\textbf{Title:} Your Data Science Lab: Navigating Observable and Meeting Your AI Assistant
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Create and navigate an Observable notebook.
+    \item Use markdown and code cells.
+    \item Execute basic Python code and interact with the integrated AI Tutor.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students are introduced to Observable as a platform for data exploration. The lesson includes a guided tour of creating notebooks, adding cells, and running simple Python code (e.g., \texttt{print("Hello Data Science!")}). An introduction to the AI Tutor follows.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Brainstorm other digital tools and discuss their features.
+    \item \textbf{Guided Tour (35 mins):} Step--by--step demonstration of logging in, creating a new notebook, and adding markdown and code cells. Followed by guided practice interacting with the AI Tutor.
+    \item \textbf{Reflection (5 mins):} Short discussion on initial impressions.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Review of students’ notebooks and observation of AI Tutor interactions.
+
+\medskip
+\textbf{Student Materials:}  
+Step--by--step Observable guide and AI Tutor instructions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 1.3: Data Exploration: Types of Data in Science}
+\textbf{Title:} Data Under the Microscope: Exploring the Variety of Data in Science
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define data in a scientific context.
+    \item Differentiate between qualitative and quantitative data.
+    \item Classify quantitative data as discrete or continuous.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+This lesson focuses on the types of data encountered in science. Interactive activities help students classify data found in their surroundings as well as in scientific contexts.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} “Data Around the Room” — students list examples of data from the classroom.
+    \item \textbf{Activity 1 (25 mins):} Compare and classify qualitative vs. quantitative data using examples.
+    \item \textbf{Activity 2 (20 mins):} A sorting challenge to further divide quantitative data into discrete and continuous.
+    \item \textbf{Reflection (10 mins):} Class discussion on why these distinctions matter.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+A short quiz and teacher observation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 2: Data Collection Mastery \& Digital Responsibility}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 2.1: Digital Footprint \& Data Ethics}
+\textbf{Title:} Navigating the Digital World: Your Footprint and Ethical Data Use
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define and explain a digital footprint.
+    \item Identify online activities contributing to a digital footprint.
+    \item Understand ethical considerations in data collection and privacy.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students discuss digital footprints and ethical issues. They examine scenarios that highlight privacy, security, and the ethical use of data in both personal and scientific contexts.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Brainstorm activities that leave digital traces; discuss potential consequences.
+    \item \textbf{Main Activity (25 mins):} Explore the difference between active and passive digital footprints and examine examples.
+    \item \textbf{Ethical Dilemmas (20 mins):} In small groups, discuss provided scenarios (e.g., anonymized medical data, environmental monitoring, AI bias) and debate ethical solutions.
+    \item \textbf{Reflection (10 mins):} Write a brief reflection on personal digital footprint management.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Observation of group discussion and a formative reflection task.
+
+\medskip
+\textbf{Student Materials:}  
+Brainstorm worksheet, ethical dilemma scenarios, and a reflection prompt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 2.2: Data Collection Techniques: Primary vs. Secondary Data (Hands--On Design)}
+\textbf{Title:} Becoming Data Collectors: Designing Scientific Investigations
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Differentiate between primary and secondary data.
+    \item Describe methods for primary data collection.
+    \item Design a basic data collection plan.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students explore primary versus secondary data and work in groups to design a data collection plan for a given scientific question.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Present several scientific questions and ask which data sources (primary or secondary) might answer them.
+    \item \textbf{Discussion (20 mins):} Define primary and secondary data, and review the pros and cons of each.
+    \item \textbf{Group Activity (30 mins):} In groups, choose one of the questions and develop a detailed data collection plan (including method, variables, procedure, and data type).
+    \item \textbf{Reflection (10 mins):} Groups share and discuss their plans.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Review of group plans and a matching exercise on data types.
+
+\medskip
+\textbf{Student Materials:}  
+Data Collection Plan template and a matching worksheet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 2.3: Accuracy, Precision, and Validity: Ensuring Data Quality (Practical Activities)}
+\textbf{Title:} Data Quality Control: Accuracy, Precision, and Validity in Scientific Measurement
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define accuracy, precision, and validity.
+    \item Perform measurements and evaluate their quality.
+    \item Propose improvements for experimental design.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students engage in a hands--on "Measurement Olympics" across various stations (length, mass, volume, time) to experience issues of accuracy and precision, and later critique an experimental design for validity.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Use visual examples (e.g., targets) to review the concepts.
+    \item \textbf{Measurement Olympics (30 mins):} Rotate among stations, record multiple measurements, and calculate averages and ranges.
+    \item \textbf{Validity Challenge (20 mins):} Analyze a flawed experimental design and suggest specific improvements.
+    \item \textbf{Reflection (10 mins):} Discuss why these concepts are critical in science.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Written definitions and teacher observation.
+
+\medskip
+\textbf{Student Materials:}  
+Recording sheets, a validity scenario worksheet, and reference definitions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 3: Data Visualization \& Interactive Storytelling}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 3.1: Data Display: Tables --- Organising Information}
+\textbf{Title:} Data in Order: Mastering Tables for Scientific Clarity
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Construct clear and informative tables.
+    \item Identify key table components (title, headings, cells, units).
+    \item Choose appropriate table formats for various data.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students learn table design principles by critiquing poor examples and then creating their own table from raw data.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Present unorganized data and discuss extraction challenges.
+    \item \textbf{Activity 1 (25 mins):} Analyze a well--designed table versus a poorly designed one.
+    \item \textbf{Activity 2 (20 mins):} Groups convert raw data into a neatly formatted table.
+    \item \textbf{Reflection (10 mins):} Discuss why tables are effective.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Component identification and group table review.
+
+\medskip
+\textbf{Student Materials:}  
+Table critique worksheet and raw data sets.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 3.2: Visualizing Relationships: Bar Graphs}
+\textbf{Title:} Bar Graphs: Comparing Categories and Showing Differences
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Create bar graphs to compare categorical data.
+    \item Identify the essential components of a bar graph.
+    \item Choose the appropriate type of bar graph.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+The lesson introduces bar graphs. Students learn by deconstructing examples and then constructing their own graphs from provided data.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Brainstorm examples of categorical data.
+    \item \textbf{Activity 1 (25 mins):} Discuss the anatomy of a bar graph and match different scenarios with the best graph type.
+    \item \textbf{Activity 2 (20 mins):} Groups create a bar graph from a given dataset.
+    \item \textbf{Reflection (10 mins):} Discuss when to use bar graphs.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+A component identification task and group review of graphs.
+
+\medskip
+\textbf{Student Materials:}  
+Graph data sets and a “Bar Graph Type Match” worksheet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 3.3: Showing Trends Over Time: Line Graphs}
+\textbf{Title:} Line Graphs: Revealing Trends and Changes Over Time
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Construct line graphs to display trends.
+    \item Identify key components (axes, data points, lines, labels).
+    \item Interpret trends and discuss the impact of scale choices.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students learn how to build and interpret line graphs by reviewing examples and creating graphs from datasets.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Present several simple line graphs and identify trends.
+    \item \textbf{Activity 1 (25 mins):} Explain and demonstrate the components of a line graph.
+    \item \textbf{Activity 2 (20 mins):} In groups, construct a line graph from provided data.
+    \item \textbf{Reflection (10 mins):} Discuss the importance of accurate scaling.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Component labeling and group project feedback.
+
+\medskip
+\textbf{Student Materials:}  
+Graph paper or digital tools and a “Scale Choice Challenge” worksheet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 4: Descriptive Statistics \& Data Interpretation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 4.1: Central Tendency: Mean, Median, Mode --- Finding the "Average"}
+\textbf{Title:} Unlocking the Center: Mean, Median, and Mode --- Finding the Typical Value
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define and calculate the mean, median, and mode.
+    \item Explain the differences between these measures.
+    \item Use Python (in Observable) to compute these statistics.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students practice calculating central tendency measures both by hand and with Python code.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} “Guess the Average” using simple numerical sets.
+    \item \textbf{Activity 1 (25 mins):} Definitions and manual calculations of mean, median, and mode.
+    \item \textbf{Activity 2 (20 mins):} Guided coding in Observable to calculate these measures using \texttt{numpy} and \texttt{scipy.stats}.
+    \item \textbf{Reflection (10 mins):} Discuss when each measure is most useful.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Quiz questions and review of students’ Python code.
+
+\medskip
+\textbf{Student Materials:}  
+Calculation worksheets and Python code templates.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 4.2: Data Dispersion: Range --- Understanding Data Spread}
+\textbf{Title:} Beyond the Average: Range --- Measuring the Spread of Data
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define and calculate the range.
+    \item Interpret what the range tells us about data variability.
+    \item Use Python to compute the range.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+The lesson explains how the range is a measure of dispersion and discusses its limitations.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Compare two datasets with the same mean but different spreads.
+    \item \textbf{Activity 1 (25 mins):} Manual calculation and interpretation of the range.
+    \item \textbf{Activity 2 (20 mins):} Coding in Observable to compute range using \texttt{max()} and \texttt{min()}.
+    \item \textbf{Reflection (10 mins):} Discuss the usefulness and limitations of the range.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Short quiz and code review.
+
+\medskip
+\textbf{Student Materials:}  
+Worksheets and code templates.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 4.3: Outliers: Identifying and Interpreting Unusual Data Points}
+\textbf{Title:} Data Detectives: Unmasking Outliers --- Spotting the Unusual Suspects in Data
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define what an outlier is.
+    \item Identify outliers visually (using box plots and scatter plots) and conceptually.
+    \item Discuss strategies for handling outliers.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students learn to spot outliers through visual aids and simple numerical rules, and discuss the implications of outliers.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} “Spot the Odd One Out” activity.
+    \item \textbf{Activity 1 (25 mins):} Presentation on outlier identification with examples using box plots and scatter plots.
+    \item \textbf{Activity 2 (20 mins):} Practice exercises using simplified numerical rules to flag outliers.
+    \item \textbf{Reflection (10 mins):} Discuss the importance of investigating outliers.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Short answer questions and group discussion.
+
+\medskip
+\textbf{Student Materials:}  
+Worksheets with graphs and outlier identification challenges.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 5: Scientific Question Formulation \& Experimental Design --- Advanced}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 5.1: Asking Testable Questions: From Observation to Inquiry}
+\textbf{Title:} Igniting Inquiry: Asking Powerful, Testable Scientific Questions
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Formulate testable scientific questions.
+    \item Differentiate among descriptive, comparative, correlational, and causal questions.
+    \item Refine broad questions into focused, answerable ones.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students observe a natural scene (via video or walk) then work in pairs to refine vague questions into precise, testable inquiries.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Observation Challenge — generate questions from a nature video.
+    \item \textbf{Activity 1 (25 mins):} Present criteria for testable questions and analyze examples.
+    \item \textbf{Activity 2 (20 mins):} In groups, refine broad questions to precise project questions.
+    \item \textbf{Reflection (10 mins):} Discuss common pitfalls and improvements.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Multiple-choice quiz and review of refined questions.
+
+\medskip
+\textbf{Student Materials:}  
+Question Critique worksheet and refinement template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 5.2: Experimental Design: Variables, Controls, and Groups}
+\textbf{Title:} Blueprint for Investigation: Designing Robust Scientific Experiments
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define independent, dependent, and controlled variables.
+    \item Understand the role of control and experimental groups.
+    \item Design a basic controlled experiment.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+This lesson explains experimental design using examples and a group challenge to design an experiment (e.g., plant growth vs. light intensity).
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss scenarios to identify variable types.
+    \item \textbf{Activity 1 (25 mins):} Define and provide examples of independent, dependent, and controlled variables.
+    \item \textbf{Activity 2 (20 mins):} In groups, design an experiment outlining variables and control groups.
+    \item \textbf{Reflection (10 mins):} Discuss why controls are critical.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Variable Matching Quiz and review of group designs.
+
+\medskip
+\textbf{Student Materials:}  
+Worksheets and a checklist for experimental design.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 5.3: Designing Virtual Experiments in Observable}
+\textbf{Title:} Virtual Labs: Conducting Experiments in Observable Notebooks
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Design a simple virtual experiment in Observable.
+    \item Define and manipulate variables via Python code.
+    \item Simulate data collection and visualize results.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Using a guided template (e.g., a plant growth simulation), students work through defining a question, simulating data with \texttt{numpy.random}, and visualizing outcomes with Plot.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss advantages of virtual experiments.
+    \item \textbf{Guided Activity (25 mins):} Follow a step--by--step template in Observable to simulate plant growth under varied light conditions.
+    \item \textbf{Hands-On (20 mins):} Students modify parameters and observe changes.
+    \item \textbf{Reflection (10 mins):} Group discussion on experiment design and limitations.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Teacher review of notebooks and observation of data interpretation.
+
+\medskip
+\textbf{Student Materials:}  
+Observable notebook template and code snippets.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 6: Advanced Data Handling (Cleaning, Sorting, Filtering)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 6.1: Real-World Data Challenges: "Messy" Datasets and Data Quality Issues}
+\textbf{Title:} Taming the Data Jungle: Facing Real-World Data Challenges
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Recognize that real--world datasets are often messy.
+    \item Identify common issues such as missing values, inconsistent formats, errors, and biases.
+    \item Understand the importance of data cleaning.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students receive a pre--prepared “messy” dataset, explore it in Observable, and document quality issues.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Share data disaster stories.
+    \item \textbf{Activity 1 (25 mins):} Explore a messy dataset in Observable and list issues (missing values, inconsistent formats, etc.).
+    \item \textbf{Activity 2 (20 mins):} In class, categorize issues and brainstorm conceptual cleaning strategies.
+    \item \textbf{Reflection (10 mins):} Discuss the implications of poor data quality.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Quiz on data quality issues and review of student documentation.
+
+\medskip
+\textbf{Student Materials:}  
+Messy dataset file and a worksheet for categorizing issues.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 6.2: Data Cleaning Techniques in Python (Pandas --- Basic)}
+\textbf{Title:} Data Spa Treatment: Cleaning Data with Python and Pandas
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Use Python/Pandas to handle missing values (using \texttt{dropna()} and \texttt{fillna()}).
+    \item Standardize data formats with \texttt{astype()}, \texttt{to\_datetime()}, and string methods.
+    \item Apply basic data validation techniques.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+A guided code--along in Observable shows how to clean data using Pandas functions.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Present data cleaning scenarios.
+    \item \textbf{Activity 1 (25 mins):} Code--along demonstrating detection and handling of missing values.
+    \item \textbf{Activity 2 (20 mins):} Code--along for standardizing data formats.
+    \item \textbf{Reflection (10 mins):} Discuss the advantages of automated cleaning.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Matching exercise and review of Observable notebooks.
+
+\medskip
+\textbf{Student Materials:}  
+Code templates and a Pandas cheat sheet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 6.3: Data Sorting and Filtering for Focused Analysis}
+\textbf{Title:} Focusing the Lens: Sorting and Filtering Data for Deeper Insights
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Sort DataFrames using \texttt{sort\_values()}.
+    \item Filter DataFrames using boolean indexing and \texttt{query()}.
+    \item Combine these techniques to extract meaningful subsets.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students learn to order and filter data for analysis and then apply these methods in Observable.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss strategies to quickly locate information in large datasets.
+    \item \textbf{Activity 1 (25 mins):} Guided demonstration of sorting techniques.
+    \item \textbf{Activity 2 (20 mins):} Demonstration and practice of filtering using boolean conditions and \texttt{query()}.
+    \item \textbf{Reflection (10 mins):} Class discussion on how sorting and filtering aid analysis.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Short answer questions and review of code in Observable.
+
+\medskip
+\textbf{Student Materials:}  
+Datasets, code templates, and a worksheet with research questions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 7: AI-Powered Data Analysis \& Predictive Modelling (Introduction)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 7.1: Introduction to AI in Data Analysis: Pattern Recognition and Insights}
+\textbf{Title:} The AI Data Detective: Uncovering Patterns with Artificial Intelligence
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Define AI in the context of data analysis.
+    \item Explain how AI is used for pattern recognition.
+    \item Describe AI’s role in data summarization and insight extraction.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Through visual pattern recognition challenges and case study research, students learn how AI tools augment data analysis.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Pattern Recognition Challenge with images.
+    \item \textbf{Activity 1 (25 mins):} Define AI and explain pattern recognition with real--world examples.
+    \item \textbf{Activity 2 (20 mins):} In groups, research a case study on AI in science and present findings.
+    \item \textbf{Reflection (10 mins):} Class discussion comparing AI capabilities with human analysis.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Short quiz and observation of group presentations.
+
+\medskip
+\textbf{Student Materials:}  
+Case study descriptions and a summary table template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 7.2: Simplified Predictive Modelling (Conceptual Introduction --- Visual Tools if feasible)}
+\textbf{Title:} Predicting the Future (Simply): Introduction to Predictive Modelling
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Explain the concept of predictive modelling.
+    \item Identify key steps: training, prediction, evaluation.
+    \item Understand the roles of features and target variables.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students learn the basic principles of predictive modelling through a conceptual overview and, if available, a hands--on session with a visual tool.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss everyday prediction scenarios.
+    \item \textbf{Activity 1 (25 mins):} Explain key steps (training, prediction, evaluation) and use analogies.
+    \item \textbf{Activity 2 (20 mins):} (If feasible) use a simplified visual predictive modelling tool on a sample dataset.
+    \item \textbf{Reflection (10 mins):} Discuss limitations and challenges.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Multiple-choice quiz and teacher observation.
+
+\medskip
+\textbf{Student Materials:}  
+Definition handouts and (if applicable) tool instructions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 7.3: Ethical Considerations of AI in Data Science}
+\textbf{Title:} AI Ethics Compass: Navigating the Ethical Landscape of Data Science
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Identify ethical issues such as bias, data privacy, and transparency.
+    \item Discuss sources and consequences of AI bias.
+    \item Understand the need for responsible, explainable AI.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students review ethical dilemma scenarios and brainstorm guidelines for ethical AI.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss general ethical dilemmas.
+    \item \textbf{Activity 1 (25 mins):} Present and analyze examples of AI bias.
+    \item \textbf{Activity 2 (20 mins):} In groups, brainstorm ethical principles for AI.
+    \item \textbf{Reflection (10 mins):} Class discussion on the value of ethical guidelines.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Short answer definitions and observation of brainstorming.
+
+\medskip
+\textbf{Student Materials:}  
+Ethical dilemma worksheets and a “Bias Detection Challenge” sheet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 8: Group Project --- Real-World Data Science Challenge}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 8.1: Project Launch: Defining Problems and Choosing Datasets}
+\textbf{Title:} Challenge Accepted: Launching Your Real-World Data Science Project
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Brainstorm and define a real-world problem.
+    \item Formulate a clear, focused project question.
+    \item Identify and evaluate potential datasets.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students work in groups to select a project topic, define a question, and begin exploring relevant datasets.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Class brainstorm of real-world problems.
+    \item \textbf{Activity 1 (25 mins):} In groups, choose a topic and formulate a project question.
+    \item \textbf{Activity 2 (20 mins):} Explore and evaluate potential datasets using online data portals.
+    \item \textbf{Reflection (10 mins):} Class discussion on topic selection and ethical considerations.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Review of group project proposals and dataset evaluations.
+
+\medskip
+\textbf{Student Materials:}  
+Project proposal template, dataset evaluation checklist, and resource list.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 8.2: Data Exploration and Question Formulation for Group Projects}
+\textbf{Title:} Data Expedition: Exploring Datasets and Defining Project Questions
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Load and explore a dataset in Observable using Pandas.
+    \item Refine the project question based on data insights.
+    \item Develop a detailed project plan.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Groups load their chosen dataset, explore its structure, and refine their project question. They then develop a plan outlining analysis, visualization, and a timeline.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Quick review of data exploration techniques.
+    \item \textbf{Activity 1 (35 mins):} In groups, load the dataset, view structure (\texttt{head()}, \texttt{info()}, \texttt{describe()}), and generate initial visualizations.
+    \item \textbf{Activity 2 (15 mins):} Refine the project question and develop a project plan.
+    \item \textbf{Reflection (10 mins):} Share key findings and next steps.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Teacher review of Observable notebooks and project plan checklists.
+
+\medskip
+\textbf{Student Materials:}  
+Data exploration checklist, project question refinement worksheet, and project plan template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 8.3: Data Analysis and Visualization --- Project Work Session}
+\textbf{Title:} Data in Action: Analyzing and Visualizing Project Data
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Apply data analysis techniques in Observable.
+    \item Create visualizations to communicate findings.
+    \item Document progress and work collaboratively.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Dedicated class time for groups to clean, analyze, and visualize their project data as per their plans.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Recap data analysis and visualization techniques.
+    \item \textbf{Main Work Session (60 mins):} Groups work in Observable—clean data (if needed), analyze it (descriptive stats, filtering, sorting), and produce visualizations (bar graphs, line graphs, scatter plots). They document all steps in markdown cells.
+    \item \textbf{Reflection (10 mins):} Class discussion of key findings, challenges, and next steps.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Observation and review of group notebooks and visualizations.
+
+\medskip
+\textbf{Student Materials:}  
+Project progress tracking sheets and guidance on visualization selection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 9: Project Refinement \& Advanced Review}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 9.1: Project Presentations --- Peer Feedback and Iteration}
+\textbf{Title:} Showcase and Sharpen: Project Presentations and Peer Review
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Present project findings clearly and concisely.
+    \item Provide constructive peer feedback.
+    \item Develop an iteration plan based on feedback.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Groups present their projects to the class. Peers complete a feedback form and groups then refine their projects based on the input.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Brainstorm effective presentation elements.
+    \item \textbf{Presentations (35 mins):} Each group presents (approx. 5--7 mins each) followed by Q\&A and peer feedback.
+    \item \textbf{Iteration Planning (20 mins):} Groups review feedback and create a detailed refinement plan.
+    \item \textbf{Reflection (10 mins):} Class discussion on the value of peer review.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Evaluation of presentations, peer feedback forms, and iteration plans.
+
+\medskip
+\textbf{Student Materials:}  
+Presentation guidelines, Peer Feedback Form, and Iteration Plan template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 9.2: AI-Driven Project Review and Refinement}
+\textbf{Title:} AI Project Consultant: Leveraging AI for Project Enhancement
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Use AI tools to receive automated feedback on project notebooks.
+    \item Integrate AI and peer feedback into a comprehensive revision plan.
+    \item Implement refinements collaboratively.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students submit their Observable project notebooks to an AI review tool (if available) and then combine that feedback with peer input to create a refined action plan.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Discuss what feedback AI might offer.
+    \item \textbf{AI Review Session (40 mins):} Students submit notebooks to the AI tool, review the feedback, and discuss it within their groups.
+    \item \textbf{Feedback Integration (20 mins):} Groups update their Iteration Plans to include AI suggestions.
+    \item \textbf{Reflection (10 mins):} Class discussion on the benefits and limitations of AI feedback.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Review of the refined action plans and observation of group collaboration.
+
+\medskip
+\textbf{Student Materials:}  
+Instructions for using the AI review tool, Feedback Integration Worksheet, and revised Iteration Plan template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 9.3: Exam Preparation and Advanced Data Analysis Practice}
+\textbf{Title:} Data Science Mastery: Exam Prep and Advanced Practice
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Review and consolidate key course concepts.
+    \item Practice solving advanced, exam--style data analysis problems.
+    \item Identify areas of strength and improvement.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+A teacher--led review session followed by practice problems in Observable, covering topics from data collection to AI.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} “Brain Dump” of key data science concepts.
+    \item \textbf{Review Session (35 mins):} Recap each week’s main topics with examples and quick questions.
+    \item \textbf{Practice Problems (25 mins):} Solve exam--style problems in Observable.
+    \item \textbf{Reflection (10 mins):} Identify topics for further review.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Teacher review of practice problem solutions and an exam preparation action plan.
+
+\medskip
+\textbf{Student Materials:}  
+Comprehensive review checklist, practice problem sets, and an Exam Preparation Action Plan template.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Week 10: End-of-Semester Exam \& Future Pathways}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Lesson 10.1: End-of-Semester Exam (Part 1 --- Data Interpretation and Short Answer)}
+\textbf{Title:} Exam Challenge Part 1: Data Interpretation and Knowledge Check
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Interpret data from tables and graphs.
+    \item Answer short-answer questions demonstrating conceptual understanding.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students complete an exam section (Part 1) under supervision, covering data interpretation and short-answer questions.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Exam Administration (70 mins):} Students work on Part 1 of the exam in a controlled setting.
+    % (Details regarding exam instructions and allowed materials are assumed to be provided on the exam paper.)
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+This section is summative; grading is based on pre--defined rubrics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 10.2: End-of-Semester Exam (Part 2 --- Coding and Notebook Tasks)}
+\textbf{Title:} Exam Challenge Part 2: Coding and Data Analysis in Action
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Complete coding tasks in Python using Observable.
+    \item Apply data analysis techniques to solve exam problems.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+Students work on the coding and notebook tasks portion of the exam using provided datasets and must complete the tasks within the allotted time.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Exam Administration (70 mins):} Students perform the coding tasks in Observable under exam conditions.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Summative exam grading based on code accuracy and interpretation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lesson 10.3: Future Pathways in Data Science \& Course Reflection}
+\textbf{Title:} Beyond Year 8: Data Science Futures and Course Reflection
+
+\medskip
+\textbf{Learning Outcomes:}
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Explore potential careers and educational pathways in data science.
+    \item Reflect on learning progress and skill development throughout the course.
+\end{itemize}
+
+\medskip
+\textbf{Overview:}  
+The final lesson offers insight into data science careers and allows students to reflect on their experiences and growth. Optional guest speakers or video clips may be included.
+
+\medskip
+\textbf{Activities:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Warm-Up (10 mins):} Brainstorm potential data science careers.
+    \item \textbf{Career Exploration (30 mins):} Present information on higher education, job roles, and emerging trends.
+    \item \textbf{Reflection Activity (30 mins):} Complete a Course Reflection Questionnaire and discuss key takeaways.
+    \item \textbf{Final Discussion (10 mins):} Share thoughts on next steps and course feedback.
+\end{enumerate}
+
+\medskip
+\textbf{Assessments:}  
+Review of the Course Reflection Questionnaire and class feedback.
+
+\medskip
+\textbf{Student Materials:}  
+Career information handout, Course Reflection Questionnaire, and resource list for continued learning.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+\bibliography{sample-handout}
+\bibliographystyle{plainnat}
+\printindex
+
+\end{document}

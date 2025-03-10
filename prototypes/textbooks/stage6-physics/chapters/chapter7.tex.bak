@@ -1,0 +1,167 @@
+\chapter{The Nature of Light}
+
+\section{Introduction: Unveiling the Mystery of Light}
+
+Light surrounds us, shaping our perception of the universe and underpinning technologies that define modern society. From the vivid colours of a sunset to the lasers powering complex surgeries, understanding the nature of light has profoundly influenced both scientific thought and technological advancement. Yet, its fundamental nature remains intriguingly dual: sometimes behaving like a wave, other times like a particle.
+
+In this chapter, we explore the duality of light through the wave-particle phenomenon, investigate the intricacies of atomic spectra, and delve into the strange consequences of Einstein's special relativity. These concepts are not merely theoretical—they form the basis for modern technology, from photovoltaic cells harnessing the photoelectric effect to GPS systems relying on relativistic corrections.
+
+\historylink{Newton argued for a particle theory of light, while Huygens supported a wave theory. The debate lasted centuries, shaping physics profoundly.}
+
+\section{Wave-Particle Duality}
+
+\subsection{Historical Context: Waves or Particles?}
+
+Early physicists debated fiercely whether light was a wave or a particle. Isaac Newton proposed a corpuscular (particle) model, while Christiaan Huygens argued for a wave model. By the 19th century, Thomas Young's double-slit experiment provided strong evidence for the wave theory, demonstrating interference patterns only explainable by waves.
+
+\begin{keyconcept}{Wave-Particle Duality}
+Light exhibits both wave-like and particle-like properties. Under certain conditions, it behaves as a wave, producing interference and diffraction patterns; in other conditions, it behaves as discrete particles, called photons.
+\end{keyconcept}
+
+\subsection{The Photoelectric Effect}
+
+Albert Einstein's analysis of the photoelectric effect in 1905 revolutionised our understanding of light. When light shines on a metal surface, electrons may be emitted. According to classical wave theory, increasing the intensity of light should eject electrons regardless of frequency. However, experiments showed electrons were emitted only if the frequency exceeded a certain threshold.
+
+\marginpar{\keyword{Photon:} A quantum (packet) of electromagnetic radiation carrying energy $E = hf$.}
+
+Einstein suggested that light consists of discrete energy packets called photons, each carrying energy proportional to their frequency:
+\[
+E = hf
+\]
+where $E$ is the energy, $h$ is Planck's constant ($6.626\times10^{-34}\,\text{Js}$), and $f$ is the frequency of the light.
+
+\begin{example}
+A photon of red light has a frequency of $4.6\times10^{14}$ Hz. Calculate the energy of one photon.
+
+\textbf{Solution:}
+\[
+E = hf = (6.626\times10^{-34})(4.6\times10^{14}) = 3.05\times10^{-19}\,\text{J}
+\]
+\end{example}
+
+\begin{stopandthink}
+If you double the frequency of a photon, what happens to its energy?
+\end{stopandthink}
+
+\subsection{De Broglie Waves}
+
+Louis de Broglie proposed that if light could behave as both wave and particle, perhaps matter could as well. This bold hypothesis led to the discovery of matter waves, encapsulated by the de Broglie wavelength formula:
+
+\[
+\lambda = \frac{h}{mv}
+\]
+
+This equation implies that all matter possesses wave-like properties, though these are only noticeable at atomic scales.
+
+\mathlink{The de Broglie hypothesis was experimentally confirmed by electron diffraction, showing electrons forming interference patterns similar to waves.}
+
+\begin{investigation}{Demonstrating Wave-Particle Duality: Double-Slit Experiment with Electrons}
+Research the experimental setup and results of electron diffraction through a double slit. Discuss what this experiment reveals about wave-particle duality.
+\end{investigation}
+
+\begin{tieredquestions}{Intermediate}
+\begin{enumerate}
+\item Explain how the photoelectric effect supports the particle theory of light.
+\item Calculate the de Broglie wavelength of an electron travelling with a speed of $2\times10^{6}\,\text{m/s}$ (electron mass $m_e = 9.11\times10^{-31}\,\text{kg}$).
+\end{enumerate}
+\end{tieredquestions}
+
+\challenge{Explore Quantum Electrodynamics (QED), which further integrates wave-particle duality into the quantum framework.}
+
+\FloatBarrier
+
+\section{Atomic Spectra}
+
+\subsection{Emission and Absorption Spectra}
+
+Atoms emit or absorb electromagnetic radiation at specific wavelengths, producing unique atomic spectra. These spectra serve as fingerprints, identifying chemical elements in distant stars, galaxies, and even forensic investigations.
+
+\begin{keyconcept}{Emission Spectrum}
+When electrons in an atom transition from higher to lower energy levels, photons are emitted, creating a bright-line emission spectrum unique to that element.
+\end{keyconcept}
+
+\begin{keyconcept}{Absorption Spectrum}
+When electrons absorb photons and move to higher energy levels, dark absorption lines appear in a continuous spectrum.
+\end{keyconcept}
+
+\subsection{The Bohr Model of the Atom}
+
+Niels Bohr proposed quantized energy levels to explain hydrogen's spectral lines. Electrons orbit the nucleus in specific allowed orbits, each with defined energies given by:
+\[
+E_n = -\frac{13.6\,\text{eV}}{n^2}
+\]
+where $n$ is a positive integer (principal quantum number).
+
+\begin{stopandthink}
+Why are spectral lines discrete rather than continuous?
+\end{stopandthink}
+
+\begin{example}
+Calculate the energy difference (and hence the photon wavelength) between the $n=3$ and $n=2$ levels in a hydrogen atom.
+
+\textbf{Solution:} Energy difference:
+\[
+\Delta E = E_3 - E_2 = \left(-\frac{13.6}{3^2}\right)-\left(-\frac{13.6}{2^2}\right) = 1.89\,\text{eV}
+\]
+
+Convert to Joules ($1\,\text{eV}=1.6\times10^{-19}\,\text{J}$):
+\[
+\Delta E = 1.89\times1.6\times10^{-19}=3.02\times10^{-19}\,\text{J}
+\]
+
+Photon wavelength:
+\[
+\lambda=\frac{hc}{\Delta E}=\frac{(6.626\times10^{-34})(3\times10^8)}{3.02\times10^{-19}}=6.58\times10^{-7}\,\text{m}=658\,\text{nm}
+\]
+\end{example}
+
+\begin{tieredquestions}{Advanced}
+\begin{enumerate}
+\item Derive the Rydberg formula for hydrogen spectral lines from Bohr's energy quantization. Discuss limitations of the Bohr model.
+\item Research how astronomers use spectroscopy to determine chemical compositions of distant stars.
+\end{enumerate}
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Special Relativity}
+
+\subsection{Einstein's Postulates}
+
+Albert Einstein's Special Relativity (1905) revolutionised conceptions of space and time, based on two simple postulates:
+
+\begin{enumerate}
+\item The laws of physics are identical for all inertial observers.
+\item The speed of light in a vacuum, $c$, is constant and independent of the motion of the source or observer.
+\end{enumerate}
+
+\begin{keyconcept}{Time Dilation}
+Moving clocks run slower compared to stationary observers. Time intervals measured in a moving frame ($\Delta t'$) relate to stationary intervals ($\Delta t$) by:
+\[
+\Delta t'=\frac{\Delta t}{\sqrt{1-\frac{v^2}{c^2}}}
+\]
+\end{keyconcept}
+
+\begin{keyconcept}{Length Contraction}
+Objects moving at relativistic speeds appear shorter along the direction of motion:
+\[
+L'=L\sqrt{1-\frac{v^2}{c^2}}
+\]
+\end{keyconcept}
+
+\begin{tieredquestions}{Basic}
+\begin{enumerate}
+\item What are Einstein's two postulates of special relativity?
+\item Describe time dilation and provide one real-world application.
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{investigation}{Testing Special Relativity: Muon Decay}
+Research experiments measuring muon decay in Earth's atmosphere. Explain how these experiments provide evidence for time dilation.
+\end{investigation}
+
+\challenge{Investigate relativistic energy and momentum, and how Einstein's mass-energy equivalence $E=mc^2$ emerges from special relativity.}
+
+\FloatBarrier
+
+This chapter has introduced you to the profound and revolutionary aspects of light, from wave-particle duality and atomic spectra to the intriguing world of special relativity. These ideas not only shape physics but continue to redefine our understanding of reality itself.

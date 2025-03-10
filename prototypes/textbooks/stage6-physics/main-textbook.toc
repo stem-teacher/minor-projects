@@ -1,0 +1,109 @@
+\contentsline {chapter}{Introduction}{5}{chapter*.2}%
+\contentsline {section}{How to Use This Textbook}{5}{section*.3}%
+\contentsline {subsection}{Main Text}{5}{subsection*.4}%
+\contentsline {subsection}{Margin Notes}{5}{subsection*.5}%
+\contentsline {subsection}{Investigations and Activities}{6}{subsection*.6}%
+\contentsline {subsection}{Worked Examples and Practice Problems}{6}{subsection*.7}%
+\contentsline {subsection}{Chapter Summaries and Review Questions}{6}{subsection*.8}%
+\contentsline {section}{Overview of the NSW HSC Physics Course}{6}{section*.9}%
+\contentsline {subsection}{Year 11 (Preliminary) Modules}{6}{subsection*.10}%
+\contentsline {subsection}{Year 12 (HSC) Modules}{7}{subsection*.11}%
+\contentsline {section}{How to Use This Textbook Effectively}{7}{section*.12}%
+\contentsline {subsection}{Study Tips}{7}{subsection*.13}%
+\contentsline {subsection}{Navigation and Organisation}{8}{subsection*.14}%
+\contentsline {subsection}{Preparation for HSC Examinations}{8}{subsection*.15}%
+\contentsline {section}{The Nature and Importance of Physics}{8}{section*.16}%
+\contentsline {section}{A Word of Encouragement}{9}{section*.17}%
+\contentsline {chapter}{Kinematics}{11}{chapter*.18}%
+\contentsline {section}{Describing Motion}{11}{section*.19}%
+\contentsline {subsection}{Scalars and Vectors}{11}{subsection*.20}%
+\contentsline {subsection}{Displacement and Distance}{11}{subsection*.21}%
+\contentsline {subsection}{Speed and Velocity}{12}{subsection*.22}%
+\contentsline {subsection}{Acceleration}{12}{subsection*.23}%
+\contentsline {section}{Graphical Analysis of Motion}{13}{section*.24}%
+\contentsline {subsection}{Displacement-Time Graphs}{14}{subsection*.25}%
+\contentsline {subsection}{Velocity-Time Graphs}{14}{subsection*.26}%
+\contentsline {chapter}{Dynamics}{17}{chapter*.27}%
+\contentsline {section}{Newton’s Laws of Motion}{17}{section*.28}%
+\contentsline {subsection}{First Law: The Law of Inertia}{17}{subsection*.29}%
+\contentsline {subsection}{Second Law: Force, Mass, and Acceleration}{18}{subsection*.30}%
+\contentsline {subsection}{Third Law: Action and Reaction}{18}{subsection*.31}%
+\contentsline {section}{Analyzing Forces: Force Diagrams and Free-Body Diagrams}{19}{section*.32}%
+\contentsline {subsection}{Constructing Free-Body Diagrams}{19}{subsection*.33}%
+\contentsline {section}{Projectile Motion}{20}{section*.34}%
+\contentsline {section}{Uniform Circular Motion (Qualitative)}{21}{section*.35}%
+\contentsline {section}{Momentum, Impulse, and Collisions}{21}{section*.36}%
+\contentsline {chapter}{Waves \& Thermodynamics}{23}{chapter*.37}%
+\contentsline {section}{The Nature of Waves}{23}{section*.38}%
+\contentsline {subsection}{What is a Wave?}{23}{subsection*.39}%
+\contentsline {subsection}{Properties of Waves}{23}{subsection*.40}%
+\contentsline {section}{Sound and Electromagnetic Waves}{25}{section*.41}%
+\contentsline {subsection}{Sound Waves}{25}{subsection*.42}%
+\contentsline {subsection}{Electromagnetic Waves}{25}{subsection*.43}%
+\contentsline {section}{Introduction to Thermodynamics}{26}{section*.44}%
+\contentsline {subsection}{Temperature vs. Thermal Energy}{26}{subsection*.45}%
+\contentsline {subsection}{Heat Transfer Mechanisms}{27}{subsection*.46}%
+\contentsline {chapter}{Electricity \& Magnetism}{29}{chapter*.47}%
+\contentsline {section}{Introduction to Electricity and Magnetism}{29}{section*.48}%
+\contentsline {section}{Electric Fields and Forces}{29}{section*.49}%
+\contentsline {subsection}{Electric Charge and Coulomb's Law}{29}{subsection*.50}%
+\contentsline {subsection}{Electric Fields}{30}{subsection*.51}%
+\contentsline {subsection}{Investigation: Mapping Electric Fields}{30}{subsection*.52}%
+\contentsline {section}{Electric Current, Voltage, and Resistance}{31}{section*.53}%
+\contentsline {subsection}{Understanding Current and Voltage}{31}{subsection*.54}%
+\contentsline {subsection}{Resistance and Ohm's Law}{31}{subsection*.55}%
+\contentsline {subsection}{Circuit Analysis}{31}{subsection*.56}%
+\contentsline {subsection}{Investigation: Ohm's Law Experiment}{32}{subsection*.57}%
+\contentsline {section}{Magnetic Fields and Electromagnetism}{32}{section*.58}%
+\contentsline {subsection}{Magnetic Fields}{32}{subsection*.59}%
+\contentsline {subsection}{Electromagnetism Fundamentals}{33}{subsection*.60}%
+\contentsline {subsection}{DC Electric Motors and Induction}{33}{subsection*.61}%
+\contentsline {chapter}{Advanced Mechanics}{35}{chapter*.62}%
+\contentsline {section}{Introduction and Context}{35}{section*.63}%
+\contentsline {section}{Uniform Circular Motion and Centripetal Force}{35}{section*.64}%
+\contentsline {subsection}{Defining Uniform Circular Motion}{35}{subsection*.65}%
+\contentsline {subsection}{Centripetal Force}{36}{subsection*.66}%
+\contentsline {section}{Rotational Dynamics: Torque and Rotational Inertia}{37}{section*.67}%
+\contentsline {subsection}{Understanding Torque}{37}{subsection*.68}%
+\contentsline {subsection}{Rotational Inertia (Moment of Inertia)}{37}{subsection*.69}%
+\contentsline {section}{Gravitational Fields and Orbital Motion}{38}{section*.70}%
+\contentsline {subsection}{Newton's Law of Universal Gravitation}{38}{subsection*.71}%
+\contentsline {subsection}{Orbital Motion: Satellites and Planets}{38}{subsection*.72}%
+\contentsline {section}{Chapter Summary and Review}{39}{section*.73}%
+\contentsline {chapter}{Electromagnetism}{41}{chapter*.74}%
+\contentsline {section}{Introduction to Electromagnetism}{41}{section*.75}%
+\contentsline {section}{Electromagnetic Induction}{41}{section*.76}%
+\contentsline {subsection}{Faraday's Law of Induction}{41}{subsection*.77}%
+\contentsline {subsection}{Lenz's Law and Conservation of Energy}{42}{subsection*.78}%
+\contentsline {section}{Transformers and Power Distribution}{43}{section*.79}%
+\contentsline {subsection}{Principles of Transformers}{43}{subsection*.80}%
+\contentsline {subsection}{Alternating Current (AC) vs. Direct Current (DC)}{43}{subsection*.81}%
+\contentsline {section}{Introducing Maxwell's Equations}{44}{section*.82}%
+\contentsline {subsection}{Qualitative Overview of Maxwell's Equations}{44}{subsection*.83}%
+\contentsline {section}{Chapter Summary}{45}{section*.84}%
+\contentsline {section}{Further Reading and Research}{45}{section*.85}%
+\contentsline {chapter}{The Nature of Light}{47}{chapter*.86}%
+\contentsline {section}{Introduction: Unveiling the Mystery of Light}{47}{section*.87}%
+\contentsline {section}{Wave-Particle Duality}{47}{section*.88}%
+\contentsline {subsection}{Historical Context: Waves or Particles?}{47}{subsection*.89}%
+\contentsline {subsection}{The Photoelectric Effect}{48}{subsection*.90}%
+\contentsline {subsection}{De Broglie Waves}{48}{subsection*.91}%
+\contentsline {section}{Atomic Spectra}{49}{section*.92}%
+\contentsline {subsection}{Emission and Absorption Spectra}{49}{subsection*.93}%
+\contentsline {subsection}{The Bohr Model of the Atom}{49}{subsection*.94}%
+\contentsline {section}{Special Relativity}{50}{section*.95}%
+\contentsline {subsection}{Einstein's Postulates}{50}{subsection*.96}%
+\contentsline {chapter}{From the Universe to the Atom}{53}{chapter*.97}%
+\contentsline {section}{The Standard Model of Particle Physics}{53}{section*.98}%
+\contentsline {subsection}{Fundamental Particles}{53}{subsection*.99}%
+\contentsline {subsection}{Quarks and Leptons}{54}{subsection*.100}%
+\contentsline {subsection}{Interactions and Force-Carrying Particles}{54}{subsection*.101}%
+\contentsline {section}{Nuclear Physics: Stability, Decay, and Applications}{56}{section*.102}%
+\contentsline {subsection}{Nuclear Stability}{56}{subsection*.103}%
+\contentsline {subsection}{Radioactive Decay}{56}{subsection*.104}%
+\contentsline {subsection}{Applications of Nuclear Physics}{56}{subsection*.105}%
+\contentsline {section}{Cosmology Basics: The Origin and Evolution of Our Universe}{57}{section*.106}%
+\contentsline {subsection}{The Big Bang Theory}{57}{subsection*.107}%
+\contentsline {subsection}{Cosmic Microwave Background Radiation}{57}{subsection*.108}%
+\contentsline {subsection}{Expansion of the Universe}{57}{subsection*.109}%
+\contentsfinish 

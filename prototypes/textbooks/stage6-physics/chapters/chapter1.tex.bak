@@ -1,0 +1,199 @@
+\chapter{Kinematics}
+\label{ch:kinematics}
+
+\newthought{Motion is fundamental} to understanding the physical world. From analyzing the trajectory of a spacecraft to understanding the mechanics behind athletes' movements, kinematics plays a central role in our interpretation of reality. In this chapter, we explore the concepts of displacement, velocity, acceleration, graphical representations, and the critical distinction between vectors and scalars.  
+
+\section{Describing Motion}
+
+Motion is everywhere. Cars driving, birds flying, and planets orbiting are all examples of objects in motion. But how exactly do physicists describe and quantify motion?
+
+\subsection{Scalars and Vectors}
+
+Physics uses two distinct types of measurements: \keyword{scalars} and \keyword{vectors}.
+
+\begin{keyconcept}{Scalars and Vectors}
+\begin{description}
+    \item[Scalars] Quantities that have magnitude only, such as temperature, mass, and speed.
+    \item[Vectors] Quantities that have both magnitude and direction, such as velocity, displacement, and acceleration.
+\end{description}
+\end{keyconcept}
+
+\marginnote[\baselineskip]{\textbf{Scalar examples:} 
+\begin{itemize}
+    \item Mass: $3\,\mathrm{kg}$
+    \item Speed: $50\,\mathrm{km\,h^{-1}}$
+\end{itemize}}
+
+\marginnote[\baselineskip]{\textbf{Vector examples:} 
+\begin{itemize}
+    \item Velocity: $50\,\mathrm{km\,h^{-1}}$ north
+    \item Displacement: $10\,\mathrm{m}$ east
+\end{itemize}}
+
+\begin{stopandthink}
+Classify these quantities as scalar or vector: distance, force, energy, momentum, temperature.
+\end{stopandthink}
+
+\subsection{Displacement and Distance}
+
+\keyword{Distance} is the total path length travelled, whereas \keyword{displacement} is the shortest straight-line path from initial to final position, including direction.
+
+\begin{example}
+Sophia walks $3\,\mathrm{km}$ east, then $4\,\mathrm{km}$ north. Calculate her displacement and distance travelled.
+\end{example}
+
+\begin{solution}
+Distance travelled = $3 + 4 = 7\,\mathrm{km}$.
+
+Displacement is a vector quantity:
+\[
+\text{Displacement magnitude} = \sqrt{3^2 + 4^2} = 5\,\mathrm{km},\quad \text{Direction: Northeast (53.1° from east)}
+\]
+\end{solution}
+
+\begin{stopandthink}
+If you walk around a circular track of circumference $400\,\mathrm{m}$ exactly once, what is your displacement?
+\end{stopandthink}
+
+\FloatBarrier
+
+\subsection{Speed and Velocity}
+
+\keyword{Speed} is the rate of change of distance travelled, while \keyword{velocity} is the rate of change of displacement.
+
+\begin{marginfigure}
+% figure placeholder: speedometer vs. compass+speed illustration
+\caption{Speed indicates how fast, while velocity includes direction.}
+\end{marginfigure}
+
+\begin{keyconcept}{Average vs Instantaneous Velocity}
+\begin{itemize}
+    \item \textbf{Average Velocity:} $\vec{v}_{avg} = \frac{\Delta \vec{s}}{\Delta t}$
+    \item \textbf{Instantaneous Velocity:} velocity at a specific instant or time interval approaching zero.
+\end{itemize}
+\end{keyconcept}
+
+\begin{example}
+A car travels $150\,\mathrm{km}$ north in $3$ hours, then $50\,\mathrm{km}$ south in $1$ hour. Calculate the average velocity.
+\end{example}
+
+\begin{solution}
+Net displacement = $150 - 50 = 100\,\mathrm{km}$ north. Total time = $4\,\mathrm{h}$.
+
+Average velocity = $\frac{100\,\mathrm{km}}{4\,\mathrm{h}} = 25\,\mathrm{km\,h^{-1}}$ north.
+\end{solution}
+
+\begin{stopandthink}
+Can an object have zero velocity but non-zero speed? Explain clearly.
+\end{stopandthink}
+
+\FloatBarrier
+
+\subsection{Acceleration}
+
+\keyword{Acceleration} measures the rate at which velocity changes with time.
+
+\begin{keyconcept}{Acceleration}
+Defined mathematically as:
+\[
+\vec{a} = \frac{\Delta \vec{v}}{\Delta t}
+\]
+Units: $\mathrm{m\,s^{-2}}$
+\end{keyconcept}
+
+\challenge{Acceleration can be positive, negative, or directional. Negative acceleration does not necessarily mean slowing down; it depends on the direction chosen as positive.}
+
+\begin{example}
+A train increases velocity uniformly from rest to $20\,\mathrm{m\,s^{-1}}$ in $10\,\mathrm{s}$. Find its acceleration.
+\end{example}
+
+\begin{solution}
+Initial velocity $u = 0$; final velocity $v = 20\,\mathrm{m\,s^{-1}}$; time $t = 10\,\mathrm{s}$.
+
+Acceleration $a = \frac{v - u}{t} = \frac{20 - 0}{10} = 2\,\mathrm{m\,s^{-2}}$.
+\end{solution}
+
+\begin{stopandthink}
+If velocity is constant, what is the acceleration? Justify mathematically.
+\end{stopandthink}
+
+\FloatBarrier
+
+\begin{tieredquestions}{Basic}
+\begin{enumerate}
+    \item Define scalar and vector quantities. Give two examples each.
+    \item A cyclist travels $12\,\mathrm{km}$ east and then $5\,\mathrm{km}$ west. What is the cyclist's displacement?
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Intermediate}
+\begin{enumerate}
+    \item A runner completes one lap around a $400\,\mathrm{m}$ track in $50\,\mathrm{s}$. Determine average speed and average velocity.
+    \item Differentiate clearly between instantaneous velocity and average velocity.
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+A car accelerates uniformly from rest at $3\,\mathrm{m\,s^{-2}}$ for $4\,\mathrm{s}$, then continues at constant velocity for $10\,\mathrm{s}$, and finally decelerates uniformly to rest in $5\,\mathrm{s}$. Calculate its total displacement.
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Graphical Analysis of Motion}
+
+Graphs provide an intuitive visual representation of motion. The two primary graphs used in kinematics are displacement-time and velocity-time graphs.
+
+\subsection{Displacement-Time Graphs}
+
+\begin{keyconcept}{Displacement-Time Graphs}
+\begin{itemize}
+    \item Gradient (slope) represents velocity.
+    \item A straight line indicates uniform velocity.
+    \item Curvature indicates acceleration (changing velocity).
+\end{itemize}
+\end{keyconcept}
+
+\begin{investigation}{Plotting Your Motion}
+Using a stopwatch and measuring tape, record your displacement every second as you walk at a steady pace. Plot a displacement-time graph. Repeat for a fast walk or run. Compare the slopes and discuss the differences.
+\end{investigation}
+
+\challenge{What would a vertical line on a displacement-time graph represent? Is this physically possible?}
+
+\FloatBarrier
+
+\subsection{Velocity-Time Graphs}
+
+\begin{keyconcept}{Velocity-Time Graphs}
+\begin{itemize}
+    \item Gradient represents acceleration.
+    \item Area under the graph represents displacement.
+\end{itemize}
+\end{keyconcept}
+
+\begin{stopandthink}
+Describe the motion represented by a horizontal line below the time axis on a velocity-time graph.
+\end{stopandthink}
+
+\begin{investigation}{Measuring Acceleration}
+Use a trolley on an inclined track and motion sensor to produce a velocity-time graph. Determine acceleration from the gradient and displacement by calculating the area under the graph.
+\end{investigation}
+
+\FloatBarrier
+
+\begin{tieredquestions}{Intermediate}
+Given a velocity-time graph:
+\begin{enumerate}
+    \item Describe how you would find displacement.
+    \item Explain how acceleration is determined.
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+Sketch a velocity-time graph for an object thrown vertically upwards and returning to its original position. Label key points clearly, explaining changes in velocity, acceleration, and displacement.
+\end{tieredquestions}
+
+\historylink{Galileo Galilei pioneered graphical representations by plotting distance-time relationships in his experiments on acceleration.}
+
+\FloatBarrier
+
+This concludes our exploration of kinematics fundamentals. Mastery in interpreting and analyzing motion is foundational for understanding more complex physical phenomena that we will encounter throughout this course.

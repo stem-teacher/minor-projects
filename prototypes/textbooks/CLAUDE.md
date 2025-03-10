@@ -8,6 +8,7 @@ The goal of this project is to produce two high-quality science textbooks for th
 3. Textbook development plan: plan.md
 4. Produced pdf file products. This directory and may be ignored.
 5. Task-history.md contains the history of different runs.
+6. Stage 6 textbook development plan: plan-hsc.md
 
 Files in the tests directory are prototype tests and should be ignored.
 Previously generated textbooks are located in the output directory.
@@ -124,9 +125,10 @@ When generating LaTeX with Gemini:
 3. ✅ Apply the same process, but instead using the Google Gemini API. Files should output to a "stage {4 |5}-gemini" instead. (COMPLETED)
 4. ✅ Standardize the build processes across all versions (OpenAI and Gemini) with consistent scripts. (COMPLETED)
 5. ✅ Fix LaTeX compilation issues in Gemini-generated chapters (COMPLETED)
-6. Compare text book versions produced by the different AI's and determine which is best for primary generation
-7. Create the remaining chapter files for Stage 4 (Chapters 3-10)
-8. Create the remaining chapter files for Stage 5 (Chapters 3-10)
-9. Review content & incorporate feedback into text book
-10. Add actual image content to replace empty placeholders
-11. Uncomment image references once real images are available
+6. Create Chemistry and Physics stage 6 text books using the OpenAI api.
+7. Compare text book versions produced by the different AI's and determine which is best for primary generation
+8. Create the remaining chapter files for Stage 4 (Chapters 3-10)
+9. Create the remaining chapter files for Stage 5 (Chapters 3-10)
+10. Review content & incorporate feedback into text book
+11. Add actual image content to replace empty placeholders
+112. Uncomment image references once real images are available

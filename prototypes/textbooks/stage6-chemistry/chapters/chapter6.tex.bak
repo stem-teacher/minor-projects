@@ -1,0 +1,176 @@
+\chapter{Acid/Base Reactions}
+
+Acid-base chemistry underpins many natural phenomena and industrial processes, from the digestion of food in our stomachs to the large-scale manufacturing of fertilizers essential for global agriculture. Understanding the fundamental principles of acids and bases equips scientists and engineers to develop critical technologies, ensure environmental sustainability, and improve medical treatments.
+
+This chapter explores the behavior and properties of acids and bases, methods to quantify their strength, techniques for accurate quantitative analysis (including titrations and standard solutions), and their significant industrial applications. Through structured explanations, practical investigations, and tiered exercises, you will build a deep, rigorous understanding of acid/base reactions.
+
+\section{Understanding Acids and Bases}
+\FloatBarrier
+\FloatBarrier
+\marginnote{\historylink{The terms ``acid'' and ``base'' originate from Latin; ``acidus'' meaning sour, and ``basis'' indicating foundation.}}
+
+Acids and bases play fundamental roles in chemical reactions, identified historically by their taste, texture, and reactivity. Modern chemistry defines acids and bases using specific, measurable criteria, allowing quantitative exploration of their properties.
+
+\subsection{Key Definitions and Theories}
+\FloatBarrier
+\FloatBarrier
+
+\begin{keyconcept}{Arrhenius Theory}
+Svante Arrhenius defined acids as substances dissociating in water to produce hydrogen ions (\ce{H+}) and bases as substances dissociating to produce hydroxide ions (\ce{OH-}).
+\begin{align*}
+\text{Acid:}\quad &\ce{HCl -> H+ + Cl-}\\[6pt]
+\text{Base:}\quad &\ce{NaOH -> Na+ + OH-}
+\end{align*}
+\end{keyconcept}
+
+\begin{keyconcept}{Brønsted–Lowry Theory}
+This theory expands the definition of acids and bases beyond aqueous solutions. Acids are proton (\ce{H+}) donors, and bases are proton acceptors. The interactions between acids and bases form conjugate acid-base pairs.
+\[
+\ce{NH3 + H2O <=> NH4+ + OH-}
+\]
+Here, \ce{NH3} acts as a base (accepting a proton), and \ce{H2O} acts as an acid (donating a proton).
+\end{keyconcept}
+
+\marginnote{\keyword{Conjugate Acid-Base Pair} -- consists of two substances differing by a single proton (\ce{H+}).}
+
+\subsection{Strong and Weak Acids and Bases}
+\FloatBarrier
+\FloatBarrier
+
+The strength of an acid or base depends on its degree of ionization or dissociation in aqueous solutions. Strong acids and bases dissociate completely, while weak acids and bases dissociate partially.
+
+\begin{example}
+Hydrochloric acid (\ce{HCl}) is a strong acid:
+\[
+\ce{HCl(aq) -> H+(aq) + Cl-(aq)}
+\]
+
+Acetic acid (\ce{CH3COOH}) is a weak acid:
+\[
+\ce{CH3COOH(aq) <=> CH3COO-(aq) + H+(aq)}
+\]
+\end{example}
+
+\begin{stopandthink}
+Why does partial dissociation lead to weaker conductivity in weak acids compared to strong acids?
+\end{stopandthink}
+
+\begin{tieredquestions}{Basic}
+\item Define an acid and a base according to the Brønsted–Lowry theory.
+\item Classify the following as strong or weak acids/bases: \ce{NaOH}, \ce{H2SO4}, \ce{NH3}, \ce{HF}.
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+\item Explain, using equilibrium concepts, why weak acids have equilibrium constants associated with them, whereas strong acids do not.
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Quantitative Analysis of Acids and Bases}
+\FloatBarrier
+\FloatBarrier
+
+Quantitative analysis involves precise measurement of acid/base concentrations. The pH scale provides a quantitative measure of acidity or alkalinity of solutions.
+
+\subsection{The pH Scale and Calculations}
+\FloatBarrier
+\FloatBarrier
+\marginnote{\keyword{pH} -- negative logarithm of the hydrogen ion concentration: $ \text{pH} = -\log[\ce{H+}]$.}
+
+pH quantifies the acidity of a solution. Neutral solutions have a pH of 7, acidic solutions have pH below 7, and basic solutions have pH above 7.
+
+\begin{example}
+Calculate the pH of a solution with hydrogen ion concentration \ce{[H+]} of $3.2\times10^{-4}\,\text{mol}\,\text{L}^{-1}$.
+
+\textbf{Solution:}
+\[
+\text{pH} = -\log(3.2\times10^{-4}) = 3.49
+\]
+This solution is acidic.
+\end{example}
+
+\begin{stopandthink}
+What happens to the pH of a solution when you dilute it with distilled water? Explain quantitatively.
+\end{stopandthink}
+
+\subsection{Titrations and Volumetric Analysis}
+\FloatBarrier
+\FloatBarrier
+
+A titration involves the gradual addition of a solution of known concentration (standard solution) to another solution of unknown concentration until the reaction reaches equivalence point.
+
+\begin{keyconcept}{Standard Solutions}
+A \keyword{standard solution} has an accurately known concentration, prepared using precise analytical techniques.
+\end{keyconcept}
+
+\begin{investigation}{Determining the Concentration of Acetic Acid in Vinegar}
+\textbf{Objective:} Use titration techniques to determine the concentration of acetic acid in commercial vinegar.
+
+\textbf{Materials:} Standardized sodium hydroxide (\ce{NaOH}) solution, vinegar sample, phenolphthalein indicator, burette, pipette, conical flask.
+
+\textbf{Procedure:}
+\begin{enumerate}
+\item Pipette 25.0 mL vinegar solution into a conical flask.
+\item Add 2-3 drops phenolphthalein indicator.
+\item Titrate with standardized \ce{NaOH}, recording the volume required.
+\item Repeat to obtain consistent results.
+\end{enumerate}
+
+\textbf{Calculations:} Determine concentration using:
+\[
+\ce{CH3COOH + NaOH -> CH3COONa + H2O}
+\]
+Calculate the molarity of vinegar from titration data.
+\end{investigation}
+
+\begin{tieredquestions}{Intermediate}
+\item Describe how indicators work in acid-base titrations.
+\item Calculate the pH of a solution prepared by dissolving 0.010 mol of hydrochloric acid in water to make 250 mL of solution.
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Industrial Applications of Acid/Base Chemistry}
+\FloatBarrier
+\FloatBarrier
+
+Acid-base reactions are integral to many industries, including agriculture, pharmaceuticals, and chemical manufacturing.
+
+\subsection{Ammonia Production: The Haber Process}
+\FloatBarrier
+\FloatBarrier
+\marginnote{\historylink{The Haber process, developed by Fritz Haber and Carl Bosch in early 20th century Germany, revolutionized agriculture.}}
+
+The Haber process synthesizes ammonia (\ce{NH3}), essential in fertilizers, from nitrogen and hydrogen gases:
+\[
+\ce{N2(g) + 3H2(g) <=> 2NH3(g)}
+\]
+
+\challenge{Explore Le Châtelier’s principle and reaction conditions (temperature, pressure, catalyst) to optimize ammonia yields.}
+
+\subsection{Chemical Manufacturing and Neutralization}
+\FloatBarrier
+\FloatBarrier
+
+Many industries rely on neutralization reactions to control pH, manage waste, or produce useful chemicals, such as salts and pharmaceuticals.
+
+\begin{example}
+Hydrochloric acid neutralizing sodium hydroxide produces sodium chloride, widely used industrially:
+\[
+\ce{HCl + NaOH -> NaCl + H2O}
+\]
+\end{example}
+
+\begin{stopandthink}
+Discuss how understanding acid/base equilibria can reduce environmental harm in industrial waste management.
+\end{stopandthink}
+
+\begin{tieredquestions}{Advanced}
+\item Examine the role of buffer solutions in pharmaceutical manufacturing. Outline an example where precise pH control is critical.
+\item Evaluate the environmental and economic impacts of ammonia production globally.
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section*{Summary}
+This chapter introduced acid-base theories, quantitative analysis, practical laboratory techniques, and industrial significance. Mastery of these concepts is crucial in both academic contexts and real-world applications.

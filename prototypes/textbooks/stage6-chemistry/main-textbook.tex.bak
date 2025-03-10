@@ -1,0 +1,135 @@
+% Stage 6 Chemistry Textbook (OpenAI Version)
+% Using Tufte-LaTeX document class for elegant layout with margin notes
+
+\documentclass[justified]{tufte-book}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{amsmath,amssymb}
+\usepackage[version=4]{mhchem} % For chemistry notation
+\usepackage{booktabs} % For nice tables
+\usepackage{microtype} % Better typography
+\usepackage{tikz} % For diagrams
+\usepackage{xcolor} % For colored text
+\usepackage{soul} % For highlighting
+\usepackage{tcolorbox} % For colored boxes
+\usepackage{enumitem} % For better lists
+\usepackage{wrapfig} % For wrapping text around figures
+\usepackage{hyperref} % For links
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+% Add float package for [H] placement option
+\usepackage{float}
+\usepackage{placeins} % For \FloatBarrier
+\usepackage{morefloats}
+\extrafloats{100}
+
+% Float adjustment to reduce figure/table drift
+\setcounter{topnumber}{9}          % Maximum floats at top of page
+\setcounter{bottomnumber}{9}       % Maximum floats at bottom
+\setcounter{totalnumber}{16}       % Maximum total floats on a page
+\renewcommand{\topfraction}{0.9}   % Maximum page fraction for top floats
+\renewcommand{\bottomfraction}{0.9}% Maximum page fraction for bottom floats
+\renewcommand{\textfraction}{0.05} % Minimum text fraction on page
+\renewcommand{\floatpagefraction}{0.5} % Minimum float page fill
+
+% Process all floats at end of each chapter
+\makeatletter
+\AtBeginDocument{
+  \let\old@chapter\@chapter
+  \def\@chapter[#1]#2{\FloatBarrier\old@chapter[{#1}]{#2}}
+}
+\makeatother
+
+% Custom colors
+\definecolor{primary}{RGB}{0, 73, 144} % Deep blue
+\definecolor{secondary}{RGB}{242, 142, 43} % Orange
+\definecolor{highlight}{RGB}{255, 222, 89} % Yellow highlight
+\definecolor{success}{RGB}{46, 139, 87} % Green
+\definecolor{info}{RGB}{70, 130, 180} % Steel blue
+\definecolor{note}{RGB}{220, 220, 220} % Light gray
+
+% Custom commands for pedagogical elements
+\newcommand{\keyword}[1]{\textbf{#1}\marginnote{\textbf{#1}: }}
+
+\newcommand{\challengeicon}{*}
+\newcommand{\challenge}[1]{\marginnote{\textbf{\challengeicon\ Challenge:} #1}}
+
+\newcommand{\mathlink}[1]{\marginnote{\textbf{Math Link:} #1}}
+
+\newcommand{\historylink}[1]{\marginnote{\textbf{History:} #1}}
+
+\newenvironment{investigation}[1]{%
+    \begin{tcolorbox}[colback=info!10,colframe=info,title=\textbf{Investigation: #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{keyconcept}[1]{%
+    \begin{tcolorbox}[colback=primary!5,colframe=primary,title=\textbf{Key Concept: #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{tieredquestions}[1]{%
+    \begin{tcolorbox}[colback=note!30,colframe=note!50,title=\textbf{Practice Questions - #1}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{stopandthink}{%
+    \begin{tcolorbox}[colback={highlight!30},colframe={highlight!50},title=\textbf{Stop and Think}]
+}{%
+    \end{tcolorbox}
+}
+
+\newenvironment{example}{%
+    \par\smallskip\noindent\textit{Example:}
+}{%
+    \par\smallskip
+}
+
+\title{NSW HSC Chemistry: A Comprehensive Guide\\
+\large For the Focused Student}
+\author{The Curious Scientist}
+\publisher{Emergent Mind Press}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+% Introduction
+\input{chapters/introduction}
+\FloatBarrier
+
+\input{chapters/chapter1}
+\FloatBarrier
+
+\input{chapters/chapter2}
+\FloatBarrier
+
+\input{chapters/chapter3}
+\FloatBarrier
+
+\input{chapters/chapter4}
+\FloatBarrier
+
+\input{chapters/chapter5}
+\FloatBarrier
+
+\input{chapters/chapter6}
+\FloatBarrier
+
+\input{chapters/chapter7}
+\FloatBarrier
+
+\input{chapters/chapter8}
+\FloatBarrier
+
+\end{document}

@@ -1,0 +1,191 @@
+\chapter{Introduction to Quantitative Chemistry}
+
+Chemistry is a language of patterns and quantities. While qualitative chemistry describes what substances are involved, quantitative chemistry tells us precisely how much. From pharmaceuticals to environmental protection, the ability to measure accurately and calculate chemical amounts is crucial. In this chapter, we will explore how chemists quantify substances through the mole concept, molar masses, chemical equations, and stoichiometric calculations. We will also investigate how these skills underpin real-world applications such as drug synthesis, pollution control, and quality assurance in industry.
+
+\section{The Mole Concept}
+\FloatBarrier
+\FloatBarrier
+\marginnote{\historylink{The mole concept was first formalised by Wilhelm Ostwald in 1893, who recognised the importance of a standard measure in chemistry.}}
+
+Chemists frequently deal with vast numbers of tiny particles—atoms, molecules, or ions. Counting these particles individually is impractical. Instead, chemists use a special counting unit called the \keyword{mole}.
+
+\begin{keyconcept}{The Mole}
+One mole (\si{\mol}) is defined as the amount of substance containing exactly \(6.02214076 \times 10^{23}\) elementary particles (atoms, molecules, ions, electrons, etc.). This number is known as \keyword{Avogadro's constant}, symbolised as \(N_A\).
+\[
+N_A = 6.02214076 \times 10^{23}\;\text{mol}^{-1}
+\]
+\end{keyconcept}
+
+\marginnote{\challenge{Why is Avogadro’s constant chosen as exactly \(6.02214076 \times 10^{23}\)? Research recent changes in its definition.}}
+
+\subsection{Relating Mass to Moles}
+\FloatBarrier
+\FloatBarrier
+
+Atoms and molecules are too small to weigh individually. Instead, we measure masses in grams and convert them into moles using the \keyword{molar mass}.
+
+\begin{keyconcept}{Molar Mass}
+The molar mass (\(M\)) of a substance is the mass (in grams) of exactly one mole of that substance. Its units are grams per mole (\si{\gram\per\mol}). The molar mass of an element equals its atomic mass from the periodic table.
+\end{keyconcept}
+
+\begin{example}
+Calculate the molar mass of water (\ce{H2O}).
+
+\textit{Solution:}
+\[
+M_{\ce{H2O}} = (2 \times 1.008) + (16.00) = 18.016\,\si{\gram\per\mol}
+\]
+\end{example}
+
+\begin{stopandthink}
+If one mole of carbon atoms weighs exactly \(12.01\,\si{\gram}\), how much do three moles weigh?
+\end{stopandthink}
+
+\begin{investigation}{Measuring the Mole}
+Using laboratory scales, measure exactly one mole of common substances (e.g., salt, sugar, water). Compare physical quantities—what does one mole look like? Discuss practical relevance of mole calculations for industrial-scale chemistry.
+\end{investigation}
+
+\begin{tieredquestions}{Basic}
+\begin{enumerate}
+  \item Define the mole and Avogadro’s constant.
+  \item Calculate the molar mass of sodium chloride (\ce{NaCl}).
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Intermediate}
+\begin{enumerate}
+  \item How many moles are there in \(88\,\si{\gram}\) of carbon dioxide (\ce{CO2})?
+  \item What is the mass of \(0.250\,\si{\mol}\) of glucose (\ce{C6H12O6})?
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+\begin{enumerate}
+  \item Discuss the implications of redefining Avogadro’s constant in 2019. How has this impacted chemical measurement?
+\end{enumerate}
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Chemical Equations and Stoichiometry}
+\FloatBarrier
+\FloatBarrier
+
+\marginnote{\historylink{Stoichiometry derives from Greek \textit{stoicheion} (element) and \textit{metron} (measure).}}
+
+A \keyword{chemical equation} symbolically represents chemical reactions, showing reactants transforming into products. Stoichiometry enables precise calculations involving reacting substances and their products.
+
+\subsection{Balancing Chemical Equations}
+\FloatBarrier
+\FloatBarrier
+
+Balancing equations ensures atoms of each element are conserved. This is fundamental to accurately calculating reacting amounts.
+
+\begin{keyconcept}{Law of Conservation of Mass}
+Mass cannot be created nor destroyed in chemical reactions—the total mass of reactants equals the total mass of products.
+\end{keyconcept}
+
+\begin{example}
+Balance the combustion of propane (\ce{C3H8}):
+\[
+\ce{C3H8 + O2 -> CO2 + H2O}
+\]
+
+\textit{Solution:}
+Balanced equation:
+\[
+\ce{C3H8 + 5O2 -> 3CO2 + 4H2O}
+\]
+\end{example}
+
+\begin{stopandthink}
+Why must chemical equations always be balanced? Explain using atomic theory.
+\end{stopandthink}
+
+\subsection{Calculations Using Stoichiometry}
+\FloatBarrier
+\FloatBarrier
+
+Balanced equations provide mole ratios, allowing us to calculate precise quantities of reactants/products.
+
+\begin{example}
+Calculate the mass of carbon dioxide produced when \(44\,\si{\gram}\) of propane burns completely.
+
+\textit{Solution:}
+Moles of propane:
+\[
+n = \frac{44\,\si{\gram}}{44.1\,\si{\gram\per\mol}} = 0.998\,\si{\mol}
+\]
+
+Mole ratio propane:\ce{CO2} = \(1:3\), thus:
+\[
+n_{\ce{CO2}} = 0.998 \times 3 = 2.994\,\si{\mol}
+\]
+
+Mass of \ce{CO2}:
+\[
+m = 2.994\,\si{\mol} \times 44.01\,\si{\gram\per\mol} = 131.8\,\si{\gram}
+\]
+\end{example}
+
+\begin{investigation}{Quantitative Analysis of a Reaction}
+Experimentally verify stoichiometric ratios by reacting measured amounts of baking soda (\ce{NaHCO3}) and vinegar (\ce{CH3COOH}). Predict and then measure the mass of carbon dioxide released.
+\end{investigation}
+
+\FloatBarrier
+
+\section{Empirical and Molecular Formulas}
+\FloatBarrier
+\FloatBarrier
+
+Chemists use empirical and molecular formulas to describe chemical compounds.
+
+\begin{keyconcept}{Empirical Formula}
+The simplest whole-number ratio of elements in a compound.
+\end{keyconcept}
+
+\begin{keyconcept}{Molecular Formula}
+Shows the actual number of atoms of each element in a molecule.
+\end{keyconcept}
+
+\begin{example}
+A compound contains \(40.0\%\) carbon, \(6.7\%\) hydrogen, and \(53.3\%\) oxygen by mass. Determine its empirical formula.
+
+\textit{Solution:}
+\[
+\text{C}: \frac{40.0\,\si{\gram}}{12.01\,\si{\gram\per\mol}}=3.33\,\si{\mol},\quad
+\text{H}: \frac{6.7\,\si{\gram}}{1.008\,\si{\gram\per\mol}}=6.65\,\si{\mol},\quad
+\text{O}: \frac{53.3\,\si{\gram}}{16.00\,\si{\gram\per\mol}}=3.33\,\si{\mol}
+\]
+
+Divide by smallest (3.33):
+\[
+\text{C}:1,\quad\text{H}:2,\quad\text{O}:1\quad\Rightarrow\quad\ce{CH2O}
+\]
+\end{example}
+
+\begin{stopandthink}
+Can two different compounds have the same empirical formula? Explain with examples.
+\end{stopandthink}
+
+\begin{tieredquestions}{Advanced}
+\begin{enumerate}
+  \item A compound has empirical formula \ce{CH2} and molar mass \(56\,\si{\gram\per\mol}\). Determine its molecular formula.
+\end{enumerate}
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Gravimetric Analysis Basics}
+\FloatBarrier
+\FloatBarrier
+
+Gravimetric analysis is a quantitative method used to measure mass and determine concentrations chemically.
+
+\begin{investigation}{Gravimetric Analysis of Sulfate Ions}
+Determine sulfate concentration in fertiliser by precipitation and filtration. Discuss accuracy, precision, and potential errors.
+\end{investigation}
+
+\marginnote{\challenge{Research modern instrumental methods replacing traditional gravimetric techniques. Discuss their advantages and disadvantages in real-world contexts.}}
+
+In the following chapters, we build further on these foundational quantitative skills, applying them to advanced chemical contexts and practical chemistry.

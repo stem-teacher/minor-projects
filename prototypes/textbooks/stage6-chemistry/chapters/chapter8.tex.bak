@@ -1,0 +1,226 @@
+\chapter{Applying Chemical Ideas}
+\label{chap:applying-chemical-ideas}
+
+Chemistry is not only the study of substances around us—it is also a powerful tool for addressing real-world problems. From monitoring environmental pollutants to forensic investigations and pharmaceutical analyses, chemists apply sophisticated analytical methods to understand and protect our world. In this chapter, you will explore instrumental analysis techniques, methods for monitoring the environment, and approaches for qualitative and quantitative analysis of various substances.
+
+\section{Instrumental Analysis Techniques}
+\FloatBarrier
+\FloatBarrier
+
+Modern chemistry relies heavily on instrumental analysis. These methods allow scientists to identify and quantify substances quickly and accurately, even in complex samples. Two of the most important instrumental techniques are spectroscopy and chromatography.
+
+\subsection{Spectroscopy}
+\FloatBarrier
+\FloatBarrier
+
+Spectroscopy involves the interaction of electromagnetic radiation with matter to determine structure, concentration, and properties of substances.
+
+\begin{keyconcept}{Understanding Spectroscopy}
+Spectroscopy uses the absorption, emission, or scattering of electromagnetic radiation by atoms or molecules to identify and quantify chemical substances.
+\end{keyconcept}
+
+\marginnote{\historylink{Joseph von Fraunhofer (1787–1826) pioneered spectroscopy by observing solar absorption lines.}}
+
+\subsubsection{Atomic Absorption Spectroscopy (AAS)}
+
+Atomic Absorption Spectroscopy measures the absorption of specific wavelengths by atoms to quantify elemental concentrations in a sample. 
+
+\begin{marginfigure}[0pt][0pt]
+% Placeholder: Diagram of Atomic Absorption Spectrometer
+\caption{Key components of an Atomic Absorption Spectrometer.}
+\label{fig:aas-setup}
+\end{marginfigure}
+
+\begin{example}
+\textbf{Determining Lead in Water Samples}
+
+A water sample was tested for lead (\ce{Pb}) using AAS. A calibration curve gave the absorbance as $A = 0.45$ corresponding to a concentration of $0.15\,\text{mg L}^{-1}$. This concentration exceeds the Australian Drinking Water Guidelines limit of $0.01\,\text{mg L}^{-1}$, indicating contamination.
+\end{example}
+
+\begin{stopandthink}
+Why is it critical to create a calibration curve when performing quantitative spectroscopy?
+\end{stopandthink}
+
+\subsubsection{Infrared (IR) Spectroscopy}
+
+Infrared spectroscopy analyses the vibrations of molecular bonds. Each functional group in organic molecules vibrates at characteristic frequencies, providing a fingerprint for identification.
+
+\begin{marginfigure}[0pt][0pt]
+% Placeholder: IR Spectrum example showing functional groups
+\caption{Typical IR spectrum with characteristic peaks.}
+\label{fig:ir-spectrum}
+\end{marginfigure}
+
+\begin{keyconcept}{Interpreting IR Spectra}
+Different bonds absorb IR radiation at unique wavenumbers (\(\text{cm}^{-1}\)), allowing chemists to identify functional groups within molecules.
+\end{keyconcept}
+
+\begin{stopandthink}
+Explain how IR spectroscopy can be used to distinguish between ethanol (\ce{C2H5OH}) and ethanoic acid (\ce{CH3COOH}).
+\end{stopandthink}
+
+\FloatBarrier
+
+\subsection{Chromatography}
+\FloatBarrier
+\FloatBarrier
+
+Chromatography separates mixtures into individual components based on differential affinities to stationary and mobile phases.
+
+\begin{keyconcept}{Principles of Chromatography}
+Substances separate due to differences in their adsorption or solubility between a stationary phase (solid or liquid) and a mobile phase (liquid or gas).
+\end{keyconcept}
+
+\subsubsection{Gas Chromatography (GC)}
+
+Gas chromatography employs a gas mobile phase and is particularly useful for volatile organic compounds.
+
+\begin{marginfigure}[0pt][0pt]
+% Placeholder: Diagram of Gas Chromatography setup
+\caption{Gas Chromatograph schematic.}
+\label{fig:gc-setup}
+\end{marginfigure}
+
+\begin{example}
+\textbf{Identifying Hydrocarbons in Petrol}
+
+Gas chromatography can differentiate petrol samples by separating hydrocarbons based on volatility and polarity. The retention time of each hydrocarbon on the chromatogram allows identification and quantification.
+\end{example}
+
+\begin{stopandthink}
+Why is gas chromatography unsuitable for analysing non-volatile substances?
+\end{stopandthink}
+
+\subsubsection{High-Performance Liquid Chromatography (HPLC)}
+
+HPLC uses a liquid mobile phase under high pressure and is effective for analysing less volatile or thermally unstable compounds.
+
+\begin{marginfigure}[0pt][0pt]
+% Placeholder: HPLC chromatogram example
+\caption{HPLC chromatogram showing different components.}
+\label{fig:hplc-chromatogram}
+\end{marginfigure}
+
+\begin{stopandthink}
+Discuss why it is important to select appropriate solvents for the mobile phase in HPLC.
+\end{stopandthink}
+
+\FloatBarrier
+
+\begin{investigation}{Analysing Soft Drink Additives using HPLC}
+Obtain samples of various soft drinks. Using HPLC, determine the concentration of caffeine and artificial sweeteners in each drink. Compare your results to label claims and discuss discrepancies.
+\end{investigation}
+
+\begin{tieredquestions}{Basic}
+\begin{enumerate}
+    \item Define spectroscopy and chromatography.
+    \item What is measured in atomic absorption spectroscopy?
+    \item Name two applications of IR spectroscopy.
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Intermediate}
+\begin{enumerate}
+    \item Explain the principle behind gas chromatography separation.
+    \item AAS calibration gave a concentration of calcium (\ce{Ca}) as $35\,\text{mg L}^{-1}$. Calculate the mass of calcium in $250\,\text{mL}$ of the sample.
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+\begin{enumerate}
+    \item Describe how you would modify an HPLC method to improve separation of closely related compounds.
+    \item \challenge{Research and report on emerging spectroscopy techniques such as Raman Spectroscopy or Nuclear Magnetic Resonance (NMR).}
+\end{enumerate}
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Monitoring the Environment}
+\FloatBarrier
+\FloatBarrier
+
+Chemistry plays a crucial role in monitoring and protecting our environment, ensuring air and water quality are maintained for health and sustainability.
+
+\subsection{Water Quality Analysis}
+\FloatBarrier
+\FloatBarrier
+
+Monitoring water quality involves detecting and quantifying pollutants and determining overall chemical health of aquatic ecosystems.
+
+\begin{keyconcept}{Indicators of Water Quality}
+Common indicators include dissolved oxygen, biochemical oxygen demand (BOD), nitrates, phosphates, heavy metals, and microbial content.
+\end{keyconcept}
+
+\begin{investigation}{Assessing Local Stream Health}
+Collect water samples from a local stream. Perform analyses for dissolved oxygen, nitrates, phosphates, and heavy metals (using AAS). Interpret your findings in terms of environmental health and potential pollution sources.
+\end{investigation}
+
+\subsection{Air Quality Monitoring}
+\FloatBarrier
+\FloatBarrier
+
+Analysing air quality involves measuring pollutants such as nitrogen oxides (\ce{NO_x}), sulfur dioxide (\ce{SO2}), carbon monoxide (\ce{CO}), particulate matter, and volatile organic compounds (VOCs).
+
+\begin{marginfigure}[0pt][0pt]
+% Placeholder: Diagram of air monitoring station
+\caption{Air monitoring station measuring pollutants.}
+\label{fig:air-monitoring}
+\end{marginfigure}
+
+\begin{stopandthink}
+Why is continuous monitoring of air quality important for urban areas?
+\end{stopandthink}
+
+\FloatBarrier
+
+\begin{tieredquestions}{Advanced}
+\begin{enumerate}
+    \item Design a monitoring program for air quality in your area. Outline sampling techniques and analytical methods you would employ.
+    \item \challenge{Investigate the chemical basis for the formation of photochemical smog, and discuss strategies for its reduction.}
+\end{enumerate}
+\end{tieredquestions}
+
+\section{Qualitative and Quantitative Analysis}
+\FloatBarrier
+\FloatBarrier
+
+Chemists frequently conduct qualitative and quantitative analyses to determine the identity and quantity of unknown substances.
+
+\subsection{Qualitative Analysis}
+\FloatBarrier
+\FloatBarrier
+
+Identifying unknown substances often relies on precipitation reactions, flame tests, and spectroscopic methods.
+
+\begin{investigation}{Identifying Unknown Salts}
+Given unknown samples, use qualitative tests (flame tests, solubility rules, precipitation reactions) to identify the ions present.
+\end{investigation}
+
+\subsection{Quantitative Analysis}
+\FloatBarrier
+\FloatBarrier
+
+Accurate quantification often involves gravimetric analysis, volumetric titration, and instrumental methods.
+
+\begin{example}
+\textbf{Determination of Sulfate by Gravimetry}
+
+A water sample precipitates barium sulfate (\ce{BaSO4}) weighing $0.233\,\text{g}$. Determine the sulfate ion (\ce{SO4^{2-}}) concentration in mg/L.
+\end{example}
+
+\begin{stopandthink}
+Discuss factors affecting accuracy in gravimetric analysis.
+\end{stopandthink}
+
+\FloatBarrier
+
+\begin{tieredquestions}{Intermediate}
+\begin{enumerate}
+    \item Explain how a flame test can distinguish between sodium and potassium ions.
+    \item Describe a titration method to quantify acetic acid in vinegar.
+\end{enumerate}
+\end{tieredquestions}
+
+Through instrumental and classical methods covered, chemists precisely apply chemical ideas to solve real-world problems, protecting health and environment.
+
+\FloatBarrier

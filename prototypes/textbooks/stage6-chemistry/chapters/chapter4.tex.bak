@@ -1,0 +1,192 @@
+\chapter{Drivers of Reactions}
+
+The world we live in is a dynamic system in constant change—chemical reactions are occurring everywhere around us, from the metabolic processes within our bodies to the batteries powering our devices, and even the rust forming on a bicycle left outside. Yet, have you ever wondered what truly drives these reactions forward or backward? Why are some reactions spontaneous, while others require external energy? In this chapter, we explore the fundamental driving forces of chemical reactions: \keyword{enthalpy}, \keyword{entropy}, and how these concepts combine through \keyword{Gibbs free energy} to determine spontaneity. We'll also investigate electrochemical cells, a powerful real-world application of these principles.
+
+\section{Thermodynamics: Energy and Chemical Reactions}
+\FloatBarrier
+\FloatBarrier
+
+Thermodynamics is the study of energy transformations in chemical reactions. Understanding these transformations enables chemists to predict reaction outcomes and harness chemical processes effectively.
+
+\subsection{Energy Changes in Chemical Reactions}
+\FloatBarrier
+\FloatBarrier
+
+Chemical reactions involve changes in energy, often experienced as heat. Energy changes occur because bonds in reactants break, and new bonds form in products. This breaking and making of bonds result in an overall energy difference, known as the reaction's enthalpy change (\(\Delta H\)).
+
+\marginnote{\historylink{The term \textit{enthalpy} was coined by Dutch physicist Heike Kamerlingh Onnes in 1909, originally called "heat content".}}
+
+\begin{keyconcept}{Enthalpy (\(\Delta H\))}
+Enthalpy is the measure of total energy content of a chemical system at constant pressure. It reflects the heat absorbed or released in chemical reactions.
+\begin{itemize}
+    \item \textbf{Exothermic reactions}: release energy (\(\Delta H < 0\))
+    \item \textbf{Endothermic reactions}: absorb energy (\(\Delta H > 0\))
+\end{itemize}
+\end{keyconcept}
+
+\begin{example}
+Consider combustion of methane (\ce{CH4}):
+\[
+\ce{CH4(g) + 2O2(g) -> CO2(g) + 2H2O(g)} \quad \Delta H = -890\,kJ\,mol^{-1}
+\]
+
+This negative enthalpy indicates an exothermic reaction, releasing significant heat.
+\end{example}
+
+\begin{stopandthink}
+Ice melting is endothermic, yet it spontaneously melts at room temperature. How can this happen if it requires energy input? What other factors might be influencing the reaction's spontaneity?
+\end{stopandthink}
+
+\subsection{Calculating Enthalpy Changes}
+\FloatBarrier
+\FloatBarrier
+
+Enthalpy changes can be calculated using bond energies or through standard enthalpies of formation.
+
+\begin{keyconcept}{Standard Enthalpy of Formation (\(\Delta H_f^\circ\))}
+The enthalpy change when one mole of a compound is formed from its elements in their standard states under standard conditions (298 K, 100 kPa).
+\end{keyconcept}
+
+The enthalpy of reaction can be calculated as:
+\[
+\Delta H^\circ_{\text{reaction}} = \sum{\Delta H_f^\circ(\text{products})} - \sum{\Delta H_f^\circ(\text{reactants})}
+\]
+
+\begin{example}
+Calculate the enthalpy change for the reaction:
+\[
+\ce{C(s) + O2(g) -> CO2(g)}
+\]
+
+Using standard enthalpies:
+\[
+\Delta H^\circ = \Delta H_f^\circ(\ce{CO2(g)}) - [\Delta H_f^\circ(\ce{C(s)}) + \Delta H_f^\circ(\ce{O2(g)})]
+\]
+
+Since elemental forms have \(\Delta H_f^\circ = 0\), and \(\Delta H_f^\circ(\ce{CO2}) = -393.5\,kJ\,mol^{-1}\):
+\[
+\Delta H^\circ = -393.5 - (0 + 0) = -393.5\,kJ\,mol^{-1}
+\]
+\end{example}
+
+\begin{tieredquestions}{Basic}
+\begin{enumerate}
+    \item Define enthalpy.
+    \item Classify each reaction as endothermic or exothermic:
+    \begin{enumerate}
+        \item \(\Delta H = +24\,kJ\,mol^{-1}\)
+        \item \(\Delta H = -150\,kJ\,mol^{-1}\)
+    \end{enumerate}
+\end{enumerate}
+\end{tieredquestions}
+
+\begin{tieredquestions}{Intermediate}
+Calculate the enthalpy change for:
+\[
+\ce{2H2(g) + O2(g) -> 2H2O(g)}
+\]
+
+Given:
+\[
+\Delta H_f^\circ(\ce{H2O(g)}) = -242\,kJ\,mol^{-1}
+\]
+\end{tieredquestions}
+
+\begin{tieredquestions}{Advanced}
+Bond energies can also be used. Given bond energies (\(\ce{H-H}=436\,kJ\,mol^{-1}\), \(\ce{O=O}=498\,kJ\,mol^{-1}\), \(\ce{O-H}=464\,kJ\,mol^{-1}\)), calculate the enthalpy change of the reaction above and compare with your previous answer.
+\end{tieredquestions}
+
+\FloatBarrier
+
+\section{Entropy: Disorder in Chemical Systems}
+\FloatBarrier
+\FloatBarrier
+
+Even though energy considerations are crucial, energy alone doesn't predict all reaction spontaneity. Another important factor is entropy, a measure of disorder or randomness within a system.
+
+\marginnote{\challenge{Entropy is deeply connected to statistical mechanics—the number of ways particles can be arranged. Ludwig Boltzmann famously expressed entropy as \(S = k \ln W\), linking macroscopic entropy to microscopic states.}}
+
+\begin{keyconcept}{Entropy (\(S\))}
+Entropy is a thermodynamic property measuring disorder or randomness. Increased entropy (\(\Delta S > 0\)) favors spontaneity.
+\end{keyconcept}
+
+Entropy typically increases in situations like:
+\begin{itemize}
+    \item Solid → liquid → gas transitions
+    \item Dissolving solids into solutions
+    \item Increasing the number of gas particles in a reaction
+\end{itemize}
+
+\begin{stopandthink}
+Why does a messy room become messier over time without active effort to clean it? How can this analogy help us understand entropy?
+\end{stopandthink}
+
+\section{Spontaneity and Gibbs Free Energy}
+\FloatBarrier
+\FloatBarrier
+
+Enthalpy and entropy combine into a single quantity—Gibbs free energy—which determines reaction spontaneity.
+
+\begin{keyconcept}{Gibbs Free Energy (\(G\))}
+Gibbs free energy (\(G\)) combines enthalpy and entropy:
+\[
+\Delta G = \Delta H - T\Delta S
+\]
+
+A reaction is spontaneous if:
+\[
+\Delta G < 0
+\]
+\end{keyconcept}
+
+\marginnote{\mathlink{Notice Gibbs equation integrates temperature explicitly, reflecting temperature-dependence of spontaneity.}}
+
+\begin{example}
+Predict spontaneity at 298 K:
+\[
+\ce{H2O(l) -> H2O(g)}, \quad \Delta H=+44\,kJ\,mol^{-1},\,\Delta S=+119\,J\,mol^{-1}K^{-1}
+\]
+
+Calculate:
+\[
+\Delta G = 44,000 - (298)(119) = 44,000 - 35,462 = +8,538\,J\,mol^{-1}
+\]
+
+Positive \(\Delta G\) indicates the reaction is non-spontaneous at 298K. At higher temperatures, however, it becomes spontaneous. Consider why.
+\end{example}
+
+\section{Electrochemical Cells: Practical Applications}
+\FloatBarrier
+\FloatBarrier
+
+\subsection{Galvanic Cells}
+\FloatBarrier
+\FloatBarrier
+
+Galvanic (voltaic) cells harness spontaneous redox reactions to generate electrical energy. This principle is behind batteries powering everyday devices.
+
+\begin{investigation}{Constructing a Simple Galvanic Cell}
+Materials: Copper strip, zinc strip, copper sulfate solution, zinc sulfate solution, voltmeter, salt bridge.
+
+Procedure:
+\begin{enumerate}
+    \item Set up half-cells with metals immersed in respective solutions.
+    \item Connect half-cells via salt bridge.
+    \item Connect voltmeter to metal electrodes. Record voltage.
+\end{enumerate}
+
+Discuss observed voltage, electron flow direction, anode, cathode, and how Gibbs free energy relates to cell potential.
+\end{investigation}
+
+\section*{Chapter Summary}
+
+Revisit enthalpy, entropy, Gibbs free energy, and electrochemical cells concepts. Reflect on their interconnectedness and practical significance.
+
+\FloatBarrier
+
+\section*{Further Exploration}
+\begin{itemize}
+\item Explore fuel cells as modern electrochemical applications.
+\item Investigate entropy in biological systems.
+\item Research current battery technologies and their environmental impacts.
+\end{itemize}
