@@ -1,0 +1,99 @@
+\contentsline {chapter}{Introduction}{5}{chapter*.2}%
+\contentsline {section}{How This Textbook is Organised}{5}{section*.3}%
+\contentsline {section}{Overview of Year 11 and Year 12 Modules}{6}{section*.4}%
+\contentsline {subsection}{Year 11 Preliminary Modules}{6}{subsection*.5}%
+\contentsline {subsection}{Year 12 HSC Modules}{6}{subsection*.6}%
+\contentsline {section}{How to Use This Book Effectively}{7}{section*.7}%
+\contentsline {subsection}{Active Reading and Margin Notes}{7}{subsection*.8}%
+\contentsline {subsection}{Hands-on Investigations}{7}{subsection*.9}%
+\contentsline {subsection}{Regular Revision and Practice}{7}{subsection*.10}%
+\contentsline {subsection}{Collaboration and Discussion}{7}{subsection*.11}%
+\contentsline {subsection}{Support for Diverse Learning Styles}{7}{subsection*.12}%
+\contentsline {section}{Understanding Chemistry}{8}{section*.13}%
+\contentsline {section}{Final Thoughts}{8}{section*.14}%
+\contentsline {chapter}{Properties \& Structure of Matter}{9}{chapter*.15}%
+\contentsline {section}{Introduction: Why Matter Matters}{9}{section*.16}%
+\contentsline {section}{Atomic Structure}{9}{section*.17}%
+\contentsline {subsection}{Historical Development of Atomic Theories}{9}{subsection*.18}%
+\contentsline {subsection}{Subatomic Particles}{10}{subsection*.19}%
+\contentsline {section}{Electron Configuration and Atomic Orbitals}{10}{section*.20}%
+\contentsline {subsection}{Quantum Numbers and Orbitals}{10}{subsection*.21}%
+\contentsline {subsection}{Electron Configuration and the Periodic Table}{11}{subsection*.22}%
+\contentsline {section}{Periodic Trends}{11}{section*.23}%
+\contentsline {subsection}{Atomic Radius, Ionisation Energy, and Electronegativity}{11}{subsection*.24}%
+\contentsline {section}{Chemical Bonding and Structure}{12}{section*.25}%
+\contentsline {subsection}{Types of Chemical Bonds}{12}{subsection*.26}%
+\contentsline {subsection}{Allotropes and Structural Variations}{12}{subsection*.27}%
+\contentsline {section}{Intermolecular Forces}{13}{section*.28}%
+\contentsline {section}{Conclusion}{13}{section*.29}%
+\contentsline {chapter}{Introduction to Quantitative Chemistry}{15}{chapter*.30}%
+\contentsline {section}{The Mole Concept}{15}{section*.31}%
+\contentsline {subsection}{Relating Mass to Moles}{15}{subsection*.32}%
+\contentsline {section}{Chemical Equations and Stoichiometry}{16}{section*.33}%
+\contentsline {subsection}{Balancing Chemical Equations}{17}{subsection*.34}%
+\contentsline {subsection}{Calculations Using Stoichiometry}{17}{subsection*.35}%
+\contentsline {section}{Empirical and Molecular Formulas}{18}{section*.36}%
+\contentsline {section}{Gravimetric Analysis Basics}{18}{section*.37}%
+\contentsline {chapter}{Reactive Chemistry}{19}{chapter*.38}%
+\contentsline {section}{Types of Chemical Reactions}{19}{section*.39}%
+\contentsline {subsection}{Combustion Reactions}{19}{subsection*.40}%
+\contentsline {subsection}{Precipitation Reactions}{20}{subsection*.41}%
+\contentsline {subsection}{Acid-Base Reactions}{20}{subsection*.42}%
+\contentsline {subsection}{Redox Reactions}{21}{subsection*.43}%
+\contentsline {section}{Reaction Rates and Collision Theory}{22}{section*.44}%
+\contentsline {subsection}{Understanding Reaction Rates}{22}{subsection*.45}%
+\contentsline {subsection}{Collision Theory Fundamentals}{22}{subsection*.46}%
+\contentsline {chapter}{Drivers of Reactions}{25}{chapter*.47}%
+\contentsline {section}{Thermodynamics: Energy and Chemical Reactions}{25}{section*.48}%
+\contentsline {subsection}{Energy Changes in Chemical Reactions}{25}{subsection*.49}%
+\contentsline {subsection}{Calculating Enthalpy Changes}{26}{subsection*.50}%
+\contentsline {section}{Entropy: Disorder in Chemical Systems}{27}{section*.51}%
+\contentsline {section}{Spontaneity and Gibbs Free Energy}{27}{section*.52}%
+\contentsline {section}{Electrochemical Cells: Practical Applications}{28}{section*.53}%
+\contentsline {subsection}{Galvanic Cells}{28}{subsection*.54}%
+\contentsline {chapter}{Equilibrium and Acid Reactions}{31}{chapter*.55}%
+\contentsline {section}{Principles of Chemical Equilibrium}{31}{section*.56}%
+\contentsline {subsection}{Dynamic Equilibrium}{31}{subsection*.57}%
+\contentsline {subsection}{Le Châtelier's Principle}{32}{subsection*.58}%
+\contentsline {section}{Equilibrium Constants ($K_{eq}$)}{33}{section*.59}%
+\contentsline {section}{Acid-Base Theories}{33}{section*.60}%
+\contentsline {subsection}{Historical Definitions}{33}{subsection*.61}%
+\contentsline {subsection}{pH and pOH}{34}{subsection*.62}%
+\contentsline {section}{Strength vs. Concentration}{34}{section*.63}%
+\contentsline {subsection}{Buffer Systems}{34}{subsection*.64}%
+\contentsline {chapter}{Acid/Base Reactions}{37}{chapter*.65}%
+\contentsline {section}{Understanding Acids and Bases}{37}{section*.66}%
+\contentsline {subsection}{Key Definitions and Theories}{37}{subsection*.67}%
+\contentsline {subsection}{Strong and Weak Acids and Bases}{38}{subsection*.68}%
+\contentsline {section}{Quantitative Analysis of Acids and Bases}{39}{section*.69}%
+\contentsline {subsection}{The pH Scale and Calculations}{39}{subsection*.70}%
+\contentsline {subsection}{Titrations and Volumetric Analysis}{39}{subsection*.71}%
+\contentsline {section}{Industrial Applications of Acid/Base Chemistry}{40}{section*.72}%
+\contentsline {subsection}{Ammonia Production: The Haber Process}{40}{subsection*.73}%
+\contentsline {subsection}{Chemical Manufacturing and Neutralization}{40}{subsection*.74}%
+\contentsline {chapter}{Organic Chemistry}{43}{chapter*.75}%
+\contentsline {section}{Hydrocarbons and Functional Groups}{43}{section*.76}%
+\contentsline {subsection}{Alkanes, Alkenes, and Alkynes}{43}{subsection*.77}%
+\contentsline {subsection}{Functional Groups}{44}{subsection*.78}%
+\contentsline {section}{IUPAC Nomenclature and Isomerism}{44}{section*.79}%
+\contentsline {subsection}{Naming Organic Compounds}{44}{subsection*.80}%
+\contentsline {subsection}{Structural and Geometric Isomerism}{45}{subsection*.81}%
+\contentsline {section}{Reaction Pathways}{45}{section*.82}%
+\contentsline {subsection}{Substitution Reactions}{45}{subsection*.83}%
+\contentsline {subsection}{Addition Reactions}{45}{subsection*.84}%
+\contentsline {subsection}{Condensation Reactions}{46}{subsection*.85}%
+\contentsline {section}{Polymers, Biofuels, and Current Advances}{46}{section*.86}%
+\contentsline {subsection}{Polymers}{46}{subsection*.87}%
+\contentsline {subsection}{Biofuels}{46}{subsection*.88}%
+\contentsline {subsection}{Current Advances in Organic Synthesis}{46}{subsection*.89}%
+\contentsline {chapter}{Applying Chemical Ideas}{49}{chapter*.90}%
+\contentsline {section}{Instrumental Analysis Techniques}{49}{section*.91}%
+\contentsline {subsection}{Spectroscopy}{49}{subsection*.92}%
+\contentsline {subsection}{Chromatography}{50}{subsection*.93}%
+\contentsline {section}{Monitoring the Environment}{52}{section*.94}%
+\contentsline {subsection}{Water Quality Analysis}{52}{subsection*.95}%
+\contentsline {subsection}{Air Quality Monitoring}{52}{subsection*.96}%
+\contentsline {section}{Qualitative and Quantitative Analysis}{53}{section*.97}%
+\contentsline {subsection}{Qualitative Analysis}{53}{subsection*.98}%
+\contentsline {subsection}{Quantitative Analysis}{53}{subsection*.99}%
+\contentsfinish 
