@@ -3,8 +3,8 @@
 # Change to the project directory
 cd "$(dirname "$0")"
 
-# Build the direct implementation
-npm run build-direct
+# Build the implementation
+npm run build
 
 # Run the comprehensive test
 npm test

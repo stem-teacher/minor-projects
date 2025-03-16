@@ -4,6 +4,20 @@
 
 This project creates a knowledge graph tool for Claude Desktop using the Model Context Protocol (MCP). It enables Claude to maintain an external memory store in SurrealDB, allowing for persistent storage of entities, observations, and relationships between different knowledge concepts.
 
+## Development Guidelines
+
+1. **Follow Standard Practices**: Always adhere to established patterns and standard practices when implementing features or fixing bugs. Don't randomly change course from standard approaches as this wastes time and resources.
+
+2. **Incremental Changes**: Make small, incremental changes that can be easily tested and verified rather than attempting large rewrites or refactorings.
+
+3. **Maintain Compatibility**: When working on fixes, ensure that existing functionality continues to work as expected. Don't introduce changes that break working code.
+
+4. **Test Before Committing**: Always ensure that the code compiles and basic functionality works before committing changes or suggesting implementations.
+
+5. **Ask Before Making Significant Changes**: ALWAYS ask before making any significant change to the implementation approach, architecture, or fundamental design decisions. This includes switching libraries, frameworks, or implementation strategies (such as moving from SDK-based to direct implementation).
+
+6. **Evidence-Based, Disciplined Approach**: Take a disciplined, methodical approach to problem-solving. Do not make unilateral decisions or changes without clear evidence. Test theories incrementally, and seek agreement on the approach before implementing solutions. Never assume a solution will work without testing it first.
+
 ## Key Issues and Solutions
 
 ### Original Problem
@@ -179,3 +193,36 @@ Potential improvements:
 - The ES module implementation (.mts) is more compatible with modern Node.js practices
 - Direct SQL queries are more reliable than the SurrealDB client methods for certain operations
 - Avoid using JavaScript functions in SurrealDB queries when running in secure mode
+
+## Claude Desktop Integration
+
+To integrate with Claude Desktop, follow these steps:
+
+1. Ensure SurrealDB is running:
+   ```
+   ./startdb.sh
+   ```
+
+2. Configure the connection in Claude Desktop settings with this exact configuration:
+
+```json
+"knowledge": {
+  "command": "/Users/philiphaynes/.nvm/versions/node/v22.14.0/bin/node",
+  "args": [
+    "/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/official-mcp.mjs"
+  ],
+  "env": {
+    "SURREALDB_URL": "http://localhost:8070",
+    "SURREALDB_USER": "root",
+    "SURREALDB_PASS": "root",
+    "SURREALDB_NS": "development",
+    "SURREALDB_DB": "knowledge"
+  }
+}
+```
+
+Common errors:
+- MODULE_NOT_FOUND: Make sure the file path in the configuration points to a file that exists
+- Connection issues: Ensure SurrealDB is running with `./startdb.sh`
+- Server disconnection: Check the log file at `/Users/philiphaynes/Library/Logs/Claude/mcp-server-knowledge.log`
+- Parse errors: The configuration is particular about paths; use absolute paths with correct extensions

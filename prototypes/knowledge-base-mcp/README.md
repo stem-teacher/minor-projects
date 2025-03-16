@@ -73,9 +73,70 @@ This implementation:
 3. Provides proper error handling and validation
 4. Is fully compatible with Claude Desktop's MCP implementation
 
+## Database Schema
+
+The knowledge graph consists of:
+
+### Entities
+- `name`: Unique identifier (string)
+- `entityType`: Category/classification (string)
+- `observations`: Array of observations, each with:
+  - `text`: The observation content (string)
+  - `createdAt`: Timestamp when the observation was added (ISO datetime string)
+- `createdAt`: Timestamp when the entity was created (ISO datetime string)
+- `updatedAt`: Timestamp when the entity was last updated (ISO datetime string)
+
+### Relations
+- `from`: Source entity name (string)
+- `to`: Target entity name (string)
+- `relationType`: Describes the relationship (string)
+- `createdAt`: Timestamp when the relation was created (ISO datetime string)
+
+## Database Migration
+
+If you're upgrading from a previous version without timestamps, the simplest approach is to reset the database:
+
+```
+npm run reset-db
+```
+
+This script will:
+1. Drop the existing entity and relation tables
+2. Recreate them with timestamp support
+3. This will delete all existing data, so only use this if you don't need to preserve your data
+
+Alternatively, if you need to maintain existing data and are comfortable with potential migration issues, you can:
+1. Modify the code to add timestamps manually
+2. Test thoroughly with your database
+
+## Claude Desktop Integration
+
+To integrate with Claude Desktop, add the following to your config:
+
+```json
+"knowledge": {
+  "command": "node",
+  "args": [
+    "/path/to/knowledge-base-mcp/mcp-wrapper.mjs"
+  ],
+  "env": {
+    "SURREALDB_URL": "http://localhost:8070",
+    "SURREALDB_USER": "root",
+    "SURREALDB_PASS": "root",
+    "SURREALDB_NS": "development",
+    "SURREALDB_DB": "knowledge",
+    "TRACE_LEVEL": "DEBUG"
+  }
+}
+```
+
+Replace `/path/to/knowledge-base-mcp` with the absolute path to your installation.
+
+**Important:** Make sure to build the project first with `npm run build` before starting the integration.
+
 ## Notes
 
-The direct implementation bypasses the MCP SDK entirely, as we encountered issues with the SDK's stdio transport handling. This implementation is simpler, more reliable, and specifically tailored for Claude Desktop's JSON-RPC protocol expectations.
+This implementation directly handles the JSON-RPC protocol expected by Claude Desktop. It's designed to be simple, reliable, and efficient.
 
 ## License
 

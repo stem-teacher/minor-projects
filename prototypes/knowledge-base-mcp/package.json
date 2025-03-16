@@ -5,14 +5,25 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "build-direct": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext index-direct-fixed.mts",
-    "start": "node dist/index.js",
-    "start-direct": "node build/index-direct-fixed.mjs",
-    "dev": "ts-node --esm src/index.ts",
+    "build": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext index.mts",
+    "build-reset-commented-out": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext src/reset-db.ts",
+    "build-mcp": "tsc --outDir ./build/src --module NodeNext --moduleResolution nodenext src/index.ts",
+    "start": "node build/index.mjs",
+    "start-mcp": "node build/src/index.js",
+    "start-wrapper": "node mcp-wrapper.mjs",
+    "start-standalone": "node standalone-mcp.mjs",
+    "start-minimal": "node minimal-mcp.mjs",
+    "start-sdk": "node sdk-mcp.mjs",
+    "claude": "node official-mcp.mjs",
     "migrate": "ts-node --esm src/migrate.ts",
+    "reset-db-commented-out": "npm run build-reset && node build/reset-db.js",
     "test": "node test-direct-comprehensive.js",
-    "test-debug": "TRACE_LEVEL=DEBUG node test-direct-comprehensive.js"
+    "test-debug": "TRACE_LEVEL=DEBUG node test-direct-comprehensive.js",
+    "test-standalone": "node test-standalone.mjs",
+    "test:unit": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "test:unit:coverage": "node --experimental-vm-modules ./node_modules/.bin/jest --coverage",
+    "test:simple": "node --experimental-vm-modules ./node_modules/.bin/jest database.simple.test.ts",
+    "test:node": "node --test test/database.test.js"
   },
   "keywords": [
     "mcp",
@@ -23,14 +34,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.7.0",
+    "@modelcontextprotocol/sdk": "^1.0.1",
     "commander": "^11.0.0",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.7",
     "surrealdb": "^1.2.1",
-    "zod": "^3.22.2"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.6.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }

@@ -7,4 +7,4 @@ cd "$(dirname "$0")"
 npm run build
 
 # Run the MCP server
-node dist/index.js
+npm run start

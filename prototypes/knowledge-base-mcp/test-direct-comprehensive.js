@@ -61,7 +61,7 @@ async function runTest() {
   // Start the MCP server
   console.log("\nStarting MCP server as a child process...");
   const mcp = spawn(nodePath, [
-    '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/index-direct-fixed.mjs'
+    '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/index.mjs'
   ], {
     env: {
       SURREALDB_URL: "http://localhost:8070",

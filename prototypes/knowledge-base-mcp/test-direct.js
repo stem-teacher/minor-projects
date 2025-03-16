@@ -48,15 +48,9 @@ async function runTest() {
   // Start the MCP server the same way Claude Desktop would
   console.log("\nStarting MCP server as a child process...");
   const mcp = spawn(nodePath, [
-    '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/index-direct.js'
+    '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/standalone-mcp.mjs'
   ], {
     env: {
-      SURREALDB_URL: "http://localhost:8070",
-      SURREALDB_USER: "root",
-      SURREALDB_PASS: "root",
-      SURREALDB_NS: "development",
-      SURREALDB_DB: "knowledge",
-      TRACE_LEVEL: "DEBUG",
       PATH: process.env.PATH // Pass the current PATH
     },
     stdio: ['pipe', 'pipe', 'inherit'] // stdin, stdout, stderr
