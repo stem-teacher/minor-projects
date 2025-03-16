@@ -1,0 +1,44 @@
+services:
+  # SurrealDB service
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    container_name: surrealdb
+    command: start --user root --pass root surrealkv:///data/knowledge.db
+    ports:
+      - "8070:8000"
+    volumes:
+      - ./surrealdb-data:/data
+    networks:
+      - knowledge-net
+    # No healthcheck needed
+
+  # Knowledge Base MCP service
+  knowledge-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: knowledge-mcp
+    entrypoint: ["/bin/sh", "-c", "sleep 5 && node dist/index.js"]
+    command: []
+    depends_on:
+      - surrealdb
+    environment:
+      - SURREALDB_URL=http://surrealdb:8000 # Keep this as 8000 for internal docker network
+      - SURREALDB_USER=root
+      - SURREALDB_PASS=root
+      - SURREALDB_NS=development
+      - SURREALDB_DB=knowledge
+    volumes:
+      - ./data:/app/data
+    networks:
+      - knowledge-net
+    stdin_open: true
+    tty: true
+
+networks:
+  knowledge-net:
+    driver: bridge
+
+# Using bind mount instead of named volume
+# volumes:
+#   surrealdb-data:

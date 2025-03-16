@@ -1,0 +1,37 @@
+{
+  "name": "knowledge-base-mcp",
+  "version": "1.0.0",
+  "description": "SurrealDB-powered knowledge graph for Model Context Protocol",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build-direct": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext index-direct-fixed.mts",
+    "start": "node dist/index.js",
+    "start-direct": "node build/index-direct-fixed.mjs",
+    "dev": "ts-node --esm src/index.ts",
+    "migrate": "ts-node --esm src/migrate.ts",
+    "test": "node test-direct-comprehensive.js",
+    "test-debug": "TRACE_LEVEL=DEBUG node test-direct-comprehensive.js"
+  },
+  "keywords": [
+    "mcp",
+    "knowledge",
+    "graph",
+    "surrealdb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "commander": "^11.0.0",
+    "dotenv": "^16.3.1",
+    "surrealdb": "^1.2.1",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
