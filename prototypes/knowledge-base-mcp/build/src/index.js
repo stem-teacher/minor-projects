@@ -1,4 +1,15 @@
 #!/usr/bin/env node
+/**
+ * Knowledge Graph MCP Server
+ *
+ * This is the main entry point for the knowledge graph MCP server.
+ * It implements the Model Context Protocol (MCP) for Claude Desktop
+ * integration, handles JSON-RPC requests, and routes them to the
+ * KnowledgeGraphManager for database operations.
+ *
+ * The server exposes tools for creating, reading, updating, and
+ * deleting entities, relations, and observations in the knowledge graph.
+ */
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema, } from "@modelcontextprotocol/sdk/types.js";

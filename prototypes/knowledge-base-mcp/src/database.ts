@@ -1,5 +1,16 @@
 #!/usr/bin/env node
 
+/**
+ * Knowledge Graph Database Layer
+ * 
+ * This module handles all database operations for the knowledge graph,
+ * providing CRUD operations for entities, relations, and observations.
+ * It uses SurrealDB as the backend database.
+ * 
+ * The KnowledgeGraphManager class encapsulates all database operations
+ * and provides a clean interface for the MCP server to use.
+ */
+
 import Surreal from 'surrealdb';
 import * as dotenv from 'dotenv';
 
@@ -169,27 +180,35 @@ export class KnowledgeGraphManager {
             }
           });
           
-          const timestamp = new Date().toISOString();
+          // No longer using JavaScript timestamp
           
-          // Create new entity
-          const result = await this.db.create("entity", {
-            name: entity.name,
-            entityType: entity.entityType,
-            observations: observationsWithTimestamps,
-            createdAt: timestamp,
-            updatedAt: timestamp
-          });
+          // Create new entity with SurrealDB time::now() function for datetime
+          const result = await this.db.query(
+            `CREATE entity CONTENT {
+              name: $name,
+              entityType: $entityType,
+              observations: $observations,
+              createdAt: time::now(),
+              updatedAt: time::now()
+            }`,
+            {
+              name: entity.name,
+              entityType: entity.entityType,
+              observations: observationsWithTimestamps,
+            }
+          );
 
-          // SurrealDB might return an array or a single object
-          const created = Array.isArray(result) ? result[0] : result;
+          // Handle result from query - result is in the first array element
+          const resultData = result[0];
+          const created = resultData && resultData.length ? resultData[0] : null;
 
           if (created && typeof created === 'object' && 'name' in created) {
             createdEntities.push({
               name: created.name as string,
               entityType: created.entityType as string,
               observations: created.observations as Observation[] || [],
-              createdAt: created.createdAt as string,
-              updatedAt: created.updatedAt as string
+              createdAt: created.createdAt ? created.createdAt.toString() : '',
+              updatedAt: created.updatedAt ? created.updatedAt.toString() : ''
             });
           }
         }
@@ -243,15 +262,13 @@ export class KnowledgeGraphManager {
         );
 
         if (!existing[0] || existing[0].length === 0) {
-          // Create new relation using CREATE instead of INSERT INTO for more reliable operation
-          const timestamp = new Date().toISOString();
+          // Create new relation using CREATE with time::now() for datetime
           const result = await this.db.query(
-            `CREATE relation SET from = $from, to = $to, relationType = $relationType, createdAt = $createdAt`,
+            `CREATE relation SET from = $from, to = $to, relationType = $relationType, createdAt = time::now()`,
             {
               from: relation.from,
               to: relation.to,
-              relationType: relation.relationType,
-              createdAt: timestamp
+              relationType: relation.relationType
             }
           );
 
@@ -314,23 +331,23 @@ export class KnowledgeGraphManager {
           typeof o === 'string' ? o : o.text
         ));
         
-        // Create timestamped observations
-        const timestamp = new Date().toISOString();
+        // Create observations
         const newObservationsWithTimestamps = obs.contents
           .filter((content) => !currentObservationTexts.has(content))
           .map(content => ({
             text: content,
-            createdAt: timestamp
+            // Let's keep the JavaScript timestamp for observations since they're stored as an array
+            // and not directly as a field that's defined as DATETIME in the schema
+            createdAt: new Date().toISOString()
           }));
 
         if (newObservationsWithTimestamps.length > 0) {
-          // Update entity with new observations and update the updatedAt timestamp
+          // Update entity with new observations and update the updatedAt timestamp with time::now()
           await this.db.query(
-            "UPDATE entity SET observations = array::concat(observations, $newObs), updatedAt = $updatedAt WHERE name = $name",
+            "UPDATE entity SET observations = array::concat(observations, $newObs), updatedAt = time::now() WHERE name = $name",
             {
               name: obs.entityName,
-              newObs: newObservationsWithTimestamps,
-              updatedAt: timestamp
+              newObs: newObservationsWithTimestamps
             }
           );
 
@@ -410,14 +427,12 @@ export class KnowledgeGraphManager {
           }
         );
 
-        // Update entity with filtered observations and update the updatedAt timestamp
-        const timestamp = new Date().toISOString();
+        // Update entity with filtered observations and update the updatedAt timestamp using time::now()
         await this.db.query(
-          "UPDATE entity SET observations = $observations, updatedAt = $updatedAt WHERE name = $name",
+          "UPDATE entity SET observations = $observations, updatedAt = time::now() WHERE name = $name",
           {
             name: deletion.entityName,
-            observations: updatedObservations,
-            updatedAt: timestamp
+            observations: updatedObservations
           }
         );
       }

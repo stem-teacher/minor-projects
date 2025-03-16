@@ -1,10 +1,18 @@
 # Knowledge Graph MCP Server
 
-This is a SurrealDB-powered knowledge graph integration for Claude Desktop via the Model Context Protocol (MCP).
+A SurrealDB-powered knowledge graph integration for Claude Desktop via the Model Context Protocol (MCP).
 
 ## Overview
 
-This implementation allows Claude Desktop to maintain a knowledge graph with entities, observations, and relations using SurrealDB as the backend database.
+This implementation allows Claude Desktop to maintain a persistent knowledge graph with entities, observations, and relations using SurrealDB as the backend database. Claude can store and retrieve information across conversations, creating a form of long-term memory.
+
+## Features
+
+- Create, read, update, and delete entities
+- Establish and manage relationships between entities
+- Add and remove observations about entities
+- Search functionality for finding related concepts
+- Persistent storage across conversations
 
 ## Installation
 
@@ -19,25 +27,24 @@ This implementation allows Claude Desktop to maintain a knowledge graph with ent
    ```
    Edit the `.env` file to set your SurrealDB connection details.
 
-4. Build the direct implementation:
+4. Start SurrealDB:
    ```
-   npm run build-direct
+   npm run startdb
+   ```
+
+5. Build the implementation:
+   ```
+   npm run build-mcp
    ```
 
 ## Usage
 
-### Running the Direct Implementation (Recommended)
+### Running the Implementation
 
-This implementation directly handles the JSON-RPC protocol expected by Claude Desktop without relying on the MCP SDK:
-
-```
-npm run start-direct
-```
-
-OR
+The implementation has a clean separation between the MCP protocol handling and database operations:
 
 ```
-node build/index-direct.js
+npm run start-mcp
 ```
 
 ### Testing
@@ -45,10 +52,20 @@ node build/index-direct.js
 To verify everything is working correctly, run:
 
 ```
-./test-direct.js
+npm run test-basic
 ```
 
-This simulates Claude Desktop interactions and verifies responses are correct.
+For comprehensive testing of all operations:
+
+```
+npm run test
+```
+
+If you encounter database issues, you can reset it:
+
+```
+npm run cleanup
+```
 
 ## Supported Tools
 
@@ -117,7 +134,7 @@ To integrate with Claude Desktop, add the following to your config:
 "knowledge": {
   "command": "node",
   "args": [
-    "/path/to/knowledge-base-mcp/mcp-wrapper.mjs"
+    "/absolute/path/to/knowledge-base-mcp/build/src/index.js"
   ],
   "env": {
     "SURREALDB_URL": "http://localhost:8070",
@@ -125,18 +142,27 @@ To integrate with Claude Desktop, add the following to your config:
     "SURREALDB_PASS": "root",
     "SURREALDB_NS": "development",
     "SURREALDB_DB": "knowledge",
-    "TRACE_LEVEL": "DEBUG"
+    "TRACE_LEVEL": "INFO"
   }
 }
 ```
 
-Replace `/path/to/knowledge-base-mcp` with the absolute path to your installation.
+Replace `/absolute/path/to/knowledge-base-mcp` with the absolute path to your installation.
 
-**Important:** Make sure to build the project first with `npm run build` before starting the integration.
+**Important:** 
+- Make sure to build the project first with `npm run build-mcp` before integration
+- Ensure SurrealDB is running with `npm run startdb`
+- For detailed configuration and troubleshooting, see [CLAUDE.md](CLAUDE.md)
 
-## Notes
+## Architecture
 
-This implementation directly handles the JSON-RPC protocol expected by Claude Desktop. It's designed to be simple, reliable, and efficient.
+The implementation follows a clean separation of concerns:
+
+- **src/index.ts**: MCP server and protocol handling
+- **src/database.ts**: Database operations through KnowledgeGraphManager
+- **SurrealDB**: Underlying graph database
+
+This architecture makes the code more maintainable and testable.
 
 ## License
 

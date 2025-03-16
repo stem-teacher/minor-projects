@@ -92,11 +92,15 @@ The implementation follows a simple, direct architecture:
 ## Implementation Details
 
 ### Key Files
-- **index-direct.ts**: Original implementation with JSON-RPC protocol
-- **index-direct-fixed.mts**: Enhanced implementation with ES module support and bug fixes
+- **src/index.ts**: Main application entry point with MCP integration
+- **src/database.ts**: Database layer with KnowledgeGraphManager implementation
+- **build/src/index.js**: Compiled JavaScript for production use
+- **official-mcp.mjs**: Standalone JavaScript implementation (alternative to the TypeScript version)
 - **test-direct.js**: Basic testing script that simulates Claude Desktop interaction
 - **test-direct-comprehensive.js**: Thorough test suite for all knowledge graph operations
-- **tsconfig.direct.json**: TypeScript configuration specific to the ES module implementation
+- **startdb.sh**: Script to start the SurrealDB server
+
+Archived files (in the `archive` directory) include experimental implementations that were created during debugging.
 
 ### Data Structure
 The knowledge graph consists of:
@@ -136,34 +140,51 @@ The implementation includes multiple testing scripts:
 - TRACE_LEVEL: Logging level (DEBUG or INFO)
 
 ### Running the Implementation
-1. Build the original implementation:
+
+### Setup
+
+1. Install dependencies:
    ```
-   npm run build-direct
-   ```
-   Or build the fixed ES module implementation:
-   ```
-   npm run build-direct-fixed
+   npm install
    ```
 
-2. Run the server:
+2. Start SurrealDB:
    ```
-   npm run start-direct
+   npm run startdb
+   ```
+
+3. Build the implementation:
+   ```
+   npm run build-mcp
    ```
 
 ### Testing
-Run the basic test:
-```
-npm run test-direct
-```
 
-Run the comprehensive test:
-```
-npm run test-comprehensive
-```
+1. Run basic functionality test:
+   ```
+   npm run test-basic
+   ```
 
-Run the comprehensive test with debug logging:
+2. Run comprehensive test (tests all operations):
+   ```
+   npm run test
+   ```
+
+3. Run with debug logging:
+   ```
+   npm run test-debug
+   ```
+
+4. Run database unit tests:
+   ```
+   npm run test:node
+   ```
+
+### Reset Database
+
+If you encounter issues or want to start fresh:
 ```
-npm run test-comprehensive-debug
+npm run cleanup
 ```
 
 ## Memory Support
@@ -198,18 +219,23 @@ Potential improvements:
 
 To integrate with Claude Desktop, follow these steps:
 
-1. Ensure SurrealDB is running:
+1. Build the latest implementation:
    ```
-   ./startdb.sh
+   npm run build-mcp
    ```
 
-2. Configure the connection in Claude Desktop settings with this exact configuration:
+2. Ensure SurrealDB is running:
+   ```
+   npm run startdb
+   ```
+
+3. Configure the connection in Claude Desktop settings:
 
 ```json
 "knowledge": {
-  "command": "/Users/philiphaynes/.nvm/versions/node/v22.14.0/bin/node",
+  "command": "node",
   "args": [
-    "/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/official-mcp.mjs"
+    "/absolute/path/to/knowledge-base-mcp/build/src/index.js"
   ],
   "env": {
     "SURREALDB_URL": "http://localhost:8070",
@@ -221,8 +247,33 @@ To integrate with Claude Desktop, follow these steps:
 }
 ```
 
+Replace `/absolute/path/to/knowledge-base-mcp` with the actual absolute path to your project directory.
+
+### Alternative Integration Method
+
+If you encounter issues with the TypeScript-compiled version, you can use the standalone JavaScript implementation:
+
+```json
+"knowledge": {
+  "command": "node",
+  "args": [
+    "/absolute/path/to/knowledge-base-mcp/official-mcp.mjs"
+  ],
+  "env": {
+    "SURREALDB_URL": "http://localhost:8070",
+    "SURREALDB_USER": "root",
+    "SURREALDB_PASS": "root",
+    "SURREALDB_NS": "development",
+    "SURREALDB_DB": "knowledge"
+  }
+}
+```
+
+### Troubleshooting
+
 Common errors:
-- MODULE_NOT_FOUND: Make sure the file path in the configuration points to a file that exists
-- Connection issues: Ensure SurrealDB is running with `./startdb.sh`
-- Server disconnection: Check the log file at `/Users/philiphaynes/Library/Logs/Claude/mcp-server-knowledge.log`
-- Parse errors: The configuration is particular about paths; use absolute paths with correct extensions
+- **MODULE_NOT_FOUND**: Make sure the file path in the configuration points to a file that exists
+- **Connection issues**: Ensure SurrealDB is running with `npm run startdb`
+- **Server disconnection**: Check the log file at `~/Library/Logs/Claude/mcp-server-knowledge.log`
+- **Parse errors**: The configuration is particular about paths; use absolute paths with correct extensions
+- **Datetime errors**: If you see datetime format errors, the database schema might need updating (run `npm run cleanup` to reset the database)

@@ -6,24 +6,16 @@
   "type": "module",
   "scripts": {
     "build": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext index.mts",
-    "build-reset-commented-out": "tsc --outDir ./build --module NodeNext --moduleResolution nodenext src/reset-db.ts",
     "build-mcp": "tsc --outDir ./build/src --module NodeNext --moduleResolution nodenext src/index.ts",
     "start": "node build/index.mjs",
     "start-mcp": "node build/src/index.js",
-    "start-wrapper": "node mcp-wrapper.mjs",
-    "start-standalone": "node standalone-mcp.mjs",
-    "start-minimal": "node minimal-mcp.mjs",
-    "start-sdk": "node sdk-mcp.mjs",
     "claude": "node official-mcp.mjs",
-    "migrate": "ts-node --esm src/migrate.ts",
-    "reset-db-commented-out": "npm run build-reset && node build/reset-db.js",
     "test": "node test-direct-comprehensive.js",
+    "test-basic": "node test-direct.js",
     "test-debug": "TRACE_LEVEL=DEBUG node test-direct-comprehensive.js",
-    "test-standalone": "node test-standalone.mjs",
-    "test:unit": "node --experimental-vm-modules ./node_modules/.bin/jest",
-    "test:unit:coverage": "node --experimental-vm-modules ./node_modules/.bin/jest --coverage",
-    "test:simple": "node --experimental-vm-modules ./node_modules/.bin/jest database.simple.test.ts",
-    "test:node": "node --test test/database.test.js"
+    "test:node": "node --test test/database.test.js",
+    "startdb": "./startdb.sh",
+    "cleanup": "rm -rf ./surrealdb-data/knowledge.db && ./startdb.sh"
   },
   "keywords": [
     "mcp",
