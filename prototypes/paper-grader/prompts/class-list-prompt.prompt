@@ -1,0 +1,11 @@
+Below is the prompt to create a class
+list from an xl list copied into a prompt here.
+
+The following is a science class list for 7SCIS. It has the student name followed by student number on the next line.  Please convert this to a json document using camelCase field names with the schema '{
+  "class": "7SCI%",
+  "students": [
+    {
+      "name": "{A student name}",
+      "studentNumber": "{a student number}"
+    }]
+}'.

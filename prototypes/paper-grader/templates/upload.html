@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Exams - Exam Marking System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Upload Exam Papers</h2>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Upload scanned exam papers for processing. Supported formats: PDF, JPG, PNG.</p>
+        
+        <form method="POST" enctype="multipart/form-data" class="mb-4">
+            <div class="form-group">
+                <label for="file">Select files:</label>
+                <input type="file" class="form-control-file" id="file" name="file" multiple accept=".pdf,.jpg,.jpeg,.png">
+                <small class="form-text text-muted">You can select multiple files at once.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Upload Files</button>
+        </form>
+        
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Tips for best results:</h4>
+            <ul>
+                <li>Ensure scans are clear and well-lit</li>
+                <li>Align papers properly when scanning</li>
+                <li>Use at least 300 DPI resolution</li>
+                <li>Ensure student name and class are clearly written</li>
+                <li>Make sure answer markings are distinct and dark</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Preview selected files before upload
+    document.getElementById('file').addEventListener('change', function(e) {
+        const fileCount = e.target.files.length;
+        const fileList = document.createElement('div');
+        fileList.className = 'mt-3';
+        
+        if (fileCount > 0) {
+            const header = document.createElement('h5');
+            header.textContent = `Selected ${fileCount} file(s):`;
+            fileList.appendChild(header);
+            
+            const list = document.createElement('ul');
+            list.className = 'list-group';
+            
+            for (let i = 0; i < fileCount; i++) {
+                const file = e.target.files[i];
+                const item = document.createElement('li');
+                item.className = 'list-group-item';
+                item.textContent = `${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+                list.appendChild(item);
+            }
+            
+            fileList.appendChild(list);
+        }
+        
+        // Remove previous list if exists
+        const previousList = document.querySelector('.file-preview');
+        if (previousList) {
+            previousList.remove();
+        }
+        
+        fileList.classList.add('file-preview');
+        this.parentNode.appendChild(fileList);
+    });
+</script>
+{% endblock %}

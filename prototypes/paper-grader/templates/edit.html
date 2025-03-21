@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Result - Exam Marking System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Edit Exam Result</h2>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <label for="student_name">Student Name:</label>
+                <input type="text" class="form-control" id="student_name" name="student_name" value="{{ result.student_name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="class">Class:</label>
+                <input type="text" class="form-control" id="class" name="class" value="{{ result.class }}" required>
+            </div>
+            
+            <div class="card mt-4 mb-4">
+                <div class="card-header bg-light">
+                    <h4>Student Answers</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for q_num in range(1, 17) %}
+                        {% set q_key = q_num|string %}
+                        {% set answer = result.answers.get(q_key, {}) %}
+                        {% set student_answer = answer.student_answer if answer is mapping else answer %}
+                        {% set correct_answer = answer.correct_answer if answer is mapping else None %}
+                        {% set is_correct = answer.is_correct if answer is mapping else None %}
+                        
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <div class="form-group">
+                                <label for="q{{ q_num }}">Question {{ q_num }}</label>
+                                <select class="form-control {% if is_correct == False %}is-invalid{% elif is_correct == True %}is-valid{% endif %}" 
+                                        id="q{{ q_num }}" name="q{{ q_num }}">
+                                    <option value="" {% if not student_answer %}selected{% endif %}>No Answer</option>
+                                    <option value="A" {% if student_answer == "A" %}selected{% endif %}>A</option>
+                                    <option value="B" {% if student_answer == "B" %}selected{% endif %}>B</option>
+                                    <option value="C" {% if student_answer == "C" %}selected{% endif %}>C</option>
+                                    <option value="D" {% if student_answer == "D" %}selected{% endif %}>D</option>
+                                </select>
+                                {% if correct_answer %}
+                                <small class="form-text {% if is_correct %}text-success{% else %}text-danger{% endif %}">
+                                    Correct answer: {{ correct_answer }}
+                                </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{{ url_for('results') }}" class="btn btn-secondary ml-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if result.filename %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h3>Original Exam Paper</h3>
+    </div>
+    <div class="card-body">
+        <p>Source file: {{ result.filename }}</p>
+        <p class="text-muted">The original scanned exam paper would be displayed here for reference.</p>
+        <!-- In a real implementation, the image would be displayed here -->
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Highlight correct and incorrect answers
+    document.addEventListener('DOMContentLoaded', function() {
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', function() {
+                // Remove any existing validation classes
+                this.classList.remove('is-valid', 'is-invalid');
+                
+                // Get the correct answer from the small text element
+                const smallText = this.nextElementSibling;
+                if (smallText && smallText.textContent) {
+                    const correctAnswer = smallText.textContent.match(/Correct answer: ([A-D])/);
+                    if (correctAnswer && correctAnswer[1]) {
+                        // Add appropriate validation class
+                        if (this.value === correctAnswer[1]) {
+                            this.classList.add('is-valid');
+                            smallText.classList.remove('text-danger');
+                            smallText.classList.add('text-success');
+                        } else {
+                            this.classList.add('is-invalid');
+                            smallText.classList.remove('text-success');
+                            smallText.classList.add('text-danger');
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

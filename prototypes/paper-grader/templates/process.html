@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Process Exams - Exam Marking System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Process Exam Papers</h2>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Enter the answer key for the exam before processing.</p>
+        
+        <form method="POST" class="mb-4">
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h4>Answer Key</h4>
+                </div>
+                <div class="card-body">
+                    <p>Enter the correct answer for each question (A, B, C, or D).</p>
+                    
+                    <div class="row">
+                        {% for i in range(1, 17) %}
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <div class="form-group">
+                                <label for="q{{ i }}">Question {{ i }}</label>
+                                <select class="form-control" id="q{{ i }}" name="q{{ i }}" required>
+                                    <option value="" selected disabled>Select</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Process Exam Papers</button>
+        </form>
+        
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Processing Information:</h4>
+            <p>The system will:</p>
+            <ol>
+                <li>Extract student information (name, class) using OCR</li>
+                <li>Identify marked answers on the answer grid</li>
+                <li>Compare answers with the provided answer key</li>
+                <li>Generate preliminary grades and statistics</li>
+            </ol>
+            <p>After processing, you'll be able to review and correct any misrecognized information.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Load saved answer key if available
+    document.addEventListener('DOMContentLoaded', function() {
+        // This would typically fetch from the server, but we'll use localStorage for simplicity
+        const savedKey = localStorage.getItem('answerKey');
+        if (savedKey) {
+            try {
+                const answerKey = JSON.parse(savedKey);
+                for (const [question, answer] of Object.entries(answerKey)) {
+                    const selectElement = document.getElementById(`q${question}`);
+                    if (selectElement) {
+                        selectElement.value = answer;
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading saved answer key:', e);
+            }
+        }
+    });
+    
+    // Save answer key when form is submitted
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const answerKey = {};
+        for (let i = 1; i <= 16; i++) {
+            const answer = document.getElementById(`q${i}`).value;
+            if (answer) {
+                answerKey[i] = answer;
+            }
+        }
+        localStorage.setItem('answerKey', JSON.stringify(answerKey));
+    });
+</script>
+{% endblock %}

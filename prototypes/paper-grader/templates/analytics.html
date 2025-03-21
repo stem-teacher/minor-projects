@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - Exam Marking System{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Exam Analytics</h2>
+    </div>
+    <div class="card-body">
+        {% if stats %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h4>Overall Statistics</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Number of Students</th>
+                                        <td>{{ stats.num_students }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Average Score</th>
+                                        <td>{{ stats.average_score|round(1) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Median Score</th>
+                                        <td>{{ stats.median_score|round(1) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Highest Score</th>
+                                        <td>{{ stats.highest_score }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lowest Score</th>
+                                        <td>{{ stats.lowest_score }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Average Percentage</th>
+                                        <td>{{ stats.average_percentage|round(1) }}%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h4>Grade Distribution</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Count</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for grade, count in stats.grade_distribution.items() %}
+                                    <tr>
+                                        <td>{{ grade }}</td>
+                                        <td>{{ count }}</td>
+                                        <td>{{ (count / stats.num_students * 100)|round(1) }}%</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h4>Question Analysis</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Correct Answers</th>
+                                <th>Total Attempts</th>
+                                <th>Success Rate</th>
+                                <th>Difficulty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for q_num, q_stats in stats.question_stats.items() %}
+                            <tr>
+                                <td>Question {{ q_num }}</td>
+                                <td>{{ q_stats.correct }}</td>
+                                <td>{{ q_stats.total }}</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar {% if q_stats.percentage >= 75 %}bg-success{% elif q_stats.percentage >= 40 %}bg-warning{% else %}bg-danger{% endif %}" 
+                                             role="progressbar" 
+                                             style="width: {{ q_stats.percentage }}%;" 
+                                             aria-valuenow="{{ q_stats.percentage }}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                            {{ q_stats.percentage|round(1) }}%
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if q_stats.percentage >= 75 %}
+                                        <span class="badge badge-success">Easy</span>
+                                    {% elif q_stats.percentage >= 40 %}
+                                        <span class="badge badge-warning">Medium</span>
+                                    {% else %}
+                                        <span class="badge badge-danger">Hard</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h4>Difficulty Breakdown</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5>Easy Questions</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if stats.difficulty.easy %}
+                                <p>Questions where 75% or more students answered correctly:</p>
+                                <p class="lead">
+                                    {% for q in stats.difficulty.easy %}
+                                    <span class="badge badge-pill badge-success">Q{{ q }}</span>
+                                    {% endfor %}
+                                </p>
+                                {% else %}
+                                <p>No easy questions found.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h5>Medium Questions</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if stats.difficulty.medium %}
+                                <p>Questions where 40-75% of students answered correctly:</p>
+                                <p class="lead">
+                                    {% for q in stats.difficulty.medium %}
+                                    <span class="badge badge-pill badge-warning">Q{{ q }}</span>
+                                    {% endfor %}
+                                </p>
+                                {% else %}
+                                <p>No medium difficulty questions found.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">
+                                <h5>Hard Questions</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if stats.difficulty.hard %}
+                                <p>Questions where less than 40% of students answered correctly:</p>
+                                <p class="lead">
+                                    {% for q in stats.difficulty.hard %}
+                                    <span class="badge badge-pill badge-danger">Q{{ q }}</span>
+                                    {% endfor %}
+                                </p>
+                                {% else %}
+                                <p>No hard questions found.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if classes %}
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h4>Class Comparison</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Students</th>
+                                <th>Average Score</th>
+                                <th>Median Score</th>
+                                <th>Highest Score</th>
+                                <th>Lowest Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for class_name, class_results in classes.items() %}
+                            <tr>
+                                <td>{{ class_name }}</td>
+                                <td>{{ class_results|length }}</td>
+                                <td>{{ (class_results|sum(attribute='score') / class_results|length)|round(1) }}</td>
+                                <td>
+                                    {% set sorted_scores = class_results|map(attribute='score')|list|sort %}
+                                    {% set mid = (sorted_scores|length - 1) // 2 %}
+                                    {% if sorted_scores|length % 2 == 0 %}
+                                        {{ ((sorted_scores[mid] + sorted_scores[mid + 1]) / 2)|round(1) }}
+                                    {% else %}
+                                        {{ sorted_scores[mid]|round(1) }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ class_results|map(attribute='score')|max }}</td>
+                                <td>{{ class_results|map(attribute='score')|min }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="alert alert-warning">
+            <p>No results available for analysis. Please upload and process exam papers first.</p>
+            <div class="mt-3">
+                <a href="{{ url_for('upload_file') }}" class="btn btn-primary">Upload Exams</a>
+                <a href="{{ url_for('process_files') }}" class="btn btn-secondary ml-2">Process Exams</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
