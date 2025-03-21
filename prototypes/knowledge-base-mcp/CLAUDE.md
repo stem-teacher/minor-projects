@@ -149,8 +149,19 @@ The implementation includes multiple testing scripts:
    ```
 
 2. Start SurrealDB:
+   
+   Using Docker (default):
    ```
    npm run startdb
+   ```
+   
+   For native macOS (more power efficient):
+   ```
+   # First install SurrealDB
+   curl -sSf https://install.surrealdb.com | sh
+   
+   # Then run with native option
+   ./startdb.sh native
    ```
 
 3. Build the implementation:
@@ -214,6 +225,18 @@ Potential improvements:
 - The ES module implementation (.mts) is more compatible with modern Node.js practices
 - Direct SQL queries are more reliable than the SurrealDB client methods for certain operations
 - Avoid using JavaScript functions in SurrealDB queries when running in secure mode
+
+### SurrealDB Storage and Versioning
+
+- This project uses SurrealDB 2.0 with versioned storage
+- The storage format uses `surrealkv+versioned://` prefix for database files
+- Versioning allows tracking changes, point-in-time queries, and improved data integrity
+- The database file is stored in the `surrealdb-data` directory with `.db` extension
+- When migrating between environments, make sure to:
+  - Use the correct storage format (`surrealkv+versioned://`)
+  - Maintain the same database name in environment variables
+  - Keep consistent user authentication settings
+- Docker and native modes use the same storage format, so you can switch between them
 
 ## Claude Desktop Integration
 

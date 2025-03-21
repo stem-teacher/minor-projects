@@ -9,9 +9,8 @@
     "build-mcp": "tsc --outDir ./build/src --module NodeNext --moduleResolution nodenext src/index.ts",
     "start": "node build/index.mjs",
     "start-mcp": "node build/src/index.js",
-    "claude": "node official-mcp.mjs",
-    "test": "node test-direct-comprehensive.js",
-    "test-basic": "node test-direct.js",
+    "test": "node test/test-direct-comprehensive.js",
+    "test-basic": "node test/test-direct.js",
     "test-debug": "TRACE_LEVEL=DEBUG node test-direct-comprehensive.js",
     "test:node": "node --test test/database.test.js",
     "startdb": "./startdb.sh",
@@ -23,7 +22,7 @@
     "graph",
     "surrealdb"
   ],
-  "author": "",
+  "author": "Philip Haynes",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.1",
