@@ -1,0 +1,865 @@
+{
+  "courses": [
+    {
+      "courseName": "Physics Stage 6",
+      "modules": [
+        {
+          "moduleName": "Module 1: Kinematics",
+          "moduleCode": "PHY11-M1",
+          "topics": [
+            {
+              "topicName": "Motion in a Straight Line",
+              "inquiryQuestions": ["How can we describe and predict motion?"],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-8",
+                  "description": "Describes and analyses motion in terms of scalar and vector quantities in two dimensions and makes quantitative measurements and calculations for distance, displacement, speed velocity and acceleration",
+                  "bloomsLevel": "Analyse"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-2",
+                  "description": "Designs and evaluates investigations in order to obtain primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-3",
+                  "description": "Conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "Selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                }
+              ],
+              "knowledgeNodes": [
+                {
+                  "nodeId": "PHY_KIN_SL_UAM_INTRO",
+                  "description": "Introduction to uniformly accelerated motion (UAM), distinguishing between uniform and non-uniform acceleration. Qualitatively describe acceleration as the rate of change of velocity. Address common misconception: confusing velocity and acceleration.",
+                  "type": "definition",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 1: Kinematics, PHY11-8",
+                  "workingScientificallyCategory": "Communicating",
+                  "literacySkills": [
+                    "Describing",
+                    "Explaining",
+                    "Distinguishing",
+                    "Defining",
+                    "Addressing misconceptions"
+                  ],
+                  "numeracySkills": [
+                    "Calculations",
+                    "Graphing",
+                    "Interpreting slopes"
+                  ],
+                  "prerequisiteNodes": [],
+                  "examQuestionsLinked": ["HSC2019Q2a", "HSC2021Q5b"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Car accelerating uniformly from rest (constant rate of speed increase)",
+                    "Falling objects under gravity ignoring air resistance (constant downward acceleration)",
+                    "Non-examples: Car speeding up in traffic (non-uniform acceleration)"
+                  ],
+                  "media": [
+                    "image:images/uniform_acceleration.png",
+                    "video:video/uniform_acceleration_intro.mp4"
+                  ]
+                },
+                {
+                  "nodeId": "PHY_KIN_EQ_OF_MOTION",
+                  "description": "Equations of motion for uniformly accelerated rectilinear motion: Derive and apply the standard equations: s=ut+(1/2)at², v=u+at, v²=u²+2as. Emphasise conditions for using these equations (constant acceleration, straight-line motion). Practice applying these to contexts like projectiles moving vertically under gravity and cars braking uniformly to rest. Explain the physical meaning of each term and unit consistency.",
+                  "type": "equation",
+                  "bloomTaxonomyLevel": "Apply",
+                  "syllabusReference": "Module 1: Kinematics, PHY11-8",
+                  "workingScientificallyCategory": "Problem solving",
+                  "literacySkills": [
+                    "Deriving equations",
+                    "Contextualising physics problems",
+                    "Explaining equation components"
+                  ],
+                  "numeracySkills": [
+                    "Substitution",
+                    "Algebraic manipulation",
+                    "Unit conversions",
+                    "Formula application"
+                  ],
+                  "prerequisiteNodes": ["PHY_KIN_SL_UAM_INTRO"],
+                  "examQuestionsLinked": ["HSC2020Q4c", "HSC2018Q3a"],
+                  "depthStudyComponents": [
+                    "Data Analysis and Interpretation",
+                    "Mathematical Modelling"
+                  ],
+                  "examples": [
+                    "Estimating stopping distance of vehicles given initial speed and deceleration - consider reaction time.",
+                    "Calculating displacement and final velocity of free-falling objects from various heights.",
+                    "Solve problems requiring rearrangement of equations to find unknown variables."
+                  ],
+                  "media": [
+                    "image:images/equations_motion.png",
+                    "simulation:simulation/motion_equations_simulation.html"
+                  ],
+                  "equations": ["s=ut+(1/2)at²", "v=u+at", "v²=u²+2as"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "moduleName": "Module 2: Dynamics",
+          "moduleCode": "PHY11-M2",
+          "topics": [
+            {
+              "topicName": "Forces and Newton's Laws",
+              "inquiryQuestions": [
+                "How do forces affect the motion of objects and systems?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-9",
+                  "description": "Describes and explains events in terms of Newton’s Laws of Motion, the law of conservation of momentum and the law of conservation of energy",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-2",
+                  "description": "Designs and evaluates investigations in order to obtain primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "Selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "Solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                }
+              ],
+              "knowledgeNodes": [
+                {
+                  "nodeId": "PHY_DYN_NEWT1STLAW",
+                  "description": "Newton’s First Law of Motion (Law of Inertia): Explain and exemplify Newton's First Law, defining inertia and its relation to mass. Discuss inertial reference frames and non-inertial frames (qualitatively). Address common misconception: inertia is a force.",
+                  "type": "law",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Communicating",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Applying scientific terminology",
+                    "Distinguishing between concepts",
+                    "Addressing misconceptions"
+                  ],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": ["PHY_KIN_SL_UAM_INTRO"],
+                  "examQuestionsLinked": ["HSC2020Q3", "HSC2018Q7b"],
+                  "depthStudyComponents": [
+                    "Historical analysis of scientific models"
+                  ],
+                  "examples": [
+                    "Seatbelt safety systems and inertia in car crashes",
+                    "A spacecraft drifting in deep space maintaining constant velocity",
+                    "Objects on a friction-less surface maintaining state of motion"
+                  ],
+                  "media": [
+                    "image:images/inertia_example.png",
+                    "video:video/newton_first_law.mp4",
+                    "simulation:simulation/inertial_frames.html"
+                  ],
+                  "lawEquation": "∑F = 0 implies Δv = 0"
+                },
+                {
+                  "nodeId": "PHY_DYN_NEWT2NDLAW",
+                  "description": "Newton's Second Law of Motion: Quantitative treatment using the formula F=ma. Explain net force and its role in acceleration. Apply Newton's Second Law in real-world scenarios including motion with frictional forces (kinetic and static friction qualitatively introduced). Solve problems involving single and multiple forces in 1D.",
+                  "type": "law",
+                  "bloomTaxonomyLevel": "Apply",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Processing data and information",
+                  "literacySkills": [
+                    "Descriptive explanations",
+                    "Scientific terminology",
+                    "Problem decomposition"
+                  ],
+                  "numeracySkills": [
+                    "Calculations",
+                    "Unit conversions",
+                    "Proportional reasoning",
+                    "Vector component addition (1D)"
+                  ],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_NEWT1STLAW",
+                    "PHY_KIN_SL_UAM_INTRO"
+                  ],
+                  "examQuestionsLinked": ["HSC2019Q7c", "HSC2022Q2b"],
+                  "depthStudyComponents": [
+                    "Experimental Design",
+                    "Hypothesis Formulation",
+                    "Quantitative Data Analysis"
+                  ],
+                  "examples": [
+                    "Calculating acceleration of a car given applied force and mass, considering friction.",
+                    "Predicting outcomes of vehicle safety tests involving impact forces and deceleration.",
+                    "Analysing forces on objects on inclined planes (without trigonometry yet)."
+                  ],
+                  "media": [
+                    "image:images/newton_second_law_diagram.png",
+                    "simulation:simulation/newton_second_law_simulation.html",
+                    "experiment:video/newton_second_law_experiment.mp4"
+                  ],
+                  "lawEquation": "∑F = ma"
+                },
+                {
+                  "nodeId": "PHY_DYN_FORCE_TYPES_INTRO",
+                  "description": "Introduction to common types of forces: Gravitational force (weight), Normal force, Tension force, Frictional force (static and kinetic), and Applied force. Qualitative description of each force and its direction. Emphasise force as a vector quantity.",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Communicating",
+                  "literacySkills": ["Defining", "Describing", "Classifying"],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_NEWT1STLAW",
+                    "PHY_DYN_NEWT2NDLAW"
+                  ],
+                  "examQuestionsLinked": ["HSC2021Q7a", "HSC2017Q3"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Weight of objects on Earth and other planets.",
+                    "Normal force on a book resting on a table.",
+                    "Tension in a rope pulling a box.",
+                    "Friction between shoes and the ground when walking."
+                  ],
+                  "media": ["image:images/force_types_diagram.png"]
+                },
+                {
+                  "nodeId": "PHY_DYN_GRAV_FORCE_WEIGHT",
+                  "description": "Gravitational Force and Weight: Define gravitational force and weight (force due to gravity). Quantitative treatment of weight using W=mg.  Distinguish between mass and weight. Explain 'g' as gravitational field strength and its approximate value on Earth. Address common misconception: weight and mass are the same.",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Analysing Data and Information",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Distinguishing",
+                    "Addressing misconceptions"
+                  ],
+                  "numeracySkills": ["Calculations", "Unit conversions"],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_FORCE_TYPES_INTRO",
+                    "PHY_DYN_NEWT2NDLAW"
+                  ],
+                  "examQuestionsLinked": ["HSC2018Q2", "HSC2016Q4b"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Calculating weight of different masses on Earth.",
+                    "Comparing weight of same mass on Earth and Moon (qualitatively).",
+                    "Understanding weightlessness in orbit (apparent weight vs. true weight)."
+                  ],
+                  "media": ["image:images/weight_vs_mass.png"],
+                  "equations": ["W=mg"]
+                },
+                {
+                  "nodeId": "PHY_DYN_NORMAL_FORCE",
+                  "description": "Normal Force: Explain normal force as a contact force perpendicular to the surface of contact. Understand it as a reaction force preventing objects from passing through surfaces. Determine normal force in simple horizontal and vertical scenarios. Relate normal force to Newton's Third Law.",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Analysing Data and Information",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Relating concepts"
+                  ],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_FORCE_TYPES_INTRO",
+                    "PHY_DYN_NEWT3RDLAW_INTRO"
+                  ],
+                  "examQuestionsLinked": ["HSC2019Q7a", "HSC2015Q6c"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Normal force on a book on a table (equal and opposite to weight).",
+                    "Normal force on a person standing on the ground.",
+                    "Normal force on an object on an inclined plane (qualitatively)."
+                  ],
+                  "media": ["image:images/normal_force_diagram.png"]
+                },
+                {
+                  "nodeId": "PHY_DYN_TENSION_FORCE",
+                  "description": "Tension Force: Explain tension force as the force transmitted through a string, rope, cable or wire when it is pulled tight by forces acting from opposite ends. Understand tension as acting along the length of the string and equally in both directions. Analyse tension in simple systems (e.g., single hanging mass, mass pulled horizontally).",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Analysing Data and Information",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Analysing systems"
+                  ],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": ["PHY_DYN_FORCE_TYPES_INTRO"],
+                  "examQuestionsLinked": ["HSC2022Q7a", "HSC2014Q5"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Tension in a string holding a hanging weight.",
+                    "Tension in a tow rope pulling a car.",
+                    "Tension in a cable in an elevator system (qualitatively)."
+                  ],
+                  "media": ["image:images/tension_force_diagram.png"]
+                },
+                {
+                  "nodeId": "PHY_DYN_FRICTION_FORCE",
+                  "description": "Frictional Force: Introduce frictional force as a force that opposes motion between surfaces in contact. Distinguish qualitatively between static and kinetic friction. Explain factors affecting friction (surface roughness, normal force).  Understand friction as converting kinetic energy to thermal energy. Introduce coefficient of friction qualitatively.",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Analysing Data and Information",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Distinguishing"
+                  ],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": ["PHY_DYN_FORCE_TYPES_INTRO"],
+                  "examQuestionsLinked": ["HSC2023Q6b", "HSC2017Q7a"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Friction between tires and road when braking.",
+                    "Static friction preventing a box from sliding on an inclined plane.",
+                    "Kinetic friction slowing down a sliding object."
+                  ],
+                  "media": [
+                    "image:images/friction_force_diagram.png",
+                    "video:video/friction_demonstration.mp4"
+                  ]
+                },
+                {
+                  "nodeId": "PHY_DYN_APPLIED_FORCE",
+                  "description": "Applied Force: Define applied force as a force exerted on an object by a person or another object. Understand applied force as an external force initiating or changing motion.  Recognise applied force in various contexts (pushing, pulling, throwing).",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Communicating",
+                  "literacySkills": ["Defining", "Explaining"],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": ["PHY_DYN_FORCE_TYPES_INTRO"],
+                  "examQuestionsLinked": [],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Pushing a trolley.",
+                    "Pulling a wagon.",
+                    "Kicking a ball."
+                  ],
+                  "media": ["image:images/applied_force_examples.png"]
+                },
+                {
+                  "nodeId": "PHY_DYN_NEWT3RDLAW_INTRO",
+                  "description": "Newton's Third Law of Motion (Action-Reaction): Introduce Newton's Third Law qualitatively. Explain that forces always occur in pairs - action and reaction forces, equal in magnitude and opposite in direction, acting on *different* objects. Identify action-reaction pairs in simple scenarios. Address common misconception: action-reaction forces cancel out.",
+                  "type": "law",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Communicating",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Identifying",
+                    "Addressing misconceptions"
+                  ],
+                  "numeracySkills": [],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_NEWT1STLAW",
+                    "PHY_DYN_NEWT2NDLAW",
+                    "PHY_DYN_FORCE_TYPES_INTRO"
+                  ],
+                  "examQuestionsLinked": ["HSC2020Q7b", "HSC2016Q7c"],
+                  "depthStudyComponents": [],
+                  "examples": [
+                    "Action-reaction pair between Earth and a falling object.",
+                    "Action-reaction pair between a person pushing a wall.",
+                    "Action-reaction pair between rocket and exhaust gases."
+                  ],
+                  "media": [
+                    "image:images/newton_third_law_diagram.png",
+                    "video:video/newton_third_law_explanation.mp4",
+                    "simulation:simulation/action_reaction.html"
+                  ],
+                  "lawEquation": "F_AB = -F_BA"
+                },
+                {
+                  "nodeId": "PHY_DYN_NET_FORCE_EQUILIBRIUM_1D",
+                  "description": "Net Force and Equilibrium in 1D: Explain net force as the vector sum of all forces acting on an object. Define equilibrium as the state where net force is zero, leading to no acceleration (Newton's First Law).  Solve problems involving equilibrium and non-equilibrium in one dimension using vector addition. Introduce free body diagrams for 1D systems.",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Apply",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Problem Solving",
+                  "literacySkills": [
+                    "Defining",
+                    "Explaining",
+                    "Problem decomposition"
+                  ],
+                  "numeracySkills": [
+                    "Vector addition (1D)",
+                    "Calculations",
+                    "Algebraic manipulation"
+                  ],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_NEWT1STLAW",
+                    "PHY_DYN_NEWT2NDLAW",
+                    "PHY_DYN_FORCE_TYPES_INTRO"
+                  ],
+                  "examQuestionsLinked": ["HSC2021Q4c", "HSC2015Q7b"],
+                  "depthStudyComponents": [
+                    "Quantitative problem solving",
+                    "Free body diagram construction"
+                  ],
+                  "examples": [
+                    "Block at rest on a horizontal surface (equilibrium).",
+                    "Block sliding at constant velocity on a horizontal surface (equilibrium).",
+                    "Block accelerating horizontally due to an applied force (non-equilibrium)."
+                  ],
+                  "media": [
+                    "image:images/net_force_1d_diagram.png",
+                    "simulation:simulation/equilibrium_1d.html"
+                  ],
+                  "equations": [
+                    "∑F_net = 0 (Equilibrium)",
+                    "∑F_net = ma (Non-equilibrium)"
+                  ]
+                },
+                {
+                  "nodeId": "PHY_DYN_NET_FORCE_EQUILIBRIUM_2D_INTRO",
+                  "description": "Net Force and Equilibrium in 2D - Introduction: Extend the concept of net force and equilibrium to two dimensions. Introduce resolving forces into perpendicular components (horizontal and vertical). Qualitative analysis of equilibrium in 2D (e.g., object on inclined plane).",
+                  "type": "concept",
+                  "bloomTaxonomyLevel": "Understand",
+                  "syllabusReference": "Module 2: Dynamics, PHY11-9",
+                  "workingScientificallyCategory": "Analysing Data and Information",
+                  "literacySkills": [
+                    "Explaining",
+                    "Extending concepts",
+                    "Visualisation"
+                  ],
+                  "numeracySkills": [
+                    "Introduction to vector components (qualitative)"
+                  ],
+                  "prerequisiteNodes": [
+                    "PHY_DYN_NET_FORCE_EQUILIBRIUM_1D",
+                    "PHY_KIN_M1T2_NL1"
+                  ],
+                  "examQuestionsLinked": ["HSC2018Q7c", "HSC2014Q7"],
+                  "depthStudyComponents": [
+                    "Visual representation of forces",
+                    "Qualitative analysis"
+                  ],
+                  "examples": [
+                    "Object at rest on an inclined plane (qualitative force analysis).",
+                    "Traffic light hanging in equilibrium (qualitative force analysis)."
+                  ],
+                  "media": ["image:images/net_force_2d_intro_diagram.png"]
+                }
+              ]
+            },
+            {
+              "topicName": "Forces, Acceleration and Energy",
+              "inquiryQuestions": [
+                "How can the motion of objects be explained and analysed?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-9",
+                  "description": "describes and explains events in terms of Newton’s Laws of Motion, the law of conservation of momentum and the law of conservation of energy",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-2",
+                  "description": "designs and evaluates investigations in order to obtain primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 2 Topic 2 will be added here in the next iterations ...
+              ]
+            },
+            {
+              "topicName": "Momentum, Energy and Simple Systems",
+              "inquiryQuestions": [
+                "How is the motion of objects in a simple system dependent on the interaction between the objects?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-9",
+                  "description": "describes and explains events in terms of Newton’s Laws of Motion, the law of conservation of momentum and the law of conservation of energy",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-2",
+                  "description": "designs and evaluates investigations in order to obtain primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 2 Topic 3 will be added here in the next iterations ...
+              ]
+            }
+          ]
+        },
+        {
+          "moduleName": "Module 3: Waves and Thermodynamics",
+          "moduleCode": "PHY11-M3",
+          "topics": [
+            {
+              "topicName": "Wave Properties",
+              "inquiryQuestions": [
+                "What are the properties of all waves and wave motion?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-10",
+                  "description": "explains and analyses waves and the transfer of energy by sound, light and thermodynamic principles",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-3",
+                  "description": "conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 3 Topic 1 will be added here in the next iterations ...
+              ]
+            },
+            {
+              "topicName": "Wave Behaviour",
+              "inquiryQuestions": ["How do waves behave?"],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-10",
+                  "description": "explains and analyses waves and the transfer of energy by sound, light and thermodynamic principles",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-3",
+                  "description": "conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 3 Topic 2 will be added here in the next iterations ...
+              ]
+            },
+            {
+              "topicName": "Sound Waves",
+              "inquiryQuestions": [
+                "What evidence suggests that sound is a mechanical wave?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-10",
+                  "description": "explains and analyses waves and the transfer of energy by sound, light and thermodynamic principles",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-3",
+                  "description": "conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 3 Topic 3 will be added here in the next iterations ...
+              ]
+            },
+            {
+              "topicName": "Ray Model of Light",
+              "inquiryQuestions": [
+                "What properties can be demonstrated when using the ray model of light?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-10",
+                  "description": "explains and analyses waves and the transfer of energy by sound, light and thermodynamic principles",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-3",
+                  "description": "conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 3 Topic 4 will be added here in the next iterations ...
+              ]
+            },
+            {
+              "topicName": "Thermodynamics",
+              "inquiryQuestions": [
+                "How are temperature, thermal energy and particle motion related?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-10",
+                  "description": "explains and analyses waves and the transfer of energy by sound, light and thermodynamic principles",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-3",
+                  "description": "conducts investigations to collect valid and reliable primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-4",
+                  "description": "selects and processes appropriate qualitative and quantitative data and information using a range of appropriate media"
+                },
+                {
+                  "code": "PH11/12-6",
+                  "description": "solves scientific problems using primary and secondary data, critical thinking skills and scientific processes"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 3 Topic 5 will be added here in the next iterations ...
+              ]
+            }
+          ]
+        },
+        {
+          "moduleName": "Module 4: Electricity and Magnetism",
+          "moduleCode": "PHY11-M4",
+          "topics": [
+            {
+              "topicName": "Electrostatics",
+              "inquiryQuestions": [
+                "How do charged objects interact with other charged objects and with neutral objects?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-11",
+                  "description": "explains and quantitatively analyses electric fields, circuitry and magnetism",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-1",
+                  "description": "Develops and evaluates questions and hypotheses for scientific investigation"
+                },
+                {
+                  "code": "PH11/12-5",
+                  "description": "Analyses and evaluates primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "Communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 4 Topic 1 will be added here ...
+              ]
+            },
+            {
+              "topicName": "Electric Circuits",
+              "inquiryQuestions": [
+                "How do the processes of the transfer and the transformation of energy occur in electric circuits?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-11",
+                  "description": "explains and quantitatively analyses electric fields, circuitry and magnetism",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-1",
+                  "description": "Develops and evaluates questions and hypotheses for scientific investigation"
+                },
+                {
+                  "code": "PH11/12-5",
+                  "description": "Analyses and evaluates primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "Communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 4 Topic 2 will be added here ...
+              ]
+            },
+            {
+              "topicName": "Magnetism",
+              "inquiryQuestions": [
+                "How do magnetised and magnetic objects interact?"
+              ],
+              "syllabusOutcomes": [
+                {
+                  "outcomeCode": "PH11-11",
+                  "description": "explains and quantitatively analyses electric fields, circuitry and magnetism",
+                  "bloomsLevel": "Understand"
+                }
+              ],
+              "workingScientificallyOutcomes": [
+                {
+                  "code": "PH11/12-1",
+                  "description": "Develops and evaluates questions and hypotheses for scientific investigation"
+                },
+                {
+                  "code": "PH11/12-5",
+                  "description": "Analyses and evaluates primary and secondary data and information"
+                },
+                {
+                  "code": "PH11/12-7",
+                  "description": "Communicates scientific understanding using suitable language and terminology for a specific audience or purpose"
+                }
+              ],
+              "knowledgeNodes": [
+                // ... Knowledge nodes for Module 4 Topic 3 will be added here ...
+              ]
+            }
+          ]
+        }
+      ],
+      "examinations": {
+        "yearsCovered": "2014-2023",
+        "examQuestions": [
+          {
+            "examQuestionId": "HSC2020Q3",
+            "syllabusOutcome": "PH11-9",
+            "questionText": "Explain how Newton’s First Law accounts for motion in inertial frames.",
+            "markingCriteria": "Clearly defines inertia; provides appropriate example showing clear understanding of inertial frame concept.",
+            "exemplarResponses": [
+              "Newton’s first law states an object continues in uniform motion unless acted upon by external force. For instance, astronauts experiencing weightlessness in space move at constant velocity in absence of air resistance and gravity"
+            ],
+            "successIndicators": [
+              "Concept explanation",
+              "Relevant example",
+              "Correct scientific language"
+            ],
+            "linkedNodes": ["PHY_DYN_NEWT1STLAW"]
+          },
+          {
+            "examQuestionId": "HSC2019Q2a",
+            "syllabusOutcome": "PH11-8",
+            "questionText": "A car accelerates uniformly from rest to 25 m/s over a distance of 100 m. Calculate its acceleration.",
+            "markingCriteria": "Correctly selects v²=u²+2as; substitutes values correctly; calculates acceleration with correct units.",
+            "exemplarResponses": [
+              "v²=u²+2as => 25² = 0² + 2*a*100 => a = 3.125 m/s²"
+            ],
+            "successIndicators": [
+              "Formula selection",
+              "Correct substitution",
+              "Accurate calculation",
+              "Units included"
+            ],
+            "linkedNodes": ["PHY_KIN_EQ_OF_MOTION"]
+          },
+          {
+            "examQuestionId": "HSC2022Q7a",
+            "syllabusOutcome": "PH11-9",
+            "questionText": "A block is suspended from the ceiling by a light string. Identify ONE action-reaction pair in this system and explain Newton's Third Law in relation to this pair.",
+            "markingCriteria": "Correctly identifies an action-reaction pair (e.g., weight of block and tension in string, OR force of block on string and force of string on block); Explains that these forces are equal and opposite and act on different objects.",
+            "exemplarResponses": [
+              "Action-reaction pair: Earth pulls down on block (weight), block pulls up on Earth (gravitational pull of block). Newton's Third Law states these forces are equal in magnitude and opposite in direction, acting on different objects (block and Earth)."
+            ],
+            "successIndicators": [
+              "Correct action-reaction pair",
+              "Explanation of Third Law",
+              "Forces on different objects"
+            ],
+            "linkedNodes": [
+              "PHY_DYN_NEWT3RDLAW_INTRO",
+              "PHY_DYN_GRAV_FORCE_WEIGHT",
+              "PHY_DYN_TENSION_FORCE"
+            ]
+          }
+        ]
+      },
+      "studentProgressTracking": {
+        "studentId": "STU4567",
+        "nodesCompleted": [
+          "PHY_KIN_SL_UAM_INTRO",
+          "PHY_DYN_NEWT1STLAW",
+          "PHY_DYN_FORCE_TYPES_INTRO",
+          "PHY_DYN_GRAV_FORCE_WEIGHT",
+          "PHY_DYN_NORMAL_FORCE"
+        ],
+        "assessmentData": {},
+        "interventionsSuggested": [
+          "PHY_DYN_NEWT2NDLAW",
+          "PHY_DYN_TENSION_FORCE"
+        ]
+      }
+    }
+  ]
+}
