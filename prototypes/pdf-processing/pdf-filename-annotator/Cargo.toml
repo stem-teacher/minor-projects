@@ -1,0 +1,31 @@
+[package]
+name = "pdf-filename-annotator"
+version = "0.1.0"
+edition = "2021"
+authors = ["Philip Haynes"]
+description = "A tool to annotate PDF files with their filenames"
+readme = "README.md"
+
+[dependencies]
+# PDF processing library
+lopdf = "^0.36.0"
+# Command line argument parsing
+clap = { version = "^4.5.4", features = ["derive"] }
+# JSON configuration handling
+serde = { version = "^1.0.197", features = ["derive"] }
+serde_json = "^1.0.115"
+# Error handling
+anyhow = "^1.0.81"
+thiserror = "^1.0.58"
+# File handling
+walkdir = "^2.5.0"
+# Logging
+log = "^0.4.21"
+env_logger = "^0.11.3"
+# Font handling
+rusttype = "^0.9.3"
+
+[dev-dependencies]
+tempfile = "^3.8.1"
+assert_fs = "^1.0.13"
+predicates = "^3.0.4"
