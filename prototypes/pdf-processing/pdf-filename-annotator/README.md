@@ -72,9 +72,64 @@ The code has been updated to use the Annotator class for PDF handling, which off
 - Improved error handling and reporting
 - Better compatibility with different PDF structures
 
-## Development 
+## Real-World Testing
 
-For testing purposes, you may need to copy font files into a local `fonts` directory.
+### Test Configuration
+Create a `test_config.json` file with the following structure:
+```json
+{
+  "input_dir": "./test_subset",
+  "output_dir": "./test_output",
+  "recursive": false,
+  "font": {
+    "family": "Helvetica",
+    "size": 12,
+    "fallback": "Arial"
+  },
+  "position": {
+    "corner": "TopRight",
+    "x_offset": 50,
+    "y_offset": 30
+  }
+}
+```
+
+### Testing Process
+1. **Prepare Test PDFs**:
+   - Add scanner-generated PDFs to the `test_subset` directory
+   - Include a variety of sources (Epson, Canon, HP scanners, etc.)
+   - Include multi-page documents if available
+
+2. **Run the Application**:
+   ```
+   ./target/release/pdf-filename-annotator --config test_config.json
+   ```
+
+3. **Verify the Results**:
+   - Check all pages visually for annotations (should appear in top-right corner)
+   - Verify that original content (especially images) is preserved
+   - Test PDF searchability with pdftotext or similar tools:
+     ```
+     pdftotext test_output/FILE.pdf - | grep "FILE.pdf"
+     ```
+
+4. **Check for Issues**:
+   - First page blank/corrupted (content stream preservation issue)
+   - Missing annotations on some pages (annotation strategy issue)
+   - Annotations not searchable (FreeText annotation implementation issue)
+   - Missing images or visual content (resource dictionary merging issue)
+
+### Key Implemented Fixes
+- Added proper FreeText annotations for searchability
+- Fixed content stream preservation for scanner PDFs
+- Improved resource dictionary merging to preserve images
+- Fixed generation number handling for page references
+
+### Command Reference
+- Build: `cargo build --release`
+- Run: `./target/release/pdf-filename-annotator --config test_config.json`
+- Test: `cargo test`
+- Check: `cargo check`
 
 ## License
 

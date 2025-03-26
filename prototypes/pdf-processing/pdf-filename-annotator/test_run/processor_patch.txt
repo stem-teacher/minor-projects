@@ -1,0 +1,50 @@
+diff --git a/src/processor.rs b/src/processor.rs
+index xxxxxxx..xxxxxxx 100644
+--- a/src/processor.rs
++++ b/src/processor.rs
+@@ -127,9 +127,17 @@ impl PdfProcessor {
+         }
+ 
+         // First, detect if this is a scanner-generated PDF
+-        let is_scanner_pdf = match scanner_diagnostic::analyze_pdf(input_path) {
++        let is_scanner_pdf_original = match scanner_diagnostic::analyze_pdf(input_path) {
+             Ok(diagnostic) => {
+                 let scanner_indicators = scanner_diagnostic::count_scanner_indicators(&diagnostic);
++                
++                // Get producer info to check if it's an Epson Scan 2 PDF
++                let is_epson_scan2 = diagnostic.producer
++                    .as_ref()
++                    .map(|p| p.contains("Epson Scan 2"))
++                    .unwrap_or(false);
++                
++                // Fix: Special handling for Epson Scan 2 PDFs with duplication issue
+                 let is_scanner = scanner_indicators >= 4; // Threshold for scanner detection
+ 
+                 if is_scanner {
+@@ -161,15 +169,23 @@ impl PdfProcessor {
+                     }
+                 }
+ 
+-                is_scanner
++                (is_scanner, is_epson_scan2)
+             }
+             Err(e) => {
+                 warn!("Failed to analyze PDF for scanner detection: {}", e);
+-                false
++                (false, false)
+             }
+         };
++        
++        // Extract values
++        let (is_standard_scanner, is_epson_scan2) = is_scanner_pdf_original;
++        
++        // Override scanner detection for Epson Scan 2 documents
++        // This fixes the duplicate text annotation issue
++        let is_scanner_pdf = if is_epson_scan2 {
++            false  // Treat as regular PDF to avoid duplication
++        } else {
++            is_standard_scanner
++        };
+ 
+         // Log if this is a scanner PDF
+         if is_scanner_pdf {

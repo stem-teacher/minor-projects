@@ -1,0 +1,15 @@
+{
+  "input_dir": "./test_run/single_input",
+  "output_dir": "./test_run/output_single",
+  "recursive": false,
+  "font": {
+    "size": 10.0,
+    "family": "Helvetica",
+    "fallback": "Arial"
+  },
+  "position": {
+    "corner": "top-right",
+    "x_offset": 5.0,
+    "y_offset": 25.0
+  }
+}

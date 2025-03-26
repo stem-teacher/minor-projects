@@ -1,0 +1,249 @@
+use crate::config::Config;
+use crate::error::Error;
+use crate::scanner_diagnostic;
+use log::{debug, error, info, warn};
+use lopdf::{dictionary, Document, Object, Stream, ObjectId};
+use std::collections::HashMap;
+use std::fs;
+use std::path::{Path, PathBuf};
+use walkdir::WalkDir;
+
+/// Summary of PDF processing results
+#[derive(Debug)]
+pub struct ProcessingSummary {
+    /// Number of files successfully processed
+    pub files_processed: usize,
+
+    /// Number of pages annotated
+    pub pages_annotated: usize,
+
+    /// Map of files that encountered errors and their error messages
+    pub errors: HashMap<PathBuf, String>,
+    
+    /// Map of files with partial success (some pages failed)
+    /// The value is a vector of tuples with (page_index, error_message)
+    pub partial_success: HashMap<PathBuf, Vec<(usize, String)>>,
+}
+
+/// PDF processor for batch processing PDF files
+pub struct PdfProcessor {
+    /// Application configuration
+    pub config: Config,
+}
+
+impl PdfProcessor {
+    /// Create a new PDF processor with the given configuration
+    pub fn new(config: Config) -> Self {
+        Self { 
+            config,
+        }
+    }
+
+    /// Process all PDF files in the configured input directory
+    pub fn process_all(&self) -> Result<ProcessingSummary, Error> {
+        // Ensure output directory exists
+        self.ensure_output_dir()?;
+
+        // Find all PDF files in the input directory
+        let pdf_files = self.find_pdf_files()?;
+
+        let mut summary = ProcessingSummary {
+            files_processed: 0,
+            pages_annotated: 0,
+            errors: HashMap::new(),
+            partial_success: HashMap::new(),
+        };
+
+        // Process each file
+        for file_path in pdf_files {
+            match self.process_file(&file_path) {
+                Ok(pages) => {
+                    summary.files_processed += 1;
+                    summary.pages_annotated += pages;
+                    
+                    // Check if this was a partial success (some pages failed)
+                    if let Some(page_errors) = self.get_page_errors(&file_path) {
+                        if !page_errors.is_empty() {
+                            summary.partial_success.insert(file_path.clone(), page_errors);
+                        }
+                    }
+                }
+                Err(e) => {
+                    error!("Error processing {}: {}", file_path.display(), e);
+                    summary.errors.insert(file_path, e.to_string());
+                }
+            }
+        }
+
+        Ok(summary)
+    }
+
+    /// Process a single PDF file
+    pub fn process_file(&self, input_path: &Path) -> Result<usize, Error> {
+        // Generate output path
+        let output_path = self.generate_output_path(input_path);
+
+        // Get the filename (for annotation)
+        let filename = input_path
+            .file_name()
+            .and_then(|s| s.to_str())
+            .unwrap_or("unknown.pdf");
+
+        info!("Processing {}", input_path.display());
+        
+        // Detect if this is a scanner-generated PDF
+        let is_scanner_pdf = match scanner_diagnostic::analyze_pdf(input_path) {
+            Ok(diagnostic) => {
+                let scanner_indicators = scanner_diagnostic::count_scanner_indicators(&diagnostic);
+                scanner_indicators >= 4 // Threshold for scanner detection
+            },
+            Err(e) => {
+                warn!("Failed to analyze PDF for scanner detection: {}", e);
+                false
+            }
+        };
+        
+        // Log if this is a scanner PDF
+        if is_scanner_pdf {
+            debug!("Scanner PDF detected, will use special handling");
+        }
+        
+        // First, try to read the file with lopdf
+        let mut doc = Document::load(input_path)?;
+
+        // Fix any issues with the page tree
+        self.fix_page_tree(&mut doc)?;
+
+        // Create an annotator with our font config
+        let annotator = crate::annotation::Annotator::new(self.config.font.clone())?;
+
+        // Get all pages from the document - IDs are (obj_id, generation)
+        let pages = doc.get_pages();
+        let mut pages_annotated = 0;
+        
+        // Track page-level failures
+        let mut page_errors = Vec::new();
+
+        // For debugging - print page count
+        debug!("Found {} pages", pages.len());
+
+        // Process each page by its ACTUAL object ID, not just page number
+        for (page_num, (obj_id, generation)) in pages.iter().enumerate() {
+            let page_id = (*obj_id, *generation); // Use the actual page object ID
+            
+            debug!("Processing page {} with ID {:?}", page_num + 1, page_id);
+
+            // Create a fixed reference to the page if needed
+            let fixed_page_id = match self.ensure_page_dictionary(&mut doc, page_id) {
+                Ok(id) => id,
+                Err(e) => {
+                    error!(
+                        "Failed to ensure page dictionary for page {} in {}: {}",
+                        page_num + 1,
+                        input_path.display(),
+                        e
+                    );
+                    page_errors.push((page_num + 1, format!("Page dictionary error: {}", e)));
+                    continue; // Skip to next page
+                }
+            };
+
+            // Get page dimensions for positioning
+            let (page_width, page_height) = match self.get_page_dimensions(&doc, fixed_page_id) {
+                Ok(dimensions) => dimensions,
+                Err(e) => {
+                    error!(
+                        "Failed to get dimensions for page {} in {}: {}",
+                        page_num + 1,
+                        input_path.display(),
+                        e
+                    );
+                    page_errors.push((page_num + 1, format!("Dimension error: {}", e)));
+                    continue; // Skip to next page
+                }
+            };
+
+            // Calculate position for the annotation
+            let (x, y) = annotator.calculate_position(
+                &self.config.position,
+                page_width,
+                page_height,
+                filename,
+            );
+
+            // Use a unified approach for all pages, with fallbacks
+            let annotation_result = self.unified_page_annotation(
+                &annotator,
+                &mut doc,
+                fixed_page_id,
+                filename,
+                x,
+                y,
+                is_scanner_pdf
+            );
+
+            match annotation_result {
+                Ok(_) => {
+                    pages_annotated += 1;
+                    debug!("Annotated page {} in {}", page_num + 1, input_path.display());
+                }
+                Err(e) => {
+                    // Log error but continue with next page
+                    error!(
+                        "Failed to annotate page {} in {}: {}",
+                        page_num + 1,
+                        input_path.display(),
+                        e
+                    );
+                    page_errors.push((page_num + 1, format!("Annotation error: {}", e)));
+                }
+            }
+        }
+
+        if pages_annotated > 0 {
+            // Save the modified PDF
+            doc.save(&output_path)?;
+
+            info!("Saved annotated PDF to {}", output_path.display());
+            info!("Annotated {} pages", pages_annotated);
+            
+            // Log any page-specific errors
+            if !page_errors.is_empty() {
+                info!(
+                    "Note: {} out of {} pages could not be annotated in {}",
+                    page_errors.len(),
+                    pages.len(),
+                    input_path.display()
+                );
+            }
+        } else {
+            return Err(Error::Processing(format!(
+                "No pages were successfully annotated in {}. Errors: {:?}",
+                input_path.display(),
+                page_errors
+            )));
+        }
+
+        Ok(pages_annotated)
+    }
+    
+    /// Unified annotation approach for all pages
+    fn unified_page_annotation(
+        &self,
+        annotator: &crate::annotation::Annotator,
+        doc: &mut Document,
+        page_id: (u32, u16),
+        text: &str,
+        x: f32,
+        y: f32,
+        is_scanner_pdf: bool,
+    ) -> Result<(), crate::error::AnnotationError> {
+        // Step 1: Analyze the page's content stream structure
+        let page_dict = doc.get_dictionary(page_id).map_err(|e| {
+            crate::error::AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+        })?;
+        
+        // Check if the page has a Contents entry and what type it is
+        let content_type = match page_dict.get(b"Contents") {
+            Ok(Object::Array(_)) => "array",
+            Ok(Object::Reference(ref_id)) => {

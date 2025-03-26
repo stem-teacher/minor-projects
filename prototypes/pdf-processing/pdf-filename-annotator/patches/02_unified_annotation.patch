@@ -1,0 +1,56 @@
+--- src/processor.rs
++++ src/processor.rs
+@@ -130,93 +130,20 @@ impl PdfProcessor {
+                 filename,
+             );
+ 
+-            // For scanner PDFs, we'll use different annotation strategies depending on the page
+-            if is_scanner_pdf {
+-                // For scanner PDFs, try different approaches based on page and scanner type
+-                let annotation_result = if is_first_page_of_scanner {
+-                    // For first page of scanner PDFs, use our special scanner first page handler
+-                    self.add_scanner_first_page_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y)
+-                } else if idx >= 3 {
+-                    // For pages beyond the first three, use our special handler for later scanner pages
+-                    // This addresses the issue where annotations don't appear on these pages
+-                    self.add_scanner_later_page_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y, idx)
+-                } else {
+-                    // For pages 2-3, start with searchable annotation and fall back to content stream
+-                    self.add_searchable_annotation(
+-                        &annotator, 
+-                        &mut doc, 
+-                        fixed_page_id, 
+-                        filename, 
+-                        x, 
+-                        y
+-                    )
+-                    .or_else(|_| {
+-                        // Fallback to regular content stream annotation
+-                        annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
+-                    })
+-                };
+-            } else {
+-                // Standard PDF annotation flow - first try searchable, then fall back
+-                let annotation_result = self.add_searchable_annotation(
+-                    &annotator, 
+-                    &mut doc, 
+-                    fixed_page_id, 
+-                    filename, 
+-                    x, 
+-                    y
+-                )
+-                .or_else(|_| {
+-                    // Fallback to regular content stream annotation if searchable annotation fails
+-                    annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
+-                });
+-            }
++            // Use a unified annotation approach for all pages
++            // This avoids special-casing based on page number which causes issues
++            let annotation_result = self.unified_page_annotation(
++                &annotator, 
++                &mut doc, 
++                fixed_page_id, 
++                filename, 
++                x, 
++                y
++            );

@@ -1,0 +1,91 @@
+# Problem
+Now the Claude coding agent has a finite context to undertake coding tasks, but it is very good at generating software code and is able to execute the ability take a problem, write code and build it.
+
+However, once a software engineering problem crosses a threshold of size or complexity, the context window associated with a given task expands to a point that the agent is unable to make reliable progress, nor are its activities and approach transparent.
+
+To this end, a set of software engineering structures has been put in place to create formal requirements, plans and checklists. This approach has worked to a point, but with a more complex coding challenge, fully solving the challenge has required more context than is available and it is not clear the agent is, or is able to take, additional advice on how to solve the problem. Furthermore, as the agent cycles through context re-establishment several times as it re-solves problems, the solution slightly change introducing unnecsarry accidental complexity.
+
+For example the goal of this task is to take scanned PDF documents, and annotate the top of each page with the filename (which contains a unique id, allowing the exam document to be split across multiple markers). Currently, the front page is being made blank, and only the first page is being annotated. The test for this has been established, but through multiple runs, the approach has been re-created several times in different locations.  This is wasteful and confusing.
+
+# Potential Solution Strategy
+Using the an early CMM model as analogy, the coding agent is working as a level 1 super programmer. The proposed strategy is to instead create a software based, defined strategy to make task explicit through creation of a set of scripts and prompts that can be reviewed (automatically) and tested. As the agent executes the scripts, they are continue to be tested through time for them to improve, also acting as a set of examples for other tasks.
+
+The agents role then shifts to monitoring and process improvement, rather than direct coding per se. In this way, when the agent needs to compact / restart due to context constraints, the amount of required context to start is minimised.
+
+The following prompt is a first attempt at this.
+
+
+# Prompt
+
+In the context of the {project} you are about to undertake software engineering task {task-id} in the context of a {software type} project.
+
+The goal of this prompt is to make the activities in task {task-id} explicit so they can be automatically executed where possible, independently reviewed by humans and other AI agents, ultimately also leading to creation of a process data set that can also be improved over time.
+
+Consequently, this process too must be expressed in code to to make all activities explicit through documented code. Thus there are process tasks as specified in the {process-project} and process directories, and project tasks.
+
+## Task Preparation
+Tasks may be prepared on completion of a prior task or in advance by the coding agent or other agents.
+
+When preparing a task:
+1. The project is checked to see if if has been baselined or not. If not, the project is checked in so all changes due to the task may be tracked and potentially unwound if required.
+2. a sub-directory is created in the task directory with the task-id as the name of the directory. The subdirectory shall contain at least the following files:
+a. {task-id}-DESCRIPTION.md : a description of the task, its type. It must describe its goal, expected outcomes and completion measure. Each task step must be uniquely described and have an id, that matches the ID in the associated checklist.
+b. {task-id}-CHECKLIST.md : To track progess against the tasks.
+c. {task-id}-STEP_LOG.md : As each step is taken, this is logged in this file. In this way if there are multiple repetions through a process, it can be tracked here. Logging should include timing.
+d. {task-id}-COMMAND_LOG : As an agent executes different steps, any commands used must be recorded prior to use.
+
+There needs to be a task design phase depending on use case. These can include:
+## Design Approach
+Given the goal of the task, this task type:
+Reviews what is required to be done.
+Associated inputs such as prior review comments
+Identifies approach options & risks
+Tests different options in the scope of the task if required
+Creates provisional code or code samples to highlight how it is intended code is to be added, changed or deleted.
+Depending on task complexity, the design approach may require human and /or AI review
+May trigger sub tasks, such as a Package Dependency Updates, Code Examples or Test Case Design to validate the design approach and options.
+The outcome of this step is enough information to completed the detailed design, and validate success of the overall task.
+
+## Detailed Design
+Given a concrete design approach, this phase creates the concrete set of remaining steps to be completed. All steps must be described in the DESCRIPTION and corresponding checklist. Steps should be represented as code where ever feasible, or at least as explicit AI prompt to be run by the agent.
+Furthermore, the detailed design must consider the logical dependencies in the code, can undertake the updates in the correct order. Thus if an update is to be made to a form, the update must change and test the database operations first, then the business model, and finally the UI.
+
+## Package Dependency Update
+Here a new package may be added to the project, the package version updated or a package removed.
+When adding or updating a package, it is often the case that the API differs from that AI's were trained on, or there are relevant examples that may be useful to the AI in completing the design.
+
+## Unit Test / Code Check / Build / Code Cycle
+This step is where relevant unit tests are created & run, code is written and incrementally checked and built.  Where errors are found, potential learnings are then able to be brought forward.
+Given the availability of AI reviewers, it may also make sense to review code at different points prior to avoid expensive build / code cycles.
+
+Where the phase starts to stall, earlier steps may be required.
+
+## Final Build Test
+This task completes integration tests to confirm success of the updates, or returns to prior steps with additional data.
+
+## Release
+This task:
+1. Creates a release build
+2. Performs a smoke test of the build to ensure continued operation, and similarly returns to earlier 3. steps if unsuccessful; or
+4. Ensures test results are available with the task
+5. Updates relevant documents, updates the task status and how it is represented in the overall project.
+6. Commits the overall changes.
+7. Either transitions to the next task at the task level, or if there are issues or required changes, to the project level for broader consideration.
+
+
+# Task Initation and Operation
+When tasks are initated, an assessment is made as to whether they need to be updated, updated if required and then stepped through.
+
+## Context  Monitoring
+As an Agent executes a task it monitors progress and context consumption. If a step is completed and context can safely be compacted, it is compacted, and if as the task executes it becomes apparent that the task will likely not have sufficient context to complete the task, takes a snap shot of task execution progress, compacts, then restarts.
+
+## Progress Monitoring
+If during execution of a task, problems start to emerge as evidenced by continued failed builds or test cases, then in the first instance, the agent should seek advice from an AI agent to what might be happening and how to resolve it, otherwise pause, and seek human input.
+
+Key however, is not to embark on a new task direction without ensuring that it is gated and approved.  Without this, as as been evidenced several times, negative progress is made as the agent goes off task completely.
+
+
+When starting a task:
+Tasks performed during the preparation activity are repeated if required.
+The checklist is updated to reflect that the task has started; and
+The state change checked in and committed.

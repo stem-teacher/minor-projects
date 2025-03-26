@@ -1,0 +1,9 @@
+/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/pdf-filename-annotator/1.3/hello_world/target/debug/deps/libpredicates_core-c9141995566a5ea4.rmeta: /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/lib.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/core.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/reflection.rs
+
+/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/pdf-filename-annotator/1.3/hello_world/target/debug/deps/libpredicates_core-c9141995566a5ea4.rlib: /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/lib.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/core.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/reflection.rs
+
+/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/pdf-filename-annotator/1.3/hello_world/target/debug/deps/predicates_core-c9141995566a5ea4.d: /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/lib.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/core.rs /Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/reflection.rs
+
+/Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/lib.rs:
+/Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/core.rs:
+/Users/philiphaynes/.cargo/registry/src/index.crates.io-6f17d22bba15001f/predicates-core-1.0.9/src/reflection.rs:

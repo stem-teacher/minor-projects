@@ -1,0 +1,14 @@
+--- src/processor.rs
++++ src/processor.rs
+@@ -83,9 +83,9 @@ impl PdfProcessor {
+         debug!("Found {} pages", pages.len());
+ 
+         // Process each page
+-        for (idx, page_ref) in pages.iter().enumerate() {
+-            // For lopdf, page_id is a tuple of (u32, u16)
+-            let page_id = (*page_ref.0, 0); // Using generation number 0 for simplicity
++        for (page_num, (obj_id, generation)) in pages.iter().enumerate() {
++            // Use actual page ObjectId with correct generation number
++            let page_id = (*obj_id, *generation);
+             
+             debug!("Processing page {} with ID {:?}", idx + 1, page_id);

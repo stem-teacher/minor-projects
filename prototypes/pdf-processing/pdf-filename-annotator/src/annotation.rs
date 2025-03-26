@@ -48,9 +48,9 @@ impl Annotator {
             font_data,
         })
     }
-    
+
     /// Adds a FreeText annotation to a PDF page
-    /// 
+    ///
     /// This method creates a proper text annotation object that is searchable
     /// and detectable by text extraction tools.
     pub fn add_text_annotation(
@@ -63,7 +63,9 @@ impl Annotator {
     ) -> Result<(), AnnotationError> {
         // Calculate text width using rusttype
         let font = Font::try_from_vec(self.font_data.clone()).ok_or_else(|| {
-            AnnotationError::FontError("Failed to create font for text width calculation".to_string())
+            AnnotationError::FontError(
+                "Failed to create font for text width calculation".to_string(),
+            )
         })?;
 
         // Approximate text width calculation
@@ -78,46 +80,60 @@ impl Annotator {
         let font_scale_factor = 0.75; // Approximate conversion factor
         let text_width = text_width * font_scale_factor;
         let text_height = self.font_config.size * 1.2; // Add some padding
-        
+
         // Create annotation dictionary
         let mut annot_dict = lopdf::Dictionary::new();
         annot_dict.set("Type", Object::Name(b"Annot".to_vec()));
         annot_dict.set("Subtype", Object::Name(b"FreeText".to_vec()));
-        annot_dict.set("Contents", Object::String(text.as_bytes().to_vec(), lopdf::StringFormat::Literal));
-        annot_dict.set("Rect", Object::Array(vec![
-            Object::Real(x),
-            Object::Real(y - text_height),
-            Object::Real(x + text_width),
-            Object::Real(y),
-        ]));
-        
+        annot_dict.set(
+            "Contents",
+            Object::String(text.as_bytes().to_vec(), lopdf::StringFormat::Literal),
+        );
+        annot_dict.set(
+            "Rect",
+            Object::Array(vec![
+                Object::Real(x),
+                Object::Real(y - text_height),
+                Object::Real(x + text_width),
+                Object::Real(y),
+            ]),
+        );
+
         // Default appearance string
         let font_size = self.font_config.size;
-        annot_dict.set("DA", Object::String(
-            format!("//{} {} Tf 0 0 0 rg", "Helvetica", font_size).as_bytes().to_vec(),
-            lopdf::StringFormat::Literal
-        ));
-        
+        annot_dict.set(
+            "DA",
+            Object::String(
+                format!("//{} {} Tf 0 0 0 rg", "Helvetica", font_size)
+                    .as_bytes()
+                    .to_vec(),
+                lopdf::StringFormat::Literal,
+            ),
+        );
+
         // No border
-        annot_dict.set("Border", Object::Array(vec![
-            Object::Integer(0),
-            Object::Integer(0),
-            Object::Integer(0),
-        ]));
-        
+        annot_dict.set(
+            "Border",
+            Object::Array(vec![
+                Object::Integer(0),
+                Object::Integer(0),
+                Object::Integer(0),
+            ]),
+        );
+
         // Set print flag (bit position 2, value 4)
         annot_dict.set("F", Object::Integer(4));
-        
+
         // Add the annotation to the document
         let annot_id = doc.add_object(Object::Dictionary(annot_dict));
-        
+
         // Add the annotation to the page
         // We need to handle the Annots array carefully to avoid borrowing conflicts
         let annots_info = {
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
                 AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
             })?;
-            
+
             if let Ok(Object::Array(arr)) = page_dict.get(b"Annots") {
                 // Direct array
                 Some((None, arr.clone()))
@@ -132,30 +148,36 @@ impl Annotator {
                 None
             }
         };
-        
+
         match annots_info {
             Some((None, mut arr)) => {
                 // Direct array case
                 arr.push(Object::Reference(annot_id));
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+                    AnnotationError::ContentStreamError(format!(
+                        "Failed to get page dictionary: {}",
+                        e
+                    ))
                 })?;
                 page_dict.set("Annots", Object::Array(arr));
-            },
+            }
             Some((Some(ref_id), mut arr)) => {
                 // Referenced array case
                 arr.push(Object::Reference(annot_id));
                 doc.objects.insert(ref_id, Object::Array(arr));
-            },
+            }
             None => {
                 // No existing annots or invalid reference
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+                    AnnotationError::ContentStreamError(format!(
+                        "Failed to get page dictionary: {}",
+                        e
+                    ))
                 })?;
                 page_dict.set("Annots", Object::Array(vec![Object::Reference(annot_id)]));
             }
         }
-        
+
         Ok(())
     }
 
@@ -175,7 +197,7 @@ impl Annotator {
             "C:\\Windows\\Fonts",
             "./fonts",
         ];
-        
+
         // Try exact matches first
         for location in &base_locations {
             for ext in &common_extensions {
@@ -189,7 +211,7 @@ impl Annotator {
                 }
             }
         }
-        
+
         // If exact match fails, try case-insensitive partial matches
         for location in &base_locations {
             if let Ok(entries) = fs::read_dir(location) {
@@ -198,7 +220,7 @@ impl Annotator {
                     if let Some(file_name) = path.file_name() {
                         let file_name_str = file_name.to_string_lossy().to_lowercase();
                         let font_name_lower = font_name.to_lowercase();
-                        
+
                         // Check if the filename contains the font name we're looking for
                         if file_name_str.contains(&font_name_lower) {
                             if let Some(ext) = path.extension() {
@@ -206,7 +228,10 @@ impl Annotator {
                                 if ext_str == "ttf" || ext_str == "ttc" || ext_str == "otf" {
                                     match fs::read(&path) {
                                         Ok(data) => {
-                                            debug!("Loaded font from partial match: {}", path.display());
+                                            debug!(
+                                                "Loaded font from partial match: {}",
+                                                path.display()
+                                            );
                                             return Ok(data);
                                         }
                                         Err(_) => continue,
@@ -281,13 +306,11 @@ impl Annotator {
             AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
         })?;
 
-        // Get the content stream(s) for the page
+        // Get (or create) the content stream(s)
         let contents_id = match page_dict.get(b"Contents") {
             Ok(contents) => match contents {
                 &Object::Reference(id) => id,
                 &Object::Array(ref arr) => {
-                    // If there are multiple content streams, we'll need to merge them
-                    // This is a simplified approach - a real implementation would be more robust
                     if let Some(Object::Reference(id)) = arr.first() {
                         *id
                     } else {
@@ -310,25 +333,27 @@ impl Annotator {
                     Object::Stream(Stream::new(lopdf::Dictionary::new(), vec![])),
                 );
 
-                // Add the content stream to the page
-                let page_dict = doc.get_dictionary_mut(page_id).unwrap();
-                page_dict.set("Contents", Object::Reference(content_id));
+                // Update the page dictionary
+                let page_dict_mut = doc.get_dictionary_mut(page_id).map_err(|e| {
+                    AnnotationError::ContentStreamError(format!(
+                        "Failed to update page dictionary: {}",
+                        e
+                    ))
+                })?;
+                page_dict_mut.set("Contents", Object::Reference(content_id));
 
                 content_id
             }
         };
 
-        // Get real content stream ID from dictionary if needed
+        // Get the real content stream ID from the object.
+        // (For example, sometimes the object at contents_id is itself a dictionary with a Contents reference.)
         let real_contents_id = match doc.get_object(contents_id) {
             Ok(Object::Dictionary(dict)) => {
-                debug!("Got dictionary instead of stream, checking for Contents reference");
-                // If we're looking at a page dictionary (instead of a content stream)
                 if let Ok(Object::Reference(contents_ref)) = dict.get(b"Contents") {
-                    debug!("Found Contents reference: {:?}", contents_ref);
                     *contents_ref
                 } else {
                     // Create a new empty stream if needed
-                    debug!("No Contents found, creating new stream");
                     let new_stream_id = doc.new_object_id();
                     doc.objects.insert(
                         new_stream_id,
@@ -336,123 +361,101 @@ impl Annotator {
                     );
                     new_stream_id
                 }
-            },
-            Ok(_) => contents_id, // Not a dictionary, use as is
+            }
+            Ok(_) => contents_id, // Otherwise, use the one we got
             Err(e) => {
-                return Err(AnnotationError::ContentStreamError(
-                    format!("Failed to get content object: {}", e)
-                ));
+                return Err(AnnotationError::ContentStreamError(format!(
+                    "Failed to get content object: {}",
+                    e
+                )));
             }
         };
-        
+
         debug!("Using content stream ID: {:?}", real_contents_id);
-        
-        // Get the actual content stream
-        let content_stream = doc.get_object(real_contents_id).map_err(|e| {
+
+        // Retrieve the actual content stream
+        let content_obj = doc.get_object(real_contents_id).map_err(|e| {
             AnnotationError::ContentStreamError(format!("Failed to get content stream: {}", e))
         })?;
 
-        debug!("Content stream type: {:?}", content_stream);
-
-        // Get the stream data
-        let stream_data = match content_stream {
+        // Obtain the stream data
+        let stream_data = match content_obj {
             Object::Stream(ref stream) => {
                 debug!("Found direct stream object");
                 stream.clone()
-            },
+            }
             Object::Array(ref arr) => {
-                debug!("Found array of content streams, will merge them");
+                debug!("Found array of content streams, merging them");
                 if arr.is_empty() {
-                    // Create a new stream
-                    debug!("Empty array, creating new stream");
+                    // Create a new stream if empty
                     let new_stream = Stream::new(lopdf::Dictionary::new(), vec![]);
-                    
-                    // Update the page to point to the new content stream
                     let new_stream_id = doc.new_object_id();
-                    doc.objects.insert(new_stream_id, Object::Stream(new_stream.clone()));
-                    
+                    doc.objects
+                        .insert(new_stream_id, Object::Stream(new_stream.clone()));
                     if let Ok(page_dict) = doc.get_dictionary_mut(page_id) {
                         page_dict.set("Contents", Object::Reference(new_stream_id));
                     }
-                    
                     new_stream
                 } else {
-                    // Merge all streams in the array
+                    // Merge all streams; copy the dictionary from the first stream
                     let mut merged_content = Vec::new();
                     let mut stream_dict = lopdf::Dictionary::new();
-                    
+
                     for item in arr {
                         if let Object::Reference(ref_id) = item {
-                            match doc.get_object(*ref_id) {
-                                Ok(Object::Stream(stream)) => {
-                                    // If this is the first stream, copy its dictionary
-                                    if stream_dict.is_empty() {
-                                        stream_dict = stream.dict.clone();
-                                    }
-                                    
-                                    // Add content data
-                                    merged_content.extend_from_slice(&stream.content);
-                                },
-                                _ => debug!("Non-stream reference in contents array, skipping"),
+                            if let Ok(Object::Stream(stream)) = doc.get_object(*ref_id) {
+                                if stream_dict.is_empty() {
+                                    stream_dict = stream.dict.clone();
+                                }
+                                merged_content.extend_from_slice(&stream.content);
+                            } else {
+                                debug!("Non-stream reference in contents array, skipping");
                             }
                         }
                     }
-                    
                     Stream::new(stream_dict, merged_content)
                 }
-            },
+            }
             other => {
                 debug!("Expected stream but got: {:?}", other);
-                // If it has a Contents entry, follow it
+                // Try to resolve a Contents reference if available
                 if let Object::Dictionary(dict) = other {
                     if let Ok(Object::Reference(contents_ref)) = dict.get(b"Contents") {
                         debug!("Dictionary has Contents reference: {:?}", contents_ref);
-                        match doc.get_object(*contents_ref) {
-                            Ok(Object::Stream(stream)) => {
-                                debug!("Successfully got stream from Contents reference");
-                                stream.clone()
-                            },
-                            _ => {
-                                // Create a new stream
-                                debug!("Contents reference is not a stream, creating new one");
-                                let new_stream = Stream::new(lopdf::Dictionary::new(), vec![]);
-                                let new_stream_id = doc.new_object_id();
-                                doc.objects.insert(new_stream_id, Object::Stream(new_stream.clone()));
-                                
-                                // Update the page dictionary
-                                if let Ok(dict) = doc.get_dictionary_mut(page_id) {
-                                    dict.set("Contents", Object::Reference(new_stream_id));
-                                }
-                                
-                                new_stream
+                        if let Ok(Object::Stream(stream)) = doc.get_object(*contents_ref) {
+                            debug!("Got stream from Contents reference");
+                            stream.clone()
+                        } else {
+                            debug!("Contents reference is not a stream, creating new one");
+                            let new_stream = Stream::new(lopdf::Dictionary::new(), vec![]);
+                            let new_stream_id = doc.new_object_id();
+                            doc.objects
+                                .insert(new_stream_id, Object::Stream(new_stream.clone()));
+                            if let Ok(dict) = doc.get_dictionary_mut(page_id) {
+                                dict.set("Contents", Object::Reference(new_stream_id));
                             }
+                            new_stream
                         }
                     } else {
-                        // Create a new stream if no Contents entry
                         debug!("Dictionary has no Contents entry, creating new stream");
                         let new_stream = Stream::new(lopdf::Dictionary::new(), vec![]);
                         let new_stream_id = doc.new_object_id();
-                        doc.objects.insert(new_stream_id, Object::Stream(new_stream.clone()));
-                        
-                        // Update the page dictionary
-                        if let Ok(dict) = doc.get_dictionary_mut(page_id) {
-                            dict.set("Contents", Object::Reference(new_stream_id));
+                        doc.objects
+                            .insert(new_stream_id, Object::Stream(new_stream.clone()));
+                        if let Ok(page_dict) = doc.get_dictionary_mut(page_id) {
+                            page_dict.set("Contents", Object::Reference(new_stream_id));
                         }
-                        
                         new_stream
                     }
                 } else {
-                    // For any other object type, create a new stream
                     debug!("Creating new stream for unexpected object type");
                     let new_stream = Stream::new(lopdf::Dictionary::new(), vec![]);
                     let new_stream_id = doc.new_object_id();
-                    doc.objects.insert(new_stream_id, Object::Stream(new_stream.clone()));
-                    
-                    // Update the page to point to the new content stream
+                    doc.objects
+                        .insert(new_stream_id, Object::Stream(new_stream.clone()));
                     if let Ok(page_dict) = doc.get_dictionary_mut(page_id) {
                         page_dict.set("Contents", Object::Reference(new_stream_id));
                     }
-                    
                     new_stream
                 }
             }
@@ -463,65 +466,65 @@ impl Annotator {
             AnnotationError::ContentStreamError(format!("Failed to decode content stream: {}", e))
         })?;
 
-        // Create new operations for adding the text
+        // Create new content operations (with proper PDF operator usage)
         let mut operations = content.operations;
 
-        // Add marking annotation to make it more visible
-        // This will create both an appearance stream and the actual annotation
-        
         // Save graphics state
         operations.push(Operation::new("q", vec![]));
-        
-        // Set text rendering mode to fill
-        operations.push(Operation::new("0 Tr", vec![]));
-        
+
         // Set text color (black)
         operations.push(Operation::new("0 0 0 rg", vec![]));
-        
+
         // Set line width for text
         operations.push(Operation::new("1 w", vec![]));
 
         // Begin text object
         operations.push(Operation::new("BT", vec![]));
-        
-        // Set font with higher contrast
-        let font_name = "F0"; // Arbitrary name
+
+        // Set font with proper operands
         operations.push(Operation::new(
             "Tf",
             vec![
-                Object::Name(font_name.as_bytes().to_vec()),
+                Object::Name(b"F0".to_vec()),
                 Object::Real(self.font_config.size),
             ],
         ));
-        
-        // Add text matrix transformation for better positioning
+
+        // Set text matrix for positioning
         operations.push(Operation::new(
-            "Tm", 
+            "Tm",
             vec![
-                Object::Real(1.0), // a: horizontal scaling
-                Object::Real(0.0), // b: horizontal skewing
-                Object::Real(0.0), // c: vertical skewing
-                Object::Real(1.0), // d: vertical scaling
+                Object::Real(1.0), // a
+                Object::Real(0.0), // b
+                Object::Real(0.0), // c
+                Object::Real(1.0), // d
                 Object::Real(x),   // e: x position
                 Object::Real(y),   // f: y position
-            ]
+            ],
         ));
 
-        // Set text rendering mode with higher priority
-        operations.push(Operation::new("1 Tr", vec![])); // Stroke text
-        
-        // Add text with proper encoding for better extraction
-        let text_bytes = text.as_bytes().to_vec();
+        // Set text rendering mode to stroke (using operand)
+        operations.push(Operation::new("Tr", vec![Object::Integer(1)]));
+
+        // Add text with hexadecimal encoding
         operations.push(Operation::new(
             "Tj",
-            vec![Object::String(text_bytes, lopdf::StringFormat::Hexadecimal)],
+            vec![Object::String(
+                text.as_bytes().to_vec(),
+                lopdf::StringFormat::Hexadecimal,
+            )],
         ));
-        
-        // Add the text again with fill for better visibility
-        operations.push(Operation::new("0 Tr", vec![])); // Fill text
+
+        // Switch back to fill mode
+        operations.push(Operation::new("Tr", vec![Object::Integer(0)]));
+
+        // Add text again with fill
         operations.push(Operation::new(
             "Tj",
-            vec![Object::String(text.as_bytes().to_vec(), lopdf::StringFormat::Literal)],
+            vec![Object::String(
+                text.as_bytes().to_vec(),
+                lopdf::StringFormat::Literal,
+            )],
         ));
 
         // End text object
@@ -530,20 +533,20 @@ impl Annotator {
         // Restore graphics state
         operations.push(Operation::new("Q", vec![]));
 
-        // Encode the modified content
+        // Encode the modified content stream
         let modified_content = Content { operations };
         let encoded_content = modified_content.encode().map_err(|e| {
             AnnotationError::ContentStreamError(format!("Failed to encode content stream: {}", e))
         })?;
 
-        // Update the stream in the document
+        // IMPORTANT: Update the object at the actual (resolved) content stream id!
         doc.objects.insert(
-            contents_id,
+            real_contents_id,
             Object::Stream(Stream::new(stream_data.dict.clone(), encoded_content)),
         );
 
-        // Ensure font resource exists in page or parent
-        self.ensure_font_resource(doc, page_id, font_name)?;
+        // Ensure that the font resource exists on the page (or inherited from the parent)
+        self.ensure_font_resource(doc, page_id, "F0")?;
 
         Ok(())
     }
@@ -659,13 +662,13 @@ impl Annotator {
                     let mut font_entry = lopdf::Dictionary::new();
                     font_entry.set("Type", Object::Name(b"Font".to_vec()));
                     font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
-                    
+
                     // Use the font family from our config
                     let font_family = self.font_config.family.clone();
                     let font_bytes = font_family.as_bytes().to_vec();
                     font_entry.set("BaseFont", Object::Name(font_bytes));
                     font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                    
+
                     // Add additional required entries
                     if font_family.contains("Times") {
                         // Times font family
@@ -691,13 +694,13 @@ impl Annotator {
                 let mut font_entry = lopdf::Dictionary::new();
                 font_entry.set("Type", Object::Name(b"Font".to_vec()));
                 font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
-                
+
                 // Use the font family from our config
                 let font_family = self.font_config.family.clone();
                 let font_bytes = font_family.as_bytes().to_vec();
                 font_entry.set("BaseFont", Object::Name(font_bytes));
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                
+
                 // Add additional required entries
                 if font_family.contains("Times") {
                     // Times font family

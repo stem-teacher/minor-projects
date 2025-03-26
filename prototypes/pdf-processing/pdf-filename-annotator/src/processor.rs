@@ -19,7 +19,7 @@ pub struct ProcessingSummary {
 
     /// Map of files that encountered errors and their error messages
     pub errors: HashMap<PathBuf, String>,
-    
+
     /// Map of files with partial success (some pages failed)
     /// The value is a vector of tuples with (page_index, error_message)
     pub partial_success: HashMap<PathBuf, Vec<(usize, String)>>,
@@ -34,9 +34,7 @@ pub struct PdfProcessor {
 impl PdfProcessor {
     /// Create a new PDF processor with the given configuration
     pub fn new(config: Config) -> Self {
-        Self { 
-            config,
-        }
+        Self { config }
     }
 
     /// Process all PDF files in the configured input directory
@@ -60,11 +58,13 @@ impl PdfProcessor {
                 Ok(pages) => {
                     summary.files_processed += 1;
                     summary.pages_annotated += pages;
-                    
+
                     // Check if this was a partial success (some pages failed)
                     if let Some(page_errors) = self.get_page_errors(&file_path) {
                         if !page_errors.is_empty() {
-                            summary.partial_success.insert(file_path.clone(), page_errors);
+                            summary
+                                .partial_success
+                                .insert(file_path.clone(), page_errors);
                         }
                     }
                 }
@@ -90,53 +90,57 @@ impl PdfProcessor {
             .unwrap_or("unknown.pdf");
 
         info!("Processing {}", input_path.display());
-        
+
         // First, detect if this is a scanner-generated PDF
         let is_scanner_pdf = match scanner_diagnostic::analyze_pdf(input_path) {
             Ok(diagnostic) => {
                 let scanner_indicators = scanner_diagnostic::count_scanner_indicators(&diagnostic);
                 let is_scanner = scanner_indicators >= 4; // Threshold for scanner detection
-                
+
                 if is_scanner {
-                    info!("Detected scanner-generated PDF with {} indicators", scanner_indicators);
-                    
+                    info!(
+                        "Detected scanner-generated PDF with {} indicators",
+                        scanner_indicators
+                    );
+
                     // Look at specific scanner properties that might need special handling
                     let first_page_has_array_content = if !diagnostic.pages.is_empty() {
                         diagnostic.pages[0].content.content_type == "array"
                     } else {
                         false
                     };
-                    
+
                     if first_page_has_array_content {
                         debug!("First page has array content streams (typical for scanners)");
                     }
-                    
+
                     // Check for first page differences
                     if diagnostic.pages.len() > 1 {
                         let first_content_type = &diagnostic.pages[0].content.content_type;
-                        let other_content_types: Vec<_> = diagnostic.pages[1..].iter()
+                        let other_content_types: Vec<_> = diagnostic.pages[1..]
+                            .iter()
                             .map(|p| &p.content.content_type)
                             .collect();
-                        
+
                         if !other_content_types.iter().all(|t| *t == first_content_type) {
                             debug!("First page has different content type than other pages");
                         }
                     }
                 }
-                
+
                 is_scanner
-            },
+            }
             Err(e) => {
                 warn!("Failed to analyze PDF for scanner detection: {}", e);
                 false
             }
         };
-        
+
         // Log if this is a scanner PDF
         if is_scanner_pdf {
             debug!("Scanner PDF detected, will use special handling for first page");
         }
-        
+
         // First, try to read the file with lopdf
         let mut doc = Document::load(input_path)?;
 
@@ -149,7 +153,7 @@ impl PdfProcessor {
         // Get the pages
         let pages = doc.get_pages();
         let mut pages_annotated = 0;
-        
+
         // Track page-level failures
         let mut page_errors = Vec::new();
 
@@ -157,10 +161,11 @@ impl PdfProcessor {
         debug!("Found {} pages", pages.len());
 
         // Process each page
+        // This is the fixed version of the page processing loop from processor.rs
+        // Process each page
         for (idx, page_ref) in pages.iter().enumerate() {
-            // For lopdf, page_id is a tuple of (u32, u16)
-            // In this case, page_ref.0 is the key (page number) and page_ref.1 is already the ObjectId (u32, u16)
-            let page_id = (*page_ref.0, 0); // Using generation number 0 for simplicity
+            // Use the correct page dictionary object id from page_ref.1 rather than constructing a bogus one.
+            let page_id = *page_ref.1; // Dereference to get the actual (u32,u16) tuple
 
             debug!("Processing page {} with ID {:?}", idx + 1, page_id);
 
@@ -208,79 +213,60 @@ impl PdfProcessor {
                 filename,
             );
 
-            // For scanner PDFs, we'll use different annotation strategies depending on the page
-            if is_scanner_pdf {
-                // For scanner PDFs, try different approaches based on page and scanner type
-                let annotation_result = if is_first_page_of_scanner {
-                    // For first page of scanner PDFs, use our special scanner first page handler
-                    self.add_scanner_first_page_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y)
+            // For scanner PDFs, choose the annotation strategy
+            let annotation_result = if is_scanner_pdf {
+                if is_first_page_of_scanner {
+                    self.add_scanner_first_page_annotation(
+                        &annotator,
+                        &mut doc,
+                        fixed_page_id,
+                        filename,
+                        x,
+                        y,
+                    )
                 } else if idx >= 3 {
-                    // For pages beyond the first three, use our special handler for later scanner pages
-                    // This addresses the issue where annotations don't appear on these pages
-                    self.add_scanner_later_page_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y, idx)
+                    self.add_scanner_later_page_annotation(
+                        &annotator,
+                        &mut doc,
+                        fixed_page_id,
+                        filename,
+                        x,
+                        y,
+                        idx,
+                    )
                 } else {
-                    // For pages 2-3, start with searchable annotation and fall back to content stream
                     self.add_searchable_annotation(
-                        &annotator, 
-                        &mut doc, 
-                        fixed_page_id, 
-                        filename, 
-                        x, 
-                        y
+                        &annotator,
+                        &mut doc,
+                        fixed_page_id,
+                        filename,
+                        x,
+                        y,
                     )
                     .or_else(|_| {
-                        // Fallback to regular content stream annotation
                         annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
                     })
-                };
-
-                match annotation_result {
-                    Ok(_) => {
-                        pages_annotated += 1;
-                        debug!("Annotated page {} in {} (scanner PDF)", idx + 1, input_path.display());
-                    }
-                    Err(e) => {
-                        error!(
-                            "Failed to annotate page {} in {}: {}",
-                            idx + 1,
-                            input_path.display(),
-                            e
-                        );
-                        page_errors.push((idx + 1, format!("Scanner annotation error: {}", e)));
-                    }
                 }
             } else {
-                // Standard PDF annotation flow - first try searchable, then fall back
-                let annotation_result = self.add_searchable_annotation(
-                    &annotator, 
-                    &mut doc, 
-                    fixed_page_id, 
-                    filename, 
-                    x, 
-                    y
-                )
-                .or_else(|_| {
-                    // Fallback to regular content stream annotation if searchable annotation fails
-                    annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
-                });
+                self.add_searchable_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y)
+                    .or_else(|_| {
+                        annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
+                    })
+            };
 
-                // Add the text annotation to the page
-                match annotation_result {
-                    Ok(_) => {
-                        pages_annotated += 1;
-                        debug!("Annotated page {} in {}", idx + 1, input_path.display());
-                    }
-                    Err(e) => {
-                        // Log error but continue with next page
-                        error!(
-                            "Failed to annotate page {} in {}: {}",
-                            idx + 1,
-                            input_path.display(),
-                            e
-                        );
-                        page_errors.push((idx + 1, format!("Annotation error: {}", e)));
-                        // Continue with next page instead of returning error
-                    }
+            match annotation_result {
+                Ok(_) => {
+                    pages_annotated += 1;
+                    debug!("Annotated page {} in {}", idx + 1, input_path.display());
+                }
+                Err(e) => {
+                    error!(
+                        "Failed to annotate page {} in {}: {}",
+                        idx + 1,
+                        input_path.display(),
+                        e
+                    );
+                    page_errors.push((idx + 1, format!("Annotation error: {}", e)));
                 }
             }
         }
@@ -291,7 +277,7 @@ impl PdfProcessor {
 
             info!("Saved annotated PDF to {}", output_path.display());
             info!("Annotated {} pages", pages_annotated);
-            
+
             // Log any page-specific errors
             if !page_errors.is_empty() {
                 info!(
@@ -300,7 +286,7 @@ impl PdfProcessor {
                     pages.len(),
                     input_path.display()
                 );
-                
+
                 // Store page errors in partial_success field (handled by process_all)
             }
         } else {
@@ -313,9 +299,9 @@ impl PdfProcessor {
 
         Ok(pages_annotated)
     }
-    
+
     /// Add an annotation to the first page of a scanner PDF
-    /// 
+    ///
     /// This method uses a special approach for scanner-generated PDFs which often
     /// have multiple content streams and a complex structure on the first page.
     /// It ensures all original content is preserved while adding our annotation.
@@ -329,38 +315,41 @@ impl PdfProcessor {
         y: f32,
     ) -> Result<(), crate::error::AnnotationError> {
         debug!("Using scanner first page approach for page {:?}", page_id);
-        
+
         // For scanner PDFs, we'll use a hybrid approach:
         // 1. First, try to create a new independent content stream with our annotation
         // 2. If that fails, try to add a stamp annotation
         // 3. If both fail, then fall back to modifying existing content
-        
+
         // First check if the page has a Contents entry and what type it is
         // We need to use a block to limit the scope of our borrows
         let has_array_contents_and_data = {
             // Get the page dictionary
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(format!("Failed to get scanner page dictionary: {}", e))
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get scanner page dictionary: {}",
+                    e
+                ))
             })?;
-        
+
             // Check for array contents
             let has_array_contents = match page_dict.get(b"Contents") {
                 Ok(Object::Array(_)) => true,
                 _ => false,
             };
-            
+
             // If it has array contents, collect info about existing contents
             if has_array_contents {
                 let existing_contents_data = match page_dict.get(b"Contents") {
                     Ok(Object::Array(array)) => {
                         debug!("Found Contents array with {} items", array.len());
                         (array.clone(), false, None)
-                    },
+                    }
                     Ok(Object::Reference(ref_id)) => {
                         debug!("Contents is a reference to {:?}", ref_id);
                         // Store reference ID but don't try to dereference it yet
                         (vec![], true, Some(*ref_id))
-                    },
+                    }
                     _ => {
                         // No contents or unexpected type, create an empty array
                         debug!("No valid Contents entry, creating new array");
@@ -372,51 +361,64 @@ impl PdfProcessor {
                 (false, (vec![], false, None))
             }
         };
-        
-        let (has_array_contents, (mut existing_contents, page_dict_ref, ref_id_opt)) = has_array_contents_and_data;
-        
+
+        let (has_array_contents, (mut existing_contents, page_dict_ref, ref_id_opt)) =
+            has_array_contents_and_data;
+
         if has_array_contents {
             debug!("First page has array Contents, adding new content stream for annotation");
-            
+
             // Create a new content stream for our annotation - this is independent
             // of any existing content to avoid corrupting it
             let new_content_stream = self.create_annotation_content_stream(doc, text, x, y)?;
             let new_content_id = doc.add_object(Object::Stream(new_content_stream));
-            
+
             // Process referenced content array if needed to get all existing content
             if let Some(ref_id) = ref_id_opt {
                 match doc.get_object(ref_id) {
                     Ok(Object::Array(array)) => {
                         debug!("Referenced Contents array has {} items", array.len());
                         existing_contents = array.clone();
-                    },
+                    }
                     Ok(Object::Stream(_stream)) => {
                         // Special case: reference points to a stream, not an array
                         // Create a new array that includes the original content stream
                         debug!("Referenced Contents is a single stream, creating new array");
                         existing_contents = vec![Object::Reference(ref_id)];
-                    },
+                    }
                     Ok(other) => {
                         // Not an array reference, but preserve whatever it is
-                        debug!("Referenced Contents is not an array or stream ({}), preserving it", 
-                               if let Object::Dictionary(_) = other { "Dictionary" } else { "Other" });
+                        debug!(
+                            "Referenced Contents is not an array or stream ({}), preserving it",
+                            if let Object::Dictionary(_) = other {
+                                "Dictionary"
+                            } else {
+                                "Other"
+                            }
+                        );
                         existing_contents = vec![Object::Reference(ref_id)];
-                    },
+                    }
                     Err(e) => {
                         // We couldn't get the referenced object, warn and continue
-                        debug!("Error getting referenced Contents: {}, creating new array", e);
+                        debug!(
+                            "Error getting referenced Contents: {}, creating new array",
+                            e
+                        );
                         existing_contents = vec![];
                     }
                 }
             }
-            
+
             // IMPORTANT: Append our annotation to existing content rather than replacing
             // This preserves all original content in its original order
             let mut updated_contents = existing_contents;
             updated_contents.push(Object::Reference(new_content_id));
-            
-            debug!("Updated Contents array now has {} items", updated_contents.len());
-            
+
+            debug!(
+                "Updated Contents array now has {} items",
+                updated_contents.len()
+            );
+
             // Update the page dictionary
             if page_dict_ref {
                 // If it was a reference to an array, update the array object
@@ -427,73 +429,79 @@ impl PdfProcessor {
             } else {
                 // If it was a direct array or missing, update the page dictionary
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(
-                        format!("Failed to get mutable scanner page dictionary: {}", e)
-                    )
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get mutable scanner page dictionary: {}",
+                        e
+                    ))
                 })?;
                 page_dict.set("Contents", Object::Array(updated_contents));
                 debug!("Updated page dictionary Contents directly");
             }
-            
+
             // Ensure resources exist with proper merging to preserve all original resources
             self.ensure_scanner_resources(doc, page_id)?;
-            
+
             Ok(())
         } else {
             // No array contents, try to detect what kind of structure this page has
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(format!("Failed to get scanner page dictionary: {}", e))
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get scanner page dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             // Check if the page has a Contents entry at all
             if let Ok(Object::Reference(content_ref)) = page_dict.get(b"Contents") {
                 // Page has a single reference to contents
                 // Store the content reference for later use
                 let ref_id = *content_ref;
-                
+
                 // Need to end the scope of the immutable borrow before doing mutable operations
                 let _ = page_dict;
-                
+
                 // Determine what the reference points to
                 let is_stream = match doc.get_object(ref_id) {
                     Ok(Object::Stream(_)) => true,
                     _ => {
-                        debug!("Contents reference doesn't point to a Stream, trying other approaches");
+                        debug!(
+                            "Contents reference doesn't point to a Stream, trying other approaches"
+                        );
                         false
                     }
                 };
-                
+
                 if is_stream {
                     debug!("First page has a single content stream, converting to array structure");
-                    
+
                     // Create a new array with existing content and our annotation
-                    let new_content_stream = self.create_annotation_content_stream(doc, text, x, y)?;
+                    let new_content_stream =
+                        self.create_annotation_content_stream(doc, text, x, y)?;
                     let new_content_id = doc.add_object(Object::Stream(new_content_stream));
-                    
+
                     // Create array with original content plus our annotation
-                    let contents_array = vec![
-                        Object::Reference(ref_id),
-                        Object::Reference(new_content_id)
-                    ];
-                    
+                    let contents_array =
+                        vec![Object::Reference(ref_id), Object::Reference(new_content_id)];
+
                     // Update the page dictionary to use the array
                     let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                        crate::error::AnnotationError::ContentStreamError(
-                            format!("Failed to get mutable scanner page dictionary: {}", e)
-                        )
+                        crate::error::AnnotationError::ContentStreamError(format!(
+                            "Failed to get mutable scanner page dictionary: {}",
+                            e
+                        ))
                     })?;
                     page_dict.set("Contents", Object::Array(contents_array));
-                    
+
                     // Ensure resources exist with proper merging
                     self.ensure_scanner_resources(doc, page_id)?;
-                    
+
                     return Ok(());
                 }
             }
-            
+
             // Fall back to using regular annotation methods
             debug!("First page does not have array Contents, using standard annotation approaches");
-            
+
             // First try searchable annotation
             self.add_searchable_annotation(annotator, doc, page_id, text, x, y)
                 .or_else(|_| {
@@ -507,7 +515,7 @@ impl PdfProcessor {
                 })
         }
     }
-    
+
     /// Create a new content stream for annotation
     fn create_annotation_content_stream(
         &self,
@@ -518,10 +526,10 @@ impl PdfProcessor {
     ) -> Result<Stream, crate::error::AnnotationError> {
         // Create a content stream with a BT/ET block that draws the text
         // This uses the PDF content stream operators to create a standalone text block
-        
+
         // Create a simple dictionary for the stream
         let stream_dict = lopdf::Dictionary::new();
-        
+
         // Build a PDF content stream that draws the text
         // Important: Set graphics state to avoid interference with other content
         let font_size = self.config.font.size;
@@ -540,15 +548,15 @@ impl PdfProcessor {
              Q\n                     % Restore graphics state",
             font_size, x, y, text, text
         );
-        
+
         // Create the stream object
         let stream = Stream::new(stream_dict, content.as_bytes().to_vec());
-        
+
         Ok(stream)
     }
-    
+
     /// Ensure that resources needed for scanner PDF annotation exist
-    /// 
+    ///
     /// This method properly merges resource dictionaries, ensuring that we keep all existing
     /// resources while adding our own. This is critical for scanner PDFs where existing resources
     /// often reference important XObjects for the page content.
@@ -561,20 +569,22 @@ impl PdfProcessor {
         let (resources_id, needs_update, existing_dict) = {
             // Get the page dictionary to check for resources
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get page dictionary for resources: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get page dictionary for resources: {}",
+                    e
+                ))
             })?;
-            
+
             // Check if resources exist and get its form
             match page_dict.get(b"Resources") {
                 Ok(Object::Dictionary(dict)) => {
                     // Resources directly in page - create a new object while preserving content
                     let resources_dict = dict.clone();
                     let new_id = doc.new_object_id();
-                    doc.objects.insert(new_id, Object::Dictionary(resources_dict.clone()));
+                    doc.objects
+                        .insert(new_id, Object::Dictionary(resources_dict.clone()));
                     (new_id, true, Some(resources_dict))
-                },
+                }
                 Ok(Object::Reference(id)) => {
                     // Resources as reference - get existing
                     let existing_dict = if let Ok(Object::Dictionary(dict)) = doc.get_object(*id) {
@@ -583,76 +593,81 @@ impl PdfProcessor {
                         None
                     };
                     (*id, false, existing_dict)
-                },
+                }
                 _ => {
                     // No resources - create new
                     let resources_dict = lopdf::Dictionary::new();
                     let new_id = doc.new_object_id();
-                    doc.objects.insert(new_id, Object::Dictionary(resources_dict));
+                    doc.objects
+                        .insert(new_id, Object::Dictionary(resources_dict));
                     (new_id, true, None)
                 }
             }
         };
-        
+
         // Update page dictionary if needed
         if needs_update {
             let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get mutable page dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get mutable page dictionary: {}",
+                    e
+                ))
             })?;
             page_dict.set("Resources", Object::Reference(resources_id));
         }
-        
+
         // Handle font dictionary
         let has_font_and_font_ref = {
             // Check if there is a Font dictionary in resources
             let resources_dict = doc.get_dictionary(resources_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get resources dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get resources dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             match resources_dict.get(b"Font") {
                 Ok(Object::Dictionary(_)) => (true, None), // Has direct font dict
                 Ok(Object::Reference(font_ref)) => (true, Some(*font_ref)), // Has referenced font dict
-                _ => (false, None) // No font dict
+                _ => (false, None),                                         // No font dict
             }
         };
-        
+
         // Process based on the font status, with proper merging to preserve existing fonts
         match has_font_and_font_ref {
             (false, _) => {
                 // No Font dictionary, add one
                 let resources_dict = doc.get_dictionary_mut(resources_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(
-                        format!("Failed to get resources dictionary: {}", e)
-                    )
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get resources dictionary: {}",
+                        e
+                    ))
                 })?;
-                
+
                 let mut font_dict = lopdf::Dictionary::new();
-                
+
                 // Add a basic Helvetica font
                 let mut helvetica_dict = lopdf::Dictionary::new();
                 helvetica_dict.set("Type", Object::Name(b"Font".to_vec()));
                 helvetica_dict.set("Subtype", Object::Name(b"Type1".to_vec()));
                 helvetica_dict.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                 helvetica_dict.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                
+
                 // Add to font dictionary
                 font_dict.set("F0", Object::Dictionary(helvetica_dict));
-                
+
                 // Set in resources
                 resources_dict.set("Font", Object::Dictionary(font_dict));
-            },
+            }
             (true, None) => {
                 // Direct font dictionary, ensure it has F0
                 let resources_dict = doc.get_dictionary_mut(resources_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(
-                        format!("Failed to get resources dictionary: {}", e)
-                    )
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get resources dictionary: {}",
+                        e
+                    ))
                 })?;
-                
+
                 // Check if Font dictionary has F0
                 let needs_f0 = {
                     if let Ok(Object::Dictionary(font_dict)) = resources_dict.get(b"Font") {
@@ -661,7 +676,7 @@ impl PdfProcessor {
                         true // If it's not a dictionary, we'll add F0
                     }
                 };
-                
+
                 if needs_f0 {
                     if let Ok(Object::Dictionary(font_dict)) = resources_dict.get_mut(b"Font") {
                         // Add Helvetica without modifying existing fonts
@@ -670,33 +685,33 @@ impl PdfProcessor {
                         helvetica_dict.set("Subtype", Object::Name(b"Type1".to_vec()));
                         helvetica_dict.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                         helvetica_dict.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                        
+
                         // Add to font dictionary without overwriting anything else
                         font_dict.set("F0", Object::Dictionary(helvetica_dict));
                     } else {
                         // Font is not a dictionary, preserve as much as possible
                         let mut font_dict = lopdf::Dictionary::new();
-                        
+
                         // If there was a previous value, try to preserve it
                         if let Ok(original_font) = resources_dict.get(b"Font") {
                             font_dict.set("Original", original_font.clone());
                         }
-                        
+
                         // Add Helvetica
                         let mut helvetica_dict = lopdf::Dictionary::new();
                         helvetica_dict.set("Type", Object::Name(b"Font".to_vec()));
                         helvetica_dict.set("Subtype", Object::Name(b"Type1".to_vec()));
                         helvetica_dict.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                         helvetica_dict.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                        
+
                         // Add to font dictionary
                         font_dict.set("F0", Object::Dictionary(helvetica_dict));
-                        
+
                         // Set in resources
                         resources_dict.set("Font", Object::Dictionary(font_dict));
                     }
                 }
-            },
+            }
             (true, Some(font_ref)) => {
                 // Referenced font dictionary, ensure it has F0
                 let (font_needs_f0, font_dict_clone) = {
@@ -706,7 +721,7 @@ impl PdfProcessor {
                         (true, None)
                     }
                 };
-                
+
                 if font_needs_f0 {
                     if let Some(mut font_dict) = font_dict_clone {
                         // Add Helvetica while preserving existing fonts
@@ -715,47 +730,50 @@ impl PdfProcessor {
                         helvetica_dict.set("Subtype", Object::Name(b"Type1".to_vec()));
                         helvetica_dict.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                         helvetica_dict.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                        
+
                         // Add to font dictionary without overwriting existing entries
                         font_dict.set("F0", Object::Dictionary(helvetica_dict));
-                        
+
                         // Update the referenced dictionary
                         doc.objects.insert(font_ref, Object::Dictionary(font_dict));
                     } else {
                         // Create a new font dictionary and update resource reference
                         let mut font_dict = lopdf::Dictionary::new();
-                        
+
                         // Add Helvetica
                         let mut helvetica_dict = lopdf::Dictionary::new();
                         helvetica_dict.set("Type", Object::Name(b"Font".to_vec()));
                         helvetica_dict.set("Subtype", Object::Name(b"Type1".to_vec()));
                         helvetica_dict.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                         helvetica_dict.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                        
+
                         // Add to font dictionary
                         font_dict.set("F0", Object::Dictionary(helvetica_dict));
-                        
+
                         // Update the reference in the document
                         doc.objects.insert(font_ref, Object::Dictionary(font_dict));
                     }
                 }
             }
         }
-        
+
         // Preserve existing XObject resources
         if let Some(existing_resources) = existing_dict {
             // Check if we have XObjects in the existing resources
             if let Ok(Object::Dictionary(xobjects)) = existing_resources.get(b"XObject") {
                 let resources_dict = doc.get_dictionary_mut(resources_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(
-                        format!("Failed to get resources dictionary: {}", e)
-                    )
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get resources dictionary: {}",
+                        e
+                    ))
                 })?;
-                
+
                 // If XObjects aren't already in the new resources, add them
                 if !resources_dict.has(b"XObject") {
                     resources_dict.set("XObject", Object::Dictionary(xobjects.clone()));
-                } else if let Ok(Object::Dictionary(existing_xobjects)) = resources_dict.get_mut(b"XObject") {
+                } else if let Ok(Object::Dictionary(existing_xobjects)) =
+                    resources_dict.get_mut(b"XObject")
+                {
                     // If we already have XObjects, merge them rather than replacing
                     for (k, v) in xobjects.iter() {
                         if !existing_xobjects.has(k) {
@@ -765,16 +783,23 @@ impl PdfProcessor {
                     }
                 }
             }
-            
+
             // Also preserve other resource dictionaries (ColorSpace, ExtGState, etc.)
-            let preserve_keys: &[&[u8]] = &[b"ColorSpace", b"ExtGState", b"Pattern", b"Shading", b"Properties"];
-            
+            let preserve_keys: &[&[u8]] = &[
+                b"ColorSpace",
+                b"ExtGState",
+                b"Pattern",
+                b"Shading",
+                b"Properties",
+            ];
+
             let resources_dict = doc.get_dictionary_mut(resources_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get resources dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get resources dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             for &key in preserve_keys {
                 if !resources_dict.has(key) && existing_resources.has(key) {
                     if let Ok(value) = existing_resources.get(key) {
@@ -783,12 +808,12 @@ impl PdfProcessor {
                 }
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// Add an annotation to pages beyond the first three in scanner PDFs
-    /// 
+    ///
     /// This method handles the special case of pages 4+ in scanner PDFs, which often
     /// have different structures than the first three pages and require special handling.
     fn add_scanner_later_page_annotation(
@@ -801,19 +826,23 @@ impl PdfProcessor {
         y: f32,
         page_index: usize,
     ) -> Result<(), crate::error::AnnotationError> {
-        debug!("Using scanner later page approach for page {} (index {})", page_id.0, page_index);
-        
+        debug!(
+            "Using scanner later page approach for page {} (index {})",
+            page_id.0, page_index
+        );
+
         // For pages beyond the first three, we need to check the page structure
         // and apply an appropriate annotation strategy based on what we find
-        
+
         // First analyze the page structure to detect the type of content stream
         let page_structure = {
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get scanner page dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get scanner page dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             // Check for array contents, references, or direct stream
             let content_type = match page_dict.get(b"Contents") {
                 Ok(Object::Array(_)) => "array",
@@ -822,33 +851,37 @@ impl PdfProcessor {
                     match doc.get_object(*ref_id) {
                         Ok(Object::Array(_)) => "array_ref",
                         Ok(Object::Stream(_)) => "stream_ref",
-                        _ => "unknown_ref"
+                        _ => "unknown_ref",
                     }
-                },
+                }
                 Ok(Object::Stream(_)) => "direct_stream",
-                _ => "unknown"
+                _ => "unknown",
             };
-            
+
             // Check for scanner-specific dictionary entries
-            let has_scanner_keys = page_dict.has(b"ScannerGenerated") || 
-                                  page_dict.has(b"Producer") ||
-                                  page_dict.has(b"Scanner");
-            
+            let has_scanner_keys = page_dict.has(b"ScannerGenerated")
+                || page_dict.has(b"Producer")
+                || page_dict.has(b"Scanner");
+
             (content_type, has_scanner_keys)
         };
-        
+
         // Based on the structure, choose the best annotation strategy
         let (content_type, has_scanner_keys) = page_structure;
-        
-        debug!("Later page {} has content type: {} and scanner keys: {}", 
-               page_index + 1, content_type, has_scanner_keys);
-               
+
+        debug!(
+            "Later page {} has content type: {} and scanner keys: {}",
+            page_index + 1,
+            content_type,
+            has_scanner_keys
+        );
+
         match content_type {
             "array" | "array_ref" => {
                 // For array content streams (common in later scanner pages too),
                 // use a similar approach to first page but with slight modifications
                 self.handle_array_content_page(doc, page_id, text, x, y)
-            },
+            }
             "direct_stream" => {
                 // For direct stream content, try a stamp annotation first
                 self.add_stamp_annotation(doc, page_id, text, x, y)
@@ -856,7 +889,7 @@ impl PdfProcessor {
                         // If stamp fails, fall back to content stream
                         annotator.add_text_to_page(doc, page_id, text, x, y)
                     })
-            },
+            }
             "stream_ref" => {
                 // For referenced stream content, try searchable annotation first
                 self.add_searchable_annotation(annotator, doc, page_id, text, x, y)
@@ -868,7 +901,7 @@ impl PdfProcessor {
                         // Finally fall back to regular content stream
                         annotator.add_text_to_page(doc, page_id, text, x, y)
                     })
-            },
+            }
             _ => {
                 // For unknown structures, try multiple approaches
                 if has_scanner_keys {
@@ -885,16 +918,14 @@ impl PdfProcessor {
                 } else {
                     // Otherwise use standard approach
                     self.add_searchable_annotation(annotator, doc, page_id, text, x, y)
-                        .or_else(|_| {
-                            annotator.add_text_to_page(doc, page_id, text, x, y)
-                        })
+                        .or_else(|_| annotator.add_text_to_page(doc, page_id, text, x, y))
                 }
             }
         }
     }
-    
+
     /// Helper method for pages with array content streams
-    /// 
+    ///
     /// This method properly handles pages that use an array of content streams,
     /// which is common in scanner PDFs. It preserves all existing content while
     /// adding our annotation.
@@ -907,22 +938,23 @@ impl PdfProcessor {
         y: f32,
     ) -> Result<(), crate::error::AnnotationError> {
         debug!("Handling array content page for page {:?}", page_id);
-        
+
         // First check if the page has a Contents entry and get its data
         let contents_data = {
             // Get the page dictionary
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get scanner page dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get scanner page dictionary: {}",
+                    e
+                ))
             })?;
-        
+
             // Check Contents type and collect info
             match page_dict.get(b"Contents") {
                 Ok(Object::Array(array)) => {
                     debug!("Found Contents array with {} items", array.len());
                     (array.clone(), false, None)
-                },
+                }
                 Ok(Object::Reference(ref_id)) => {
                     debug!("Contents is a reference to {:?}", ref_id);
                     match doc.get_object(*ref_id) {
@@ -930,13 +962,13 @@ impl PdfProcessor {
                             // It's a reference to an array
                             debug!("Referenced array has {} items", array.len());
                             (array.clone(), true, Some(*ref_id))
-                        },
+                        }
                         _ => {
                             // Not an array reference, create an empty array
                             (vec![], true, Some(*ref_id))
                         }
                     }
-                },
+                }
                 _ => {
                     // No contents or unexpected type, create an empty array
                     debug!("No valid Contents entry, creating new array");
@@ -944,18 +976,18 @@ impl PdfProcessor {
                 }
             }
         };
-        
+
         let (existing_contents, is_ref, ref_id_opt) = contents_data;
-        
+
         // Create new content stream with our annotation
         let new_content_stream = self.create_annotation_content_stream(doc, text, x, y)?;
         let new_content_id = doc.add_object(Object::Stream(new_content_stream));
-        
+
         // IMPORTANT: Preserve all existing content streams - don't replace them
         // Create a new array with all existing content plus our annotation
         let mut updated_contents = existing_contents;
         updated_contents.push(Object::Reference(new_content_id));
-        
+
         // Update the page dictionary based on its structure
         if is_ref {
             if let Some(ref_id) = ref_id_opt {
@@ -964,30 +996,32 @@ impl PdfProcessor {
             } else {
                 // If there's a reference but no valid ref_id, update the page directly
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(
-                        format!("Failed to get page dictionary: {}", e)
-                    )
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get page dictionary: {}",
+                        e
+                    ))
                 })?;
-                
+
                 page_dict.set("Contents", Object::Array(updated_contents));
             }
         } else {
             // Direct array or no array - update the page dictionary directly
             let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(
-                    format!("Failed to get page dictionary: {}", e)
-                )
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get page dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             page_dict.set("Contents", Object::Array(updated_contents));
         }
-        
+
         // Ensure required resources exist for our annotation by merging resources
         self.ensure_scanner_resources(doc, page_id)?;
-        
+
         Ok(())
     }
-    
+
     /// Add a stamp annotation to a page (alternative to FreeText for scanner PDFs)
     fn add_stamp_annotation(
         &self,
@@ -998,39 +1032,62 @@ impl PdfProcessor {
         y: f32,
     ) -> Result<(), crate::error::AnnotationError> {
         debug!("Adding stamp annotation to page {:?}", page_id);
-        
+
         // Calculate text width using approximation
         let (text_width, text_height) = (100.0, self.config.font.size + 4.0); // Approximate
-        
+
         // Create annotation dictionary
         let mut annot_dict = lopdf::Dictionary::new();
         annot_dict.set("Type", Object::Name(b"Annot".to_vec()));
         annot_dict.set("Subtype", Object::Name(b"Stamp".to_vec()));
-        annot_dict.set("Contents", Object::String(text.as_bytes().to_vec(), lopdf::StringFormat::Literal));
-        annot_dict.set("Rect", Object::Array(vec![
-            Object::Real(x),
-            Object::Real(y - text_height),
-            Object::Real(x + text_width),
-            Object::Real(y),
-        ]));
-        
+        annot_dict.set(
+            "Contents",
+            Object::String(text.as_bytes().to_vec(), lopdf::StringFormat::Literal),
+        );
+        annot_dict.set(
+            "Rect",
+            Object::Array(vec![
+                Object::Real(x),
+                Object::Real(y - text_height),
+                Object::Real(x + text_width),
+                Object::Real(y),
+            ]),
+        );
+
         // Set appearance characteristics
         let mut ap_dict = lopdf::Dictionary::new();
         ap_dict.set("R", Object::Integer(0)); // Rotation
-        ap_dict.set("BC", Object::Array(vec![Object::Real(0.0), Object::Real(0.0), Object::Real(0.0)])); // Border color
-        ap_dict.set("BG", Object::Array(vec![Object::Real(1.0), Object::Real(1.0), Object::Real(1.0)])); // Background color
+        ap_dict.set(
+            "BC",
+            Object::Array(vec![
+                Object::Real(0.0),
+                Object::Real(0.0),
+                Object::Real(0.0),
+            ]),
+        ); // Border color
+        ap_dict.set(
+            "BG",
+            Object::Array(vec![
+                Object::Real(1.0),
+                Object::Real(1.0),
+                Object::Real(1.0),
+            ]),
+        ); // Background color
         annot_dict.set("AP", Object::Dictionary(ap_dict));
-        
+
         // Set flags (print bit)
         annot_dict.set("F", Object::Integer(4));
-        
+
         // Set border
-        annot_dict.set("Border", Object::Array(vec![
-            Object::Integer(0),
-            Object::Integer(0),
-            Object::Integer(1),
-        ]));
-        
+        annot_dict.set(
+            "Border",
+            Object::Array(vec![
+                Object::Integer(0),
+                Object::Integer(0),
+                Object::Integer(1),
+            ]),
+        );
+
         // Create appearance stream (important for scanner PDFs)
         let stream_content = format!(
             "q\n\
@@ -1046,22 +1103,27 @@ impl PdfProcessor {
              ({}) Tj\n\
              ET\n\
              Q",
-            text_width, text_height, self.config.font.size, 
+            text_width,
+            text_height,
+            self.config.font.size,
             text_height - 4.0, // Position text near top
             text
         );
-        
+
         let mut ap_stream_dict = lopdf::Dictionary::new();
         ap_stream_dict.set("Type", Object::Name(b"XObject".to_vec()));
         ap_stream_dict.set("Subtype", Object::Name(b"Form".to_vec()));
         ap_stream_dict.set("FormType", Object::Integer(1));
-        ap_stream_dict.set("BBox", Object::Array(vec![
-            Object::Real(0.0),
-            Object::Real(0.0),
-            Object::Real(text_width),
-            Object::Real(text_height),
-        ]));
-        
+        ap_stream_dict.set(
+            "BBox",
+            Object::Array(vec![
+                Object::Real(0.0),
+                Object::Real(0.0),
+                Object::Real(text_width),
+                Object::Real(text_height),
+            ]),
+        );
+
         // Add Resources for the appearance stream
         let mut resources_dict = lopdf::Dictionary::new();
         let mut font_dict = lopdf::Dictionary::new();
@@ -1072,25 +1134,28 @@ impl PdfProcessor {
         font_dict.set("F0", Object::Dictionary(f0_dict));
         resources_dict.set("Font", Object::Dictionary(font_dict));
         ap_stream_dict.set("Resources", Object::Dictionary(resources_dict));
-        
+
         // Create the appearance stream
         let ap_stream = Stream::new(ap_stream_dict, stream_content.as_bytes().to_vec());
         let ap_stream_id = doc.add_object(Object::Stream(ap_stream));
-        
+
         // Add appearance dictionary with normal appearance
         let mut appearance_dict = lopdf::Dictionary::new();
         appearance_dict.set("N", Object::Reference(ap_stream_id));
         annot_dict.set("AP", Object::Dictionary(appearance_dict));
-        
+
         // Add the annotation to the document
         let annot_id = doc.add_object(Object::Dictionary(annot_dict));
-        
+
         // Handle Annots in a way that avoids borrowing conflicts
         let annots_info = {
             let page_dict = doc.get_dictionary(page_id).map_err(|e| {
-                crate::error::AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+                crate::error::AnnotationError::ContentStreamError(format!(
+                    "Failed to get page dictionary: {}",
+                    e
+                ))
             })?;
-            
+
             if let Ok(Object::Array(arr)) = page_dict.get(b"Annots") {
                 // Direct array
                 Some((None, arr.clone()))
@@ -1105,34 +1170,40 @@ impl PdfProcessor {
                 None
             }
         };
-        
+
         // Update with the collected information
         match annots_info {
             Some((None, mut arr)) => {
                 // Direct array case
                 arr.push(Object::Reference(annot_id));
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get page dictionary: {}",
+                        e
+                    ))
                 })?;
                 page_dict.set("Annots", Object::Array(arr));
-            },
+            }
             Some((Some(ref_id), mut arr)) => {
                 // Referenced array case
                 arr.push(Object::Reference(annot_id));
                 doc.objects.insert(ref_id, Object::Array(arr));
-            },
+            }
             None => {
                 // No existing annots or invalid reference
                 let page_dict = doc.get_dictionary_mut(page_id).map_err(|e| {
-                    crate::error::AnnotationError::ContentStreamError(format!("Failed to get page dictionary: {}", e))
+                    crate::error::AnnotationError::ContentStreamError(format!(
+                        "Failed to get page dictionary: {}",
+                        e
+                    ))
                 })?;
                 page_dict.set("Annots", Object::Array(vec![Object::Reference(annot_id)]));
             }
         }
-        
+
         Ok(())
     }
-    
+
     /// Add a searchable text annotation to a page
     fn add_searchable_annotation(
         &self,
@@ -1613,9 +1684,9 @@ impl PdfProcessor {
         // Create the output path by joining the output directory and filename
         self.config.output_dir.join(filename)
     }
-    
+
     /// Get page errors for a file
-    /// 
+    ///
     /// This method would normally track page errors per file in a database or struct field.
     /// For our implementation, we currently pass the errors directly to process_all()
     /// but this method is kept for future implementation.

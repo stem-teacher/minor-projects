@@ -18,6 +18,14 @@ This document outlines the implementation plan for the PDF Filename Annotator pr
 - Document the test approach in LEARNING_LOG.md
 - Fix any issues identified during test creation
 
+### Task 1.3: Create Structured SDLC Test Project
+**Outcome**: A simple Rust hello world project created using the structured SDLC process.
+- Create task documentation following new SDLC templates
+- Implement a basic Rust hello world project with proper structure
+- Test the application with different greeting messages
+- Document the full development process using the new methodology
+- Verify the process addresses context window limitations effectively
+
 ## Phase 2: Core Functionality Verification
 
 ### Task 2.1: Validate PDF Annotation
@@ -74,6 +82,24 @@ This document outlines the implementation plan for the PDF Filename Annotator pr
 - Measure and document performance metrics
 - Optimize for common use cases
 - Create benchmark tests for future comparison
+
+## Phase 5: Process Improvement and Validation
+
+### Task 5.1: Create Process for Consistent Application Validation
+**Outcome**: A structured, reproducible methodology for validating the PDF Filename Annotator application.
+- Develop validation methodology specific to PDF annotations
+- Create standardized testing scripts that can be reused
+- Establish consistent file organization strategy
+- Document the complete validation process
+- Implement automated verification tools where possible
+
+### Task 5.2: Re-implement Subtask 3.3.3 (Consistent Annotation Strategy)
+**Outcome**: A robust, well-tested annotation strategy that works consistently across different PDF types.
+- Apply the new validation process to verify annotation strategies
+- Implement a consistent annotation strategy according to design goals
+- Create comprehensive tests for different PDF types
+- Test with both scanner-generated and digitally created PDFs
+- Document the implementation with clear explanations
 
 ---
 
