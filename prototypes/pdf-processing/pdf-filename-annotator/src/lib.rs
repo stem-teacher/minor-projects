@@ -7,7 +7,7 @@ pub mod annotation;
 pub mod config;
 pub mod error;
 pub mod processor;
-pub mod scanner_diagnostic;
+// Scanner diagnostic module has been removed
 
 // Re-export main types for convenience
 pub use annotation::Annotator;
