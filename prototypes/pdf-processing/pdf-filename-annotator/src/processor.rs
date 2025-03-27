@@ -166,11 +166,9 @@ impl PdfProcessor {
                 filename,
             );
 
-            // Use the same annotation strategy for all pages
-            let annotation_result = self.add_searchable_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y)
-                .or_else(|_| {
-                    annotator.add_text_to_page(&mut doc, fixed_page_id, filename, x, y)
-                });
+            // Use only the searchable annotation method for all pages
+            // We no longer fall back to content stream modification which created inconsistent results
+            let annotation_result = self.add_searchable_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y);
 
             match annotation_result {
                 Ok(_) => {
