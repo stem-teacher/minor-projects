@@ -1,16 +1,17 @@
-//! PDF Filename Annotator Library
-//!
-//! This library provides functionality for annotating PDF files with their filenames
-//! in the top-right corner of each page.
-
-pub mod annotation;
+// Export library modules
+pub mod file_utils;
+pub mod pdf_utils;
+pub mod mc_pdf_utils;
 pub mod config;
-pub mod error;
 pub mod processor;
-// Scanner diagnostic module has been removed
+pub mod error;
+pub mod annotation;
+// pub mod pdf_annotation_utils; // Temporarily removed due to type conflicts
 
-// Re-export main types for convenience
-pub use annotation::Annotator;
+// Re-export types from pdf_utils - only for original functionality
+// Re-export types used by main binary
 pub use config::Config;
-pub use error::Error;
 pub use processor::PdfProcessor;
+
+// Re-export types for multiple choice marking guide
+pub use mc_pdf_utils::McPdfAnnotation;
