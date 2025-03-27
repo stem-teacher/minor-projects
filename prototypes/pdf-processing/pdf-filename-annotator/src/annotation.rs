@@ -61,6 +61,19 @@ impl Annotator {
         x: f32,
         y: f32,
     ) -> Result<(), AnnotationError> {
+        // Add detailed logging for page and annotation information
+        debug!("Adding text annotation to page ID: {:?}", page_id);
+        debug!("Annotation text: '{}'", text);
+        debug!("Annotation position: x={}, y={}", x, y);
+        
+        // Log font configuration details
+        debug!(
+            "Font config: size={}, family={}, fallback={:?}",
+            self.font_config.size, 
+            self.font_config.family, 
+            self.font_config.fallback
+        );
+
         // Calculate text width using rusttype
         let font = Font::try_from_vec(self.font_data.clone()).ok_or_else(|| {
             AnnotationError::FontError(
@@ -79,9 +92,11 @@ impl Annotator {
         // Convert from font units to PDF units and add buffer space to prevent truncation
         let font_scale_factor = 1.2; // Increased scale factor with buffer space built in
         let text_width = text_width * font_scale_factor;
+        debug!("Calculated text width: {} (with scale factor: {})", text_width, font_scale_factor);
         
         // Add a buffer to ensure the entire text is visible - but we directly use the calculated value
         let text_height = self.font_config.size * 1.2; // Add some padding
+        debug!("Calculated text height: {}", text_height);
 
         // Create annotation dictionary
         let mut annot_dict = lopdf::Dictionary::new();
@@ -101,15 +116,20 @@ impl Annotator {
             ]),
         );
 
-        // Default appearance string
-        // Always use consistent font size and family (Helvetica)
+        // Default appearance string (DA) - This is a key part of the font consistency issue
+        // The PDF specification requires precise format for the DA string
         let font_size = self.font_config.size;
+        
+        // Fix: Remove the double space between font name and size which may be causing issues
+        // According to PDF spec, the format should be consistent with exactly one space between elements
+        let fixed_da_string = format!("/{} {} Tf 0 0 0 rg", "Helvetica", font_size);
+        debug!("Default Appearance (DA) string (fixed format): '{}'", fixed_da_string);
+        
+        // Set the DA string in the annotation dictionary using the fixed format
         annot_dict.set(
             "DA",
             Object::String(
-                format!("/{}  {} Tf 0 0 0 rg", "Helvetica", font_size)
-                    .as_bytes()
-                    .to_vec(),
+                fixed_da_string.as_bytes().to_vec(),
                 lopdf::StringFormat::Literal,
             ),
         );
@@ -639,12 +659,16 @@ impl Annotator {
 
             // Add the font if it doesn't exist
             if !font_dict.has(font_name.as_bytes()) {
-                // Create a simple Type 1 font entry
+                // Create a simple Type 1 font entry - consistent with other font definitions
                 let mut font_entry = lopdf::Dictionary::new();
                 font_entry.set("Type", Object::Name(b"Font".to_vec()));
                 font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
                 font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
+                // Add name property for consistency with other font entries
+                font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
+                
+                debug!("Created consistent font entry for referenced font dictionary, page ID: {:?}", page_id);
 
                 font_dict.set(font_name, Object::Dictionary(font_entry));
             }
@@ -661,17 +685,20 @@ impl Annotator {
             if let Ok(Object::Dictionary(font_dict)) = resources_dict.get_mut(b"Font") {
                 // Add the font if it doesn't exist
                 if !font_dict.has(font_name.as_bytes()) {
-                    // Create a simple Type 1 font entry
+                    // Create a simple Type 1 font entry - keeping format consistent
                     let mut font_entry = lopdf::Dictionary::new();
                     font_entry.set("Type", Object::Name(b"Font".to_vec()));
                     font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
 
-                    // Always use Helvetica for font consistency
+                    // Always use Helvetica for font consistency across all pages
                     font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                     font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
                     
-                    // Set a standard name to ensure consistent rendering
+                    // Ensure the font has a consistent name property on all pages
+                    // This is important for consistent rendering across PDF viewers
                     font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
+                    
+                    debug!("Created consistent font entry for page ID: {:?}", page_id);
 
                     font_dict.set(font_name, Object::Dictionary(font_entry));
                 }
@@ -679,17 +706,20 @@ impl Annotator {
                 // Create a new font dictionary
                 let mut font_dict = lopdf::Dictionary::new();
 
-                // Create a simple Type 1 font entry
+                // Create a simple Type 1 font entry - keeping format consistent
                 let mut font_entry = lopdf::Dictionary::new();
                 font_entry.set("Type", Object::Name(b"Font".to_vec()));
                 font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
 
-                // Always use Helvetica for font consistency
+                // Always use Helvetica for font consistency across all pages
                 font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
                 
-                // Set a standard name to ensure consistent rendering
+                // Ensure the font has a consistent name property on all pages
+                // This is important for consistent rendering across PDF viewers
                 font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
+                
+                debug!("Created consistent font entry for new dictionary, page ID: {:?}", page_id);
 
                 font_dict.set(font_name, Object::Dictionary(font_entry));
 
