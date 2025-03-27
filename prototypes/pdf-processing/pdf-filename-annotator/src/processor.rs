@@ -1,8 +1,8 @@
 use crate::config::Config;
 use crate::error::Error;
 // Scanner diagnostic module no longer used
-use log::{debug, error, info, warn};
-use lopdf::{dictionary, Document, Object, Stream};
+use log::{debug, error, info};
+use lopdf::{dictionary, Document, Object};
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};

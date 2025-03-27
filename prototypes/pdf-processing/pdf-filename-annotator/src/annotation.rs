@@ -76,13 +76,11 @@ impl Annotator {
             .last()
             .unwrap_or(0.0);
 
-        // Convert from font units to PDF units
-        // Increased from 0.75 to 1.0 to prevent text truncation
-        let font_scale_factor = 1.0; // Increased scale factor
+        // Convert from font units to PDF units and add buffer space to prevent truncation
+        let font_scale_factor = 1.2; // Increased scale factor with buffer space built in
         let text_width = text_width * font_scale_factor;
         
-        // Add a buffer to ensure the entire text is visible
-        let text_width_with_buffer = text_width + 10.0;
+        // Add a buffer to ensure the entire text is visible - but we directly use the calculated value
         let text_height = self.font_config.size * 1.2; // Add some padding
 
         // Create annotation dictionary
@@ -275,13 +273,9 @@ impl Annotator {
             .last()
             .unwrap_or(0.0);
 
-        // Convert from font units to PDF units
-        // Increased from 0.75 to 1.0 to prevent text truncation
-        let font_scale_factor = 1.0; // Increased scale factor
+        // Convert from font units to PDF units and add buffer space to prevent truncation
+        let font_scale_factor = 1.2; // Increased scale factor with buffer space built in
         let text_width = text_width * font_scale_factor;
-        
-        // Add a buffer to ensure the entire text is visible
-        let text_width_with_buffer = text_width + 10.0;
 
         // Calculate position based on corner
         match position.corner {
@@ -290,12 +284,12 @@ impl Annotator {
                 page_height - position.y_offset - self.font_config.size,
             ),
             Corner::TopRight => (
-                page_width - text_width_with_buffer - position.x_offset,
+                page_width - text_width - position.x_offset,
                 page_height - position.y_offset - self.font_config.size,
             ),
             Corner::BottomLeft => (position.x_offset, position.y_offset),
             Corner::BottomRight => (
-                page_width - text_width_with_buffer - position.x_offset,
+                page_width - text_width - position.x_offset,
                 position.y_offset,
             ),
         }
