@@ -116,6 +116,22 @@ impl Annotator {
             ]),
         );
 
+        // *** CRITICAL FIX: Explicitly create a resource dictionary for the annotation ***
+        // This ensures consistent font resources across all pages
+        let mut font_dict = lopdf::Dictionary::new();
+        let mut helvetica_font = lopdf::Dictionary::new();
+        helvetica_font.set("Type", Object::Name(b"Font".to_vec()));
+        helvetica_font.set("Subtype", Object::Name(b"Type1".to_vec()));
+        helvetica_font.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
+        helvetica_font.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
+        helvetica_font.set("Name", Object::Name(b"Helvetica".to_vec()));
+        font_dict.set("Helvetica", Object::Dictionary(helvetica_font));
+        
+        // Create and set a dedicated resource dictionary for this annotation
+        let mut dr_dict = lopdf::Dictionary::new();
+        dr_dict.set("Font", Object::Dictionary(font_dict));
+        annot_dict.set("DR", Object::Dictionary(dr_dict));
+        
         // Default appearance string (DA) - This is a key part of the font consistency issue
         // The PDF specification requires precise format for the DA string
         let font_size = self.font_config.size;
@@ -134,6 +150,11 @@ impl Annotator {
             ),
         );
 
+        // *** CRITICAL FIX: Remove any existing appearance stream (AP) ***
+        // This forces PDF viewers to use our DA string and resource dictionary
+        // If an AP entry exists, it can override our font settings
+        annot_dict.remove(b"AP");
+        
         // No border
         annot_dict.set(
             "Border",

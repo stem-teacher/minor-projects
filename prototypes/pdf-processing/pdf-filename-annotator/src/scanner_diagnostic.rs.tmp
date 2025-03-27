@@ -1,5 +1,0 @@
-// Temporary fix file
-// Fix these lines:
-// Line 893: if !other_content_types.iter().all(|t| t == first_content_type) {
-// Line 978: if !other_content_types.iter().all(|t| t == first_content_type) {
-// Replace with: if !other_content_types.iter().all(|t| *t == first_content_type) {
