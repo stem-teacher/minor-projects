@@ -1,0 +1,15 @@
+{
+  "input_dir": "/Volumes/second-store/scan/2025-T1/7SCIF",
+  "output_dir": "/Volumes/second-store/scan/2025-T1-annotated/7SCIF",
+  "recursive": false,
+  "font": {
+    "size": 12.0,
+    "family": "Helvetica",
+    "fallback": "Arial"
+  },
+  "position": {
+    "corner": "top-right",
+    "x_offset": 10.0,
+    "y_offset": 10.0
+  }
+}

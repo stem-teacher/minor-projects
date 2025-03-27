@@ -6,6 +6,30 @@ authors = ["Philip Haynes"]
 description = "A tool to annotate PDF files with their filenames"
 readme = "README.md"
 
+[[bin]]
+name = "pdf-filename-annotator"
+path = "src/main.rs"
+
+[[bin]]
+name = "multiple-choice-marking-guide"
+path = "src/bin/multiple_choice_marking_guide.rs"
+
+[[bin]]
+name = "analyze-pdf-annotations"
+path = "src/bin/analyze_pdf_annotations.rs"
+
+[[bin]]
+name = "read-annotations"
+path = "src/bin/read_annotations.rs"
+
+[[bin]]
+name = "read-annotations-standalone"
+path = "src/bin/read_annotations_standalone.rs"
+
+[[bin]]
+name = "read-pdf-annotations"
+path = "src/bin/read_pdf_annotations.rs"
+
 [dependencies]
 # PDF processing library
 lopdf = "^0.36.0"
