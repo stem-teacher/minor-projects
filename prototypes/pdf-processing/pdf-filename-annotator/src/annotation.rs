@@ -107,7 +107,7 @@ impl Annotator {
         annot_dict.set(
             "DA",
             Object::String(
-                format!("//{} {} Tf 0 0 0 rg", "Helvetica", font_size)
+                format!("/{}  {} Tf 0 0 0 rg", "Helvetica", font_size)
                     .as_bytes()
                     .to_vec(),
                 lopdf::StringFormat::Literal,
