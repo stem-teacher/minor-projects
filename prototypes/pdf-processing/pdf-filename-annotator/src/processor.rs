@@ -95,13 +95,8 @@ impl PdfProcessor {
         // This simplifies the application and provides consistent annotations
         info!("Processing with consistent annotation approach");
         
-        // Set scanner detection to false for all PDFs
-        let is_scanner_pdf = false;
-
-        // Log if this is a scanner PDF
-        if is_scanner_pdf {
-            debug!("Scanner PDF detected, will use special handling for first page");
-        }
+        // We're using a consistent approach for all PDFs
+        // No scanner detection logic is required
 
         // First, try to read the file with lopdf
         let mut doc = Document::load(input_path)?;
