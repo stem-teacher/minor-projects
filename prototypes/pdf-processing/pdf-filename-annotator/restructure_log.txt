@@ -1,0 +1,50 @@
+Directory Restructuring Log - Thu Mar 27 13:43:16 AEDT 2025
+Renaming original directory to 2025-T1-orig...
+Successfully renamed original directory
+Renaming annotated directory to 2025-T1...
+Successfully renamed annotated directory
+Copying non-PDF files from original to new structure...
+Processing class 7SCID...
+  Copied: 7SCID-Summary.pdf.to-rename-back
+  Copied: 7SCID-class-list.json
+  Copied: rename_files.sh
+Processing class 7SCIF...
+  Copied: 7SCIF-class-list.json
+  Copied: missing.txt
+  Copied: rename-files.sh
+Processing class 7SCIG...
+  Copied: .DS_Store
+  Copied: 7SCIG-class-list.json
+  Copied: missing.txt
+  Copied: rename_files.sh
+Processing class 7SCIO...
+  Copied: 7SCIO-class-list.json
+  Copied: rename-files.sh
+Processing class 7SCIR...
+  Copied: 7SCIR-class-list.json
+  Copied: missing.txt
+  Copied: rename-files.sh
+Processing class 7SCIS...
+  Copied: 7SCIS-class-list.json
+  Copied: missing.txt
+  Copied: rename-files.sh
+Verifying directory structure...
+Class 7SCID:
+  PDF files: Original:       30, New structure:       30
+  Non-PDF files: Original:        3, New structure:        3
+Class 7SCIF:
+  PDF files: Original:       29, New structure:       29
+  Non-PDF files: Original:        3, New structure:        3
+Class 7SCIG:
+  PDF files: Original:       30, New structure:       30
+  Non-PDF files: Original:        4, New structure:        4
+Class 7SCIO:
+  PDF files: Original:       30, New structure:       30
+  Non-PDF files: Original:        2, New structure:        2
+Class 7SCIR:
+  PDF files: Original:       30, New structure:       30
+  Non-PDF files: Original:        3, New structure:        3
+Class 7SCIS:
+  PDF files: Original:       29, New structure:       29
+  Non-PDF files: Original:        3, New structure:        3
+Directory restructuring completed at Thu Mar 27 13:43:16 AEDT 2025
