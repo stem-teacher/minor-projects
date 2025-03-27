@@ -104,6 +104,7 @@ impl Annotator {
         );
 
         // Default appearance string
+        // Always use consistent font size and family (Helvetica)
         let font_size = self.font_config.size;
         annot_dict.set(
             "DA",
@@ -489,7 +490,7 @@ impl Annotator {
         // Begin text object
         operations.push(Operation::new("BT", vec![]));
 
-        // Set font with proper operands
+        // Set font with proper operands - always use F0/Helvetica
         operations.push(Operation::new(
             "Tf",
             vec![
@@ -671,26 +672,12 @@ impl Annotator {
                     font_entry.set("Type", Object::Name(b"Font".to_vec()));
                     font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
 
-                    // Use the font family from our config
-                    let font_family = self.font_config.family.clone();
-                    let font_bytes = font_family.as_bytes().to_vec();
-                    font_entry.set("BaseFont", Object::Name(font_bytes));
+                    // Always use Helvetica for font consistency
+                    font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                     font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-
-                    // Add additional required entries
-                    if font_family.contains("Times") {
-                        // Times font family
-                        font_entry.set("Name", Object::Name(b"Times".to_vec()));
-                    } else if font_family.contains("Helvetica") {
-                        // Helvetica font family
-                        font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                    } else if font_family.contains("Courier") {
-                        // Courier font family
-                        font_entry.set("Name", Object::Name(b"Courier".to_vec()));
-                    } else {
-                        // Generic fallback
-                        font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                    }
+                    
+                    // Set a standard name to ensure consistent rendering
+                    font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
 
                     font_dict.set(font_name, Object::Dictionary(font_entry));
                 }
@@ -703,26 +690,12 @@ impl Annotator {
                 font_entry.set("Type", Object::Name(b"Font".to_vec()));
                 font_entry.set("Subtype", Object::Name(b"Type1".to_vec()));
 
-                // Use the font family from our config
-                let font_family = self.font_config.family.clone();
-                let font_bytes = font_family.as_bytes().to_vec();
-                font_entry.set("BaseFont", Object::Name(font_bytes));
+                // Always use Helvetica for font consistency
+                font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-
-                // Add additional required entries
-                if font_family.contains("Times") {
-                    // Times font family
-                    font_entry.set("Name", Object::Name(b"Times".to_vec()));
-                } else if font_family.contains("Helvetica") {
-                    // Helvetica font family
-                    font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                } else if font_family.contains("Courier") {
-                    // Courier font family
-                    font_entry.set("Name", Object::Name(b"Courier".to_vec()));
-                } else {
-                    // Generic fallback
-                    font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                }
+                
+                // Set a standard name to ensure consistent rendering
+                font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
 
                 font_dict.set(font_name, Object::Dictionary(font_entry));
 
