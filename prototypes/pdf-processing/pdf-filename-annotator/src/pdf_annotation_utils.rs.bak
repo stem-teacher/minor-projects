@@ -1,0 +1,306 @@
+use std::collections::HashMap;
+use lopdf::{Document, Object, Dictionary, ObjectId};
+use anyhow::{Result, Context, anyhow};
+
+/// Structure to represent a PDF annotation
+#[derive(Debug, Clone)]
+pub struct PdfAnnotation {
+    /// Annotation type (e.g., "Circle", "Square", "Highlight")
+    pub annotation_type: String,
+    
+    /// Bounding rectangle [x1, y1, x2, y2]
+    pub rect: [f64; 4],
+    
+    /// Additional properties specific to the annotation type
+    pub properties: HashMap<String, String>,
+    
+    /// Reference to the original annotation object in the document
+    pub object_id: Option<ObjectId>,
+    
+    /// Contents of the annotation
+    pub contents: Option<String>,
+}
+
+impl PdfAnnotation {
+    /// Create a new annotation from a dictionary and object ID
+    pub fn from_dictionary(dict: &Dictionary, object_id: Option<ObjectId>) -> Result<Self> {
+        // Get annotation type
+        let annot_type = match dict.get(b"Subtype") {
+            Ok(Object::Name(name)) => String::from_utf8_lossy(name).to_string(),
+            _ => return Err(anyhow!("Missing or invalid annotation subtype")),
+        };
+        
+        // Get rect - required for all annotations
+        let rect = match dict.get(b"Rect") {
+            Ok(Object::Array(array)) if array.len() == 4 => {
+                let mut coords = [0.0; 4];
+                for (i, val) in array.iter().enumerate() {
+                    if let Object::Real(num) = val {
+                        coords[i] = *num;
+                    } else if let Object::Integer(num) = val {
+                        coords[i] = *num as f64;
+                    }
+                }
+                coords
+            },
+            _ => return Err(anyhow!("Missing or invalid annotation rectangle")),
+        };
+        
+        // Extract common annotation properties
+        let mut properties = HashMap::new();
+        
+        // Color
+        if let Ok(Object::Array(color)) = dict.get(b"C") {
+            let color_values: Vec<f64> = color.iter().filter_map(|v| {
+                match v {
+                    Object::Real(num) => Some(*num),
+                    Object::Integer(num) => Some(*num as f64),
+                    _ => None,
+                }
+            }).collect();
+            properties.insert("color".to_string(), format!("{:?}", color_values));
+        }
+        
+        // Border style
+        if let Ok(Object::Array(border)) = dict.get(b"Border") {
+            properties.insert("border".to_string(), format!("{:?}", border));
+        }
+        
+        // Border style dictionary
+        if let Ok(Object::Dictionary(bs)) = dict.get(b"BS") {
+            properties.insert("border_style".to_string(), format!("{:?}", bs));
+        }
+        
+        // Appearance dictionary - important for visual appearance
+        if let Ok(Object::Dictionary(ap)) = dict.get(b"AP") {
+            properties.insert("has_appearance".to_string(), "true".to_string());
+            
+            // Store appearance stream references
+            if let Ok(Object::Reference(normal_ref)) = ap.get(b"N") {
+                properties.insert("normal_appearance_ref".to_string(), format!("{:?}", normal_ref));
+            }
+        }
+        
+        // Get annotation-specific properties based on type
+        match annot_type.as_str() {
+            "Circle" | "Square" => {
+                // Extract fill color if present
+                if let Ok(Object::Array(fill)) = dict.get(b"IC") {
+                    let fill_values: Vec<f64> = fill.iter().filter_map(|v| {
+                        match v {
+                            Object::Real(num) => Some(*num),
+                            Object::Integer(num) => Some(*num as f64),
+                            _ => None,
+                        }
+                    }).collect();
+                    properties.insert("fill_color".to_string(), format!("{:?}", fill_values));
+                }
+            },
+            "Highlight" => {
+                // Extract quadpoints for text highlighting
+                if let Ok(Object::Array(points)) = dict.get(b"QuadPoints") {
+                    properties.insert("quad_points".to_string(), format!("{:?}", points));
+                }
+            },
+            "FreeText" => {
+                // Extract text content and appearance
+                if let Ok(Object::String(da, _)) = dict.get(b"DA") {
+                    properties.insert("da_string".to_string(), 
+                                    String::from_utf8_lossy(da).to_string());
+                }
+            },
+            _ => {}
+        }
+        
+        // Extract contents if present
+        let contents = if let Ok(Object::String(contents, _)) = dict.get(b"Contents") {
+            Some(String::from_utf8_lossy(contents).to_string())
+        } else {
+            None
+        };
+        
+        Ok(PdfAnnotation {
+            annotation_type: annot_type,
+            rect,
+            properties,
+            object_id,
+            contents,
+        })
+    }
+    
+    /// Convert the annotation to a dictionary for insertion into a PDF
+    pub fn to_dictionary(&self) -> Dictionary {
+        let mut dict = Dictionary::new();
+        
+        // Set standard annotation properties
+        dict.set(b"Type", Object::Name(b"Annot".to_vec()));
+        dict.set(b"Subtype", Object::Name(self.annotation_type.as_bytes().to_vec()));
+        
+        // Set rectangle coordinates
+        let rect = Object::Array(vec![
+            Object::Real(self.rect[0]),
+            Object::Real(self.rect[1]),
+            Object::Real(self.rect[2]),
+            Object::Real(self.rect[3]),
+        ]);
+        dict.set(b"Rect", rect);
+        
+        // Flag to make annotation appear in print
+        dict.set(b"F", Object::Integer(4));
+        
+        // Set contents if present
+        if let Some(contents) = &self.contents {
+            dict.set(b"Contents", Object::String(contents.as_bytes().to_vec(), 
+                                        lopdf::StringFormat::Literal));
+        }
+        
+        // Apply properties based on annotation type
+        match self.annotation_type.as_str() {
+            "Circle" | "Square" => {
+                // Set color if present
+                if let Some(color) = self.properties.get("color") {
+                    // In a real implementation, we would parse the color string
+                    // For now, just use a default red color
+                    dict.set(b"C", Object::Array(vec![
+                        Object::Real(1.0),
+                        Object::Real(0.0),
+                        Object::Real(0.0),
+                    ]));
+                }
+                
+                // Set fill color if present
+                if let Some(fill_color) = self.properties.get("fill_color") {
+                    // In a real implementation, we would parse the fill color string
+                    // For now, just use a default transparent yellow color
+                    dict.set(b"IC", Object::Array(vec![
+                        Object::Real(1.0),
+                        Object::Real(1.0),
+                        Object::Real(0.0),
+                        Object::Real(0.2),
+                    ]));
+                }
+            },
+            "Highlight" => {
+                // Set highlight color (default yellow)
+                dict.set(b"C", Object::Array(vec![
+                    Object::Real(1.0),
+                    Object::Real(1.0),
+                    Object::Real(0.0),
+                ]));
+                
+                if let Some(quad_points) = self.properties.get("quad_points") {
+                    // In a real implementation, we would parse the quadpoints string
+                    // For now, just use the same rect coordinates as the annotation
+                    let qp = Object::Array(vec![
+                        Object::Real(self.rect[0]),
+                        Object::Real(self.rect[1]),
+                        Object::Real(self.rect[2]),
+                        Object::Real(self.rect[1]),
+                        Object::Real(self.rect[0]),
+                        Object::Real(self.rect[3]),
+                        Object::Real(self.rect[2]),
+                        Object::Real(self.rect[3]),
+                    ]);
+                    dict.set(b"QuadPoints", qp);
+                }
+            },
+            "FreeText" => {
+                // Set appearance string if present
+                if let Some(da_string) = self.properties.get("da_string") {
+                    dict.set(b"DA", Object::String(da_string.as_bytes().to_vec(), 
+                                        lopdf::StringFormat::Literal));
+                }
+            },
+            _ => {}
+        }
+        
+        dict
+    }
+}
+
+/// Extract all annotations from a document's first page
+pub fn extract_annotations_from_document(doc: &Document) -> Result<Vec<PdfAnnotation>> {
+    let pages = doc.get_pages();
+    if pages.is_empty() {
+        return Err(anyhow!("Document has no pages"));
+    }
+    
+    // Get the first page
+    let first_page_id = pages.get(&1).ok_or_else(|| anyhow!("Failed to get first page"))?;
+    let first_page = doc.get_dictionary(*first_page_id)
+        .with_context(|| "Failed to get first page dictionary")?;
+    
+    // Get annotations array
+    let annotations = match first_page.get(b"Annots") {
+        Ok(Object::Array(annots)) => annots,
+        Ok(_) => return Err(anyhow!("Annotations not in expected format")),
+        Err(_) => return Ok(Vec::new()), // No annotations found
+    };
+    
+    let mut extracted_annotations = Vec::new();
+    
+    for annot_ref in annotations {
+        match annot_ref {
+            Object::Reference(id) => {
+                if let Ok(annot_dict) = doc.get_dictionary(*id) {
+                    match PdfAnnotation::from_dictionary(annot_dict, Some(*id)) {
+                        Ok(annotation) => extracted_annotations.push(annotation),
+                        Err(e) => {
+                            // Log error but continue processing other annotations
+                            eprintln!("Warning: Failed to extract annotation: {}", e);
+                        }
+                    }
+                }
+            },
+            Object::Dictionary(dict) => {
+                match PdfAnnotation::from_dictionary(dict, None) {
+                    Ok(annotation) => extracted_annotations.push(annotation),
+                    Err(e) => {
+                        // Log error but continue processing other annotations
+                        eprintln!("Warning: Failed to extract annotation: {}", e);
+                    }
+                }
+            },
+            _ => continue,
+        }
+    }
+    
+    Ok(extracted_annotations)
+}
+
+/// Apply annotations to a document's first page
+pub fn apply_annotations_to_document(
+    doc: &mut Document, 
+    annotations: &[PdfAnnotation]
+) -> Result<()> {
+    let pages = doc.get_pages();
+    if pages.is_empty() {
+        return Err(anyhow!("Document has no pages"));
+    }
+    
+    // Get the first page
+    let first_page_id = pages.get(&1).ok_or_else(|| anyhow!("Failed to get first page"))?;
+    let first_page = doc.get_dictionary(*first_page_id)?;
+    
+    // Get or create annotations array
+    let mut annots_array = match first_page.get(b"Annots") {
+        Ok(Object::Array(annots)) => annots.clone(),
+        _ => Vec::new(),
+    };
+    
+    // Apply each annotation to the document
+    for annotation in annotations {
+        let dict = annotation.to_dictionary();
+        let id = doc.add_object(Object::Dictionary(dict));
+        annots_array.push(Object::Reference(id));
+    }
+    
+    // Update the page's annotations array
+    let mut first_page_dict = first_page.clone();
+    first_page_dict.set(b"Annots", Object::Array(annots_array));
+    
+    // Update the page in the document
+    doc.objects.insert(*first_page_id, Object::Dictionary(first_page_dict));
+    
+    Ok(())
+}
