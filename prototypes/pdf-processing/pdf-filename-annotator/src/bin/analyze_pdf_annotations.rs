@@ -7,8 +7,6 @@
 use clap::Parser;
 use lopdf::{Document, Object, Dictionary};
 use std::path::PathBuf;
-use std::fs;
-use std::io::{self, Write};
 use anyhow::{Result, Context};
 use colored::*;
 
@@ -118,7 +116,7 @@ fn analyze_page(doc: &Document, page_id: (u32, u16), page_num: u32, detailed: bo
     Ok(())
 }
 
-fn analyze_annotation(doc: &Document, dict: &Dictionary, index: usize, page_num: u32, detailed: bool) -> Result<()> {
+fn analyze_annotation(_doc: &Document, dict: &Dictionary, index: usize, _page_num: u32, detailed: bool) -> Result<()> {
     println!("\n  {}:", format!("Annotation {}", index).bold().yellow());
     
     // Check annotation type
@@ -208,7 +206,7 @@ fn analyze_da_string(da_string: &str) {
     }
 }
 
-fn analyze_page_resources(doc: &Document, page_dict: &Dictionary, page_num: u32) -> Result<()> {
+fn analyze_page_resources(doc: &Document, page_dict: &Dictionary, _page_num: u32) -> Result<()> {
     println!("\n  {}", "Page Resources:".bold().magenta());
     
     // Check for Resources dictionary

@@ -793,10 +793,12 @@ dependencies = [
 name = "pdf_exam_tools_lib"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "lopdf",
  "serde",
  "serde_json",
  "thiserror 1.0.69",
+ "walkdir",
 ]
 
 [[package]]

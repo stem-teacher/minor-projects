@@ -1,7 +1,6 @@
 use std::path::{Path, PathBuf};
 use std::fs;
 use clap::Parser;
-use log::info;
 use walkdir::WalkDir;
 
 // Import from main library - use the new module

@@ -1,6 +1,5 @@
 use std::path::Path;
 use anyhow::{Result, Context};
-use log::{info, error};
 use lopdf::{Document, Object, Dictionary};
 use std::collections::HashMap;
 
@@ -43,7 +42,7 @@ fn main() -> Result<()> {
 #[derive(Debug, Clone)]
 struct PdfAnnotation {
     annotation_type: String,
-    rect: [f64; 4],
+    rect: [f32; 4],
     properties: HashMap<String, String>,
     contents: Option<String>,
 }
@@ -142,11 +141,11 @@ fn extract_annotation_data(dict: &Dictionary) -> Result<Option<PdfAnnotation>> {
     // Get rect - required for all annotations
     let rect = match dict.get(b"Rect") {
         Ok(Object::Array(array)) if array.len() == 4 => {
-            let mut coords = [0.0; 4];
+            let mut coords = [0.0f32; 4];
             for (i, val) in array.iter().enumerate() {
                 match val {
                     Object::Real(num) => coords[i] = *num,
-                    Object::Integer(num) => coords[i] = *num as f64,
+                    Object::Integer(num) => coords[i] = *num as f32,
                     _ => {}
                 }
             }
@@ -168,10 +167,10 @@ fn extract_annotation_data(dict: &Dictionary) -> Result<Option<PdfAnnotation>> {
     
     // Color
     if let Ok(Object::Array(color)) = dict.get(b"C") {
-        let color_values: Vec<f64> = color.iter().filter_map(|v| {
+        let color_values: Vec<f32> = color.iter().filter_map(|v| {
             match v {
                 Object::Real(num) => Some(*num),
-                Object::Integer(num) => Some(*num as f64),
+                Object::Integer(num) => Some(*num as f32),
                 _ => None,
             }
         }).collect();
@@ -233,10 +232,10 @@ fn extract_annotation_data(dict: &Dictionary) -> Result<Option<PdfAnnotation>> {
         "Circle" | "Square" => {
             // Fill color
             if let Ok(Object::Array(fill)) = dict.get(b"IC") {
-                let fill_values: Vec<f64> = fill.iter().filter_map(|v| {
+                let fill_values: Vec<f32> = fill.iter().filter_map(|v| {
                     match v {
                         Object::Real(num) => Some(*num),
-                        Object::Integer(num) => Some(*num as f64),
+                        Object::Integer(num) => Some(*num as f32),
                         _ => None,
                     }
                 }).collect();

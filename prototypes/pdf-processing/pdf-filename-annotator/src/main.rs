@@ -6,7 +6,8 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 // Logging is initialized via env_logger
-use pdf_filename_annotator::{Config, PdfProcessor};
+use pdf_exam_tools_lib::Config;
+use pdf_filename_annotator::PdfProcessor;
 use std::path::PathBuf;
 use std::fs;
 

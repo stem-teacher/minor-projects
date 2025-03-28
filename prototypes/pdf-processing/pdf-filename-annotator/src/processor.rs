@@ -1,12 +1,9 @@
-use crate::config::Config;
-use crate::error::Error;
+use pdf_exam_tools_lib::{Config, Error, file_utils};
 // Scanner diagnostic module no longer used
 use log::{debug, error, info};
 use lopdf::{dictionary, Document, Object};
 use std::collections::HashMap;
-use std::fs;
 use std::path::{Path, PathBuf};
-use walkdir::WalkDir;
 
 /// Summary of PDF processing results
 #[derive(Debug)]
@@ -40,10 +37,19 @@ impl PdfProcessor {
     /// Process all PDF files in the configured input directory
     pub fn process_all(&self) -> Result<ProcessingSummary, Error> {
         // Ensure output directory exists
-        self.ensure_output_dir()?;
+        file_utils::ensure_directory(&self.config.output_dir)
+            .map_err(|e| Error::Io(std::io::Error::new(std::io::ErrorKind::Other, e.to_string())))?;
 
         // Find all PDF files in the input directory
-        let pdf_files = self.find_pdf_files()?;
+        let pdf_files = file_utils::find_pdf_files(&self.config.input_dir, self.config.recursive, "*.pdf")
+            .map_err(|e| Error::Io(std::io::Error::new(std::io::ErrorKind::Other, e.to_string())))?;
+        
+        // Check if any PDF files were found
+        if pdf_files.is_empty() {
+            return Err(Error::NoPdfFiles(self.config.input_dir.clone()));
+        }
+        
+        info!("Found {} PDF files in {}", pdf_files.len(), self.config.input_dir.display());
 
         let mut summary = ProcessingSummary {
             files_processed: 0,
@@ -81,7 +87,7 @@ impl PdfProcessor {
     /// Process a single PDF file
     pub fn process_file(&self, input_path: &Path) -> Result<usize, Error> {
         // Generate output path
-        let output_path = self.generate_output_path(input_path);
+        let output_path = file_utils::generate_output_path(input_path, &self.config.input_dir, &self.config.output_dir);
 
         // Get the filename (for annotation)
         let filename = input_path
@@ -237,7 +243,7 @@ impl PdfProcessor {
         text: &str,
         x: f32,
         y: f32,
-    ) -> Result<(), crate::error::AnnotationError> {
+    ) -> Result<(), pdf_exam_tools_lib::AnnotationError> {
         // Use the new add_text_annotation method which creates proper FreeText annotations
         annotator.add_text_annotation(doc, page_id, text, x, y)
     }
@@ -628,86 +634,11 @@ impl PdfProcessor {
         Ok(media_box)
     }
 
-    /// Find all PDF files in a directory, optionally recursively
-    fn find_pdf_files(&self) -> Result<Vec<PathBuf>, Error> {
-        let dir = &self.config.input_dir;
+    
 
-        // Check if directory exists
-        if !dir.exists() {
-            return Err(Error::DirectoryNotFound(dir.to_path_buf()));
-        }
+    
 
-        // Check if directory is readable
-        if let Err(e) = fs::read_dir(dir) {
-            return Err(Error::Io(e));
-        }
-
-        let mut pdf_files = Vec::new();
-
-        // Use WalkDir to iterate through files
-        let walker = if self.config.recursive {
-            WalkDir::new(dir)
-        } else {
-            WalkDir::new(dir).max_depth(1)
-        };
-
-        for entry in walker.into_iter().filter_map(Result::ok) {
-            let path = entry.path();
-            if path.is_file()
-                && path
-                    .extension()
-                    .map_or(false, |ext| ext.eq_ignore_ascii_case("pdf"))
-            {
-                pdf_files.push(path.to_path_buf());
-                debug!("Found PDF: {}", path.display());
-            }
-        }
-
-        // Check if any PDF files were found
-        if pdf_files.is_empty() {
-            return Err(Error::NoPdfFiles(dir.to_path_buf()));
-        }
-
-        info!("Found {} PDF files in {}", pdf_files.len(), dir.display());
-        Ok(pdf_files)
-    }
-
-    /// Ensure output directory exists, creating it if necessary
-    fn ensure_output_dir(&self) -> Result<(), Error> {
-        let dir = &self.config.output_dir;
-
-        if !dir.exists() {
-            info!("Creating output directory: {}", dir.display());
-            fs::create_dir_all(dir)?;
-        } else if !dir.is_dir() {
-            return Err(Error::Io(std::io::Error::new(
-                std::io::ErrorKind::InvalidInput,
-                format!(
-                    "Output path exists but is not a directory: {}",
-                    dir.display()
-                ),
-            )));
-        }
-
-        // Check if directory is writable by creating and removing a test file
-        let test_file = dir.join(".test_write_permission");
-        match fs::write(&test_file, b"test") {
-            Ok(_) => {
-                let _ = fs::remove_file(test_file);
-                Ok(())
-            }
-            Err(_) => Err(Error::PermissionDenied(dir.to_path_buf())),
-        }
-    }
-
-    /// Generate output path for a processed PDF
-    fn generate_output_path(&self, input_path: &Path) -> PathBuf {
-        // Get the filename from the input path
-        let filename = input_path.file_name().unwrap_or_default();
-
-        // Create the output path by joining the output directory and filename
-        self.config.output_dir.join(filename)
-    }
+    
 
     /// Get page errors for a file
     ///
@@ -724,7 +655,7 @@ impl PdfProcessor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::config::{Config, FontConfig, PositionConfig};
+    use pdf_exam_tools_lib::{Config, FontConfig, PositionConfig};
     use assert_fs::prelude::*;
     // These imports are used in processor.rs itself, not needed in tests
 
@@ -790,10 +721,8 @@ mod tests {
             position: PositionConfig::default(),
         };
 
-        let processor = PdfProcessor::new(config);
-
-        // Test finding PDF files
-        let pdf_files = processor.find_pdf_files().unwrap();
+        // Test finding PDF files using library function
+        let pdf_files = file_utils::find_pdf_files(temp_dir.path(), false, "*.pdf").unwrap();
         assert_eq!(pdf_files.len(), 2);
 
         temp_dir.close().unwrap();
