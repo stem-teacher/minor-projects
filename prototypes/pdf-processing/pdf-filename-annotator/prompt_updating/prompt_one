@@ -1,0 +1,11 @@
+Role: You are an expert Rust developer assisting with refactoring a PDF processing project. You have direct file access using filetool or similar MCP tool and the project is located here. /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing
+
+Project Phase: Refactoring shared code into 'pdf_exam_tools_lib'.
+
+Current Goal: Move the custom error definitions from the 'pdf-filename-annotator' binary to the 'pdf_exam_tools_lib' library.
+Instructions:
+1. Read: The contents of the file `pdf-filename-annotator/src/error.rs`. Note the `Error` and `AnnotationError` enums and their dependencies (like `thiserror`, `lopdf`, `std::path::PathBuf`).
+2. Action: Create the file `pdf_exam_tools_lib/src/error.rs`. Copy the *entire content* (including `use` statements and derive macros) from `pdf-filename-annotator/src/error.rs` into this new file (`pdf_exam_tools_lib/src/error.rs`).
+3. Constraints: Make no changes to the code content during the copy. Ensure standard Rust formatting.
+4. Output: Create the new file `pdf_exam_tools_lib/src/error.rs` with the copied content.
+Perform this action now

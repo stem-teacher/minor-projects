@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2" # Recommended for workspaces
+members = [
+    "pdf_exam_tools_lib",
+    "pdf-filename-annotator",
+]
+

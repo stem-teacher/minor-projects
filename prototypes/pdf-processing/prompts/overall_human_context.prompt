@@ -1,0 +1,2422 @@
+# Current Workflow
+1. I write a prompt for what I would like to add.
+2. Using the specification-system-meta.prompt, I enrich the prompt to create an AI specification.
+3. Using Claude Desktop with the coding model, I create a specification.
+4. I then have Claude desktop create a detailed implementation model for Claude Code with an implementation plan & checklists. I have attached sample.
+5. I then run Claude Code to build the component.
+6. I manually check operation.
+
+# Limitations & Issues
+Running out of Claude Desktop context
+Claude Code context.
+Open AI integration & length.
+Still getting too much accidental complexity due to context message length growth.
+Not using Anthropic or OpenAI prompt caching.
+Not using examples as part of the caching.
+Not caching specifications such as book paper eetc.
+PDF processing in Anthropic.
+Cache PDFs to improve performance on repeated queries:
+
+# Constraints
+Proper PDF editing operations, equivalent to that which you would find in the Mac Preview application.
+High quality OCR
+Able to connect to an MCP server to access knowledge graph, AI and other functions.
+
+
+# Questions
+What would be the best implementation language? Python, Typescript or Rust?
+
+
+# Software Engineering and Teaching as an Exercise in Knowledge Graph Construction
+
+## Context
+After having worked in the software industry for over 35 years, I am in the process of retraining to become a High School Science Teacher and am in the second and final year of a Masters in Teaching course at Macquarie Uni.
+With teaching, there are lots of documents to process and navigate such as curriculum, lesson plans to development, classes to deliver, exams to prepare and then mark & grade. All this in a real world teaching environment is largely done manually and is thus highly labour intensive and  error prone. While there is academic literature on student centered learning, the practical reality is that this labour intensity drives industrial era approaches to make possible getting through all the learning material.
+
+With the emergence of new AI tools and technologies, some particularly suited to coding (such as Claude 3.7, Claude Code and OpenAI O3 models), initial work has been done to use AI to economically develop software tooling to support teaching.
+
+Thus the current plan is to take the Syllabus for different courses including Stage 6 Physics, Stage 6 Chemistry, Stage 6 Investigating Science & stages 4 & 5 and convert this into subject knowledge graphs, that are enriched with content so student specific material can be generated as students progress through a given course they can learn material, enrich their understanding through formative and summative tests and learning activities.
+
+## Development of Science Pedagogy through the lense of Human Cognition
+As evidenced by a course on human cognition as part of the MTeach Program, taking into account the functioning functioning of human cognition, is clearly essential to the development of scientifically grounded pedagogy.  The following, grosslly over simplified, is the working information model of how people learn:
+People learn in information chunks
+Information is received through multi-model sensors such as sight, sound, touch etc.
+Different parts of the brain are activated to incorporate and filter the sensory data stream.
+Attention mechanisms operate to identify relevant information for processing within a persons working memory.
+Working memory is finite.
+Cognitive processing occurs to assess, comprehend and act upon working memory.
+Action and understandng are a function of the existing schema's within a persons prior learning.
+Where information falls within a persons existing knowledge schemas, responses can be automatic, directly analogous to someones hand automatically reacting when exposed to a flame.
+Feed back driven learning from external and internal signals, potentially when assessed against an objective measure, is a common learning function. Within the AI literature this is known as Reinforcement Learning.
+As people continue to learn, the depth of learning may increase and modeled using approaches such as Blooms Taxonomy.
+
+There are multiple parts of the brain into which information may be encoded and understood.  Long term memory is distributed and stored in the same cortical areas that initially processed them.
+
+
+# Implications for Teaching
+
+<PROMPT>
+
+# Context
+I am using AI tools to assist with my software development processes. However, with my current process the tooling is unable to deal with an iterative development cycle and continues to run out of context leading to slow down of operation and the tooling getting "lost". I am seeking software engineering process advice on the best way to improve the process.
+
+I describe the current approach with example, and then highlight problems with it.
+
+# Current Process
+The current process is to:
+a) Write a specification of the functionality I would like to build.
+b) Enrich the specification using a prompt engineering meta-prompt (attached).
+c) Using Claude Code Desktop & the Sonnet 3.7 model with extended thinking, pass the location of the software development, indicate where I would like the specification to be written and the prompt.
+d) Claude Sonnet reads the prompt and using the file MCP tool, writes out the specification and implementation plan for Claude Code to complete.
+e) Using Claude Code, I pass the location of the specification and  plan for it to complete a build.
+f) With a detailed specification and guard rails, Claude Code is getting better at making a first update iteration.
+
+
+# Problems
+1. During the generation of the specification, Claude Sonnet starts to generate significant existing context. This requires continual manual inputing the command "Continue" for claude to finish generating the specification. At the end of the process, Claude Sonnet is effectively out of useful context to complete subsequent tasks.
+
+2. I will complete testing of newly created functionality & invariably corrections will be required, either due to ommisions in the specification and / or issues with the available environment.
+
+3. However, there is now no context to create an update to the original specification. The current method of trying to restart a context in another chat context provides an inadequate representation of the context and the update becomes very long, inaccurate and the tracking inaccurate. Effectively, causing the project update to be completely restarted.
+
+The prompt, and generated specifications and tracking artifacts are attached for a process to make an update to a MCP knowledge graph application, where as a result of testing, ommissions in the functions were identified, and a simple process to update the specification & tracking so Claude Code could make a short update was not possible.
+
+
+# Solution Concept
+1. Modeling the process of human learning where people learn in chunks, rather than directly modelling specifications, plans and tracking as documents, they are instead modelled as knowledge graphs.
+2. When an AI context starts, it starts from a node on the knowledge graph network with all the context, or the edges to create the context available to navigate.
+3. As new knowledge is found or gathered, the knowledge graph is continually updated.
+4. When a given task or activity is completed, somehow, the working information is either compacted or moved to another location where it does not need to be read for normal operation to continue.
+5. When an update to both the knowledge graph and a re-execution of a task is required, just the specification artifact and the task needs to be updated and the current location navigating through the knowledge graph for tasks execution moved, prior to re-establishment of processing.
+6. It should be possible to save a knowledge graph to JSON file and delete it from an active database, and /or restore it.
+7. Furthermore, the process to have code, processing steps, specifications to be reviewed by other AI's using an MCP interface to provide higher quality and more reliable steps is not currently defined.
+
+# Solution Testing
+Attached is the meta-prompt, the updated specification prompt, the Claude generated plan and tracking information, and then the test that caused the process to stop due to running out of context.
+
+Attached is MCP specifications for the Knowledge Graph system under construction, the ai_router tool and file_handling tool.
+
+# The Request
+Please assist in helping to define a set of prompts and processes to enable smooth ongoing development. In doing so, please demonstrate the approach by modifying the MCP tool artifacts in such a way to demonstrate the new process.
+
+This should also include an overall software engineering system prompt.
+
+</PROMPT>
+
+<meta-system-prompt>
+CONTEXT: We are going to create one of the best AI prompts ever written. The best prompts include comprehensive details to fully inform the Large Language Model of the prompt’s: goals, required areas of expertise, domain knowledge, preferred format, target audience, references, examples, and the best approach to accomplish the objective. Based on this and the following information, you will be able write this exceptional prompt.
+
+ROLE: You are an LLM prompt generation expert. You are known for creating extremely detailed prompts that result in LLM outputs far exceeding typical LLM responses. The prompts you write leave nothing to question because they are both highly thoughtful and extensive.
+
+ACTION:
+
+1) Before you begin writing this prompt, you will first look to receive the prompt topic or theme. If I don’t provide the topic or theme for you, please request it.
+
+2) Once you are clear about the topic or theme, please also review the Format and Example provided below.
+
+3) If necessary, the prompt should include “fill in the blank” elements for the user to populate based on their needs.
+
+4) Take a deep breath and take it one step at a time.
+
+5) Once you’ve ingested all of the information, write the best prompt ever created.
+
+FORMAT: For organizational purposes, you will use an acronym called “C.R.A.F.T.” where each letter of the acronym CRAFT represents a section of the prompt. Your format and section descriptions for this prompt development are as follows:
+
+Context: This section describes the current context that outlines the situation for which the prompt is needed. It helps the LLM understand what knowledge and expertise it should reference when creating the prompt.
+
+Role: This section defines the type of experience the LLM has, its skill set, and its level of expertise relative to the prompt requested. In all cases, the role described will need to be an industry-leading expert with more than two decades or relevant experience and thought leadership.
+
+Action: This is the action that the prompt will ask the LLM to take. It should be a numbered list of sequential steps that will make the most sense for an LLM to follow in order to maximize success.
+
+Format: This refers to the structural arrangement or presentation style of the LLM’s generated content. It determines how information is organized, displayed, or encoded to meet specific user preferences or requirements. Format types include: An essay, a table, a coding language, plain text, markdown, a summary, a list, json documents etc.  Response language should be formal academic and use British english spelling.
+
+Target Audience: This will be the ultimate consumer of the output that your prompt creates. It can include demographic information, geographic information, language spoken, reading level, preferences, etc.
+
+TARGET AUDIENCE: The target audience for this prompt creation is ChatGPT 4.5,  ChatGPT o1,  Anthropic Claude 3.7 and other advanced AI models.
+
+</meta-system-prompt>
+
+<update specification>
+# C.R.A.F.T. PROMPT FOR DEVELOPING A SPECIFICATION:
+
+## C – CONTEXT
+
+You are creating a precise and detailed specification to enhance and update an existing SurrealDB MCP Knowledge Graph Implementation. The system you will be improving is a knowledge graph tool that enables external memory storage for an LLM-based desktop environment called Claude Desktop, through the Model Context Protocol (MCP). Although partially functional, the current implementation suffers from two primary issues:
+
+The “add_observations” functionality does not reliably add new observations.
+The tool times out when integrated with Claude Desktop, and does not recover correctly without intervening resets.
+There is a need to develop and formalise a more disciplined software engineering approach to resolve these systemic issues, including the creation of a dedicated MCP client test harness. This test harness will confirm that the system can:
+• Create, update, and delete knowledge entities (including multi-attribute observations).
+• Create, traverse, and delete relationships between entities in SurrealDB.
+• Operate robustly without timing out or irreparably failing.
+• Integrate with the official MCP TypeScript SDK as needed or fix the existing SDK approach instead of repeatedly rewriting large sections of the codebase in an unstructured manner.
+
+Key references and details about the SurrealDB MCP Knowledge Graph ecosystem include:
+• SurrealDB used for persistent storage (entities, observations, relationships).
+• MCP specification and TypeScript SDK that handles JSON-RPC communication over stdio.
+• A mixture of ES modules and TypeScript solutions that need standardisation for reliability.
+• The desire to extend functionality to support comprehensive testing, validation, relation traversal, data integrity checks, and error recovery.
+
+Overview of relevant materials you should draw upon:
+• Existing codebase location: /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp
+• Current Claude Desktop integration:
+{
+"knowledge": {
+"command": "/Users/philiphaynes/.nvm/versions/node/v22.14.0/bin/node",
+"args": [
+"/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/src/index.js"
+],
+"env": {
+"SURREALDB_URL": "http://localhost:8070",
+"SURREALDB_USER": "",
+"SURREALDB_PASS": "",
+"SURREALDB_NS": "development",
+"SURREALDB_DB": "knowledge"
+}
+}
+}
+• Code for MCP TypeScript SDK: https://github.com/modelcontextprotocol/typescript-sdk
+
+## R – ROLE
+
+You are an industry-leading technical architect with more than two decades of relevant experience in knowledge graph integration, distributed systems, and robust software engineering practices. You are fully versed in SurrealDB, the Model Context Protocol, and TypeScript-based development. Your reputation for designing bulletproof architectures and highly reliable software approaches guides every detailed recommendation you make for this MCP Knowledge Graph project.
+
+## A – ACTION
+
+Please perform the following numbered steps to produce a comprehensive specification that addresses all current issues and lays the groundwork for future expansion:
+
+### Background Overview:
+a) Summarise the overall problem (particularly tying in how SurrealDB is leveraged by the MCP knowledge graph, and how the system is currently failing).
+b) Outline the escalation of the current issues and how rewriting code in an ad hoc manner has hindered maintainability.
+Objectives and Scope:
+a) Clearly define the goals of the specification, including short-term fixes (e.g., resolving observation insertion and time-out failures) and longer-term architectural enhancements (e.g., standardising the TypeScript approach, robust error recovery).
+b) Highlight the rationale for developing a test MCP client that can thoroughly exercise all knowledge graph operations.
+System Architecture Review:
+a) Provide a high-level diagram or textual breakdown of the updated knowledge graph system, including the roles of SurrealDB, the MCP TypeScript SDK, and the JSON-RPC handlers.
+b) Propose an approach for reusing or modifying the official MCP TypeScript SDK where necessary, rather than rewriting large sections of the codebase.
+Functional Specifications and Details:
+a) Describe each critical function (create_entities, read_graph, search_nodes, open_nodes, create_relations, etc.)—particularly focusing on add_observations and how to address its malfunction.
+b) Provide design choices for handling time-out issues and maintaining state if the connection is dropped, including reconnection or recovery logic.
+c) Incorporate recommended data validation, sanitisation, or schema evolution strategies for SurrealDB.
+## Testing and Verification Plan:
+a) Specify how the test MCP client will be implemented, including test coverage for each knowledge graph function.
+b) Propose a structure for verifying add_observations across an end-to-end scenario.
+c) Define success criteria for recovery from time-out or connection failure scenarios within Claude Desktop.
+### Implementation Timeline and Milestones:
+a) Provide a phased rollout strategy:
+i) Immediate Fixes (e.g., patching add_observations).
+ii) Mid-Term Stabilisation (e.g., standardising module usage; establishing better error handling).
+iii) Future Enhancements (e.g., advanced queries, analytics, improved visualisation, deeper SurrealDB-based caching).
+b) Include optional placeholders for user/team to insert estimated dates or resource allocations.
+### Risk Assessment and Mitigation:
+a) Identify potential integration pitfalls (e.g., SurrealDB constraints, concurrency issues, interdependencies with LLM integration).
+b) Present recommended backups, rollbacks, or fallback methods to prevent data corruption.
+### Documentation and Maintenance:
+a) Provide guidelines for internal or public-facing documentation, including code comments, user manuals, or wiki entries that explain how to operate and troubleshoot the updated system.
+b) Suggest a maintenance schedule or update policy to ensure the system remains robust and up-to-date with SurrealDB and MCP SDK advancements.
+
+## F – FORMAT
+Your final response must be presented as a formal academic-style specification document, divided into clearly labelled sections corresponding to the major requirements above. The style should be methodical and thorough, with each section logically flowing to the next. Please deliver the final specification using structured headings and subheadings, and ensure the writing adheres to proper British English spelling and grammar conventions.
+
+## T – TARGET AUDIENCE
+The intended audience for this specification is advanced AI-driven development agents (e.g., ChatGPT 4.5, ChatGPT o1, Anthropic Claude 3.7) and seasoned software engineers collaborating on bridging SurrealDB, knowledge graph solutions, and the MCP protocol. It should be fully intelligible to a technical professional with extensive knowledge of TypeScript, SurrealDB, and LLM integration, but structured so future generations of AI tools can reference, parse, and adapt it as required.
+
+</update specification>
+
+<generated specification>
+very long and very detailed specification, architecture, plans and test map
+</generated specification>
+
+<implementation roadmap>
+# Claude Code Implementation Roadmap for MCP Knowledge Graph Update
+
+## Project Overview
+
+This document outlines the detailed technical implementation plan for fixing and enhancing the SurrealDB MCP Knowledge Graph implementation. The primary issues to address are:
+
+1. Unreliable `add_observations` functionality
+2. Timeout issues when integrated with Claude Desktop
+3. Need for a comprehensive test harness
+
+The implementation will follow a phased approach, with clear restart points for the Claude Code agent to maintain context.
+
+---
+
+## Phase 1: Fix add_observations Functionality
+
+### Step 1: Understand Current Implementation [Context Session 1]
+
+```bash
+# First, read and understand the current implementation
+view /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/database.ts
+```
+
+Focus on understanding:
+- The existing `addObservations` method implementation
+- How observations are structured
+- Current error handling approach
+- The SurrealDB query structure used
+
+### Step 2: Create a Targeted Test Script [Context Session 1 continued]
+
+```bash
+# Create the targeted test script
+Replace /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/test-add-observations.js "#!/usr/bin/env node
+
+/**
+ * Targeted Test for add_observations Functionality
+ *
+ * This script specifically tests the add_observations functionality
+ * to identify and fix any issues with adding observations to entities.
+ */
+
+import { spawn } from 'child_process';
+import readline from 'readline';
+import { execSync } from 'child_process';
+
+// Helper function to wait
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Get the full path to node executable
+const getNodePath = () => {
+  try {
+    return execSync('which node').toString().trim();
+  } catch (error) {
+    // Fallback to common locations or current executable
+    return process.execPath;
+  }
+};
+
+async function runTest() {
+  console.log(\"Starting add_observations Test...\");
+
+  const nodePath = getNodePath();
+  console.log(`Using Node.js from: ${nodePath}`);
+
+  // Start the MCP server
+  console.log(\"\\nStarting MCP server as a child process...\");
+  const mcp = spawn(nodePath, [
+    '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/src/index.js'
+  ], {
+    env: {
+      SURREALDB_URL: \"http://localhost:8070\",
+      SURREALDB_USER: \"root\",
+      SURREALDB_PASS: \"root\",
+      SURREALDB_NS: \"test\",
+      SURREALDB_DB: \"knowledge_test\",
+      TRACE_LEVEL: \"DEBUG\",
+      PATH: process.env.PATH
+    },
+    stdio: ['pipe', 'pipe', 'inherit']
+  });
+
+  // Set up readline to process responses
+  const rl = readline.createInterface({
+    input: mcp.stdout,
+    terminal: false
+  });
+
+  const responses = [];
+  let requestId = 0;
+
+  // Process responses
+  rl.on('line', (line) => {
+    if (line.trim()) {
+      console.log(`RECEIVED: ${line}`);
+      try {
+        const json = JSON.parse(line);
+        responses.push(json);
+      } catch (error) {
+        // Not JSON, probably trace output
+      }
+    }
+  });
+
+  // Send a request and wait for response
+  const sendRequest = async (method, params) => {
+    requestId++;
+    const request = {
+      jsonrpc: \"2.0\",
+      id: requestId,
+      method: method,
+      params: params
+    };
+
+    console.log(`\\nSENDING ${method} request:`);
+    console.log(JSON.stringify(request, null, 2));
+
+    const responseIndex = responses.length;
+    mcp.stdin.write(JSON.stringify(request) + '\\n');
+
+    // Wait for response (with timeout)
+    for (let i = 0; i < 30; i++) {
+      await wait(100);
+      if (responses.length > responseIndex) {
+        return responses[responses.length - 1];
+      }
+    }
+
+    throw new Error(`No response received for request ID ${requestId}`);
+  };
+
+  // Function to call a specific tool
+  const callTool = async (toolName, args = {}) => {
+    return sendRequest('mcp.callTool', {
+      name: toolName,
+      arguments: args,
+      _meta: {}
+    });
+  };
+
+  // Wait for server to start
+  console.log(\"Waiting for server initialization...\");
+  await wait(3000);
+
+  try {
+    // Clear any existing entities first
+    console.log(\"\\n=== Cleaning existing test data ===\");
+    const clearReadResponse = await callTool('read_graph');
+    let existingData = JSON.parse(clearReadResponse.result.content[0].text);
+
+    if (existingData.entities && existingData.entities.length > 0) {
+      const entitiesToDelete = existingData.entities.map(e => e.name);
+      console.log(`Deleting existing entities: ${entitiesToDelete.join(', ')}`);
+      await callTool('delete_entities', { entityNames: entitiesToDelete });
+    }
+
+    // 1. Create a test entity
+    console.log(\"\\n=== Creating test entity ===\");
+    const testEntity = {
+      name: \"ObservationTestEntity\",
+      entityType: \"TestType\",
+      observations: [\"Initial observation\"]
+    };
+
+    await callTool('create_entities', {
+      entities: [testEntity]
+    });
+
+    // 2. Verify entity was created
+    console.log(\"\\n=== Verifying entity creation ===\");
+    const verifyResponse = await callTool('open_nodes', {
+      names: [\"ObservationTestEntity\"]
+    });
+
+    const verifyData = JSON.parse(verifyResponse.result.content[0].text);
+    console.log(\"Entity after creation:\");
+    console.log(JSON.stringify(verifyData, null, 2));
+
+    // 3. Add a single observation
+    console.log(\"\\n=== Adding single observation ===\");
+    const singleObservation = {
+      entityName: \"ObservationTestEntity\",
+      contents: [\"Second observation\"]
+    };
+
+    const singleAddResponse = await callTool('add_observations', {
+      observations: [singleObservation]
+    });
+
+    const singleAddResult = JSON.parse(singleAddResponse.result.content[0].text);
+    console.log(\"Add single observation response:\");
+    console.log(JSON.stringify(singleAddResult, null, 2));
+
+    // 4. Verify single observation was added
+    console.log(\"\\n=== Verifying single observation ===\");
+    const singleVerifyResponse = await callTool('open_nodes', {
+      names: [\"ObservationTestEntity\"]
+    });
+
+    const singleVerifyData = JSON.parse(singleVerifyResponse.result.content[0].text);
+    console.log(\"Entity after adding single observation:\");
+    console.log(JSON.stringify(singleVerifyData, null, 2));
+
+    // 5. Add multiple observations
+    console.log(\"\\n=== Adding multiple observations ===\");
+    const multipleObservations = {
+      entityName: \"ObservationTestEntity\",
+      contents: [\"Third observation\", \"Fourth observation\", \"Fifth observation\"]
+    };
+
+    const multipleAddResponse = await callTool('add_observations', {
+      observations: [multipleObservations]
+    });
+
+    const multipleAddResult = JSON.parse(multipleAddResponse.result.content[0].text);
+    console.log(\"Add multiple observations response:\");
+    console.log(JSON.stringify(multipleAddResult, null, 2));
+
+    // 6. Verify multiple observations were added
+    console.log(\"\\n=== Verifying multiple observations ===\");
+    const multipleVerifyResponse = await callTool('open_nodes', {
+      names: [\"ObservationTestEntity\"]
+    });
+
+    const multipleVerifyData = JSON.parse(multipleVerifyResponse.result.content[0].text);
+    console.log(\"Entity after adding multiple observations:\");
+    console.log(JSON.stringify(multipleVerifyData, null, 2));
+
+    // 7. Attempt to add duplicate observations (should be ignored)
+    console.log(\"\\n=== Adding duplicate observations ===\");
+    const duplicateObservations = {
+      entityName: \"ObservationTestEntity\",
+      contents: [\"Third observation\", \"Sixth observation\"]
+    };
+
+    const duplicateAddResponse = await callTool('add_observations', {
+      observations: [duplicateObservations]
+    });
+
+    const duplicateAddResult = JSON.parse(duplicateAddResponse.result.content[0].text);
+    console.log(\"Add duplicate observations response:\");
+    console.log(JSON.stringify(duplicateAddResult, null, 2));
+
+    // 8. Verify only new observations were added
+    console.log(\"\\n=== Verifying duplicate handling ===\");
+    const duplicateVerifyResponse = await callTool('open_nodes', {
+      names: [\"ObservationTestEntity\"]
+    });
+
+    const duplicateVerifyData = JSON.parse(duplicateVerifyResponse.result.content[0].text);
+    console.log(\"Entity after adding duplicate observations:\");
+    console.log(JSON.stringify(duplicateVerifyData, null, 2));
+
+    // 9. Clean up
+    console.log(\"\\n=== Cleaning up test data ===\");
+    await callTool('delete_entities', {
+      entityNames: [\"ObservationTestEntity\"]
+    });
+
+    console.log(\"\\n=== Test completed successfully ===\");
+
+  } catch (error) {
+    console.error(\"Test failed:\", error);
+  } finally {
+    // Cleanup
+    rl.close();
+    mcp.stdin.end();
+    mcp.kill();
+  }
+}
+
+runTest().catch(error => {
+  console.error(\"Test execution error:\", error);
+  process.exit(1);
+});"
+```
+
+**RESTART CONTEXT AFTER THIS STEP**
+
+### Step 3: Implement the Fixed add_observations Method [Context Session 2]
+
+```bash
+# Update the add_observations method in database.ts
+Edit /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/database.ts
+```
+
+Implement the improved `addObservations` method with:
+1. Thorough input validation
+2. Better error handling
+3. Proper handling of existing observation detection
+4. Verification steps after observation addition
+
+Focus on the following key improvements:
+- Check if inputs are valid before processing
+- Properly handle the case when an entity doesn't exist
+- Correctly detect duplicate observations
+- Verify the update succeeded
+- Add detailed error logging
+
+The implementation should look like this:
+
+```typescript
+/**
+ * Add observations to existing entities
+ */
+async addObservations(
+  observations: { entityName: string; contents: string[] }[]
+): Promise<{ entityName: string; addedObservations: Observation[] }[]> {
+  const results: { entityName: string; addedObservations: Observation[] }[] = [];
+
+  for (const obs of observations) {
+    try {
+      if (!obs.entityName || !Array.isArray(obs.contents) || obs.contents.length === 0) {
+        trace.error(`Invalid observation data: ${JSON.stringify(obs)}`);
+        continue;
+      }
+
+      trace.debug(`Adding observations to entity ${obs.entityName}: ${JSON.stringify(obs.contents)}`);
+
+      // Get current entity
+      const existing = await this.db.query(
+        "SELECT * FROM entity WHERE name = $name",
+        { name: obs.entityName }
+      );
+
+      if (!existing || !existing[0] || existing[0].length === 0) {
+        trace.error(`Entity with name ${obs.entityName} not found`);
+        continue;
+      }
+
+      const entity = existing[0][0];
+      if (!entity || !entity.observations) {
+        trace.error(`Invalid entity data for ${obs.entityName}`);
+        continue;
+      }
+
+      // Convert existing observations to a set of text values for comparison
+      const currentObservationTexts = new Set();
+
+      // Handle both string and Observation types for backward compatibility
+      for (const o of entity.observations) {
+        if (typeof o === 'string') {
+          currentObservationTexts.add(o);
+        } else if (o && typeof o === 'object' && 'text' in o) {
+          currentObservationTexts.add(o.text);
+        }
+      }
+
+      trace.debug(`Current observations for ${obs.entityName}: ${JSON.stringify([...currentObservationTexts])}`);
+
+      // Create observations
+      const newObservationsWithTimestamps = [];
+
+      for (const content of obs.contents) {
+        if (!content || typeof content !== 'string') {
+          trace.error(`Invalid observation content: ${content}`);
+          continue;
+        }
+
+        if (!currentObservationTexts.has(content)) {
+          newObservationsWithTimestamps.push({
+            text: content,
+            createdAt: new Date().toISOString()
+          });
+        } else {
+          trace.debug(`Observation "${content}" already exists in entity ${obs.entityName}`);
+        }
+      }
+
+      trace.debug(`New observations for ${obs.entityName}: ${JSON.stringify(newObservationsWithTimestamps)}`);
+
+      if (newObservationsWithTimestamps.length > 0) {
+        // Use parameterized query to update entity with new observations
+        const updateResult = await this.db.query(
+          "UPDATE entity SET observations = array::concat(observations, $newObs), updatedAt = time::now() WHERE name = $name",
+          {
+            name: obs.entityName,
+            newObs: newObservationsWithTimestamps
+          }
+        );
+
+        trace.debug(`Update result: ${JSON.stringify(updateResult)}`);
+
+        // Verify the update was successful
+        const verifyUpdate = await this.db.query(
+          "SELECT * FROM entity WHERE name = $name",
+          { name: obs.entityName }
+        );
+
+        if (verifyUpdate && verifyUpdate[0] && verifyUpdate[0].length > 0) {
+          const updatedEntity = verifyUpdate[0][0];
+          trace.debug(`Entity after update: ${JSON.stringify(updatedEntity)}`);
+        }
+
+        results.push({
+          entityName: obs.entityName,
+          addedObservations: newObservationsWithTimestamps,
+        });
+      } else {
+        results.push({
+          entityName: obs.entityName,
+          addedObservations: [],
+        });
+      }
+    } catch (error) {
+      trace.error(
+        `Error adding observations to ${obs?.entityName}:`,
+        error
+      );
+
+      // Add to results even on error, with empty observations array
+      results.push({
+        entityName: obs?.entityName || 'unknown',
+        addedObservations: [],
+      });
+    }
+  }
+
+  return results;
+}
+```
+
+### Step 4: Build and Test the Fix [Context Session 2 continued]
+
+```bash
+# Build the updated code
+bash ./Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/node_modules/.bin/tsc --outDir ./Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/src --module NodeNext --moduleResolution nodenext /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/database.ts
+
+# Run the targeted test
+node /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/test-add-observations.js
+```
+
+Analyze the test results and fix any issues discovered during testing.
+
+**RESTART CONTEXT AFTER THIS STEP**
+
+---
+
+## Phase 2: Implement Timeout Handling
+
+### Step 5: Understand the Current MCP Integration [Context Session 3]
+
+```bash
+# Read the current MCP integration
+view /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/index.ts
+```
+
+Focus on understanding:
+- How requests are processed
+- The current error handling strategy
+- Connection lifecycle management
+
+### Step 6: Implement Timeout and Recovery Logic [Context Session 3 continued]
+
+```bash
+# Update the index.ts file with timeout handling
+Edit /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/index.ts
+```
+
+Add the following components:
+1. Constants for timeout configuration
+2. Operation tracking mechanism
+3. Watchdog timer to detect stalled operations
+4. Heartbeat mechanism to maintain connection
+5. Event handlers for connection state
+6. Graceful cleanup and exit handlers
+
+Implementation should include:
+
+```typescript
+// Add these after the imports section
+// Constants for timeouts
+const OPERATION_TIMEOUT_MS = 30000; // 30 seconds timeout for operations
+const WATCHDOG_INTERVAL_MS = 5000;  // 5 seconds interval for watchdog
+const HEARTBEAT_INTERVAL_MS = 15000; // 15 seconds for heartbeat
+
+// Add this inside the main() function, before server.connect()
+// Operation tracking
+let pendingOperations = new Map();
+let lastActivityTime = Date.now();
+let isConnected = false;
+let watchdogInterval = null;
+let heartbeatInterval = null;
+
+// Setup watchdog to monitor for timeouts
+watchdogInterval = setInterval(() => {
+  const now = Date.now();
+
+  // Check for timed out operations
+  for (const [id, operation] of pendingOperations.entries()) {
+    if (now - operation.startTime > OPERATION_TIMEOUT_MS) {
+      trace.error(`Operation ${id} timed out after ${OPERATION_TIMEOUT_MS}ms`);
+
+      // Clean up the timed out operation
+      pendingOperations.delete(id);
+
+      // Attempt to send error response if connection is still alive
+      if (isConnected) {
+        try {
+          const errorResponse = {
+            jsonrpc: "2.0",
+            id: operation.requestId,
+            error: {
+              code: -32000,
+              message: "Operation timed out"
+            }
+          };
+
+          // Write error response to stdout
+          process.stdout.write(JSON.stringify(errorResponse) + '\n');
+        } catch (err) {
+          trace.error("Failed to send timeout error response:", err);
+        }
+      }
+    }
+  }
+
+  // Check for overall inactivity
+  if (now - lastActivityTime > OPERATION_TIMEOUT_MS * 2) {
+    trace.info(`No activity for ${OPERATION_TIMEOUT_MS * 2}ms, checking connection status`);
+
+    // Update activity time to prevent multiple pings
+    lastActivityTime = now;
+
+    if (isConnected) {
+      trace.debug("Sending heartbeat ping");
+      // We could send a custom notification here, but Claude Desktop might not handle it
+    }
+  }
+}, WATCHDOG_INTERVAL_MS);
+
+// Setup heartbeat interval
+heartbeatInterval = setInterval(() => {
+  if (isConnected) {
+    trace.debug("Connection heartbeat");
+    lastActivityTime = Date.now();
+  }
+}, HEARTBEAT_INTERVAL_MS);
+
+// Then modify the CallToolRequestSchema handler to track operations
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = request.params;
+  const requestId = (request as any).id;
+
+  trace.info(`Tool call: ${name} (ID: ${requestId})`);
+  trace.debug("Tool arguments:", JSON.stringify(args));
+
+  // Update activity timestamp
+  lastActivityTime = Date.now();
+
+  // Track the operation
+  const operationId = Date.now().toString(36) + Math.random().toString(36).substr(2);
+  pendingOperations.set(operationId, {
+    requestId,
+    name,
+    startTime: Date.now()
+  });
+
+  try {
+    let result;
+
+    // Handle all the tools
+    // ... existing switch statement ...
+
+    // Operation completed successfully, remove from tracking
+    pendingOperations.delete(operationId);
+
+    // Update activity timestamp again
+    lastActivityTime = Date.now();
+
+    // Return result as text content
+    return {
+      content: [{ type: "text", text: JSON.stringify(result, null, 2) }]
+    };
+  } catch (error) {
+    trace.error(`Error executing tool ${name}:`, error);
+
+    // Operation failed, remove from tracking
+    pendingOperations.delete(operationId);
+
+    throw error;
+  }
+});
+
+// Update the transport connection
+transport.on('connected', () => {
+  isConnected = true;
+  trace.info("Transport connected");
+  lastActivityTime = Date.now();
+});
+
+transport.on('disconnected', () => {
+  isConnected = false;
+  trace.info("Transport disconnected");
+});
+
+// Add graceful cleanup on process exit
+process.on('exit', () => {
+  if (watchdogInterval) clearInterval(watchdogInterval);
+  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  trace.info("Shutting down gracefully");
+});
+
+process.on('SIGINT', () => {
+  trace.info("Received SIGINT, shutting down");
+  if (watchdogInterval) clearInterval(watchdogInterval);
+  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  trace.info("Received SIGTERM, shutting down");
+  if (watchdogInterval) clearInterval(watchdogInterval);
+  if (heartbeatInterval) clearInterval(heartbeatInterval);
+  process.exit(0);
+});
+```
+
+### Step 7: Build and Test the Timeout Handling [Context Session 3 continued]
+
+```bash
+# Build the updated code
+bash ./Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/node_modules/.bin/tsc --outDir ./Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/src --module NodeNext --moduleResolution nodenext /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/src/index.ts
+
+# Run the comprehensive test to verify timeout handling
+node /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/test/test-direct-comprehensive.js
+```
+
+Analyze the test results and fix any issues discovered.
+
+**RESTART CONTEXT AFTER THIS STEP**
+
+---
+
+## Phase 3: Create MCP Client Test Harness
+
+### Step 8: Understand the Test Environment [Context Session 4]
+
+```bash
+# Examine the existing test files
+view /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/test/test-direct.js
+view /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/test/test-direct-comprehensive.js
+```
+
+Focus on understanding:
+- How the current tests are structured
+- The MCP client simulation approach
+- Test coverage and gaps
+
+### Step 9: Implement the MCP Client Test Harness [Context Session 4 continued]
+
+```bash
+# Create the MCP client test harness
+Replace /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/mcp-client-test-harness.ts "#!/usr/bin/env node
+
+/**
+ * MCP Client Test Harness
+ *
+ * This test harness acts as a Claude Desktop-like client for the MCP knowledge graph server.
+ * It provides a comprehensive testing capability that includes:
+ * 1. Testing all knowledge graph operations
+ * 2. Simulating failure scenarios and reconnection
+ * 3. Performance testing with configurable load
+ * 4. Edge case testing for input validation
+ */
+
+import { spawn, ChildProcess } from 'child_process';
+import { createInterface, Interface } from 'readline';
+import { existsSync, mkdirSync, writeFileSync, appendFileSync } from 'fs';
+import { join } from 'path';
+import { execSync } from 'child_process';
+
+// Configuration
+interface TestConfig {
+  nodePath: string;
+  serverPath: string;
+  env: Record<string, string>;
+  logDirectory: string;
+  timeoutMs: number;
+  waitBetweenTestsMs: number;
+  stressTestIterations: number;
+  verbose: boolean;
+}
+
+// Test case definition
+interface TestCase {
+  name: string;
+  method: string;
+  params: any;
+  validator: (response: any) => { success: boolean; message: string };
+  cleanup?: () => Promise<void>;
+}
+
+// Operation response cache to use between tests
+const responseCache: Record<string, any> = {};
+
+// Helper functions
+function wait(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getNodePath(): string {
+  try {
+    return execSync('which node').toString().trim();
+  } catch (error) {
+    // Fallback to process.execPath
+    return process.execPath;
+  }
+}
+
+function formatTimestamp(date = new Date()): string {
+  return date.toISOString().replace(/[:.]/g, '-');
+}
+
+function logMessage(message: string, level: 'info' | 'error' | 'debug' = 'info', config: TestConfig, logFile?: string): void {
+  const timestamp = new Date().toISOString();
+  const logMessage = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
+
+  if (level === 'debug' && !config.verbose) {
+    return;
+  }
+
+  console.log(logMessage);
+
+  if (logFile) {
+    appendFileSync(logFile, logMessage + '\\n');
+  }
+}
+
+class McpClientTestHarness {
+  private config: TestConfig;
+  private mcp: ChildProcess | null = null;
+  private rl: Interface | null = null;
+  private responses: any[] = [];
+  private requestId = 0;
+  private logFile: string;
+
+  constructor(config: TestConfig) {
+    this.config = config;
+
+    // Create log directory if it doesn't exist
+    if (!existsSync(this.config.logDirectory)) {
+      mkdirSync(this.config.logDirectory, { recursive: true });
+    }
+
+    // Create a log file for this test run
+    this.logFile = join(
+      this.config.logDirectory,
+      `mcp-test-${formatTimestamp()}.log`
+    );
+
+    writeFileSync(this.logFile, `MCP Client Test Harness Log - ${new Date().toISOString()}\\n\\n`);
+  }
+
+  async start(): Promise<void> {
+    this.log(\"Starting MCP Client Test Harness...\");
+    this.log(`Using Node.js from: ${this.config.nodePath}`);
+
+    await this.startServer();
+  }
+
+  async stop(): Promise<void> {
+    this.log(\"Shutting down test harness...\");
+
+    if (this.rl) {
+      this.rl.close();
+    }
+
+    if (this.mcp) {
+      this.log(\"Killing server process\");
+      this.mcp.stdin?.end();
+      this.mcp.kill();
+    }
+
+    this.log(\"Test harness shutdown complete\");
+  }
+
+  private async startServer(): Promise<void> {
+    this.log(\"Starting MCP server as a child process...\");
+
+    // Start the MCP server
+    this.mcp = spawn(this.config.nodePath, [this.config.serverPath], {
+      env: {
+        ...process.env,
+        ...this.config.env,
+      },
+      stdio: ['pipe', 'pipe', 'inherit'] // stdin, stdout, stderr
+    });
+
+    // Set up readline to process responses
+    this.rl = createInterface({
+      input: this.mcp.stdout!,
+      terminal: false
+    });
+
+    // Process responses
+    this.rl.on('line', (line) => {
+      if (line.trim()) {
+        this.log(`RECEIVED: ${line}`, 'debug');
+        try {
+          const json = JSON.parse(line);
+          this.responses.push(json);
+        } catch (error) {
+          // Not JSON, probably trace output
+        }
+      }
+    });
+
+    // Wait for server to start
+    this.log(\"Waiting for server initialization...\");
+    await wait(3000);
+    this.log(\"Server should be ready now\");
+  }
+
+  private log(message: string, level: 'info' | 'error' | 'debug' = 'info'): void {
+    logMessage(message, level, this.config, this.logFile);
+  }
+
+  async sendRequest(method: string, params: any): Promise<any> {
+    if (!this.mcp || !this.mcp.stdin) {
+      throw new Error(\"Server process not started or stdin not available\");
+    }
+
+    this.requestId++;
+    const request = {
+      jsonrpc: \"2.0\",
+      id: this.requestId,
+      method: method,
+      params: params
+    };
+
+    this.log(`SENDING ${method} request:`, 'debug');
+    this.log(JSON.stringify(request, null, 2), 'debug');
+
+    const responseIndex = this.responses.length;
+    this.mcp.stdin.write(JSON.stringify(request) + '\\n');
+
+    // Wait for response (with timeout)
+    const startTime = Date.now();
+    while (Date.now() - startTime < this.config.timeoutMs) {
+      if (this.responses.length > responseIndex) {
+        return this.responses[this.responses.length - 1];
+      }
+      await wait(100);
+    }
+
+    throw new Error(`No response received for request ID ${this.requestId} after ${this.config.timeoutMs}ms`);
+  }
+
+  async callTool(toolName: string, args: any = {}): Promise<any> {
+    return this.sendRequest('mcp.callTool', {
+      name: toolName,
+      arguments: args,
+      _meta: {}
+    });
+  }
+
+  async runTest(test: TestCase): Promise<{ success: boolean; message: string }> {
+    this.log(`\\n=== Running Test: ${test.name} ===`);
+
+    try {
+      let response;
+      if (test.method === 'mcp.callTool') {
+        response = await this.callTool(test.params.name, test.params.arguments);
+      } else {
+        response = await this.sendRequest(test.method, test.params);
+      }
+
+      // Store response in cache if needed for future tests
+      responseCache[test.name] = response;
+
+      // Validate the response
+      const result = test.validator(response);
+
+      if (result.success) {
+        this.log(`✅ ${test.name}: PASSED ${result.message ? '- ' + result.message : ''}`);
+      } else {
+        this.log(`❌ ${test.name}: FAILED ${result.message ? '- ' + result.message : ''}`, 'error');
+      }
+
+      // Run cleanup if provided
+      if (test.cleanup) {
+        await test.cleanup();
+      }
+
+      // Wait between tests to avoid overwhelming the server
+      await wait(this.config.waitBetweenTestsMs);
+
+      return result;
+    } catch (error: any) {
+      this.log(`❌ ${test.name}: ERROR - ${error.message}`, 'error');
+      return { success: false, message: error.message };
+    }
+  }
+
+  async runTests(tests: TestCase[]): Promise<{ total: number; passed: number; failed: number }> {
+    let passed = 0;
+    let failed = 0;
+
+    for (const test of tests) {
+      const result = await this.runTest(test);
+      if (result.success) {
+        passed++;
+      } else {
+        failed++;
+      }
+    }
+
+    this.log(`\\n===== TEST RESULTS =====`);
+    this.log(`Total: ${tests.length}, Passed: ${passed}, Failed: ${failed}`);
+    this.log(`Success Rate: ${((passed / tests.length) * 100).toFixed(2)}%`);
+
+    return { total: tests.length, passed, failed };
+  }
+
+  async stressTest(testCase: TestCase, iterations: number): Promise<{ success: boolean; message: string }> {
+    this.log(`\\n=== Running Stress Test: ${testCase.name} (${iterations} iterations) ===`);
+
+    const results = {
+      iterations,
+      successful: 0,
+      failed: 0,
+      timeouts: 0,
+      totalTimeMs: 0,
+      averageTimeMs: 0,
+      minTimeMs: Number.MAX_SAFE_INTEGER,
+      maxTimeMs: 0
+    };
+
+    for (let i = 0; i < iterations; i++) {
+      const startTime = Date.now();
+
+      try {
+        let response;
+        if (testCase.method === 'mcp.callTool') {
+          response = await this.callTool(testCase.params.name, testCase.params.arguments);
+        } else {
+          response = await this.sendRequest(testCase.method, testCase.params);
+        }
+
+        const validation = testCase.validator(response);
+        const elapsedMs = Date.now() - startTime;
+
+        results.totalTimeMs += elapsedMs;
+        results.minTimeMs = Math.min(results.minTimeMs, elapsedMs);
+        results.maxTimeMs = Math.max(results.maxTimeMs, elapsedMs);
+
+        if (validation.success) {
+          results.successful++;
+        } else {
+          results.failed++;
+          this.log(`Iteration ${i+1} failed: ${validation.message}`, 'error');
+        }
+      } catch (error: any) {
+        const elapsedMs = Date.now() - startTime;
+        results.totalTimeMs += elapsedMs;
+
+        if (error.message.includes('timeout') || elapsedMs >= this.config.timeoutMs) {
+          results.timeouts++;
+        } else {
+          results.failed++;
+        }
+
+        this.log(`Iteration ${i+1} error: ${error.message}`, 'error');
+      }
+
+      // Small wait between iterations to avoid overwhelming the server
+      await wait(100);
+
+      // Progress update every 10 iterations
+      if ((i + 1) % 10 === 0 || i === iterations - 1) {
+        this.log(`Progress: ${i + 1}/${iterations} iterations completed`);
+      }
+    }
+
+    // Calculate average time
+    results.averageTimeMs = results.totalTimeMs / iterations;
+
+    // Log results
+    this.log(`\\n=== Stress Test Results: ${testCase.name} ===`);
+    this.log(`Total iterations: ${results.iterations}`);
+    this.log(`Successful: ${results.successful} (${((results.successful / iterations) * 100).toFixed(2)}%)`);
+    this.log(`Failed: ${results.failed} (${((results.failed / iterations) * 100).toFixed(2)}%)`);
+    this.log(`Timeouts: ${results.timeouts} (${((results.timeouts / iterations) * 100).toFixed(2)}%)`);
+    this.log(`Average time: ${results.averageTimeMs.toFixed(2)}ms`);
+    this.log(`Min time: ${results.minTimeMs}ms`);
+    this.log(`Max time: ${results.maxTimeMs}ms`);
+
+    // Return overall success/failure
+    const successRate = results.successful / iterations;
+    return {
+      success: successRate > 0.95, // Consider stress test successful if 95% of iterations pass
+      message: `Success rate: ${(successRate * 100).toFixed(2)}% (${results.successful}/${iterations})`
+    };
+  }
+
+  async simulateDisconnection(): Promise<void> {
+    this.log(\"\\n=== Simulating Client Disconnection ===\");
+
+    if (this.mcp) {
+      // Save current process
+      const currentMcp = this.mcp;
+
+      // Clear references
+      this.mcp = null;
+      if (this.rl) {
+        this.rl.close();
+        this.rl = null;
+      }
+
+      // Kill the process
+      currentMcp.stdin?.end();
+      currentMcp.kill();
+
+      this.log(\"Server process terminated, waiting before reconnection...\");
+      await wait(3000);
+
+      // Restart server
+      await this.startServer();
+      this.log(\"Server reconnected\");
+    } else {
+      this.log(\"No active server to disconnect\");
+    }
+  }
+}
+
+// Default test configuration
+const DEFAULT_CONFIG: TestConfig = {
+  nodePath: getNodePath(),
+  serverPath: '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/build/src/index.js',
+  env: {
+    SURREALDB_URL: \"http://localhost:8070\",
+    SURREALDB_USER: \"root\",
+    SURREALDB_PASS: \"root\",
+    SURREALDB_NS: \"test\",
+    SURREALDB_DB: \"knowledge_test_harness\",
+    TRACE_LEVEL: \"DEBUG\",
+  },
+  logDirectory: './logs',
+  timeoutMs: 15000,
+  waitBetweenTestsMs: 500,
+  stressTestIterations: 50,
+  verbose: false
+};
+
+// Export the class and interfaces for use in other files
+export { McpClientTestHarness, TestConfig, TestCase };
+
+// If this script is run directly, execute the default test suite
+if (require.main === module) {
+  // Import the standard test cases
+  import('./standard-test-cases').then(async (standardTests) => {
+    const harness = new McpClientTestHarness(DEFAULT_CONFIG);
+
+    try {
+      await harness.start();
+
+      // Run standard tests
+      console.log(\"\\n=== Running Standard Test Suite ===\");
+      const results = await harness.runTests(standardTests.default);
+
+      // Run a simple stress test if standard tests pass
+      if (results.failed === 0) {
+        console.log(\"\\n=== Running Basic Stress Test ===\");
+
+        // Create a basic entity for stress testing
+        await harness.callTool(\"create_entities\", {
+          entities: [
+            {
+              name: \"StressTest_Entity\",
+              entityType: \"StressTest\",
+              observations: [\"Initial stress test observation\"]
+            }
+          ]
+        });
+
+        // Run stress test on add_observations
+        const stressTestCase: TestCase = {
+          name: \"stressTest_addObservations\",
+          method: \"mcp.callTool\",
+          params: {
+            name: \"add_observations\",
+            arguments: {
+              observations: [
+                {
+                  entityName: \"StressTest_Entity\",
+                  contents: [\"Stress test observation \" + Date.now()]
+                }
+              ]
+            }
+          },
+          validator: (response) => {
+            try {
+              const data = JSON.parse(response.result.content[0].text);
+              return {
+                success: data.length > 0,
+                message: `Added observations to ${data.length} entities`
+              };
+            } catch (error) {
+              return { success: false, message: \"Failed to parse response\" };
+            }
+          }
+        };
+
+        await harness.stressTest(stressTestCase, 10); // Reduced number for initial testing
+
+        // Clean up stress test entity
+        await harness.callTool(\"delete_entities\", {
+          entityNames: [\"StressTest_Entity\"]
+        });
+      }
+    } catch (error) {
+      console.error(\"Test harness error:\", error);
+    } finally {
+      await harness.stop();
+    }
+  }).catch(error => {
+    console.error(\"Failed to load standard test cases:\", error);
+  });
+}"
+```
+
+### Step 10: Create Test Cases [Context Session 4 continued]
+
+```bash
+# Create standard test cases
+Replace /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/standard-test-cases.ts "/**
+ * Standard Test Cases for MCP Client Test Harness
+ *
+ * This file contains standard test cases for testing all knowledge graph operations.
+ */
+
+import { TestCase } from './mcp-client-test-harness';
+
+// Standard validation functions
+const standardValidators = {
+  listTools: (response: any) => {
+    if (!response.result || !response.result.tools || !Array.isArray(response.result.tools)) {
+      return { success: false, message: \"Invalid tools list response format\" };
+    }
+
+    if (response.result.tools.length < 1) {
+      return { success: false, message: \"No tools returned\" };
+    }
+
+    return {
+      success: true,
+      message: `Found ${response.result.tools.length} tools`
+    };
+  },
+
+  parseToolResult: (response: any) => {
+    if (!response.result || !response.result.content || !Array.isArray(response.result.content)) {
+      return {
+        success: false,
+        message: \"Invalid response format\",
+        data: null
+      };
+    }
+
+    try {
+      const data = JSON.parse(response.result.content[0].text);
+      return { success: true, message: \"Successfully parsed result\", data };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: `Failed to parse response: ${error.message}`,
+        data: null
+      };
+    }
+  }
+};
+
+// Standard test cases
+const standardTestCases: TestCase[] = [
+  // List tools
+  {
+    name: \"listTools\",
+    method: \"mcp.listTools\",
+    params: { _meta: {} },
+    validator: standardValidators.listTools
+  },
+
+  // Read initial graph state
+  {
+    name: \"readGraph_initial\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"read_graph\",
+      arguments: {}
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      return {
+        success: true,
+        message: `Found ${data.entities.length} entities and ${data.relations.length} relations`
+      };
+    }
+  },
+
+  // Create entities
+  {
+    name: \"createEntities\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"create_entities\",
+      arguments: {
+        entities: [
+          {
+            name: \"HarnessTest_Entity_1\",
+            entityType: \"TestType\",
+            observations: [\"This is the first test entity\"]
+          },
+          {
+            name: \"HarnessTest_Entity_2\",
+            entityType: \"TestType\",
+            observations: [\"This is the second test entity\"]
+          },
+          {
+            name: \"HarnessTest_Entity_3\",
+            entityType: \"AnotherType\",
+            observations: [\"This is a different type of entity\"]
+          }
+        ]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      const expected = 3;
+      const actual = data.length;
+
+      return {
+        success: actual === expected,
+        message: `Created ${actual}/${expected} entities`
+      };
+    }
+  },
+
+  // Add observations
+  {
+    name: \"addObservations\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"add_observations\",
+      arguments: {
+        observations: [
+          {
+            entityName: \"HarnessTest_Entity_1\",
+            contents: [\"Additional observation for entity 1\", \"Another note about entity 1\"]
+          },
+          {
+            entityName: \"HarnessTest_Entity_2\",
+            contents: [\"Additional observation for entity 2\"]
+          }
+        ]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      const expected = 2;
+      const actual = data.length;
+
+      return {
+        success: actual === expected,
+        message: `Added observations to ${actual}/${expected} entities`
+      };
+    }
+  },
+
+  // Create relations
+  {
+    name: \"createRelations\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"create_relations\",
+      arguments: {
+        relations: [
+          {
+            from: \"HarnessTest_Entity_1\",
+            to: \"HarnessTest_Entity_2\",
+            relationType: \"CONNECTS_TO\"
+          },
+          {
+            from: \"HarnessTest_Entity_2\",
+            to: \"HarnessTest_Entity_3\",
+            relationType: \"REFERENCES\"
+          }
+        ]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      const expected = 2;
+      const actual = data.length;
+
+      return {
+        success: actual === expected,
+        message: `Created ${actual}/${expected} relations`
+      };
+    }
+  },
+
+  // Search nodes
+  {
+    name: \"searchNodes\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"search_nodes\",
+      arguments: {
+        query: \"TestType\"
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      const foundEntities = data.entities.length;
+
+      return {
+        success: foundEntities >= 2,
+        message: `Found ${foundEntities} entities with search term \"TestType\"`
+      };
+    }
+  },
+
+  // Open nodes
+  {
+    name: \"openNodes\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"open_nodes\",
+      arguments: {
+        names: [\"HarnessTest_Entity_1\", \"HarnessTest_Entity_3\"]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+      const expected = 2;
+      const actual = data.entities.length;
+
+      return {
+        success: actual === expected,
+        message: `Opened ${actual}/${expected} requested entities`
+      };
+    }
+  },
+
+  // Delete observations
+  {
+    name: \"deleteObservations\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"delete_observations\",
+      arguments: {
+        deletions: [
+          {
+            entityName: \"HarnessTest_Entity_1\",
+            observations: [\"Additional observation for entity 1\"]
+          }
+        ]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+
+      return {
+        success: data.success === true,
+        message: data.message || 'Unknown result'
+      };
+    }
+  },
+
+  // Delete relations
+  {
+    name: \"deleteRelations\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"delete_relations\",
+      arguments: {
+        relations: [
+          {
+            from: \"HarnessTest_Entity_1\",
+            to: \"HarnessTest_Entity_2\",
+            relationType: \"CONNECTS_TO\"
+          }
+        ]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+
+      return {
+        success: data.success === true,
+        message: data.message || 'Unknown result'
+      };
+    }
+  },
+
+  // Delete entities
+  {
+    name: \"deleteEntities\",
+    method: \"mcp.callTool\",
+    params: {
+      name: \"delete_entities\",
+      arguments: {
+        entityNames: [\"HarnessTest_Entity_1\", \"HarnessTest_Entity_2\", \"HarnessTest_Entity_3\"]
+      }
+    },
+    validator: (response) => {
+      const result = standardValidators.parseToolResult(response);
+      if (!result.success) return result;
+
+      const { data } = result as any;
+
+      return {
+        success: data.success === true,
+        message: data.message || 'Unknown result'
+      };
+    }
+  }
+];
+
+export default standardTestCases;
+"
+```
+
+**RESTART CONTEXT AFTER THIS STEP**
+
+### Step 11: Configure the Test Harness [Context Session 5]
+
+```bash
+# Create tsconfig for the test harness
+Replace /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/tsconfig.json "{
+  \"compilerOptions\": {
+    \"target\": \"ES2022\",
+    \"module\": \"NodeNext\",
+    \"moduleResolution\": \"NodeNext\",
+    \"esModuleInterop\": true,
+    \"strict\": true,
+    \"skipLibCheck\": true,
+    \"forceConsistentCasingInFileNames\": true,
+    \"outDir\": \"./build\",
+    \"declaration\": true,
+    \"sourceMap\": true
+  },
+  \"include\": [\"*.ts\"],
+  \"exclude\": [\"node_modules\"]
+}
+"
+```
+
+### Step 12: Build and Run the Test Harness [Context Session 5 continued]
+
+```bash
+# Create a logs directory for the test harness
+mkdir -p /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/logs
+
+# Build the test harness
+bash ./Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/node_modules/.bin/tsc -p /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/tsconfig.json
+
+# Run the test harness
+node /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/mcp-client-test-harness.js
+```
+
+Analyze the test results and fix any issues discovered.
+
+**RESTART CONTEXT AFTER THIS STEP**
+
+---
+
+## Phase 4: Integration and Final Testing
+
+### Step 13: Update package.json With New Scripts [Context Session 6]
+
+```bash
+# Read the current package.json
+view /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/package.json
+
+# Update package.json with new scripts
+Edit /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/package.json
+```
+
+Add these new scripts to package.json:
+
+```json
+"test:add-observations": "node update_add_observation/test-add-observations.js",
+"test:harness": "node update_add_observation/mcp-client-test-harness.js",
+"build:harness": "tsc -p update_add_observation/tsconfig.json",
+"build:all": "npm run build-mcp && npm run build:harness"
+```
+
+### Step 14: Create Documentation [Context Session 6 continued]
+
+```bash
+# Create documentation for the changes
+Replace /Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/knowledge-base-mcp/update_add_observation/README.md "# SurrealDB MCP Knowledge Graph Updates
+
+## Overview
+
+This update addresses critical issues in the SurrealDB MCP Knowledge Graph implementation:
+
+1. Fixes the unreliable `add_observations` functionality
+2. Adds timeout handling to prevent Claude Desktop integration issues
+3. Provides a comprehensive test harness for verification and future development
+
+## Key Changes
+
+### 1. Fixed add_observations Method
+
+The `add_observations` method has been improved with:
+
+- Thorough input validation
+- Better error handling
+- Proper handling of existing observation detection
+- Verification steps after observation addition
+
+These improvements ensure reliable addition of observations to entities and better error reporting.
+
+### 2. Timeout and Recovery Handling
+
+The MCP integration now includes:
+
+- Operation tracking with timeouts
+- Watchdog timer to detect stalled operations
+- Heartbeat mechanism to maintain connection
+- Graceful recovery when operations fail or timeout
+
+This prevents the system from becoming unresponsive and requiring manual intervention.
+
+### 3. MCP Client Test Harness
+
+A comprehensive test harness has been created that:
+
+- Acts as a Claude Desktop-like client
+- Tests all knowledge graph operations
+- Supports stress testing to identify reliability issues
+- Can simulate failure scenarios and reconnection
+- Provides detailed logging and reporting
+
+## How to Use
+
+### Running Tests
+
+```bash
+# Run the targeted add_observations test
+npm run test:add-observations
+
+# Run the comprehensive test harness
+npm run test:harness
+
+# Run the standard test suite
+npm run test
+```
+
+### Building the Code
+
+```bash
+# Build just the MCP server components
+npm run build-mcp
+
+# Build just the test harness
+npm run build:harness
+
+# Build everything
+npm run build:all
+```
+
+## Future Work
+
+While this update addresses the critical issues, future improvements could include:
+
+1. **Enhanced Schema and Data Validation**
+   - More comprehensive input validation
+   - Schema versioning for future evolution
+   - Support for more robust data types
+
+2. **Refactored Architecture**
+   - Separation of database, knowledge graph API, and MCP server layers
+   - Cleaner interfaces between components
+   - More consistent error handling
+
+3. **Performance Optimizations**
+   - Caching for frequently accessed data
+   - Optimized query patterns
+   - Connection pooling for database access
+
+4. **Advanced Features**
+   - Graph visualization capabilities
+   - More complex traversal queries
+   - Backup and recovery options
+"
+```
+
+### Step 15: Final Integration Test [Context Session 6 continued]
+
+```bash
+# Build all components
+npm run build:all
+
+# Run the comprehensive test
+npm run test
+
+# Run the targeted add_observations test
+npm run test:add-observations
+
+# Run the test harness
+npm run test:harness
+```
+
+Verify all tests pass and document any remaining issues.
+
+---
+
+## Technical Details
+
+### Fixed add_observations Method
+
+The improved method provides:
+- Validation that entityName and contents are valid
+- Proper checking if the entity exists
+- Correct identification and filtering of duplicate observations
+- Verification step to confirm observations were added
+- Detailed error logging and handling
+
+### Timeout Handling Implementation
+
+The timeout handling includes:
+- Constants for configurable timeout values
+- Operation tracking with request ID and start time
+- Watchdog interval to detect stalled operations
+- Heartbeat mechanism to maintain connection awareness
+- Event handlers for connection state changes
+- Graceful cleanup on process exit
+
+These improvements ensure the system remains responsive and recovers properly from failures, eliminating the need for manual intervention.
+
+</implentation roadmap>
+
+<claude_code tracking plan>
+# Implementation Checklist for Claude Code
+
+This checklist outlines the key steps for Claude Code to implement in fixing the SurrealDB MCP Knowledge Graph.
+
+## Phase 1: Fix Core Database Functionality
+
+- [ ] Understand the existing implementation in database.ts
+- [x] Implement the fixed addObservations method in database.ts using fixed-add-observations.txt
+- [ ] Fix the search_nodes function to properly search within observation contents
+- [ ] Fix the open_nodes function to include observations in returned entities
+- [ ] Create and run the targeted test-search-open.js script to verify fixes
+
+## Phase 2: Implement Timeout Handling
+
+- [ ] Understand the current MCP integration in index.ts
+- [ ] Add timeout and recovery logic from timeout-handling.txt to index.ts
+- [ ] Modify the request handler to track operations and handle timeouts
+- [ ] Add event handlers and graceful cleanup
+- [ ] Create and run the test-timeout.js script to verify timeout handling
+
+## Phase 3: Test Harness Implementation
+
+- [ ] Understand the existing test harness structure
+- [ ] Update the test harness to verify the fixes
+- [ ] Configure and run the test harness against the fixed implementation
+- [x] Verify all knowledge graph operations work correctly
+
+## Phase 4: Integration and Final Testing
+
+- [ ] Update package.json with new test scripts
+- [ ] Update the implementation checklist
+- [ ] Update the implementation roadmap for future reference
+- [ ] Create a README documenting the changes and fixes
+- [ ] Perform final integration testing
+
+## Notes for Future Work
+
+- Consider implementing caching for frequently accessed entities
+- Add more advanced graph traversal capabilities
+- Enhance search with fuzzy matching or semantic search capabilities
+- Implement transaction support for better data consistency
+- Add backup and restore functionality
+
+</claude_code tracking plan>
+
+<test update leading to process issues>
+The following  is the testing result. Would you consider this a flaw? "Searching for entities (search_nodes): Works for entity names and types, but doesn't seem to search within the contents of observations.
+* Retrieving specific entities (open_nodes): Works to retrieve entities by name, but doesn't include the observations in the returned entity objects. "EditUncovered critical flaws in knowledge graph search functionality.4sLet's analyze the reported issues from the testing results:
+
+"Searching for entities (search_nodes) works for entity names and types, but doesn't seem to search within the contents of observations."
+
+This appears to be a genuine flaw. According to the intended functionality of the search_nodes operation, it should search through entity names, types, AND observation content. The fact that it's not searching within observation contents means the implementation is incomplete or has a bug.
+
+"Retrieving specific entities (open_nodes) works to retrieve entities by name, but doesn't include the observations in the returned entity objects."
+
+This is also a flaw. The open_nodes function should return complete entity objects, including their observations. If the observations are missing from the returned entities, then the data being returned is incomplete.
+Looking at the comprehensive test we ran earlier, it seemed to pass all tests, which suggests that these issues might not have been detected by the test cases or that the tests weren't comprehensive enough to catch these specific problems.
+These flaws are significant because:
+
+The search_nodes function not searching observation content limits the searchability of the knowledge graph, which is a core feature.
+The open_nodes function not returning observations means clients can't access a critical part of the entity data, which severely limits its usefulness.
+
+The issues reported are indeed flaws that should be addressed in the implementation. They affect core functionality and would impair the usefulness of the knowledge graph integration.Yes, these two issues are definitely flaws that need to be addressed:
+
+Search functionality not including observation contents:
+
+This is a significant limitation since one of the primary purposes of a knowledge graph is to be able to search through all stored information, including observations.
+According to the specification, search_nodes should "match against entity names, types, and observation content" - so the current behavior is not meeting the intended functionality.
+
+
+Missing observations in entity retrieval:
+
+This is a critical flaw - observations are the core content of entities.
+If the open_nodes function returns entities without their observations, it's severely limiting the usefulness of the retrieval functionality.
+
+
+
+Looking back at the comprehensive tests we ran earlier, it appears that the tests may not have properly validated these specific aspects:
+
+The test might have checked that entities were returned, but not verified that observations were included in those entities
+The search test may have only verified searching by type, not by observation content
+
+These issues are directly related to the behavior described in your original briefing where you mentioned:
+
+"The 'add_observations' functionality does not reliably add new observations."
+
+If observations are not being properly returned by open_nodes or included in search results, it could give the appearance that observations aren't being properly added, even if they are actually being stored in the database.
+These flaws should definitely be addressed in the implementation. Would you like me to update the plan to specifically focus on fixing these two issues as part of the implementation?
+</test update leading to process issues>
+
+<knowledge graph mcp tool interface>
+// Define the tools available through the MCP interface
+const tools = [
+  {
+    name: "read_graph",
+    description: "Read the entire knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  {
+    name: "search_nodes",
+    description: "Search for nodes in the knowledge graph based on a query",
+    inputSchema: {
+      type: "object",
+      properties: {
+        query: {
+          type: "string",
+          description: "The search query to match against entity names, types, and observation content",
+        },
+      },
+      required: ["query"],
+    },
+  },
+  {
+    name: "open_nodes",
+    description: "Open specific nodes in the knowledge graph by their names",
+    inputSchema: {
+      type: "object",
+      properties: {
+        names: {
+          type: "array",
+          items: { type: "string" },
+          description: "An array of entity names to retrieve",
+        },
+      },
+      required: ["names"],
+    },
+  },
+  {
+    name: "create_entities",
+    description: "Create multiple new entities in the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        entities: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+                description: "The name of the entity",
+              },
+              entityType: {
+                type: "string",
+                description: "The type of the entity",
+              },
+              observations: {
+                type: "array",
+                items: { type: "string" },
+                description: "An array of observation contents associated with the entity",
+              },
+            },
+            required: ["name", "entityType", "observations"],
+          },
+        },
+      },
+      required: ["entities"],
+    },
+  },
+  {
+    name: "create_relations",
+    description: "Create multiple new relations between entities in the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        relations: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              from: {
+                type: "string",
+                description: "The name of the entity where the relation starts",
+              },
+              to: {
+                type: "string",
+                description: "The name of the entity where the relation ends",
+              },
+              relationType: {
+                type: "string",
+                description: "The type of the relation",
+              },
+            },
+            required: ["from", "to", "relationType"],
+          },
+        },
+      },
+      required: ["relations"],
+    },
+  },
+  {
+    name: "add_observations",
+    description: "Add new observations to existing entities in the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        observations: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              entityName: {
+                type: "string",
+                description: "The name of the entity to add the observations to",
+              },
+              contents: {
+                type: "array",
+                items: { type: "string" },
+                description: "An array of observation contents to add",
+              },
+            },
+            required: ["entityName", "contents"],
+          },
+        },
+      },
+      required: ["observations"],
+    },
+  },
+  {
+    name: "delete_entities",
+    description: "Delete multiple entities and their associated relations from the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        entityNames: {
+          type: "array",
+          items: { type: "string" },
+          description: "An array of entity names to delete",
+        },
+      },
+      required: ["entityNames"],
+    },
+  },
+  {
+    name: "delete_observations",
+    description: "Delete specific observations from entities in the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        deletions: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              entityName: {
+                type: "string",
+                description: "The name of the entity containing the observations",
+              },
+              observations: {
+                type: "array",
+                items: { type: "string" },
+                description: "An array of observations to delete",
+              },
+            },
+            required: ["entityName", "observations"],
+          },
+        },
+      },
+      required: ["deletions"],
+    },
+  },
+  {
+    name: "delete_relations",
+    description: "Delete multiple relations from the knowledge graph",
+    inputSchema: {
+      type: "object",
+      properties: {
+        relations: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              from: {
+                type: "string",
+                description: "The name of the entity where the relation starts",
+              },
+              to: {
+                type: "string",
+                description: "The name of the entity where the relation ends",
+              },
+              relationType: {
+                type: "string",
+                description: "The type of the relation",
+              },
+            },
+            required: ["from", "to", "relationType"],
+          },
+          description: "An array of relations to delete",
+        },
+      },
+      required: ["relations"],
+    },
+  }
+];
+</knowledge graph mcp tool interface>
+
+<ai_router mcp tool interface>
+// Define the AI provider tools
+const AI_ROUTER_TOOL: Tool = {
+  name: "ai_router",
+  description:
+    "Routes a query to a specified AI provider (OpenAI, Gemini, Claude, OpenAI-Reasoning) or a combination of providers. " +
+    "Returns the generated text response from the selected provider(s). " +
+    "Optionally accepts a model parameter to specify which model to use for each provider.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      query: {
+        type: "string",
+        description: "The text prompt to send to the AI provider",
+      },
+      provider: {
+        type: "string",
+        description:
+          "The AI provider to use (openai, gemini, claude, openai-reasoning, or all)",
+        enum: ["openai", "gemini", "claude", "openai-reasoning", "all"],
+      },
+      model: {
+        type: "string",
+        description:
+          "Optional: Specific model to use with the selected provider",
+      },
+      max_tokens: {
+        type: "number",
+        description:
+          "Optional: Maximum number of tokens to generate (default: 10000)",
+        default: 10000,
+      },
+      temperature: {
+        type: "number",
+        description:
+          "Optional: Temperature parameter for generation (default: 0.7)",
+        default: 0.7,
+      },
+    },
+    required: ["query", "provider"],
+  },
+};
+</ai_router mcp tool interface>
+
+
+
+<PROMPT>
+# PROMPT FOR SOFTWARE ENGINEERING PROCESS RE-DESIGN AND MCP KNOWLEDGE GRAPH ITERATIVE AI INTEGRATION
+
+## Context:
+
+The current software development approach leverages advanced AI tooling (Anthropic Claude models and MCP interfaces) for iterative development of a SurrealDB-based MCP knowledge graph application. While initial implementation generates an accurate first version of specifications and initial coding iterations, several key problems have emerged:
+
+1. Significant context limitations within Claude Sonnet 3.7, causing context depletion during large specification generation tasks, constant "continue" manual input prompts, and degraded performance in subsequent tasks.
+2. Elevated difficulty maintaining iterative updates due to inability to restore fully sufficient context information after initial sessions close, necessitating an inefficient "manual restart" approach, slowing down productivity and accuracy.
+3. Lack of systematic handling of iterative adjustments post-testing (testing-driven changes or specification/environment-driven corrections), creating friction and repeated restarts of context processing.
+
+A proposed solution involves modelling specifications, tasks, plans, and tracking not as isolated documents but as coherent nodes and edges within a persistent knowledge graph structure. This graph should maintain context continuity naturally and efficiently, allowing context to be navigated, activated, restored, compacted, and persisted to JSON. Additionally, explicitly structuring iterative software engineering processes is a necessity. This solution thus encompasses:
+
+- Representation of software artifacts as atomic/interconnected knowledge graph nodes and relationships.
+- Dynamic context management—efficiently releasing or reactivating nodes/context to maintain rapid, scalable interactions.
+- A systematic iterative software-engineering workflow, incorporating task design, AI model tooling engagement, thorough testing, and rapid iterative refinements based around graph-based storage of artifacts.
+- Integration of structured MCP protocol tooling interfaces to facilitate higher-quality AI-driven peer reviews and interventions, further improving robustness and quality assurance.
+
+## Role:
+
+You are an internationally recognised expert software engineer, technical architect and AI process-specialist with over 20 years of experience specialising in:
+
+- Advanced iterative software engineering methodologies (agile, CI/CD, agile-AI hybrid methods).
+- Knowledge graph architectures (SurrealDB, Neo4j, graph database architectures).
+- Model Context Protocol (MCP), advanced AI developer tooling (Claude series models, ChatGPT 4.5+ capabilities).
+- Context management best practices (efficient session/context management for AI tooling).
+- JavaScript/TypeScript software development, integration, and testing automation.
+- JSON-RPC structured communication protocols over stdio for robust tool integration.
+
+Your remit is to design and define comprehensive iterative software engineering processes and prompt engineering strategies that leverage continuous-use knowledge graph architectures to resolve current development process bottlenecks effectively, allowing for smooth, iterative AI-supported software development and minimizing manual intervention.
+
+## Action:
+
+Create a meticulously defined iterative software engineering AI-driven process specification and accompanying set of thorough prompts designed explicitly around a continuous knowledge graph model, structured MCP interfaces, and robust testing components. The complete iterative method should effectively eliminate current context depletion issues, enhance iteration stability and speed, and significantly reduce "restart" manual interventions.
+
+Please follow these sequential steps:
+
+### Step 1: Software Engineering Iterative Methodology Model Definition
+
+a. Define clearly the iterative-flow methodology structure incorporating the following elements:
+
+- Initial Task Specification
+- AI-driven enriched specification (meta-prompt utilisation)
+- Knowledge graph-based artifact management (nodes/relationships structure for context continuity)
+- Context lifecycle and management (initialisation, compaction, reactivation strategies)
+- Testing-driven iterative refinement processes
+- MCP toolkit AI validation/review protocols
+- Final release iteration mechanisms
+
+b. Provide a clear textual and/or diagrammatic description of how nodes, edges, and tasks interact.
+
+### Step 2: Context Management Strategy
+
+a. Define a systematic, automatic strategy for context management comprising:
+
+- Knowledge graph node activation/deactivation (with JSON-based export/import for context persistence)
+- Transition rules clearly defined for switching contexts based on task phases
+- Automatic compaction techniques post-task completion for efficiency
+- Graph traversal strategies to ensure required context is consistently available without overloading LLM memory.
+
+b. Define rigorous JSON schema examples of context persistence and restoration.
+
+### Step 3: MCP AI Review & Validation Framework Specification
+
+a. Clearly outline structured MCP tool-based review processes for crucial artifacts (specifications, plans, API interfaces, test cases).
+
+b. Provide JSON-RPC protocol examples for invoking and receiving structured AI peer reviews.
+
+### Step 4: Exemplified Prompt Set
+
+Define rigorously structured, production-quality AI prompts aligned precisely to support each step of this iterative method, ensuring comprehensive guidance for AI models (Claude, ChatGPT variants) across iteration phases. The prompts set should include:
+
+- Initial Task Specification Prompt
+- Meta-Prompt Enrichment Prompt (high-quality self-refinement)
+- Context Activation/Deactivation Prompts
+- Testing Validation & Feedback Prompts
+- AI Peer Review Requests (MCP-based prompts)
+- Final Release Artifact Export/Compaction Prompts
+
+## Format:
+
+You will present your completed output as a formal academic-style technical document containing the following primary sections clearly labelled:
+
+1. Iterative Methodology Specification
+   - Methodology Flow Description
+   - Node/Edge Interaction Overview (diagrammatic/textual)
+
+2. Context Management Strategy
+   - Lifecycle Policy Description
+   - Context Management Processes (includes JSON schema examples)
+
+3. MCP AI Peer Review & Validation Framework
+   - Validation Processes and Protocols
+   - JSON-RPC Structured Invocation Examples
+
+4. Comprehensive Iteration Prompt Set
+   - Clearly structured and fully annotated AI prompts per phase above
+
+Consistent use of structured headings and detailed subheadings is required, with British English spelling and formal technical register for complete clarity.
+
+## Target Audience:
+
+The intended consumers of this specification are state-of-the-art AI developer tooling platforms (ChatGPT 4.5 +, Anthropic Claude 3.7+), senior software architects, developers, and technical project leaders with extensive experience in advanced software engineering processes, knowledge graph technologies, and TypeScript-based MCP integrations. It must remain comprehensible and utilitarian for senior engineers while providing sufficient structure and rigour that advanced AI tools can parse and action the specification consistently.
+
+---
+
+# Implementation Example Begin (Fill in Details Based on Your Project's Specifics):
+
+## Iterative Methodology Flow (Example Template):
+
+```
+[Initial Task]
+    │
+    ▼
+[AI Specification Enrichment via Meta-Prompt]
+    │
+    ▼
+[Activated Knowledge Graph Node]
+    │
+    ▼─────────────────────────────────┐
+[Claude Code Implementation Iteration]│
+    │                                 │
+    ▼                                 │
+[Testing Phase (Harness & Automated)]─┘
+    │
+    ▼ (Testing-driven Issues Found)
+[Iterative Refinement via MCP AI Peer review validation]
+    │
+    ▼
+[Knowledge Graph-based Context Compaction/Update]
+    │
+    ▼───────────┐
+[Next Iteration]│
+    │           ▼
+    ▼      [JSON-based Context Export (if needed)]
+[Final Iteration Approval & Release Artifact Production]
+```
+
+---
+
+## JSON Schema Example for Context Persistence:
+
+```json
+{
+  "contextSession": {
+    "taskId": "task_00123",
+    "nodeId": "node_xyz",
+    "tasks": [
+      {
+        "taskName": "SpecificationUpdate",
+        "dependenciesEdges": ["edge_001", "edge_002"],
+        "contextDocuments": ["spec_v2.1", "tests_results_v2", "api_updates_v2"]
+      }
+    ],
+    "activatedOn": "2024-05-03T15:00:00Z",
+    "expectedDeactivationAfter": "2024-05-03T16:00:00Z",
+    "state": "activated"
+  }
+}
+```
+
+---
+
+## MCP Peer Review Invocation Example (json-rpc):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "validation-req-20240503-01",
+  "method": "mcp.callTool",
+  "params": {
+    "name": "ai_router",
+    "arguments": {
+      "query": "[Artifact Review Request]",
+      "provider": "claude",
+      "model": "claude-3-sonnet",
+      "max_tokens": 8192,
+      "temperature": 0.3
+    }
+  }
+}
+```
+
+</PROMPT>
