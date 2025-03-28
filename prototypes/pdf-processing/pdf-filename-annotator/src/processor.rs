@@ -1,4 +1,4 @@
-use pdf_exam_tools_lib::{Config, Error, file_utils};
+use pdf_exam_tools_lib::{Config, Error, file_utils, Annotator};
 // Scanner diagnostic module no longer used
 use log::{debug, error, info};
 use lopdf::{dictionary, Document, Object};
@@ -111,7 +111,7 @@ impl PdfProcessor {
         self.fix_page_tree(&mut doc)?;
 
         // Create an annotator with our font config
-        let annotator = crate::annotation::Annotator::new(self.config.font.clone())?;
+        let annotator = Annotator::new(self.config.font.clone())?;
 
         // Get the pages
         let pages = doc.get_pages();
@@ -237,7 +237,7 @@ impl PdfProcessor {
     /// Add a searchable text annotation to a page
     fn add_searchable_annotation(
         &self,
-        annotator: &crate::annotation::Annotator,
+        annotator: &Annotator,
         doc: &mut Document,
         page_id: (u32, u16),
         text: &str,

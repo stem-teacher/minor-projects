@@ -3,7 +3,7 @@
 //! This module provides functionality for annotating PDF pages with text
 //! in specific positions.
 
-use pdf_exam_tools_lib::{Corner, FontConfig, PositionConfig, AnnotationError};
+use crate::{Corner, FontConfig, PositionConfig, AnnotationError};
 use log::{debug, warn};
 use lopdf::{
     self,
