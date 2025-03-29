@@ -1,4 +1,4 @@
-use pdf_exam_tools_lib::{Config, Error, file_utils, Annotator};
+use pdf_exam_tools_lib::{file_utils, Annotator, Config, Error};
 // Scanner diagnostic module no longer used
 use log::{debug, error, info};
 use lopdf::{dictionary, Document, Object};
@@ -37,19 +37,33 @@ impl PdfProcessor {
     /// Process all PDF files in the configured input directory
     pub fn process_all(&self) -> Result<ProcessingSummary, Error> {
         // Ensure output directory exists
-        file_utils::ensure_directory(&self.config.output_dir)
-            .map_err(|e| Error::Io(std::io::Error::new(std::io::ErrorKind::Other, e.to_string())))?;
+        file_utils::ensure_directory(&self.config.output_dir).map_err(|e| {
+            Error::Io(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                e.to_string(),
+            ))
+        })?;
 
         // Find all PDF files in the input directory
-        let pdf_files = file_utils::find_pdf_files(&self.config.input_dir, self.config.recursive, "*.pdf")
-            .map_err(|e| Error::Io(std::io::Error::new(std::io::ErrorKind::Other, e.to_string())))?;
-        
+        let pdf_files =
+            file_utils::find_pdf_files(&self.config.input_dir, self.config.recursive, "*.pdf")
+                .map_err(|e| {
+                    Error::Io(std::io::Error::new(
+                        std::io::ErrorKind::Other,
+                        e.to_string(),
+                    ))
+                })?;
+
         // Check if any PDF files were found
         if pdf_files.is_empty() {
             return Err(Error::NoPdfFiles(self.config.input_dir.clone()));
         }
-        
-        info!("Found {} PDF files in {}", pdf_files.len(), self.config.input_dir.display());
+
+        info!(
+            "Found {} PDF files in {}",
+            pdf_files.len(),
+            self.config.input_dir.display()
+        );
 
         let mut summary = ProcessingSummary {
             files_processed: 0,
@@ -87,7 +101,11 @@ impl PdfProcessor {
     /// Process a single PDF file
     pub fn process_file(&self, input_path: &Path) -> Result<usize, Error> {
         // Generate output path
-        let output_path = file_utils::generate_output_path(input_path, &self.config.input_dir, &self.config.output_dir);
+        let output_path = file_utils::generate_output_path(
+            input_path,
+            &self.config.input_dir,
+            &self.config.output_dir,
+        );
 
         // Get the filename (for annotation)
         let filename = input_path
@@ -100,7 +118,7 @@ impl PdfProcessor {
         // We no longer detect scanner PDFs - treat all PDFs the same way
         // This simplifies the application and provides consistent annotations
         info!("Processing with consistent annotation approach");
-        
+
         // We're using a consistent approach for all PDFs
         // No scanner detection logic is required
 
@@ -174,7 +192,8 @@ impl PdfProcessor {
 
             // Use only the searchable annotation method for all pages
             // We no longer fall back to content stream modification which created inconsistent results
-            let annotation_result = self.add_searchable_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y);
+            let annotation_result =
+                self.add_searchable_annotation(&annotator, &mut doc, fixed_page_id, filename, x, y);
 
             match annotation_result {
                 Ok(_) => {
@@ -634,12 +653,6 @@ impl PdfProcessor {
         Ok(media_box)
     }
 
-    
-
-    
-
-    
-
     /// Get page errors for a file
     ///
     /// This method would normally track page errors per file in a database or struct field.
@@ -655,8 +668,8 @@ impl PdfProcessor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use pdf_exam_tools_lib::{Config, FontConfig, PositionConfig};
     use assert_fs::prelude::*;
+    use pdf_exam_tools_lib::{Config, FontConfig, PositionConfig};
     // These imports are used in processor.rs itself, not needed in tests
 
     // Helper function to create a minimal test PDF

@@ -850,7 +850,11 @@ fn test_searchable_annotations() {
     let result = processor.process_file(input_pdf.path());
 
     // Verify processing worked
-    assert!(result.is_ok(), "Failed to process test PDF: {:?}", result.err());
+    assert!(
+        result.is_ok(),
+        "Failed to process test PDF: {:?}",
+        result.err()
+    );
 
     // Check the output file exists
     let output_pdf = output_dir.child(test_filename);
@@ -885,7 +889,7 @@ fn test_continue_after_page_failures() {
 
         // Create 3 pages
         let mut page_ids = Vec::new();
-        
+
         // First page - intentionally malformed to cause annotation failures
         // Missing required Resources dictionary
         let broken_page_id = doc.add_object(dictionary! {
@@ -899,7 +903,7 @@ fn test_continue_after_page_failures() {
             // Intentionally missing Resources dictionary
         });
         page_ids.push(broken_page_id);
-        
+
         // Add 2 normal pages
         for _ in 0..2 {
             let page_id = doc.add_object(dictionary! {
@@ -958,14 +962,22 @@ fn test_continue_after_page_failures() {
     let result = processor.process_file(input_pdf.path());
 
     // Verify processing worked despite the first page failure
-    assert!(result.is_ok(), "Failed to process test PDF: {:?}", result.err());
+    assert!(
+        result.is_ok(),
+        "Failed to process test PDF: {:?}",
+        result.err()
+    );
 
     // Check the output file exists
     let output_pdf = output_dir.child(test_filename);
     output_pdf.assert(predicate::path::exists());
 
     // Verify partial pages were processed (should be 2 of 3 pages)
-    assert_eq!(result.unwrap(), 2, "Should have processed 2 pages successfully");
+    assert_eq!(
+        result.unwrap(),
+        2,
+        "Should have processed 2 pages successfully"
+    );
 
     // Clean up
     temp_dir.close().unwrap();

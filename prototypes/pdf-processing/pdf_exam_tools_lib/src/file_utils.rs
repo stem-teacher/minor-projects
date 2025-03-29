@@ -1,29 +1,30 @@
-use std::path::{Path, PathBuf};
+use anyhow::{Context, Result};
 use std::fs;
+use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
-use anyhow::{Result, Context};
 
 /// Find PDF files in directory based on pattern and recursion settings
 pub fn find_pdf_files(dir: &Path, recursive: bool, pattern: &str) -> Result<Vec<PathBuf>> {
     let mut files = Vec::new();
-    
+
     let walker = if recursive {
         WalkDir::new(dir)
     } else {
         WalkDir::new(dir).max_depth(1)
     };
-    
+
     for entry in walker {
         let entry = entry.context("Failed to read directory entry")?;
         let path = entry.path();
-        
-        if path.is_file() && 
-           path.extension().map_or(false, |ext| ext == "pdf") &&
-           path_matches_pattern(path, pattern) {
+
+        if path.is_file()
+            && path.extension().map_or(false, |ext| ext == "pdf")
+            && path_matches_pattern(path, pattern)
+        {
             files.push(path.to_path_buf());
         }
     }
-    
+
     Ok(files)
 }
 
@@ -33,7 +34,7 @@ fn path_matches_pattern(path: &Path, pattern: &str) -> bool {
     if pattern == "*.pdf" {
         return path.extension().map_or(false, |ext| ext == "pdf");
     }
-    
+
     // More advanced pattern matching could be implemented here
     // For now, just return true if the extension is pdf
     path.extension().map_or(false, |ext| ext == "pdf")

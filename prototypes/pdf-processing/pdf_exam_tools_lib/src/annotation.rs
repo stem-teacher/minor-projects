@@ -3,15 +3,163 @@
 //! This module provides functionality for annotating PDF pages with text
 //! in specific positions.
 
-use crate::{Corner, FontConfig, PositionConfig, AnnotationError};
+use crate::annotation_utils;
+use crate::{AnnotationError, Corner, Error, FontConfig, PositionConfig};
 use log::{debug, warn};
 use lopdf::{
     self,
     content::{Content, Operation},
-    Document, Object, Stream,
+    Dictionary, Document, Object, ObjectId, Stream,
 };
 use rusttype::{Font, Scale};
 use std::fs;
+
+/// Adds a labeled FreeText annotation to a specific page.
+/// Creates the annotation object, adds it to the document, and links it to the page.
+/// Returns the ObjectId of the created annotation dictionary.
+pub fn add_labeled_freetext(
+    doc: &mut Document,
+    page_num: u32,
+    label: &str,              // The /T value for the annotation
+    contents: &str,           // The /Contents value
+    rect: [f32; 4],           // The /Rect value [x1, y1, x2, y2]
+    font_config: &FontConfig, // Used for /DA string, might be simplified later
+) -> Result<ObjectId, Error> {
+    // Create a new dictionary for the annotation
+    let mut annot_dict = Dictionary::new();
+
+    // Set standard annotation keys
+    annot_dict.set("Type", Object::Name(b"Annot".to_vec()));
+    annot_dict.set("Subtype", Object::Name(b"FreeText".to_vec()));
+
+    // Set the rectangle coordinates
+    annot_dict.set(
+        "Rect",
+        Object::Array(vec![
+            Object::Real(rect[0]),
+            Object::Real(rect[1]),
+            Object::Real(rect[2]),
+            Object::Real(rect[3]),
+        ]),
+    );
+
+    // Set contents and label
+    annotation_utils::set_annotation_contents(&mut annot_dict, contents);
+    annotation_utils::set_annotation_label(&mut annot_dict, label);
+
+    // Set flags (Print=4)
+    annot_dict.set("F", Object::Integer(4));
+
+    // Set border to [0, 0, 0]
+    annot_dict.set(
+        "Border",
+        Object::Array(vec![
+            Object::Integer(0),
+            Object::Integer(0),
+            Object::Integer(0),
+        ]),
+    );
+
+    // Set Default Appearance string
+    let da_string = format!("/Helvetica {} Tf 0 g", font_config.size);
+    annot_dict.set(
+        "DA",
+        Object::String(da_string.as_bytes().to_vec(), lopdf::StringFormat::Literal),
+    );
+
+    // Add the annotation to the document
+    let new_annot_id = doc.add_object(Object::Dictionary(annot_dict));
+
+    // Link the annotation to the page
+    annotation_utils::add_annotation_to_page(doc, page_num, new_annot_id)?;
+
+    // Return the annotation ID
+    Ok(new_annot_id)
+}
+
+/// Adds a labeled FreeText annotation to multiple specified pages.
+/// Creates the annotation object for each page, adds it to the document, and links it.
+/// Label and Contents can include placeholders "{page}" to be replaced by the current page number.
+pub fn add_labeled_freetext_multi(
+    doc: &mut Document,
+    page_numbers: &[u32],    // Accept multiple page numbers
+    label_template: &str,    // Template for /T, e.g., "Stamp_p{page}"
+    contents_template: &str, // Template for /Contents, e.g., "File: {filename} Page: {page}"
+    rect: [f32; 4],          // Same Rect for all pages for now
+    font_config: &FontConfig,
+) -> Result<(), Error> {
+    // Return Ok(()) or Error
+    // Loop through each page number
+    for &page_num in page_numbers {
+        debug!("Adding annotation to page {}", page_num);
+
+        // Generate dynamic label and contents by replacing {page} placeholder
+        let label = label_template.replace("{page}", &page_num.to_string());
+        let contents = contents_template.replace("{page}", &page_num.to_string());
+
+        // Create a new dictionary for the annotation
+        let mut annot_dict = Dictionary::new();
+
+        // Set standard annotation keys
+        annot_dict.set("Type", Object::Name(b"Annot".to_vec()));
+        annot_dict.set("Subtype", Object::Name(b"FreeText".to_vec()));
+
+        // Set the rectangle coordinates
+        annot_dict.set(
+            "Rect",
+            Object::Array(vec![
+                Object::Real(rect[0]),
+                Object::Real(rect[1]),
+                Object::Real(rect[2]),
+                Object::Real(rect[3]),
+            ]),
+        );
+
+        // Set dynamic contents and label
+        annotation_utils::set_annotation_contents(&mut annot_dict, &contents);
+        annotation_utils::set_annotation_label(&mut annot_dict, &label);
+
+        // Set flags (Print=4)
+        annot_dict.set("F", Object::Integer(4));
+
+        // Set border to [0, 0, 0]
+        annot_dict.set(
+            "Border",
+            Object::Array(vec![
+                Object::Integer(0),
+                Object::Integer(0),
+                Object::Integer(0),
+            ]),
+        );
+
+        // Set Default Appearance string
+        let da_string = format!("/Helvetica {} Tf 0 g", font_config.size);
+        annot_dict.set(
+            "DA",
+            Object::String(da_string.as_bytes().to_vec(), lopdf::StringFormat::Literal),
+        );
+
+        // Add the annotation to the document
+        let new_annot_id = doc.add_object(Object::Dictionary(annot_dict));
+
+        // Link the annotation to the page - log warnings but continue on errors
+        if let Err(e) = annotation_utils::add_annotation_to_page(doc, page_num, new_annot_id) {
+            warn!(
+                "Failed to add annotation '{}' to page {}: {}",
+                label, page_num, e
+            );
+            // Continue to next page instead of returning error
+        } else {
+            debug!(
+                "Successfully added annotation '{}' to page {}",
+                label, page_num
+            );
+        }
+    }
+
+    // Return success if we get here
+    Ok(())
+}
 
 /// Text annotation handler for PDF pages
 pub struct Annotator {
@@ -64,13 +212,11 @@ impl Annotator {
         debug!("Adding text annotation to page ID: {:?}", page_id);
         debug!("Annotation text: '{}'", text);
         debug!("Annotation position: x={}, y={}", x, y);
-        
+
         // Log font configuration details
         debug!(
             "Font config: size={}, family={}, fallback={:?}",
-            self.font_config.size, 
-            self.font_config.family, 
-            self.font_config.fallback
+            self.font_config.size, self.font_config.family, self.font_config.fallback
         );
 
         // Calculate text width using rusttype
@@ -91,8 +237,11 @@ impl Annotator {
         // Convert from font units to PDF units and add buffer space to prevent truncation
         let font_scale_factor = 1.2; // Increased scale factor with buffer space built in
         let text_width = text_width * font_scale_factor;
-        debug!("Calculated text width: {} (with scale factor: {})", text_width, font_scale_factor);
-        
+        debug!(
+            "Calculated text width: {} (with scale factor: {})",
+            text_width, font_scale_factor
+        );
+
         // Add a buffer to ensure the entire text is visible - but we directly use the calculated value
         let text_height = self.font_config.size * 1.2; // Add some padding
         debug!("Calculated text height: {}", text_height);
@@ -125,21 +274,24 @@ impl Annotator {
         helvetica_font.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
         helvetica_font.set("Name", Object::Name(b"Helvetica".to_vec()));
         font_dict.set("Helvetica", Object::Dictionary(helvetica_font));
-        
+
         // Create and set a dedicated resource dictionary for this annotation
         let mut dr_dict = lopdf::Dictionary::new();
         dr_dict.set("Font", Object::Dictionary(font_dict));
         annot_dict.set("DR", Object::Dictionary(dr_dict));
-        
+
         // Default appearance string (DA) - This is a key part of the font consistency issue
         // The PDF specification requires precise format for the DA string
         let font_size = self.font_config.size;
-        
+
         // Fix: Remove the double space between font name and size which may be causing issues
         // According to PDF spec, the format should be consistent with exactly one space between elements
         let fixed_da_string = format!("/{} {} Tf 0 0 0 rg", "Helvetica", font_size);
-        debug!("Default Appearance (DA) string (fixed format): '{}'", fixed_da_string);
-        
+        debug!(
+            "Default Appearance (DA) string (fixed format): '{}'",
+            fixed_da_string
+        );
+
         // Set the DA string in the annotation dictionary using the fixed format
         annot_dict.set(
             "DA",
@@ -153,7 +305,7 @@ impl Annotator {
         // This forces PDF viewers to use our DA string and resource dictionary
         // If an AP entry exists, it can override our font settings
         annot_dict.remove(b"AP");
-        
+
         // No border
         annot_dict.set(
             "Border",
@@ -687,8 +839,11 @@ impl Annotator {
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
                 // Add name property for consistency with other font entries
                 font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                
-                debug!("Created consistent font entry for referenced font dictionary, page ID: {:?}", page_id);
+
+                debug!(
+                    "Created consistent font entry for referenced font dictionary, page ID: {:?}",
+                    page_id
+                );
 
                 font_dict.set(font_name, Object::Dictionary(font_entry));
             }
@@ -713,11 +868,11 @@ impl Annotator {
                     // Always use Helvetica for font consistency across all pages
                     font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                     font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                    
+
                     // Ensure the font has a consistent name property on all pages
                     // This is important for consistent rendering across PDF viewers
                     font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                    
+
                     debug!("Created consistent font entry for page ID: {:?}", page_id);
 
                     font_dict.set(font_name, Object::Dictionary(font_entry));
@@ -734,12 +889,15 @@ impl Annotator {
                 // Always use Helvetica for font consistency across all pages
                 font_entry.set("BaseFont", Object::Name(b"Helvetica".to_vec()));
                 font_entry.set("Encoding", Object::Name(b"WinAnsiEncoding".to_vec()));
-                
+
                 // Ensure the font has a consistent name property on all pages
                 // This is important for consistent rendering across PDF viewers
                 font_entry.set("Name", Object::Name(b"Helvetica".to_vec()));
-                
-                debug!("Created consistent font entry for new dictionary, page ID: {:?}", page_id);
+
+                debug!(
+                    "Created consistent font entry for new dictionary, page ID: {:?}",
+                    page_id
+                );
 
                 font_dict.set(font_name, Object::Dictionary(font_entry));
 

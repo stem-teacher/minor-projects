@@ -1,0 +1,29 @@
+    Checking aho-corasick v1.1.3
+    Checking regex-syntax v0.8.5
+    Checking serde_json v1.0.140
+    Checking lopdf v0.36.0
+    Checking regex-automata v0.4.9
+    Checking pdf_exam_tools_lib v0.1.0 (/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/pdf_exam_tools_lib)
+warning: unused import: `Error as LopdfError`
+ --> pdf_exam_tools_lib/src/annotation_utils.rs:2:35
+  |
+2 | use lopdf::{Dictionary, Document, Error as LopdfError, Object, ObjectId};
+  |                                   ^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `pdf_exam_tools_lib` (lib) generated 1 warning (run `cargo fix --lib -p pdf_exam_tools_lib` to apply 1 suggestion)
+    Checking regex v1.11.1
+    Checking env_filter v0.1.3
+    Checking env_logger v0.11.7
+    Checking pdf-filename-annotator v0.1.0 (/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/pdf-filename-annotator)
+warning: unused import: `Config`
+ --> pdf-filename-annotator/src/bin/add_annotation.rs:6:48
+  |
+6 | use pdf_exam_tools_lib::{add_labeled_freetext, Config, FontConfig}; // Import library function and config
+  |                                                ^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `pdf-filename-annotator` (bin "add-annotation") generated 1 warning (run `cargo fix --bin "add-annotation"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.83s

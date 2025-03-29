@@ -1,8 +1,8 @@
 // Export library modules
 // file_utils has been moved to pdf_exam_tools_lib
 // annotation has been moved to pdf_exam_tools_lib
-pub mod pdf_utils;
 pub mod mc_pdf_utils;
+pub mod pdf_utils;
 pub mod processor;
 // pub mod pdf_annotation_utils; // Temporarily removed due to type conflicts
 

@@ -8,8 +8,8 @@ use clap::Parser;
 // Logging is initialized via env_logger
 use pdf_exam_tools_lib::Config;
 use pdf_filename_annotator::PdfProcessor;
-use std::path::PathBuf;
 use std::fs;
+use std::path::PathBuf;
 
 /// Command line arguments for PDF Filename Annotator
 #[derive(Parser, Debug)]
@@ -22,7 +22,7 @@ struct Args {
     /// Verbose output
     #[arg(short, long)]
     verbose: bool,
-    
+
     /// List available fonts
     #[arg(short, long)]
     list_fonts: bool,
@@ -34,14 +34,17 @@ fn main() -> Result<()> {
 
     // Parse command-line arguments
     let args = Args::parse();
-    
+
     // If list_fonts flag is set, list available fonts and exit
     if args.list_fonts {
         return list_available_fonts();
     }
 
     // Load configuration from file
-    let config_path = args.config.as_ref().expect("Config should be present when not listing fonts");
+    let config_path = args
+        .config
+        .as_ref()
+        .expect("Config should be present when not listing fonts");
     let config = Config::from_file(config_path).context("Failed to load configuration")?;
 
     // Validate configuration
@@ -74,7 +77,7 @@ fn main() -> Result<()> {
 /// Lists available fonts in common system locations
 fn list_available_fonts() -> Result<()> {
     println!("Checking for available fonts...");
-    
+
     // Check common font directories
     let font_dirs = [
         "/System/Library/Fonts",
@@ -85,12 +88,12 @@ fn list_available_fonts() -> Result<()> {
         "C:\\Windows\\Fonts",
         "./fonts",
     ];
-    
+
     for dir in &font_dirs {
         let path = PathBuf::from(dir);
         if path.exists() {
             println!("Checking directory: {}", dir);
-            
+
             // Try to list files in directory
             match fs::read_dir(&path) {
                 Ok(entries) => {
@@ -113,7 +116,7 @@ fn list_available_fonts() -> Result<()> {
             }
         }
     }
-    
+
     println!("Font scanning complete.");
     Ok(())
 }

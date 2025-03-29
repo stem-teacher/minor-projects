@@ -1,0 +1,22 @@
+warning: unused import: `crate::error::Error`
+ --> pdf_exam_tools_lib/src/annotation_utils.rs:1:5
+  |
+1 | use crate::error::Error; // Assuming library error enum is here
+  |     ^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `Dictionary`, `Document`, `Error as LopdfError`, `ObjectId`, and `Object`
+ --> pdf_exam_tools_lib/src/annotation_utils.rs:2:13
+  |
+2 | use lopdf::{Dictionary, Document, Error as LopdfError, Object, ObjectId};
+  |             ^^^^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^^^^^^^^^  ^^^^^^  ^^^^^^^^
+
+warning: unused import: `std::str`
+ --> pdf_exam_tools_lib/src/annotation_utils.rs:3:5
+  |
+3 | use std::str;
+  |     ^^^^^^^^
+
+warning: `pdf_exam_tools_lib` (lib) generated 3 warnings (run `cargo fix --lib -p pdf_exam_tools_lib` to apply 3 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
