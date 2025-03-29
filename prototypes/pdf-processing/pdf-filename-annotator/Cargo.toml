@@ -43,6 +43,10 @@ path = "src/bin/get_annotation_value.rs"
 name = "set-annotation-value"
 path = "src/bin/set_annotation_value.rs"
 
+[[bin]]
+name = "cp-annotation"
+path = "src/bin/cp_annotation.rs"
+
 [dependencies]
 # PDF processing library
 lopdf = "^0.36.0"

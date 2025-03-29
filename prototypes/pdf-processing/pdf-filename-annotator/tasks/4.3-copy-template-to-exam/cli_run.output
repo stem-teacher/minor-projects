@@ -1,0 +1,69 @@
+Processing label: filename_stamp_p1
+Warning: Annotation 'filename_stamp_p1' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: filename_stamp_p2
+Warning: Annotation 'filename_stamp_p2' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: filename_stamp_p3
+Warning: Annotation 'filename_stamp_p3' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: filename_stamp_p4
+Warning: Annotation 'filename_stamp_p4' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: filename_stamp_p5
+Warning: Annotation 'filename_stamp_p5' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: filename_stamp_p6
+Warning: Annotation 'filename_stamp_p6' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-part-a
+Warning: Annotation 'mark-part-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-part-b
+Warning: Annotation 'mark-part-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-total
+Warning: Annotation 'mark-total' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-a
+Warning: Annotation 'mark-q16-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-b
+Warning: Annotation 'mark-q16-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-c
+Warning: Annotation 'mark-q16-c' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-d
+Warning: Annotation 'mark-q16-d' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-e
+Warning: Annotation 'mark-q16-e' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-f
+Warning: Annotation 'mark-q16-f' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-g
+Warning: Annotation 'mark-q16-g' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q16-h
+Warning: Annotation 'mark-q16-h' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q17
+Warning: Annotation 'mark-q17' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q18-a
+Warning: Annotation 'mark-q18-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q18-b
+Warning: Annotation 'mark-q18-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q19-a
+Warning: Annotation 'mark-q19-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+Processing label: mark-q19-b
+Warning: Annotation 'mark-q19-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+No annotations were successfully copied. Output file not saved.
+
+Summary of errors/warnings:
+- Annotation 'filename_stamp_p1' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'filename_stamp_p2' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'filename_stamp_p3' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'filename_stamp_p4' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'filename_stamp_p5' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'filename_stamp_p6' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-part-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-part-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-total' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-c' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-d' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-e' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-f' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-g' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q16-h' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q17' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q18-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q18-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q19-a' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.
+- Annotation 'mark-q19-b' not found in source PDF '/Users/philiphaynes/devel/teaching/projects/minor-projects/prototypes/pdf-processing/test_resources/input/sample_exam_marking_template_final.pdf', skipping.

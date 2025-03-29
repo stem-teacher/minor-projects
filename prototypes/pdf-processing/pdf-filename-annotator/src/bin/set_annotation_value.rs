@@ -1,9 +1,10 @@
 use anyhow::{Context, Result};
 use clap::Parser;
-use lopdf::{Document, Object}; // Need Object for Dictionary creation
+use lopdf::{Document, Object};
+use std::fs;
 use std::path::PathBuf;
 // Import necessary library functions
-use pdf_exam_tools_lib::annotation_utils::{find_annotation_by_label, set_annotation_contents}; // Need set_annotation_contents
+use pdf_exam_tools_lib::annotation_utils::{find_annotation_by_label, set_annotation_contents};
 use pdf_exam_tools_lib::Error as LibError;
 
 #[derive(Parser, Debug)]
@@ -17,9 +18,17 @@ struct Args {
     #[arg(short, long)]
     input: PathBuf,
 
-    /// Output PDF file path
+    /// Output PDF file path (omit if using --in-place)
     #[arg(short, long)]
-    output: PathBuf,
+    output: Option<PathBuf>,
+
+    /// Modify the input file directly (creates backup)
+    #[arg(long, default_value_t = false)]
+    in_place: bool,
+
+    /// Suffix for backup file when using --in-place
+    #[arg(long, default_value = ".bak")]
+    backup_suffix: String,
 
     /// Annotation label (/T value) to find and modify
     #[arg(short, long)]
@@ -32,6 +41,37 @@ struct Args {
 
 fn main() -> Result<()> {
     let args = Args::parse();
+
+    // Argument validation
+    if args.in_place && args.output.is_some() {
+        anyhow::bail!("Cannot use --in-place and --output simultaneously.");
+    }
+    if !args.in_place && args.output.is_none() {
+        anyhow::bail!("Must specify either --output or --in-place.");
+    }
+
+    // Determine output path
+    let actual_output_path = if args.in_place {
+        args.input.clone() // Use input path for in-place
+    } else {
+        args.output.clone().unwrap() // Use specified output path
+    };
+
+    // Backup if in-place
+    if args.in_place {
+        let backup_path = args.input.with_extension(
+            args.input
+                .extension()
+                .unwrap_or_default()
+                .to_str()
+                .unwrap_or("")
+                .to_owned()
+                + &args.backup_suffix,
+        );
+        fs::copy(&args.input, &backup_path)
+            .with_context(|| format!("Failed to create backup file: {}", backup_path.display()))?;
+        println!("Created backup: {}", backup_path.display());
+    }
 
     // Load the document MUTABLY
     let mut doc = Document::load(&args.input)
@@ -88,11 +128,15 @@ fn main() -> Result<()> {
         }
     }
 
-    // Save the modified document
-    doc.save(&args.output)
-        .with_context(|| format!("Failed to save output PDF: {}", args.output.display()))?;
+    // Save the modified document to the determined path
+    doc.save(&actual_output_path).with_context(|| {
+        format!(
+            "Failed to save output PDF: {}",
+            actual_output_path.display()
+        )
+    })?;
 
-    println!("Saved updated PDF to {}", args.output.display());
+    println!("Saved updated PDF to {}", actual_output_path.display());
 
     Ok(())
 }
