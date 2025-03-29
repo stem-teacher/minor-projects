@@ -1,0 +1,51 @@
+Processing label: mc-q1-c
+Error: Failed to copy annotation 'mc-q1-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q2-d
+Error: Failed to copy annotation 'mc-q2-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q3-b
+Error: Failed to copy annotation 'mc-q3-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q4-d
+Error: Failed to copy annotation 'mc-q4-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q5-b
+Error: Failed to copy annotation 'mc-q5-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q6-c
+Error: Failed to copy annotation 'mc-q6-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q7-a
+Error: Failed to copy annotation 'mc-q7-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q8-d
+Error: Failed to copy annotation 'mc-q8-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q9-a
+Error: Failed to copy annotation 'mc-q9-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q10-b
+Error: Failed to copy annotation 'mc-q10-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q11-a
+Error: Failed to copy annotation 'mc-q11-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q12-a
+Error: Failed to copy annotation 'mc-q12-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q13-c
+Error: Failed to copy annotation 'mc-q13-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q14-d
+Error: Failed to copy annotation 'mc-q14-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q15-b
+Error: Failed to copy annotation 'mc-q15-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+Processing label: mc-q16-d
+Error: Failed to copy annotation 'mc-q16-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+No annotations were successfully copied. Output file not saved.
+
+Summary of errors/warnings:
+- Failed to copy annotation 'mc-q1-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q2-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q3-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q4-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q5-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q6-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q7-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q8-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q9-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q10-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q11-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q12-a' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q13-c' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q14-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q15-b' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.
+- Failed to copy annotation 'mc-q16-d' to page 1: PDF processing error: Recreating annotation type 'Square' is not yet supported.

@@ -337,14 +337,11 @@ pub fn get_annotation_properties(
             let dict = get_annotation_dict(doc, annot_id)?; // Uses existing helper
 
             // 3. Extract properties using existing/new helpers
-            let subtype = dict
-                .get(b"Subtype")
-                .ok()
-                .and_then(|o| {
-                    o.as_name().ok().map(|bytes| {
-                        String::from_utf8_lossy(bytes).into_owned()
-                    })
-                });
+            let subtype = dict.get(b"Subtype").ok().and_then(|o| {
+                o.as_name()
+                    .ok()
+                    .map(|bytes| String::from_utf8_lossy(bytes).into_owned())
+            });
             let label = get_annotation_label(&dict); // Existing helper
             let rect = get_annotation_rect(&dict).ok(); // Existing helper, ignore error for optional field
             let contents = get_annotation_contents(&dict); // Existing helper
