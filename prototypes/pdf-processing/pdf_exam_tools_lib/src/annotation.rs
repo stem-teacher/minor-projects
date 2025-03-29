@@ -6,6 +6,21 @@
 use crate::annotation_utils;
 use crate::{AnnotationError, Corner, Error, FontConfig, PositionConfig};
 use log::{debug, warn};
+
+/// Represents RGB Color (0.0 to 1.0 range)
+#[derive(Debug, Clone, Copy, serde::Serialize)]
+pub struct Color {
+    pub r: f32,
+    pub g: f32,
+    pub b: f32,
+}
+
+/// Represents Border Style options
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct BorderStyle {
+    pub width: f32,
+    // Could add style (Solid, Dashed) later
+}
 use lopdf::{
     self,
     content::{Content, Operation},
@@ -74,6 +89,105 @@ pub fn add_labeled_freetext(
     annotation_utils::add_annotation_to_page(doc, page_num, new_annot_id)?;
 
     // Return the annotation ID
+    Ok(new_annot_id)
+}
+
+/// Adds a labeled Square annotation to a specific page.
+/// Creates the annotation object, adds it to the document, and links it to the page.
+/// Returns the ObjectId of the created annotation dictionary.
+pub fn add_labeled_rect(
+    doc: &mut Document,
+    page_num: u32,
+    label: &str,                       // The /T value
+    rect: [f32; 4],                    // The /Rect value [x1, y1, x2, y2]
+    color: Option<Color>,              // Optional border color /C
+    interior_color: Option<Color>,     // Optional fill color /IC
+    border_style: Option<BorderStyle>, // Optional border width/style /BS
+) -> Result<ObjectId, Error> {
+    let mut annot_dict = Dictionary::new();
+
+    // Set common fields
+    annot_dict.set("Type", Object::Name(b"Annot".to_vec()));
+    annot_dict.set("Subtype", Object::Name(b"Square".to_vec())); // Use Square subtype
+    annotation_utils::set_annotation_label(&mut annot_dict, label);
+    annot_dict.set(
+        "Rect",
+        Object::Array(vec![
+            Object::Real(rect[0]),
+            Object::Real(rect[1]),
+            Object::Real(rect[2]),
+            Object::Real(rect[3]),
+        ]),
+    );
+    annot_dict.set("F", Object::Integer(4)); // Print flag
+
+    // Set optional color fields
+    if let Some(c) = color {
+        annot_dict.set(
+            "C",
+            Object::Array(vec![
+                Object::Real(c.r),
+                Object::Real(c.g),
+                Object::Real(c.b),
+            ]),
+        );
+    }
+    if let Some(ic) = interior_color {
+        annot_dict.set(
+            "IC",
+            Object::Array(vec![
+                Object::Real(ic.r),
+                Object::Real(ic.g),
+                Object::Real(ic.b),
+            ]),
+        );
+    }
+
+    // Set optional border fields
+    if let Some(bs) = border_style {
+        let mut bs_dict = Dictionary::new();
+        bs_dict.set("Type", Object::Name(b"Border".to_vec())); // As per spec for /BS entry
+        bs_dict.set("W", Object::Real(bs.width)); // Border width
+                                                  // bs_dict.set("S", Object::Name(b"S")); // Style (S=Solid, D=Dashed) - add later if needed
+        annot_dict.set("BS", Object::Dictionary(bs_dict));
+        // Also set the legacy /Border array (some viewers might need it)
+        // [H V W] - Horizontal/Vertical corner radii (0), Width
+        annot_dict.set(
+            "Border",
+            Object::Array(vec![
+                Object::Integer(0),
+                Object::Integer(0),
+                Object::Real(bs.width),
+            ]),
+        );
+    } else {
+        // Default border if none specified (e.g., thin black)
+        annot_dict.set(
+            "C",
+            Object::Array(vec![
+                Object::Real(0.0),
+                Object::Real(0.0),
+                Object::Real(0.0),
+            ]),
+        ); // Black border color
+        annot_dict.set(
+            "Border",
+            Object::Array(vec![
+                Object::Integer(0),
+                Object::Integer(0),
+                Object::Integer(1),
+            ]),
+        ); // Width 1
+    }
+
+    // No /DA or /DR needed for Square annotations typically
+
+    // Add object to document
+    let new_annot_id = doc.add_object(Object::Dictionary(annot_dict));
+
+    // Link to page
+    annotation_utils::add_annotation_to_page(doc, page_num, new_annot_id)?;
+
     Ok(new_annot_id)
 }
 
@@ -159,6 +273,55 @@ pub fn add_labeled_freetext_multi(
 
     // Return success if we get here
     Ok(())
+}
+
+/// Adds a labeled Square annotation to multiple specified pages.
+/// Creates the annotation object for each page, adds it to the document, and links it.
+/// Label can include placeholder "{page}" to be replaced by the current page number.
+pub fn add_labeled_rect_multi(
+    doc: &mut Document,
+    page_numbers: &[u32],              // Pages to add annotation to
+    label_template: &str,              // Label template with optional {page}
+    rect: [f32; 4],                    // Same Rect for all pages
+    color: Option<Color>,              // Optional border color /C
+    interior_color: Option<Color>,     // Optional fill color /IC
+    border_style: Option<BorderStyle>, // Optional border width/style /BS
+) -> Result<(), Error> {
+    // Return Ok(()) or Error
+    for &page_num in page_numbers {
+        // Generate dynamic label for this page
+        let label = label_template.replace("{page}", &page_num.to_string());
+        debug!("Adding rect annotation '{}' to page {}", label, page_num);
+
+        // Call the single-page function we implemented in Task 1.6.R1
+        match add_labeled_rect(
+            doc,
+            page_num,
+            &label, // Use the generated label
+            rect,
+            color, // Pass through options
+            interior_color,
+            border_style.clone(), // Clone BorderStyle if it's not Copy
+        ) {
+            Ok(_) => {
+                // Successfully added for this page
+                debug!(
+                    "Successfully added rect annotation '{}' to page {}",
+                    label, page_num
+                );
+            }
+            Err(e) => {
+                // Log error and continue to next page for robustness
+                warn!(
+                    "Failed to add rect annotation '{}' to page {}: {}",
+                    label, page_num, e
+                );
+                // Optionally collect errors and return them at the end?
+                // For now, just log and continue.
+            }
+        }
+    }
+    Ok(()) // Overall success if loop completes (even if some pages had errors)
 }
 
 /// Text annotation handler for PDF pages

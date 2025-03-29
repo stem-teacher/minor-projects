@@ -1,7 +1,6 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use lopdf::{Document, Object};
-use std::fs;
 use std::path::PathBuf;
 // Import necessary library functions
 use pdf_exam_tools_lib::annotation_utils::{find_annotation_by_label, set_annotation_contents};
@@ -22,13 +21,9 @@ struct Args {
     #[arg(short, long)]
     output: Option<PathBuf>,
 
-    /// Modify the input file directly (creates backup)
+    /// Modify the input file directly (NO backup created by default)
     #[arg(long, default_value_t = false)]
     in_place: bool,
-
-    /// Suffix for backup file when using --in-place
-    #[arg(long, default_value = ".bak")]
-    backup_suffix: String,
 
     /// Annotation label (/T value) to find and modify
     #[arg(short, long)]
@@ -57,21 +52,7 @@ fn main() -> Result<()> {
         args.output.clone().unwrap() // Use specified output path
     };
 
-    // Backup if in-place
-    if args.in_place {
-        let backup_path = args.input.with_extension(
-            args.input
-                .extension()
-                .unwrap_or_default()
-                .to_str()
-                .unwrap_or("")
-                .to_owned()
-                + &args.backup_suffix,
-        );
-        fs::copy(&args.input, &backup_path)
-            .with_context(|| format!("Failed to create backup file: {}", backup_path.display()))?;
-        println!("Created backup: {}", backup_path.display());
-    }
+    // Backup logic removed as per Task 2.4.2
 
     // Load the document MUTABLY
     let mut doc = Document::load(&args.input)
